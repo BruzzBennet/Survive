@@ -1,1 +1,1 @@
-Through small and simple steps, big changes happen
+Through small and simple steps, big changes happen - Bruce Bennet
