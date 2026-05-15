@@ -1,1 +1,1 @@
-This is the code for the game MonRanger: Survive
+Through small and simple steps, big changes happen
