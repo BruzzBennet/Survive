@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://7s5a3t8wxqha"]
+
+[ext_resource type="PackedScene" uid="uid://bm6w2jgoovetr" path="res://scenes/Player.tscn" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://cxq5nyminoedr" path="res://scripts/label.gd" id="2_rwgxs"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4wyf3"]
+font_size = 50
+
+[node name="World" type="Node2D" unique_id=1176838]
+
+[node name="CharacterBody2D" parent="." unique_id=631887673 instance=ExtResource("1_nnsk1")]
+position = Vector2(506, 236)
+
+[node name="Label" type="Label" parent="." unique_id=119870519]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(1.0050505, 1)
+text = "STA: 10"
+label_settings = SubResource("LabelSettings_4wyf3")
+script = ExtResource("2_rwgxs")

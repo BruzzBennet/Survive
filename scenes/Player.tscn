@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bm6w2jgoovetr"]
+
+[ext_resource type="Script" uid="uid://dxp6b77hjridw" path="res://scripts/player.gd" id="1_p0vlq"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v6fml"]
+load_path = "res://.godot/imported/MR25.png-a0c54deb03d8333c74925eb95b310492.ctex"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wtcfe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_v6fml")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0e48y"]
+radius = 32.01562
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=631887673]
+script = ExtResource("1_p0vlq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=216726899]
+sprite_frames = SubResource("SpriteFrames_wtcfe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2132568283]
+position = Vector2(0, 28)
+shape = SubResource("CircleShape2D_0e48y")
