@@ -7,7 +7,8 @@ const stamina_value = 500
 const endurance = 25
 var stamina = stamina_value
 const visual_stamina_divide = 100
-
+var last_direction = Vector2.DOWN
+@onready var animated_sprite_2d = %AnimatedSprite2D
 @onready var stamina_label = %Label
 
 func _physics_process(delta: float) -> void:
@@ -19,6 +20,9 @@ func _physics_process(delta: float) -> void:
 	# Gets direction as a Vector2 (-1 to 1) using built-in arrow key actions
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
+	if direction != Vector2.ZERO:
+		last_direction = direction
+
 	if stamina<=(stamina_value+visual_stamina_divide): 
 		var visual_stamina = floor(stamina/visual_stamina_divide)
 		if direction != Vector2.ZERO and Input.is_key_pressed(KEY_C):
@@ -43,3 +47,21 @@ func _physics_process(delta: float) -> void:
 	
 	# Handles movement and collisions
 	move_and_slide()
+	process_animation(direction)
+
+func play_animation(prefix: String, dir: Vector2) -> void:
+	if dir.x > 0:
+		animated_sprite_2d.play(prefix + "0")
+	elif dir.y < 0:
+		animated_sprite_2d.play(prefix + "1")
+	elif dir.y > 0:
+		animated_sprite_2d.play(prefix + "3")
+	elif dir.x < 0:
+		animated_sprite_2d.play(prefix + "2")
+
+
+func process_animation(direction) -> void:
+	if direction != Vector2.ZERO:
+		play_animation("walk", direction)
+	else:
+		play_animation("stand", last_direction)
