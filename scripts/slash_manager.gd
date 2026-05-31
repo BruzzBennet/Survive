@@ -4,7 +4,7 @@ extends Node2D
 @export var slash_scene : PackedScene
 
 func _on_player_slash(angle,pos,dir,player) -> void:
-	print("slashconnected")
+	#print("slashconnected")
 	var slash=slash_scene.instantiate()
 	add_child(slash)
 	slash.global_position = pos + dir * 50

@@ -9,6 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://dyublfapax1r1" path="res://assets/MRright.png" id="4_d3wef"]
 [ext_resource type="Texture2D" uid="uid://bg6k2lsgk3ln2" path="res://assets/MRRunBack.png" id="5_khinc"]
 [ext_resource type="Texture2D" uid="uid://dlp0r2lfwbgui" path="res://assets/MRback.png" id="9_o4126"]
+[ext_resource type="AudioStream" uid="uid://bs6u0275h8oso" path="res://assets/audio/slash.mp3" id="10_6eyey"]
+[ext_resource type="Script" uid="uid://b5167xfyt3bcq" path="res://scripts/slash_sfx.gd" id="11_d3wef"]
+[ext_resource type="AudioStream" uid="uid://wmdklot6o1v8" path="res://assets/audio/walkondirt.mp3" id="12_o4126"]
+[ext_resource type="Script" uid="uid://bj8svuepxrurl" path="res://scripts/walk_sfx.gd" id="13_lkdrv"]
+[ext_resource type="AudioStream" uid="uid://b51px7epioyyn" path="res://assets/audio/Dash.mp3" id="14_p7iby"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jfpux"]
 atlas = ExtResource("4_cw2d6")
@@ -204,6 +209,25 @@ wait_time = 2.0
 
 [node name="StaminaTimer" type="Timer" parent="." unique_id=1213237063]
 
+[node name="SlashSFX" type="AudioStreamPlayer2D" parent="." unique_id=16950051]
+unique_name_in_owner = true
+stream = ExtResource("10_6eyey")
+volume_db = -7.0
+script = ExtResource("11_d3wef")
+
+[node name="WalkSFX" type="AudioStreamPlayer2D" parent="." unique_id=1475220967]
+unique_name_in_owner = true
+stream = ExtResource("12_o4126")
+volume_db = -10.0
+script = ExtResource("13_lkdrv")
+
+[node name="DashSFX" type="AudioStreamPlayer2D" parent="." unique_id=569590950]
+unique_name_in_owner = true
+stream = ExtResource("14_p7iby")
+volume_db = 5.0
+pitch_scale = 1.1
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="timeout" from="SlashTimer" to="." method="_on_slash_timer_timeout"]
 [connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]
 [connection signal="timeout" from="StaminaRecoverTimer" to="." method="_on_stamina_recover_timer_timeout"]

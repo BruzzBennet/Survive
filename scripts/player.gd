@@ -10,8 +10,12 @@ var can_shoot: bool
 var can_slash: bool
 var can_run: bool
 var is_attacking: bool
+var footstep_frames=[0,1]
 @onready var animated_sprite_2d = %AnimatedSprite2D
 @onready var stamina_label = %Label
+@onready var slash_sfx = %SlashSFX
+@onready var walk_sfx = %WalkSFX
+@onready var dash_sfx = %DashSFX
 
 var screen_size:Vector2
 
@@ -34,10 +38,14 @@ func _physics_process(delta: float) -> void:
 	if direction != Vector2.ZERO:
 		last_direction = direction
 
+	if Input.is_key_pressed(KEY_C):
+		if !dash_sfx.playing:
+			dash_sfx.play()
+
 	if direction != Vector2.ZERO and Input.is_key_pressed(KEY_C) and can_run:
 		current_speed *= 2	
-		if $StaminaTimer.is_stopped():
-			$StaminaTimer.start()
+		#if $StaminaTimer.is_stopped():
+			#$StaminaTimer.start()
 		
 	# Assigns velocity and normalizes it so diagonals aren't faster
 	if direction != Vector2.ZERO:
@@ -63,6 +71,7 @@ func _physics_process(delta: float) -> void:
 		is_attacking=true
 		slash.emit(last_direction.angle(), position, last_direction, self)
 		can_slash=false
+		slash_sfx.play_sound()
 		$SlashTimer.start()
 
 	# if is_attacking:
@@ -79,11 +88,11 @@ func play_animation(prefix: String, dir: Vector2) -> void:
 	elif dir.x < 0:
 		animated_sprite_2d.play(prefix + "2")
 
-
 func process_animation(direction) -> void:
 	if direction != Vector2.ZERO:
 		play_animation("walk", direction)
 	else:
+		#walk_sfx.play()
 		play_animation("stand", last_direction)
 
 func _on_shot_timer_timeout() -> void:
@@ -99,3 +108,12 @@ func _on_stamina_recover_timer_timeout() -> void:
 func _on_slash_timer_timeout() -> void:
 	can_slash=true
 	is_attacking=false
+
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	if animated_sprite_2d.animation=="stand0": return
+	if animated_sprite_2d.animation=="stand1": return
+	if animated_sprite_2d.animation=="stand2": return
+	if animated_sprite_2d.animation=="stand3": return
+	if animated_sprite_2d.frame in footstep_frames:
+		walk_sfx.play()
