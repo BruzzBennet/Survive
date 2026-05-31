@@ -178,17 +178,33 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0e48y"]
-radius = 2.0
+radius = 25.019993
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=631887673]
 script = ExtResource("1_p0vlq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=216726899]
 unique_name_in_owner = true
-scale = Vector2(5, 4.58)
+position = Vector2(-0.99999994, 0)
+scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_wtcfe")
 animation = &"stand3"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2132568283]
-position = Vector2(0, 1)
+position = Vector2(0, 17)
 shape = SubResource("CircleShape2D_0e48y")
+
+[node name="SlashTimer" type="Timer" parent="." unique_id=1462130023]
+wait_time = 0.35
+
+[node name="ShotTimer" type="Timer" parent="." unique_id=383666012]
+
+[node name="StaminaRecoverTimer" type="Timer" parent="." unique_id=1995013214]
+wait_time = 2.0
+
+[node name="StaminaTimer" type="Timer" parent="." unique_id=1213237063]
+
+[connection signal="timeout" from="SlashTimer" to="." method="_on_slash_timer_timeout"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]
+[connection signal="timeout" from="StaminaRecoverTimer" to="." method="_on_stamina_recover_timer_timeout"]
+[connection signal="timeout" from="StaminaTimer" to="." method="_on_stamina_timer_timeout"]
