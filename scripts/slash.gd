@@ -4,6 +4,8 @@ var player
 var distance = 50
 @onready var animated_sprite_2d = %AnimatedSlash2D
 
+func set_flip(value: bool):
+	animated_sprite_2d.flip_h = value
 
 func _ready():
 	animated_sprite_2d.play("Slash")
