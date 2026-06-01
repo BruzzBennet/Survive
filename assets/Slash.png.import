@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxsnug16oinoq"
-path="res://.godot/imported/MR25.png-0c79805956f0dfb5dc5614d8711df661.ctex"
+uid="uid://kwla42renok5"
+path="res://.godot/imported/Slash.png-ba7bc4f19ef6a37d50400a73d95653a4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/MR25.png"
-dest_files=["res://.godot/imported/MR25.png-0c79805956f0dfb5dc5614d8711df661.ctex"]
+source_file="res://assets/Slash.png"
+dest_files=["res://.godot/imported/Slash.png-ba7bc4f19ef6a37d50400a73d95653a4.ctex"]
 
 [params]
 
