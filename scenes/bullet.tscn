@@ -11,7 +11,6 @@ collision_layer = 8
 script = ExtResource("1_y25gk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1273843954]
-scale = Vector2(5, 5)
 texture = ExtResource("1_mkf8s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=405795565]

@@ -7,7 +7,7 @@ func _on_player_slash(angle,pos,dir,player) -> void:
 	var slash = slash_scene.instantiate()
 	add_child(slash)
 
-	slash.global_position = pos + dir * 50
+	slash.global_position = pos + dir * 10
 	slash.rotation = angle + deg_to_rad(-90)
 
 	if dir.x > 0:

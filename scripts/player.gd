@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 signal shoot
 signal slash
-@export var max_speed: float = 600
+@export var max_speed: float = 185
 @export var accel: float = 10
 @export var friction: float = 0.15
 var last_direction = Vector2.DOWN
