@@ -1,7 +1,7 @@
 extends Node2D
 var direction: Vector2
 var player
-var distance = 50
+var distance = 10
 @onready var animated_sprite_2d = %AnimatedSlash2D
 
 func set_flip(value: bool):

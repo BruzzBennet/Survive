@@ -69,7 +69,6 @@ script = ExtResource("1_3c2nd")
 [node name="AnimatedSlash2D" type="AnimatedSprite2D" parent="." unique_id=1485902092]
 unique_name_in_owner = true
 position = Vector2(0, 3)
-scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_q08yp")
 animation = &"Slash"
 frame = 6
