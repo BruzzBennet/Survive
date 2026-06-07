@@ -7,6 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://2e7a6m6g18hl" path="res://scenes/bullet.tscn" id="3_k0juu"]
 [ext_resource type="Script" uid="uid://bt5ear6ex2hfp" path="res://scripts/slash_manager.gd" id="4_qfnet"]
 [ext_resource type="PackedScene" uid="uid://bdwv0idrljtqa" path="res://scenes/slash.tscn" id="5_i7141"]
+[ext_resource type="Script" uid="uid://c16s2vw3qgu1g" path="res://scripts/hurt_fx_manager.gd" id="7_y4r1p"]
+[ext_resource type="PackedScene" uid="uid://5bbrtc4cfkdv" path="res://scenes/hurtParticles.tscn" id="8_d2wvv"]
+[ext_resource type="Script" uid="uid://cmxq4ewt74u6" path="res://scripts/died_fx_manager.gd" id="9_d2wvv"]
+[ext_resource type="PackedScene" uid="uid://c1r331jkecm7i" path="res://scenes/DiedExplosion.tscn" id="10_3v2ag"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4wyf3"]
 font_size = 50
@@ -26,6 +30,15 @@ position = Vector2(506, 236)
 script = ExtResource("4_qfnet")
 slash_scene = ExtResource("5_i7141")
 
+[node name="HurtFXManager" type="Node2D" parent="." unique_id=1821572747]
+script = ExtResource("7_y4r1p")
+fx_scene = ExtResource("8_d2wvv")
+
+[node name="DiedFXManager" type="Node2D" parent="." unique_id=1718375786]
+position = Vector2(-1, 0)
+script = ExtResource("9_d2wvv")
+fx_scene = ExtResource("10_3v2ag")
+
 [node name="Label" type="Label" parent="." unique_id=119870519]
 unique_name_in_owner = true
 offset_left = 1.0
@@ -37,5 +50,6 @@ text = "STA: 10"
 label_settings = SubResource("LabelSettings_4wyf3")
 script = ExtResource("2_rwgxs")
 
+[connection signal="hurt_fx" from="Main_Body" to="HurtFXManager" method="_on_main_body_hurt_fx"]
 [connection signal="shoot" from="Main_Body" to="BulletManager" method="_on_player_shoot"]
 [connection signal="slash" from="Main_Body" to="SlashManager" method="_on_player_slash"]

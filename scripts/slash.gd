@@ -8,6 +8,7 @@ func set_flip(value: bool):
 	animated_sprite_2d.flip_h = value
 
 func _ready():
+	add_to_group("slash")
 	animated_sprite_2d.play("Slash")
 	await animated_sprite_2d.animation_finished
 	queue_free()
