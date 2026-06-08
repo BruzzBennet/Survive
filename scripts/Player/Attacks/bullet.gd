@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed: int = 250
+var speed: int = 350
 var direction: Vector2 
 
 # Called when the node enters the scene tree for the first time.
@@ -14,3 +14,7 @@ func _process(delta: float) -> void:
 
 func _on_timer_timeout():
 	queue_free()
+
+func _on_area_entered(area) -> void:
+	if area.name=="HurtBox":
+		queue_free()

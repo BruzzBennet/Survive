@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://d4m0pld6u08hn"]
+
+[ext_resource type="Script" uid="uid://bxvjoj6wul3v0" path="res://scripts/Particles/dashparticles.gd" id="1_wpecd"]
+
+[sub_resource type="Curve" id="Curve_1ksxn"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.18714958), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="CPUParticles2D" type="CPUParticles2D" unique_id=564290444]
+emitting = false
+amount = 4
+lifetime = 0.35000000000000003
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_max = 3.0
+scale_amount_curve = SubResource("Curve_1ksxn")
+script = ExtResource("1_wpecd")

@@ -3,7 +3,7 @@ extends Node2D
 
 @export var slash_scene : PackedScene
 
-func _on_player_slash(angle,pos,dir,player) -> void:
+func _on_node_2d_slash(angle,pos,dir,player) -> void:
 	var slash = slash_scene.instantiate()
 	add_child(slash)
 

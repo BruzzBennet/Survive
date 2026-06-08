@@ -13,6 +13,5 @@ func _ready():
 	queue_free()
 	
 func _process(delta):
-
 	if player:
 		global_position = player.global_position + direction * distance

@@ -11,7 +11,11 @@ config_version=5
 [application]
 
 config/name="Survive"
+<<<<<<< Updated upstream
 run/main_scene="uid://7s5a3t8wxqha"
+=======
+run/main_scene="uid://duhfj6u356hx2"
+>>>>>>> Stashed changes
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
