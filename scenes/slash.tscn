@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bdwv0idrljtqa"]
 
-[ext_resource type="Script" uid="uid://pufbaj354pre" path="res://scripts/slash.gd" id="1_3c2nd"]
+[ext_resource type="Script" uid="uid://pufbaj354pre" path="res://scripts/Player/Attacks/slash.gd" id="1_3c2nd"]
 [ext_resource type="Texture2D" uid="uid://dkc241shci8t5" path="res://assets/SlashAnimation.png" id="1_rkylg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3c2nd"]

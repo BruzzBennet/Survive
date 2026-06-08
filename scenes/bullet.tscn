@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://2e7a6m6g18hl"]
 
 [ext_resource type="Texture2D" uid="uid://kwla42renok5" path="res://assets/Slash.png" id="1_mkf8s"]
-[ext_resource type="Script" uid="uid://bdx0cpvtgtkt0" path="res://scripts/bullet.gd" id="1_y25gk"]
+[ext_resource type="Script" uid="uid://bdx0cpvtgtkt0" path="res://scripts/Player/Attacks/bullet.gd" id="1_y25gk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y25gk"]
 size = Vector2(24, 9)
@@ -20,4 +20,5 @@ shape = SubResource("RectangleShape2D_y25gk")
 wait_time = 3.0
 autostart = true
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

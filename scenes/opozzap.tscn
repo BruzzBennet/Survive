@@ -1,0 +1,259 @@
+[gd_scene format=3 uid="uid://brqav17v5sk2v"]
+
+[ext_resource type="Script" uid="uid://c2exk4hq2mgh5" path="res://scripts/Enemies/opozzap.gd" id="1_1p6mm"]
+[ext_resource type="Texture2D" uid="uid://ci8ngoeqb2axk" path="res://assets/Oppozzap.png" id="2_jven3"]
+[ext_resource type="Script" uid="uid://dc7ejvxapg57h" path="res://scripts/Enemies/Manager/pozzap_summoner.gd" id="3_jven3"]
+[ext_resource type="AudioStream" uid="uid://43cr1wox4syq" path="res://assets/audio/Explosion(notmadebyme).wav" id="3_wgpis"]
+[ext_resource type="PackedScene" uid="uid://b6a5j10xoom4g" path="res://scenes/pozzap.tscn" id="4_3yju3"]
+[ext_resource type="Script" uid="uid://cmxq4ewt74u6" path="res://scripts/Particles/Manager/died_fx_manager.gd" id="4_yoqpp"]
+[ext_resource type="PackedScene" uid="uid://c1r331jkecm7i" path="res://scenes/DiedExplosion.tscn" id="5_1nsll"]
+[ext_resource type="AudioStream" uid="uid://bmvjjtf3u01cd" path="res://assets/audio/Hurt(notmadebyme).wav" id="8_yoqpp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yju3"]
+atlas = ExtResource("2_jven3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tirb"]
+atlas = ExtResource("2_jven3")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_623t7"]
+atlas = ExtResource("2_jven3")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgpis"]
+atlas = ExtResource("2_jven3")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yoqpp"]
+atlas = ExtResource("2_jven3")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nsll"]
+atlas = ExtResource("2_jven3")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_671on"]
+atlas = ExtResource("2_jven3")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tk5h4"]
+atlas = ExtResource("2_jven3")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s2qe"]
+atlas = ExtResource("2_jven3")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8p0y"]
+atlas = ExtResource("2_jven3")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdyro"]
+atlas = ExtResource("2_jven3")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sb2s1"]
+atlas = ExtResource("2_jven3")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qph5"]
+atlas = ExtResource("2_jven3")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xmup"]
+atlas = ExtResource("2_jven3")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psse4"]
+atlas = ExtResource("2_jven3")
+region = Rect2(448, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pstm4"]
+atlas = ExtResource("2_jven3")
+region = Rect2(480, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6cv3m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yju3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tirb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_623t7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgpis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yoqpp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1nsll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_671on")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tk5h4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2s2qe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8p0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdyro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sb2s1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qph5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xmup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psse4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pstm4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bctdi"]
+radius = 9.0
+height = 26.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yoqpp"]
+radius = 6.0
+height = 20.0
+
+[sub_resource type="Animation" id="Animation_wgpis"]
+resource_name = "Hurt"
+length = 0.5
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 0.4043309),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.39215687), Color(1, 1, 1, 1), Color(1, 0, 0, 0.39215687)]
+}
+
+[sub_resource type="Animation" id="Animation_yoqpp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1nsll"]
+resource_name = "ReallyHurt"
+length = 0.5
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20042337, 0.40657312),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.88235295), Color(1, 1, 1, 1), Color(1, 0, 0, 0.88235295)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1nsll"]
+_data = {
+&"Hurt": SubResource("Animation_wgpis"),
+&"RESET": SubResource("Animation_yoqpp"),
+&"ReallyHurt": SubResource("Animation_1nsll")
+}
+
+[node name="Opozzap" type="CharacterBody2D" unique_id=1661657961]
+script = ExtResource("1_1p6mm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2130674230]
+unique_name_in_owner = true
+clip_children = 2
+light_mask = 2
+sprite_frames = SubResource("SpriteFrames_6cv3m")
+frame_progress = 0.25626191
+
+[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D" unique_id=1045203382]
+offset_left = -20.0
+offset_top = -18.0
+offset_right = 20.0
+offset_bottom = 22.0
+color = Color(1, 1, 1, 0)
+
+[node name="DiedSFX" type="AudioStreamPlayer2D" parent="." unique_id=149674832]
+unique_name_in_owner = true
+position = Vector2(0, 1)
+stream = ExtResource("3_wgpis")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=536130041]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_bctdi")
+
+[node name="DiedFXManager" type="Node2D" parent="." unique_id=1128851366]
+position = Vector2(0, 1)
+script = ExtResource("4_yoqpp")
+fx_scene = ExtResource("5_1nsll")
+
+[node name="HitBox" type="Area2D" parent="." unique_id=599190566]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=270368503]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_bctdi")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1076071811]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1325979040]
+shape = SubResource("CapsuleShape2D_yoqpp")
+
+[node name="PozzapSummoner" type="Node2D" parent="." unique_id=2048600362]
+unique_name_in_owner = true
+position = Vector2(-2, 2)
+script = ExtResource("3_jven3")
+summon_scene = ExtResource("4_3yju3")
+
+[node name="FX" type="AnimationPlayer" parent="." unique_id=674579626]
+unique_name_in_owner = true
+root_node = NodePath("../AnimatedSprite2D/ColorRect")
+libraries/ = SubResource("AnimationLibrary_1nsll")
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=339705987]
+unique_name_in_owner = true
+position = Vector2(-1, 2)
+stream = ExtResource("8_yoqpp")
+
+[connection signal="died" from="." to="DiedFXManager" method="_on_opozzap_died"]
+[connection signal="summon" from="." to="PozzapSummoner" method="_on_opozzap_summon"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="animation_finished" from="FX" to="." method="_on_fx_animation_finished"]
