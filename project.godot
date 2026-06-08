@@ -11,18 +11,22 @@ config_version=5
 [application]
 
 config/name="Survive"
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 run/main_scene="uid://7s5a3t8wxqha"
 =======
 run/main_scene="uid://duhfj6u356hx2"
 >>>>>>> Stashed changes
+=======
+run/main_scene="uid://cbq1kkkc1v847"
+>>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
 window/size/viewport_width=640
-window/size/viewport_height=360
+window/size/viewport_height=320
 window/stretch/mode="viewport"
 
 [input]

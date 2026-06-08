@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://2e7a6m6g18hl" path="res://scenes/bullet.tscn" id="3_k0juu"]
 [ext_resource type="Script" uid="uid://bt5ear6ex2hfp" path="res://scripts/slash_manager.gd" id="4_qfnet"]
 [ext_resource type="PackedScene" uid="uid://bdwv0idrljtqa" path="res://scenes/slash.tscn" id="5_i7141"]
+<<<<<<< HEAD
 =======
 [ext_resource type="Script" uid="uid://dxp6b77hjridw" path="res://scripts/Player/player.gd" id="1_qfm1y"]
 [ext_resource type="Texture2D" uid="uid://dyublfapax1r1" path="res://assets/MRright.png" id="2_fulsm"]
@@ -46,6 +47,12 @@
 [ext_resource type="AudioStream" uid="uid://43cr1wox4syq" path="res://assets/audio/Explosion(notmadebyme).wav" id="28_t4otl"]
 [ext_resource type="AudioStream" uid="uid://b4hsf1ept0xr0" path="res://assets/audio/hurt2.wav" id="30_487ah"]
 >>>>>>> Stashed changes
+=======
+[ext_resource type="Script" uid="uid://c16s2vw3qgu1g" path="res://scripts/hurt_fx_manager.gd" id="7_y4r1p"]
+[ext_resource type="PackedScene" uid="uid://5bbrtc4cfkdv" path="res://scenes/hurtParticles.tscn" id="8_d2wvv"]
+[ext_resource type="Script" uid="uid://cmxq4ewt74u6" path="res://scripts/died_fx_manager.gd" id="9_d2wvv"]
+[ext_resource type="PackedScene" uid="uid://c1r331jkecm7i" path="res://scenes/DiedExplosion.tscn" id="10_3v2ag"]
+>>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_md1ol"]
 atlas = ExtResource("5_i4ail")
@@ -67,13 +74,26 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("6_a38lo")
 region = Rect2(96, 0, 32, 32)
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+[node name="HurtFXManager" type="Node2D" parent="." unique_id=1821572747]
+script = ExtResource("7_y4r1p")
+fx_scene = ExtResource("8_d2wvv")
+
+[node name="DiedFXManager" type="Node2D" parent="." unique_id=1718375786]
+position = Vector2(-1, 0)
+script = ExtResource("9_d2wvv")
+fx_scene = ExtResource("10_3v2ag")
+
+>>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83
 [node name="Label" type="Label" parent="." unique_id=119870519]
 =======
 [sub_resource type="AtlasTexture" id="AtlasTexture_j2b1d"]
 atlas = ExtResource("7_4ni07")
 region = Rect2(0, 0, 32, 32)
 
+<<<<<<< HEAD
 [sub_resource type="AtlasTexture" id="AtlasTexture_cs1tg"]
 atlas = ExtResource("7_4ni07")
 region = Rect2(32, 0, 32, 32)
@@ -562,6 +582,9 @@ sprite_frames = SubResource("SpriteFrames_bpsgo")
 animation = &"stand3"
 
 <<<<<<< Updated upstream
+=======
+[connection signal="hurt_fx" from="Main_Body" to="HurtFXManager" method="_on_main_body_hurt_fx"]
+>>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83
 [connection signal="shoot" from="Main_Body" to="BulletManager" method="_on_player_shoot"]
 [connection signal="slash" from="Main_Body" to="SlashManager" method="_on_player_slash"]
 =======

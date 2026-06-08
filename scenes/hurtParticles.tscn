@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://5bbrtc4cfkdv"]
 
+<<<<<<< HEAD
 [ext_resource type="Script" uid="uid://cbrqhx7djgspb" path="res://scripts/Particles/hurt_particles.gd" id="1_tbeyh"]
+=======
+[ext_resource type="Script" uid="uid://cbrqhx7djgspb" path="res://scripts/hurt_particles.gd" id="1_tbeyh"]
+>>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83
 
 [sub_resource type="Curve" id="Curve_h5l37"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]

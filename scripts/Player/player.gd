@@ -3,9 +3,24 @@ extends CharacterBody2D
 <<<<<<< Updated upstream:scripts/player.gd
 signal shoot
 signal slash
+signal hurt_fx
+const margin=15
+var dodge_speed=1
+var last_direction = Vector2.DOWN
+var can_shoot: bool = true
+var can_slash: bool = true
+var can_dodge: bool = true
+var is_attacking: bool = false
+var is_shooting: bool = false
+var is_hurt: bool = false
+var is_dodging: bool = false
+var footstep_frames=[0,2]
+var enemyCollisions=[]
+var screen_size:Vector2
 @export var max_speed: float = 185
 @export var accel: float = 10
 @export var friction: float = 0.15
+<<<<<<< HEAD:scripts/Player/player.gd
 var last_direction = Vector2.DOWN
 var can_shoot: bool
 var can_slash: bool
@@ -39,27 +54,37 @@ var screen_size:Vector2
 @export var dodge_speed=1
 @export var health=5
 >>>>>>> Stashed changes:scripts/Player/player.gd
+=======
+@export var knockbackPower: int = 500
+>>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83:scripts/player.gd
 @onready var animated_sprite_2d = %AnimatedSprite2D
 @onready var slash_sfx = %SlashSFX
 @onready var slash_shot_sfx = %SlashShotSFX
 @onready var walk_sfx = %WalkSFX
 @onready var dash_sfx = %DashSFX
+<<<<<<< HEAD:scripts/Player/player.gd
 <<<<<<< Updated upstream:scripts/player.gd
 
 var screen_size:Vector2
 =======
+=======
+>>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83:scripts/player.gd
 @onready var hurt_sfx = %HurtSFX
 @onready var hit_fx = %FX
 @onready var hurt_time = %HurtTimer
 @onready var dodge_time = %DodgeTimer
 @onready var stamina_recover_time= %StaminaRecoverTimer
+<<<<<<< HEAD:scripts/Player/player.gd
 @onready var died_sfx = %DiedSFX
 >>>>>>> Stashed changes:scripts/Player/player.gd
+=======
+>>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83:scripts/player.gd
 
 
 func _ready():
 	screen_size=get_viewport_rect().size
 	position=screen_size/2
+<<<<<<< HEAD:scripts/Player/player.gd
 <<<<<<< Updated upstream:scripts/player.gd
 	can_shoot=true
 	can_run=true
@@ -70,40 +95,57 @@ func _ready():
 	hit_fx.play("RESET")
 	add_to_group("player")
 >>>>>>> Stashed changes:scripts/Player/player.gd
+=======
+	hit_fx.play("RESET")
+>>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83:scripts/player.gd
 
 func _physics_process(delta: float) -> void:	
-	
-	position=position.clamp(Vector2.ZERO, screen_size)
+	player_movement(delta)
+	dodge()
+	Short_Range_Attack()
+	Long_Range_Attack()
+	if !is_hurt:
+		for enemyArea in enemyCollisions:
+			HurtByEnemy(enemyArea)
 
-	var current_speed = max_speed
-
+func player_movement(delta):
+	position=position.clamp(Vector2(margin,margin),Vector2(screen_size.x - margin, screen_size.y - margin))
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	
+	if is_dodging: 
+		dodge_speed=2
+	else: 
+		dodge_speed=1
 	if direction != Vector2.ZERO:
 		last_direction = direction
-
-	if direction != Vector2.ZERO and Input.is_key_pressed(KEY_C) and can_run:
-		current_speed *= 2	
-		if !dash_sfx.playing:
-			dash_sfx.play()
-		#if $StaminaTimer.is_stopped():
-			#$StaminaTimer.start()
 		
-	# Assigns velocity and normalizes it so diagonals aren't faster
 	if direction != Vector2.ZERO:
-	#if direction != Vector2.ZERO and !is_attacking:
-		# Gradually accelerate towards the target speed
-		velocity = velocity.lerp(direction * current_speed, accel * delta)
+		velocity = velocity.lerp(direction * max_speed * dodge_speed, accel * delta)
 	else:
-		# Gradually stop when no input is pressed
-		#walk_sfx.play_sound()
 		velocity = velocity.lerp(Vector2.ZERO, friction)
-	
-	# Handles movement and collisions
-	move_and_slide()
-	process_animation(direction)
 
+<<<<<<< HEAD:scripts/Player/player.gd
 <<<<<<< Updated upstream:scripts/player.gd
+=======
+	process_animation(direction)
+	move_and_slide()
+
+func dodge():
+	if last_direction != Vector2.ZERO and Input.is_key_pressed(KEY_C) and can_dodge and !dodge_time.time_left > 0:
+		is_dodging=true
+		dodge_time.start()
+		dash_sfx.play()
+		is_hurt=true
+		hit_fx.play("Dodge")
+		await dodge_time.timeout
+		hit_fx.play("RESET")
+		is_hurt=false
+		is_dodging=false
+		stamina_recover_time.start()
+		can_dodge=false
+		
+
+func Long_Range_Attack():
+>>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83:scripts/player.gd
 	if Input.is_key_pressed(KEY_X) and can_shoot:
 		# print("SHOOTING")
 =======
@@ -133,16 +175,13 @@ func Long_Range_Attack():
 			can_shoot=false
 			$ShotTimer.start()
 
+func Short_Range_Attack():
 	if Input.is_key_pressed(KEY_Z) and can_slash:
 		is_attacking=true
 		slash.emit(last_direction.angle(), position, last_direction, self)
 		can_slash=false
 		slash_sfx.play()
 		$SlashTimer.start()
-
-	# if is_attacking:
-	# 	velocity=Vector2.ZERO
-	# 	play_animation("stand", last_direction)
 
 func play_animation(prefix: String, dir: Vector2) -> void:
 	var anim_name := ""
@@ -159,7 +198,7 @@ func play_animation(prefix: String, dir: Vector2) -> void:
 	if animated_sprite_2d.animation != anim_name:
 		animated_sprite_2d.play(anim_name)
 
-	if Input.is_key_pressed(KEY_C):
+	if is_dodging:
 		animated_sprite_2d.speed_scale = 2.0
 	else:
 		animated_sprite_2d.speed_scale = 1.0
@@ -181,13 +220,6 @@ func _on_shot_timer_timeout() -> void:
 	can_shoot=true # Replace with function body.
 	is_shooting=false
 
-func _on_stamina_timer_timeout() -> void:
-	can_run=false
-	$StaminaRecoverTimer.start()
-
-func _on_stamina_recover_timer_timeout() -> void:
-	can_run=true
-
 func _on_slash_timer_timeout() -> void:
 	can_slash=true
 	is_attacking=false
@@ -208,8 +240,11 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		
 	if animated_sprite_2d.animation.begins_with("stand_slash"):
 		is_shooting = false
+<<<<<<< HEAD:scripts/Player/player.gd
 <<<<<<< Updated upstream:scripts/player.gd
 =======
+=======
+>>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83:scripts/player.gd
 
 func knockback(enemyVelocity:Vector2):
 	var knockbackDirection = (enemyVelocity-velocity).normalized() * knockbackPower
@@ -217,10 +252,16 @@ func knockback(enemyVelocity:Vector2):
 	move_and_slide()
 
 func HurtByEnemy(area):
+<<<<<<< HEAD:scripts/Player/player.gd
 	is_hurt = true
 	willdie()
 	hurt_fx.emit(global_position)
 	hurt_sfx.play()
+=======
+	hurt_fx.emit(global_position)
+	hurt_sfx.play()
+	is_hurt = true
+>>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83:scripts/player.gd
 	knockback(area.get_parent().velocity)
 	hit_fx.play("HurtBlink")
 	hurt_time.start()
@@ -232,6 +273,7 @@ func _on_hurt_box_area_entered(area):
 	if area.name=="HurtBox":
 		enemyCollisions.append(area)		
 
+<<<<<<< HEAD:scripts/Player/player.gd
 func willdie():
 	health-=1
 	hp.emit(health)
@@ -244,10 +286,15 @@ func willdie():
 		died.emit(global_position)
 		queue_free()
 
+=======
+>>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83:scripts/player.gd
 func _on_hurt_box_area_exited(area):
 	enemyCollisions.erase(area)
 
 
 func _on_stamina_recover_timer_timeout() -> void:
 	can_dodge=true
+<<<<<<< HEAD:scripts/Player/player.gd
 >>>>>>> Stashed changes:scripts/Player/player.gd
+=======
+>>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83:scripts/player.gd
