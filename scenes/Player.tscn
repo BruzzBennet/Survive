@@ -1,15 +1,5 @@
-[gd_scene format=3 uid="uid://c64b8tpoa8e3u"]
+[gd_scene format=3 uid="uid://douap45psh62b"]
 
-<<<<<<< Updated upstream
-[ext_resource type="Script" uid="uid://dan8rxx63nj3x" path="res://scripts/world.gd" id="1_i7141"]
-[ext_resource type="PackedScene" uid="uid://bm6w2jgoovetr" path="res://scenes/main_body.tscn" id="1_nnsk1"]
-[ext_resource type="Script" uid="uid://c8gwl8gy7dgrx" path="res://scripts/BulletManager.gd" id="2_71j4m"]
-[ext_resource type="Script" uid="uid://cxq5nyminoedr" path="res://scripts/label.gd" id="2_rwgxs"]
-[ext_resource type="PackedScene" uid="uid://2e7a6m6g18hl" path="res://scenes/bullet.tscn" id="3_k0juu"]
-[ext_resource type="Script" uid="uid://bt5ear6ex2hfp" path="res://scripts/slash_manager.gd" id="4_qfnet"]
-[ext_resource type="PackedScene" uid="uid://bdwv0idrljtqa" path="res://scenes/slash.tscn" id="5_i7141"]
-<<<<<<< HEAD
-=======
 [ext_resource type="Script" uid="uid://dxp6b77hjridw" path="res://scripts/Player/player.gd" id="1_qfm1y"]
 [ext_resource type="Texture2D" uid="uid://dyublfapax1r1" path="res://assets/MRright.png" id="2_fulsm"]
 [ext_resource type="Texture2D" uid="uid://dlp0r2lfwbgui" path="res://assets/MRback.png" id="3_4r5pv"]
@@ -46,13 +36,6 @@
 [ext_resource type="PackedScene" uid="uid://bdwv0idrljtqa" path="res://scenes/slash.tscn" id="25_j2b1d"]
 [ext_resource type="AudioStream" uid="uid://43cr1wox4syq" path="res://assets/audio/Explosion(notmadebyme).wav" id="28_t4otl"]
 [ext_resource type="AudioStream" uid="uid://b4hsf1ept0xr0" path="res://assets/audio/hurt2.wav" id="30_487ah"]
->>>>>>> Stashed changes
-=======
-[ext_resource type="Script" uid="uid://c16s2vw3qgu1g" path="res://scripts/hurt_fx_manager.gd" id="7_y4r1p"]
-[ext_resource type="PackedScene" uid="uid://5bbrtc4cfkdv" path="res://scenes/hurtParticles.tscn" id="8_d2wvv"]
-[ext_resource type="Script" uid="uid://cmxq4ewt74u6" path="res://scripts/died_fx_manager.gd" id="9_d2wvv"]
-[ext_resource type="PackedScene" uid="uid://c1r331jkecm7i" path="res://scenes/DiedExplosion.tscn" id="10_3v2ag"]
->>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_md1ol"]
 atlas = ExtResource("5_i4ail")
@@ -74,26 +57,10 @@ region = Rect2(64, 0, 32, 32)
 atlas = ExtResource("6_a38lo")
 region = Rect2(96, 0, 32, 32)
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-[node name="HurtFXManager" type="Node2D" parent="." unique_id=1821572747]
-script = ExtResource("7_y4r1p")
-fx_scene = ExtResource("8_d2wvv")
-
-[node name="DiedFXManager" type="Node2D" parent="." unique_id=1718375786]
-position = Vector2(-1, 0)
-script = ExtResource("9_d2wvv")
-fx_scene = ExtResource("10_3v2ag")
-
->>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83
-[node name="Label" type="Label" parent="." unique_id=119870519]
-=======
 [sub_resource type="AtlasTexture" id="AtlasTexture_j2b1d"]
 atlas = ExtResource("7_4ni07")
 region = Rect2(0, 0, 32, 32)
 
-<<<<<<< HEAD
 [sub_resource type="AtlasTexture" id="AtlasTexture_cs1tg"]
 atlas = ExtResource("7_4ni07")
 region = Rect2(32, 0, 32, 32)
@@ -573,21 +540,19 @@ _data = {
 [node name="Player" type="CharacterBody2D" unique_id=707087302]
 position = Vector2(-1, 0)
 script = ExtResource("1_qfm1y")
+max_speed = null
+accel = null
+friction = null
+knockbackPower = null
+dodge_speed = null
+health = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2108257223]
->>>>>>> Stashed changes
 unique_name_in_owner = true
 clip_children = 2
 sprite_frames = SubResource("SpriteFrames_bpsgo")
 animation = &"stand3"
 
-<<<<<<< Updated upstream
-=======
-[connection signal="hurt_fx" from="Main_Body" to="HurtFXManager" method="_on_main_body_hurt_fx"]
->>>>>>> 9c91a8fcd3c2394a25665a2f9be610c3b7796d83
-[connection signal="shoot" from="Main_Body" to="BulletManager" method="_on_player_shoot"]
-[connection signal="slash" from="Main_Body" to="SlashManager" method="_on_player_slash"]
-=======
 [node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D" unique_id=466062085]
 offset_left = -19.0
 offset_top = -19.0
@@ -694,4 +659,3 @@ one_shot = true
 [connection signal="timeout" from="StaminaRecoverTimer" to="." method="_on_stamina_recover_timer_timeout"]
 [connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]
 [connection signal="timeout" from="SlashTimer" to="." method="_on_slash_timer_timeout"]
->>>>>>> Stashed changes
