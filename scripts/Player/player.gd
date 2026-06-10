@@ -25,6 +25,7 @@ var screen_size:Vector2
 @export var knockbackPower: int = 500
 @export var dodge_speed=1
 @export var health: int = 5
+@export var health: int = 35
 @onready var animated_sprite_2d = %AnimatedSprite2D
 @onready var slash_sfx = %SlashSFX
 @onready var slash_shot_sfx = %SlashShotSFX
@@ -36,6 +37,7 @@ var screen_size:Vector2
 @onready var dodge_time = %DodgeTimer
 @onready var stamina_recover_time= %StaminaRecoverTimer
 @onready var died_sfx = %DiedSFX
+@onready var hp = %HP
 
 
 func _ready():
@@ -49,7 +51,6 @@ func _physics_process(delta: float) -> void:
 	player_movement(delta)
 	dodge()
 	Short_Range_Attack()
-	Long_Range_Attack()
 	if !is_hurt:
 		for enemyArea in enemyCollisions:
 			HurtByEnemy(enemyArea)
@@ -95,6 +96,12 @@ func Long_Range_Attack():
 			shoot.emit(last_direction.angle(), position, last_direction)
 			can_shoot=false
 			$ShotTimer.start()
+	is_shooting=true
+	if can_shoot:
+		slash_shot_sfx.play_sound()
+		shoot.emit(last_direction.angle(), position, last_direction)
+		#can_shoot=false
+		$ShotTimer.start()
 
 func Short_Range_Attack():
 	if Input.is_key_pressed(KEY_Z) and can_slash:
@@ -103,6 +110,7 @@ func Short_Range_Attack():
 		can_slash=false
 		slash_sfx.play()
 		$SlashTimer.start()
+		Long_Range_Attack()
 
 func play_animation(prefix: String, dir: Vector2) -> void:
 	var anim_name := ""
@@ -187,6 +195,8 @@ func _on_hurt_box_area_entered(area):
 func willdie():
 	health-=1
 	hp.emit(health)
+	health-=5
+	hp.set_value(health)
 	if health<=0:
 		var parent = get_tree().current_scene
 		remove_child(died_sfx)

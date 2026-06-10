@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://douap45psh62b"]
+[gd_scene format=3 uid="uid://chg317hn7eqte"]
 
 [ext_resource type="Script" uid="uid://dxp6b77hjridw" path="res://scripts/Player/player.gd" id="1_qfm1y"]
 [ext_resource type="Texture2D" uid="uid://dyublfapax1r1" path="res://assets/MRright.png" id="2_fulsm"]
@@ -540,12 +540,6 @@ _data = {
 [node name="Player" type="CharacterBody2D" unique_id=707087302]
 position = Vector2(-1, 0)
 script = ExtResource("1_qfm1y")
-max_speed = null
-accel = null
-friction = null
-knockbackPower = null
-dodge_speed = null
-health = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2108257223]
 unique_name_in_owner = true
@@ -643,7 +637,7 @@ one_shot = true
 
 [node name="SlashTimer" type="Timer" parent="." unique_id=1428997967]
 unique_name_in_owner = true
-wait_time = 0.35
+wait_time = 0.4
 one_shot = true
 
 [connection signal="dash_fx" from="." to="DashFX" method="_on_node_2d_dash_fx"]

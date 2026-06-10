@@ -3,28 +3,35 @@
 [ext_resource type="PackedScene" uid="uid://douap45psh62b" path="res://scenes/Player.tscn" id="1_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://brqav17v5sk2v" path="res://scenes/opozzap.tscn" id="2_rwgxs"]
 [ext_resource type="Script" uid="uid://dvxsf3nq8nhng" path="res://scripts/HP_label.gd" id="3_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://cqg5231flqa6s" path="res://scenes/hp.tscn" id="3_4wyf3"]
 
 [node name="World" type="Node2D" unique_id=1779477526]
 
 [node name="Player" parent="." unique_id=707087302 instance=ExtResource("1_rwgxs")]
 position = Vector2(289, 159)
+max_speed = 185.0
+accel = 10.0
+friction = 0.15
+knockbackPower = 500
+dodge_speed = 1
+health = 35
 
 [node name="Opozzap" parent="." unique_id=1661657961 instance=ExtResource("2_rwgxs")]
 position = Vector2(127, 64)
 
 [node name="Opozzap2" parent="." unique_id=129304471 instance=ExtResource("2_rwgxs")]
-position = Vector2(288, 298)
+position = Vector2(131, 219)
 
 [node name="Opozzap3" parent="." unique_id=1003578279 instance=ExtResource("2_rwgxs")]
 position = Vector2(449, 62)
 
-[node name="Label" type="Label" parent="." unique_id=1841756945]
-unique_name_in_owner = true
-offset_left = 267.0
-offset_top = 4.0
-offset_right = 307.0
-offset_bottom = 27.0
-text = "HP:"
-script = ExtResource("3_4wyf3")
+[node name="Opozzap4" parent="." unique_id=1298456266 instance=ExtResource("2_rwgxs")]
+position = Vector2(450, 205)
 
-[connection signal="hp" from="Player" to="Label" method="_on_player_hp"]
+[node name="HP" parent="." unique_id=1412859120 instance=ExtResource("3_4wyf3")]
+unique_name_in_owner = true
+z_index = 100
+offset_left = 298.0
+offset_top = 21.0
+offset_right = 298.0
+offset_bottom = 21.0
