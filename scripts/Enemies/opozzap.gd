@@ -4,7 +4,6 @@ signal died
 signal summon
 var summon_frames=[14]
 @export var health=5
-@export var slash_damage=2
 @export var slash_damage=1
 @export var bullet_damage=1
 var damage

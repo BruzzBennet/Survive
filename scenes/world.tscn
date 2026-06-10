@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://douap45psh62b" path="res://scenes/Player.tscn" id="1_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://brqav17v5sk2v" path="res://scenes/opozzap.tscn" id="2_rwgxs"]
-[ext_resource type="Script" uid="uid://dvxsf3nq8nhng" path="res://scripts/HP_label.gd" id="3_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://cqg5231flqa6s" path="res://scenes/hp.tscn" id="3_4wyf3"]
 
 [node name="World" type="Node2D" unique_id=1779477526]

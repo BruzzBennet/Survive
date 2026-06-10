@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 
-signal hp
 signal died
 signal shoot(angle,pos,dir)
 signal slash(angle,pos,dir,player)
@@ -24,7 +23,6 @@ var screen_size:Vector2
 @export var friction: float = 0.15
 @export var knockbackPower: int = 500
 @export var dodge_speed=1
-@export var health: int = 5
 @export var health: int = 35
 @onready var animated_sprite_2d = %AnimatedSprite2D
 @onready var slash_sfx = %SlashSFX
@@ -89,13 +87,6 @@ func dodge():
 		
 
 func Long_Range_Attack():
-	if Input.is_key_pressed(KEY_X):
-		is_shooting=true
-		if can_shoot:
-			slash_shot_sfx.play_sound()
-			shoot.emit(last_direction.angle(), position, last_direction)
-			can_shoot=false
-			$ShotTimer.start()
 	is_shooting=true
 	if can_shoot:
 		slash_shot_sfx.play_sound()
@@ -193,8 +184,6 @@ func _on_hurt_box_area_entered(area):
 
 
 func willdie():
-	health-=1
-	hp.emit(health)
 	health-=5
 	hp.set_value(health)
 	if health<=0:
