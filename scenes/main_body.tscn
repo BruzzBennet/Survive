@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://dn8to5wjq6onp" path="res://assets/MRLeftRunSlash.png" id="16_axnmu"]
 [ext_resource type="Script" uid="uid://yydqhu2ap6c7" path="res://scripts/slashshot_sfx.gd" id="16_jfpux"]
 [ext_resource type="Texture2D" uid="uid://dpuexvjjhr3ug" path="res://assets/MRFrontRunSlash.png" id="17_fvsjc"]
+[ext_resource type="AudioStream" uid="uid://dqyfpn3g8f07t" path="res://assets/audio/hurt1.wav" id="25_6ci06"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hxdpb"]
 atlas = ExtResource("6_p07f3")
@@ -457,20 +458,90 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0e48y"]
-radius = 25.019993
+radius = 5.0990195
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bchmm"]
+radius = 5.0
+height = 20.0
+
+[sub_resource type="Animation" id="Animation_84dws"]
+resource_name = "Dodge"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 1, 0.39215687), Color(1, 1, 1, 0.39215687)]
+}
+
+[sub_resource type="Animation" id="Animation_bchmm"]
+resource_name = "HurtBlink"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.39215687), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6ci06"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_84dws"]
+_data = {
+&"Dodge": SubResource("Animation_84dws"),
+&"HurtBlink": SubResource("Animation_bchmm"),
+&"RESET": SubResource("Animation_6ci06")
+}
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=631887673]
+position = Vector2(-1, -8)
 script = ExtResource("1_p0vlq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=216726899]
 unique_name_in_owner = true
+clip_children = 2
 position = Vector2(-0.99999994, 0)
-scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_wtcfe")
-animation = &"stand_slash3"
+animation = &"stand3"
+
+[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D" unique_id=558517515]
+offset_left = -19.0
+offset_top = -20.0
+offset_right = 21.0
+offset_bottom = 20.0
+color = Color(1, 0, 0, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2132568283]
-position = Vector2(0, 17)
+position = Vector2(-1, 2)
 shape = SubResource("CircleShape2D_0e48y")
 
 [node name="SlashTimer" type="Timer" parent="." unique_id=1462130023]
@@ -479,9 +550,19 @@ wait_time = 0.35
 [node name="ShotTimer" type="Timer" parent="." unique_id=383666012]
 
 [node name="StaminaRecoverTimer" type="Timer" parent="." unique_id=1995013214]
+unique_name_in_owner = true
 wait_time = 2.0
 
 [node name="StaminaTimer" type="Timer" parent="." unique_id=1213237063]
+
+[node name="HurtTimer" type="Timer" parent="." unique_id=1567966599]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="DodgeTimer" type="Timer" parent="." unique_id=1209609615]
+unique_name_in_owner = true
+wait_time = 0.35
+one_shot = true
 
 [node name="SlashSFX" type="AudioStreamPlayer2D" parent="." unique_id=16950051]
 unique_name_in_owner = true
@@ -506,9 +587,29 @@ unique_name_in_owner = true
 stream = ExtResource("15_srp4u")
 script = ExtResource("16_jfpux")
 
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=789049177]
+unique_name_in_owner = true
+stream = ExtResource("25_6ci06")
+volume_db = -5.0
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=292446687]
+position = Vector2(-1, 0)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionHurtBox" type="CollisionShape2D" parent="HurtBox" unique_id=369684074]
+shape = SubResource("CapsuleShape2D_bchmm")
+
+[node name="FX" type="AnimationPlayer" parent="." unique_id=1665286285]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_84dws")
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="timeout" from="SlashTimer" to="." method="_on_slash_timer_timeout"]
 [connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]
 [connection signal="timeout" from="StaminaRecoverTimer" to="." method="_on_stamina_recover_timer_timeout"]
 [connection signal="timeout" from="StaminaTimer" to="." method="_on_stamina_timer_timeout"]
+[connection signal="timeout" from="DodgeTimer" to="." method="_on_dodge_timer_timeout"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="area_exited" from="HurtBox" to="." method="_on_hurt_box_area_exited"]

@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://eql24fk7r6lp"]
+
+[ext_resource type="Texture2D" uid="uid://b8omkhbpr2qab" path="res://assets/Elecbullet.png" id="1_2e8nn"]
+[ext_resource type="Script" uid="uid://bkhns2leu0p5m" path="res://scripts/Enemies/Attacks/enemy_elec_shot.gd" id="1_4qdr7"]
+[ext_resource type="AudioStream" uid="uid://dvcok4a0iw0ed" path="res://assets/audio/parry.mp3" id="3_l0b33"]
+[ext_resource type="Script" uid="uid://bip4nm76t78cb" path="res://scripts/Particles/parried_fx.gd" id="4_pf2g1"]
+[ext_resource type="PackedScene" uid="uid://5bbrtc4cfkdv" path="res://scenes/hurtParticles.tscn" id="5_a5rix"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4qdr7"]
+radius = 5.0990195
+
+[node name="ElecShot" type="CharacterBody2D" unique_id=768738282]
+script = ExtResource("1_4qdr7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1336355002]
+texture = ExtResource("1_2e8nn")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=901208586]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1482070671]
+shape = SubResource("CircleShape2D_4qdr7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=578360245]
+shape = SubResource("CircleShape2D_4qdr7")
+
+[node name="ParriedSFX" type="AudioStreamPlayer2D" parent="." unique_id=1337276879]
+unique_name_in_owner = true
+stream = ExtResource("3_l0b33")
+
+[node name="ParriedFX" type="Node2D" parent="." unique_id=396755958]
+script = ExtResource("4_pf2g1")
+fx_scene = ExtResource("5_a5rix")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1189245290]
+rect = Rect2(-5, -5, 10, 10)
+
+[connection signal="parried" from="." to="ParriedFX" method="_on_elec_shot_parried"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cbq1kkkc1v847"]
+
+[ext_resource type="Script" uid="uid://dan8rxx63nj3x" path="res://scripts/world.gd" id="1_78awf"]
+[ext_resource type="PackedScene" uid="uid://c64b8tpoa8e3u" path="res://scenes/player.tscn" id="1_ibkli"]
+[ext_resource type="Script" uid="uid://degp3obqpwc0k" path="res://scripts/Enemies/Manager/enemy_manager.gd" id="3_s0nni"]
+[ext_resource type="PackedScene" uid="uid://b6a5j10xoom4g" path="res://scenes/pozzap.tscn" id="4_aug50"]
+
+[node name="Game" type="Node2D" unique_id=108690770]
+script = ExtResource("1_78awf")
+
+[node name="Player" parent="." unique_id=1176838 instance=ExtResource("1_ibkli")]
+
+[node name="EnemyTimer" type="Timer" parent="." unique_id=1773378839]
+unique_name_in_owner = true
+wait_time = 3.0
+
+[node name="EnemyManager" type="Node2D" parent="." unique_id=1918405990]
+script = ExtResource("3_s0nni")
+
+[node name="Pozzap" parent="." unique_id=1242391046 instance=ExtResource("4_aug50")]
+position = Vector2(141, 247)
+
+[node name="Pozzap2" parent="." unique_id=1847292476 instance=ExtResource("4_aug50")]
+position = Vector2(278, 181)
+
+[node name="Pozzap3" parent="." unique_id=708544317 instance=ExtResource("4_aug50")]
+position = Vector2(26, 170)
+
+[node name="Pozzap4" parent="." unique_id=1972005995 instance=ExtResource("4_aug50")]
+position = Vector2(308, 125)
+
+[node name="Pozzap5" parent="." unique_id=1004371268 instance=ExtResource("4_aug50")]
+position = Vector2(399, 107)
+
+[connection signal="summon" from="." to="EnemyManager" method="_on_game_summon"]
