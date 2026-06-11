@@ -633,6 +633,7 @@ one_shot = true
 
 [node name="ShotTimer" type="Timer" parent="." unique_id=39533089]
 unique_name_in_owner = true
+wait_time = 0.4
 one_shot = true
 
 [node name="SlashTimer" type="Timer" parent="." unique_id=1428997967]

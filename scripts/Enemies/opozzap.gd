@@ -10,8 +10,6 @@ var damage
 var damage_animation
 @onready var animated_sprite_2d = %AnimatedSprite2D
 @onready var summoner = %PozzapSummoner
-@onready var died_sfx = %DiedSFX
-@onready var hurt_sfx = %HurtSFX
 @onready var hit_fx = %FX
 
 func _ready() -> void:
@@ -33,16 +31,9 @@ func _on_hit_box_area_entered(area) -> void:
 			damage=slash_damage
 			damage_animation="ReallyHurt"
 		health-=damage
-		hurt_sfx.play()
+		PLAYSFX.hurt()
 		if health<=0:
-			var parent = get_tree().current_scene
-
-			remove_child(died_sfx)
-			parent.add_child(died_sfx)
-
-			died_sfx.global_position = global_position
-			
-			died_sfx.play()
+			PLAYSFX.died()
 			died.emit(global_position)
 			queue_free()
 		hit_fx.play(damage_animation)

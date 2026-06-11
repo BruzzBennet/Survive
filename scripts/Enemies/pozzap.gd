@@ -3,13 +3,11 @@ extends CharacterBody2D
 signal died
 signal shoot
 const speed = 4250.0
-const margin = 15
+const margin = 55
 var screen_size:Vector2
 var last_direction = Vector2.RIGHT
 var chasing: bool
 @onready var animated_sprite_2d = %AnimatedSprite2D
-@onready var died_sfx = %DiedSFX
-@onready var shot_sfx = %ShotSFX
 
 func _ready() -> void:
 	add_to_group("enemy")
@@ -59,7 +57,7 @@ func _on_timer_timeout() -> void:
 
 func shoot_bullet():
 	#if !shot_sfx.playing:
-	shot_sfx.play()
+	PLAYSFX.shot()
 	shoot.emit(last_direction.angle(), position, last_direction)
 
 func choose(array):
@@ -69,13 +67,6 @@ func choose(array):
 
 func _on_hurt_box_area_entered(area) -> void:
 	if area.is_in_group("bullet") or area.is_in_group("slash"):
-		var parent = get_tree().current_scene
-
-		remove_child(died_sfx)
-		parent.add_child(died_sfx)
-
-		died_sfx.global_position = global_position
-		
-		died_sfx.play()
+		PLAYSFX.died()
 		died.emit(global_position)
 		queue_free()

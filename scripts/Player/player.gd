@@ -6,7 +6,7 @@ signal shoot(angle,pos,dir)
 signal slash(angle,pos,dir,player)
 signal hurt_fx(pos)
 signal dash_fx
-const margin=15
+const margin=55
 var last_direction = Vector2.DOWN
 var can_shoot: bool = true
 var can_slash: bool = true
@@ -23,6 +23,7 @@ var screen_size:Vector2
 @export var friction: float = 0.15
 @export var knockbackPower: int = 500
 @export var dodge_speed=1
+@export var dodge_min: float = 5.0
 @export var health: int = 35
 @onready var animated_sprite_2d = %AnimatedSprite2D
 @onready var slash_sfx = %SlashSFX
@@ -36,22 +37,37 @@ var screen_size:Vector2
 @onready var stamina_recover_time= %StaminaRecoverTimer
 @onready var died_sfx = %DiedSFX
 @onready var hp = %HP
+@onready var dodgeUI = %Dodge
 
 
 func _ready():
+	global_position = Vector2(320, 160)
 	screen_size=get_viewport_rect().size
-	position=screen_size/2
 	hit_fx.play("RESET")
 	add_to_group("player")
 
 
-func _physics_process(delta: float) -> void:	
+func _physics_process(delta: float) -> void:
+	update_fx()
 	player_movement(delta)
-	dodge()
-	Short_Range_Attack()
-	if !is_hurt:
+	dodge(delta)
+	#if Input.is_key_pressed(KEY_Z):
+	#	Short_Range_Attack()
+	if Input.is_key_pressed(KEY_Z):
+		Long_Range_Attack()
+	if !can_dodge and dodgeUI.currentDodge >= dodge_min:
+		can_dodge = true
+	if !is_hurt and !is_dodging:
 		for enemyArea in enemyCollisions:
 			HurtByEnemy(enemyArea)
+
+func update_fx():
+	if is_hurt:
+		hit_fx.play("HurtBlink")
+	elif is_dodging:
+		hit_fx.play("Dodge")
+	else:
+		hit_fx.play("RESET")
 
 func player_movement(delta):
 	position=position.clamp(Vector2(margin,margin),Vector2(screen_size.x - margin, screen_size.y - margin))
@@ -70,38 +86,33 @@ func player_movement(delta):
 	process_animation(direction)
 	move_and_slide()
 
-func dodge():
-	if last_direction != Vector2.ZERO and Input.is_key_pressed(KEY_C) and can_dodge and !dodge_time.time_left > 0:
-		is_dodging=true
+func dodge(delta):
+	if last_direction != Vector2.ZERO and Input.is_key_pressed(KEY_C) and can_dodge:
 		dash_fx.emit(last_direction.angle(), position, last_direction)
-		dodge_time.start()
+		is_dodging = true
 		dash_sfx.play()
-		is_hurt=true
-		hit_fx.play("Dodge")
-		await dodge_time.timeout
-		hit_fx.play("RESET")
-		is_hurt=false
-		is_dodging=false
-		stamina_recover_time.start()
-		can_dodge=false
-		
+		dodgeUI.reduce(delta)
+	else:
+		is_dodging = false
+	if dodgeUI.currentDodge <= 0:
+		can_dodge = false	
 
 func Long_Range_Attack():
+	Short_Range_Attack()
 	is_shooting=true
 	if can_shoot:
 		slash_shot_sfx.play_sound()
 		shoot.emit(last_direction.angle(), position, last_direction)
-		#can_shoot=false
+		can_shoot=false
 		$ShotTimer.start()
 
 func Short_Range_Attack():
-	if Input.is_key_pressed(KEY_Z) and can_slash:
+	if can_slash:
 		is_attacking=true
 		slash.emit(last_direction.angle(), position, last_direction, self)
 		can_slash=false
 		slash_sfx.play()
 		$SlashTimer.start()
-		Long_Range_Attack()
 
 func play_animation(prefix: String, dir: Vector2) -> void:
 	var anim_name := ""
@@ -172,10 +183,8 @@ func HurtByEnemy(area):
 	hurt_fx.emit(global_position)
 	hurt_sfx.play()
 	knockback(area.get_parent().velocity)
-	hit_fx.play("HurtBlink")
 	hurt_time.start()
 	await hurt_time.timeout
-	hit_fx.play("RESET")
 	is_hurt=false
 
 func _on_hurt_box_area_entered(area):
@@ -197,7 +206,3 @@ func willdie():
 
 func _on_hurt_box_area_exited(area):
 	enemyCollisions.erase(area)
-
-
-func _on_stamina_recover_timer_timeout() -> void:
-	can_dodge=true
