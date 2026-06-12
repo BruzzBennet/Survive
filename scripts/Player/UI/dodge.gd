@@ -9,7 +9,7 @@ extends Control
 @onready var dodgebar = %DodgeBar
 
 func _ready():
-	global_position = Vector2(355, 20)
+	global_position = Vector2(355, 300)
 	set_value(currentDodge)
 
 func set_value(dodge_value) -> void:

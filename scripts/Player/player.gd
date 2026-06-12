@@ -87,11 +87,11 @@ func player_movement(delta):
 	move_and_slide()
 
 func dodge(delta):
-	#if last_direction != Vector2.ZERO and Input.is_action_just_pressed("dash") and can_dodge:
-	#	dash_sfx.play()
-	if last_direction != Vector2.ZERO and Input.is_action_pressed("dash") and can_dodge:
-		dash_sfx.play()
+	if last_direction != Vector2.ZERO and Input.is_action_just_pressed("dash") and can_dodge:
 		dash_fx.emit(last_direction.angle(), position, last_direction)
+		dash_sfx.play()
+	if last_direction != Vector2.ZERO and Input.is_action_pressed("dash") and can_dodge:
+#		dash_sfx.play()
 		is_dodging = true
 		dodgeUI.reduce(delta)
 	else:
