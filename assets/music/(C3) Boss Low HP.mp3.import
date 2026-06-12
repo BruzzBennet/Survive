@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c7g84ap0l6uag"
+path="res://.godot/imported/(C3) Boss Low HP.mp3-cec94497933279ce0ee2325fece76d52.mp3str"
+
+[deps]
+
+source_file="res://assets/music/(C3) Boss Low HP.mp3"
+dest_files=["res://.godot/imported/(C3) Boss Low HP.mp3-cec94497933279ce0ee2325fece76d52.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://d3skjo1344msy" path="res://scripts/Enemies/Attacks/SFX/shot_sfx.gd" id="4_qw17c"]
 [ext_resource type="AudioStream" uid="uid://43cr1wox4syq" path="res://assets/audio/Explosion(notmadebyme).wav" id="4_snamx"]
 [ext_resource type="AudioStream" uid="uid://bmvjjtf3u01cd" path="res://assets/audio/Hurt(notmadebyme).wav" id="5_2yeu1"]
+[ext_resource type="AudioStream" uid="uid://dsd6ihfl2vkm6" path="res://assets/music/(A1) Start.mp3" id="6_5fnny"]
 
 [node name="PlaySFX" type="Node" unique_id=68871846]
 script = ExtResource("1_bb6gu")
@@ -14,20 +15,33 @@ script = ExtResource("1_bb6gu")
 unique_name_in_owner = true
 position = Vector2(-1, 3)
 stream = ExtResource("2_qw17c")
+volume_db = -4.0
+bus = &"SFX"
 
 [node name="ShotSFX" type="AudioStreamPlayer2D" parent="." unique_id=475808184]
 unique_name_in_owner = true
 position = Vector2(0, 1)
 stream = ExtResource("3_qw17c")
 volume_db = 1.0
+bus = &"SFX"
 script = ExtResource("4_qw17c")
 
 [node name="DiedSFX" type="AudioStreamPlayer2D" parent="." unique_id=1254758794]
 unique_name_in_owner = true
 position = Vector2(0, 1)
 stream = ExtResource("4_snamx")
+volume_db = -7.0
+bus = &"SFX"
+
+[node name="StartTune" type="AudioStreamPlayer2D" parent="." unique_id=935809275]
+unique_name_in_owner = true
+position = Vector2(-1, 3)
+stream = ExtResource("6_5fnny")
+bus = &"SFX"
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=851815124]
 unique_name_in_owner = true
 position = Vector2(-1, 3)
 stream = ExtResource("5_2yeu1")
+volume_db = -5.0
+bus = &"SFX"

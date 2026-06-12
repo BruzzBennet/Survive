@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	dodge(delta)
 	#if Input.is_key_pressed(KEY_Z):
 	#	Short_Range_Attack()
-	if Input.is_key_pressed(KEY_Z):
+	if Input.is_action_pressed("attack"):
 		Long_Range_Attack()
 	if !can_dodge and dodgeUI.currentDodge >= dodge_min:
 		can_dodge = true
@@ -87,10 +87,12 @@ func player_movement(delta):
 	move_and_slide()
 
 func dodge(delta):
-	if last_direction != Vector2.ZERO and Input.is_key_pressed(KEY_C) and can_dodge:
+	#if last_direction != Vector2.ZERO and Input.is_action_just_pressed("dash") and can_dodge:
+	#	dash_sfx.play()
+	if last_direction != Vector2.ZERO and Input.is_action_pressed("dash") and can_dodge:
+		dash_sfx.play()
 		dash_fx.emit(last_direction.angle(), position, last_direction)
 		is_dodging = true
-		dash_sfx.play()
 		dodgeUI.reduce(delta)
 	else:
 		is_dodging = false

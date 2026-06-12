@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bqs8opq4jywxx"
+path="res://.godot/imported/(C8) Danger.mp3-9d81a9ee6f36b859e45bdf86984de6cf.mp3str"
+
+[deps]
+
+source_file="res://assets/music/(C8) Danger.mp3"
+dest_files=["res://.godot/imported/(C8) Danger.mp3-9d81a9ee6f36b859e45bdf86984de6cf.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
