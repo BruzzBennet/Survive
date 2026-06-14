@@ -25,6 +25,7 @@ var screen_size:Vector2
 @export var dodge_speed=1
 @export var dodge_min: float = 5.0
 @export var health: int = 35
+@export var damage_taken: int = 12
 @onready var animated_sprite_2d = %AnimatedSprite2D
 @onready var slash_sfx = %SlashSFX
 @onready var slash_shot_sfx = %SlashShotSFX
@@ -51,9 +52,9 @@ func _physics_process(delta: float) -> void:
 	update_fx()
 	player_movement(delta)
 	dodge(delta)
-	#if Input.is_key_pressed(KEY_Z):
-	#	Short_Range_Attack()
 	if Input.is_action_pressed("attack"):
+	#	Short_Range_Attack()
+	#if Input.is_action_pressed("shoot"):
 		Long_Range_Attack()
 	if !can_dodge and dodgeUI.currentDodge >= dodge_min:
 		can_dodge = true
@@ -195,7 +196,7 @@ func _on_hurt_box_area_entered(area):
 
 
 func willdie():
-	health-=5
+	health-=damage_taken
 	hp.set_value(health)
 	if health<=0:
 		var parent = get_tree().current_scene
@@ -204,6 +205,12 @@ func willdie():
 		died_sfx.global_position = global_position
 		died_sfx.play()
 		died.emit(global_position)
+		var death_timer = $"../DeathTimer"
+		death_timer.start()
+		BGM.GameOver()
+		var bus_index = AudioServer.get_bus_index("SFX")
+		var current_state: bool = AudioServer.is_bus_mute(bus_index)
+		AudioServer.set_bus_mute(bus_index, !current_state)
 		queue_free()
 
 func _on_hurt_box_area_exited(area):

@@ -477,7 +477,7 @@ radius = 4.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jx8is"]
 radius = 5.0
-height = 20.0
+height = 18.0
 
 [sub_resource type="Animation" id="Animation_ke2ow"]
 resource_name = "Dodge"
@@ -597,7 +597,7 @@ bus = &"SFX"
 [node name="SlashShotSFX" type="AudioStreamPlayer2D" parent="." unique_id=206371275]
 unique_name_in_owner = true
 stream = ExtResource("18_i4ail")
-volume_db = -10.0
+volume_db = -5.0
 bus = &"SFX"
 script = ExtResource("19_l71n6")
 

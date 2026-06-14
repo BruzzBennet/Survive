@@ -12,6 +12,7 @@ radius = 5.0990195
 script = ExtResource("1_4qdr7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1336355002]
+modulate = Color(1.5720325, 1.5720325, 1.5720325, 1)
 texture = ExtResource("1_2e8nn")
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=901208586]
@@ -27,6 +28,7 @@ script = ExtResource("4_pf2g1")
 fx_scene = ExtResource("5_a5rix")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1189245290]
+visible = false
 rect = Rect2(-5, -5, 10, 10)
 
 [connection signal="parried" from="." to="ParriedFX" method="_on_elec_shot_parried"]

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c4wa4pso7t1kk" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="2_ekxnf"]
+[ext_resource type="PackedScene" uid="uid://d4fsptvwptuf4" path="res://scenes/ctr_shader.tscn" id="3_bqqt6"]
 
 [node name="MainMenu" type="Node2D" unique_id=863299943]
 script = ExtResource("1_l6cm7")
@@ -45,7 +46,12 @@ visible = false
 [node name="Fade_Timer" type="Timer" parent="Transition" unique_id=146406683]
 unique_name_in_owner = true
 
+[node name="CTRShader" parent="." unique_id=1374949823 instance=ExtResource("3_bqqt6")]
+
+[connection signal="focus_exited" from="ButtonManager/VBoxContainer/Start" to="." method="_on_start_focus_exited"]
 [connection signal="pressed" from="ButtonManager/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="focus_exited" from="ButtonManager/VBoxContainer/Options" to="." method="_on_options_focus_exited"]
 [connection signal="pressed" from="ButtonManager/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="focus_exited" from="ButtonManager/VBoxContainer/Quit" to="." method="_on_quit_focus_exited"]
 [connection signal="pressed" from="ButtonManager/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="timeout" from="Transition/Fade_Timer" to="." method="_on_fade_timer_timeout"]

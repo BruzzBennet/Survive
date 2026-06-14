@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://d4fsptvwptuf4"]
+
+[ext_resource type="Shader" uid="uid://brhe8xywatubc" path="res://shaders/crt.gdshader" id="1_jg5jm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7r4gi"]
+shader = ExtResource("1_jg5jm")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.10000000475
+shader_parameter/scanlines_width = 0.5
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = false
+shader_parameter/roll_speed = 8.0
+shader_parameter/roll_size = 0.0
+shader_parameter/roll_variation = 0.10000000149012
+shader_parameter/distort_intensity = 0.0
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.0
+shader_parameter/aberration = 4.7499999933364734e-08
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.250000011875
+
+[node name="CTRShader" type="CanvasLayer" unique_id=1374949823]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1312269448]
+material = SubResource("ShaderMaterial_7r4gi")
+offset_right = 640.0
+offset_bottom = 319.0
+metadata/_edit_use_anchors_ = true

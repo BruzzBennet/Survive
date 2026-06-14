@@ -2,10 +2,10 @@ extends CharacterBody2D
 
 signal died
 signal summon
-var summon_frames=[14]
-@export var health=5
-@export var slash_damage=1
-@export var bullet_damage=1
+var summon_frames = [14]
+@export var health = 5
+@export var slash_damage = 1
+@export var bullet_damage = 1
 var damage
 var damage_animation
 @onready var animated_sprite_2d = %AnimatedSprite2D
@@ -25,14 +25,14 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 func _on_hit_box_area_entered(area) -> void:
 	if area.is_in_group("bullet") or area.is_in_group("slash"):
 		if area.is_in_group("bullet"):
-			damage=bullet_damage
-			damage_animation="Hurt"
+			damage = bullet_damage
+			damage_animation = "Hurt"
 		else:
-			damage=slash_damage
-			damage_animation="ReallyHurt"
-		health-=damage
+			damage = slash_damage
+			damage_animation = "ReallyHurt"
+		health -= damage
 		PLAYSFX.hurt()
-		if health<=0:
+		if health <= 0:
 			PLAYSFX.died()
 			died.emit(global_position)
 			queue_free()

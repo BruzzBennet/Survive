@@ -3,6 +3,7 @@
 [ext_resource type="AudioStream" uid="uid://jy7gbsk0urf7" path="res://assets/music/(C7) Stage 3.mp3" id="1_0j54u"]
 [ext_resource type="Script" uid="uid://dqp3cohwpd55i" path="res://scripts/SFX/music.gd" id="1_khwbh"]
 [ext_resource type="AudioStream" uid="uid://brl2srhx3m3i3" path="res://assets/music/(C1) Stage 1.mp3" id="2_3e3qe"]
+[ext_resource type="AudioStream" uid="uid://dwgmdxnasqf1b" path="res://assets/music/(Z1) Game Over Tune 4.mp3" id="4_op8hu"]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" unique_id=596401791]
 script = ExtResource("1_khwbh")
@@ -16,3 +17,6 @@ bus = &"Music"
 unique_name_in_owner = true
 stream = ExtResource("1_0j54u")
 bus = &"Music"
+
+[node name="GameOver" type="AudioStreamPlayer2D" parent="." unique_id=1161924845]
+stream = ExtResource("4_op8hu")

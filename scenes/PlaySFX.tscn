@@ -7,8 +7,11 @@
 [ext_resource type="AudioStream" uid="uid://43cr1wox4syq" path="res://assets/audio/Explosion(notmadebyme).wav" id="4_snamx"]
 [ext_resource type="AudioStream" uid="uid://bmvjjtf3u01cd" path="res://assets/audio/Hurt(notmadebyme).wav" id="5_2yeu1"]
 [ext_resource type="AudioStream" uid="uid://dsd6ihfl2vkm6" path="res://assets/music/(A1) Start.mp3" id="6_5fnny"]
+[ext_resource type="AudioStream" uid="uid://bdmxh1pxlkw0v" path="res://assets/audio/MenuButtonFocus.wav" id="8_2yeu1"]
+[ext_resource type="AudioStream" uid="uid://csjg3qkfap6ld" path="res://assets/audio/MenuButtonSelect.wav" id="9_ctjgy"]
 
 [node name="PlaySFX" type="Node" unique_id=68871846]
+process_mode = 3
 script = ExtResource("1_bb6gu")
 
 [node name="ParriedSFX" type="AudioStreamPlayer2D" parent="." unique_id=1199704381]
@@ -37,7 +40,7 @@ bus = &"SFX"
 unique_name_in_owner = true
 position = Vector2(-1, 3)
 stream = ExtResource("6_5fnny")
-bus = &"SFX"
+bus = &"UI SFX"
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=851815124]
 unique_name_in_owner = true
@@ -45,3 +48,13 @@ position = Vector2(-1, 3)
 stream = ExtResource("5_2yeu1")
 volume_db = -5.0
 bus = &"SFX"
+
+[node name="MenuMove" type="AudioStreamPlayer2D" parent="." unique_id=2000714770]
+unique_name_in_owner = true
+stream = ExtResource("8_2yeu1")
+bus = &"UI SFX"
+
+[node name="MenuSelect" type="AudioStreamPlayer2D" parent="." unique_id=6014951]
+unique_name_in_owner = true
+stream = ExtResource("9_ctjgy")
+bus = &"UI SFX"
