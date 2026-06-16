@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://b6a5j10xoom4g"]
+
+[ext_resource type="Script" uid="uid://ddkdtc4rexct0" path="res://scripts/Enemies/pozzap.gd" id="1_0nryl"]
+[ext_resource type="Texture2D" uid="uid://cc2ppc8f41e0o" path="res://assets/Pozzapeight.png" id="2_qwm0m"]
+[ext_resource type="Texture2D" uid="uid://chblt6cw2nvvx" path="res://assets/Pozzapback.png" id="3_qhhgb"]
+[ext_resource type="Texture2D" uid="uid://cdouo7ptqbadp" path="res://assets/Pozzapleft.png" id="4_edv5l"]
+[ext_resource type="Texture2D" uid="uid://c8pkc84gs21id" path="res://assets/Pozzapfront1.png" id="5_ad7tp"]
+[ext_resource type="Script" uid="uid://km7uun1qgqgv" path="res://scripts/Enemies/Manager/PozzapElecShot.gd" id="6_p51up"]
+[ext_resource type="Script" uid="uid://cmxq4ewt74u6" path="res://scripts/Particles/Manager/died_fx_manager.gd" id="6_qhhgb"]
+[ext_resource type="PackedScene" uid="uid://c1r331jkecm7i" path="res://scenes/DiedExplosion.tscn" id="7_edv5l"]
+[ext_resource type="PackedScene" uid="uid://eql24fk7r6lp" path="res://scenes/EnemyElecShot.tscn" id="7_v28d2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p51up"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qwm0m")
+}],
+"loop": true,
+"name": &"move0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_qhhgb")
+}],
+"loop": true,
+"name": &"move1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_edv5l")
+}],
+"loop": true,
+"name": &"move2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ad7tp")
+}],
+"loop": true,
+"name": &"move3",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v28d2"]
+radius = 6.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0nryl"]
+radius = 7.0
+height = 16.0
+
+[node name="Pozzap" type="CharacterBody2D" unique_id=1242391046]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_0nryl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1235540411]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_p51up")
+animation = &"move2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2080288837]
+visible = false
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_v28d2")
+
+[node name="Shooter" type="Node2D" parent="." unique_id=1676290225]
+script = ExtResource("6_p51up")
+bullet_scene = ExtResource("7_v28d2")
+
+[node name="DiedFXManager" type="Node2D" parent="." unique_id=379426974]
+script = ExtResource("6_qhhgb")
+fx_scene = ExtResource("7_edv5l")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=671015330]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1340553628]
+shape = SubResource("CapsuleShape2D_0nryl")
+
+[node name="Timer" type="Timer" parent="." unique_id=1338123486]
+autostart = true
+
+[connection signal="died" from="." to="DiedFXManager" method="_on_pozzap_died"]
+[connection signal="shoot" from="." to="Shooter" method="_on_pozzap_shoot"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

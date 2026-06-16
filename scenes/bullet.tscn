@@ -1,25 +1,25 @@
 [gd_scene format=3 uid="uid://2e7a6m6g18hl"]
 
 [ext_resource type="Texture2D" uid="uid://kwla42renok5" path="res://assets/Slash.png" id="1_mkf8s"]
-[ext_resource type="Script" uid="uid://bdx0cpvtgtkt0" path="res://scripts/bullet.gd" id="1_y25gk"]
+[ext_resource type="Script" uid="uid://bdx0cpvtgtkt0" path="res://scripts/Player/Attacks/bullet.gd" id="1_y25gk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y25gk"]
-size = Vector2(119, 48)
+size = Vector2(24, 9)
 
 [node name="bullet" type="Area2D" unique_id=1270715140]
-collision_layer = 8
 script = ExtResource("1_y25gk")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1273843954]
-scale = Vector2(5, 5)
+modulate = Color(1.9655429, 1.9655429, 1.9655429, 1)
 texture = ExtResource("1_mkf8s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=405795565]
-position = Vector2(0.5, 2)
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_y25gk")
 
 [node name="Timer" type="Timer" parent="." unique_id=1708571867]
-wait_time = 3.0
+wait_time = 0.2
 autostart = true
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dnl0p0bkrdb0c"
+path="res://.godot/imported/(D) Unlocked or High Score (maybe).mp3-61d8c3680abc9d81071823d756eb4957.mp3str"
+
+[deps]
+
+source_file="res://assets/music/(D) Unlocked or High Score (maybe).mp3"
+dest_files=["res://.godot/imported/(D) Unlocked or High Score (maybe).mp3-61d8c3680abc9d81071823d756eb4957.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

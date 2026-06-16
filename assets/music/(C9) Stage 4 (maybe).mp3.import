@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bw7pxpbxatcll"
+path="res://.godot/imported/(C9) Stage 4 (maybe).mp3-9015507b33154c68ed78c7ef05aaa62f.mp3str"
+
+[deps]
+
+source_file="res://assets/music/(C9) Stage 4 (maybe).mp3"
+dest_files=["res://.godot/imported/(C9) Stage 4 (maybe).mp3-9015507b33154c68ed78c7ef05aaa62f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

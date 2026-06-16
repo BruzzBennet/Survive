@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bdwv0idrljtqa"]
 
-[ext_resource type="Script" uid="uid://pufbaj354pre" path="res://scripts/slash.gd" id="1_3c2nd"]
+[ext_resource type="Script" uid="uid://pufbaj354pre" path="res://scripts/Player/Attacks/slash.gd" id="1_3c2nd"]
 [ext_resource type="Texture2D" uid="uid://dkc241shci8t5" path="res://assets/SlashAnimation.png" id="1_rkylg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3c2nd"]
@@ -61,7 +61,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5t3io"]
-size = Vector2(122, 47)
+size = Vector2(30, 26)
 
 [node name="Slash" type="Area2D" unique_id=2039783034]
 script = ExtResource("1_3c2nd")
@@ -69,12 +69,10 @@ script = ExtResource("1_3c2nd")
 [node name="AnimatedSlash2D" type="AnimatedSprite2D" parent="." unique_id=1485902092]
 unique_name_in_owner = true
 position = Vector2(0, 3)
-scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_q08yp")
 animation = &"Slash"
 frame = 6
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1444233969]
-position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_5t3io")
