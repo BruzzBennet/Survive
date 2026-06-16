@@ -45,8 +45,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_v28d2"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ad7tp"]
 radius = 6.0
+height = 14.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0nryl"]
 radius = 7.0
@@ -54,18 +55,15 @@ height = 16.0
 
 [node name="Pozzap" type="CharacterBody2D" unique_id=1242391046]
 collision_layer = 2
-collision_mask = 2
 script = ExtResource("1_0nryl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1235540411]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_p51up")
-animation = &"move2"
+animation = &"move3"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2080288837]
-visible = false
-position = Vector2(0, 4)
-shape = SubResource("CircleShape2D_v28d2")
+shape = SubResource("CapsuleShape2D_ad7tp")
 
 [node name="Shooter" type="Node2D" parent="." unique_id=1676290225]
 script = ExtResource("6_p51up")

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dan8rxx63nj3x" path="res://scripts/world.gd" id="1_e3hyu"]
 [ext_resource type="PackedScene" uid="uid://chg317hn7eqte" path="res://scenes/player.tscn" id="1_rwgxs"]
-[ext_resource type="PackedScene" uid="uid://djmppjsqywatj" path="res://scenes/bridgeofdoom.tscn" id="2_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://dcqheu0e5s5ul" path="res://scenes/maps/LazyMap.tscn" id="2_7r4gi"]
 [ext_resource type="PackedScene" uid="uid://brqav17v5sk2v" path="res://scenes/opozzap.tscn" id="2_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://cqg5231flqa6s" path="res://scenes/hp.tscn" id="3_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://d37vdgv23c2ih" path="res://scenes/Dodge.tscn" id="4_k0juu"]
@@ -18,17 +18,25 @@ glow_intensity = 0.35
 [node name="World" type="Node2D" unique_id=1779477526]
 script = ExtResource("1_e3hyu")
 
-[node name="Node2D" parent="." unique_id=337268180 instance=ExtResource("2_7r4gi")]
+[node name="Node2D" type="Node2D" parent="." unique_id=797401203]
+
+[node name="TileMapLayer" parent="Node2D" unique_id=491260023 instance=ExtResource("2_7r4gi")]
 
 [node name="Player" parent="." unique_id=707087302 instance=ExtResource("1_rwgxs")]
 unique_name_in_owner = true
-position = Vector2(315, 155)
+position = Vector2(339, 59)
 
 [node name="Opozzap" parent="." unique_id=1661657961 instance=ExtResource("2_rwgxs")]
-position = Vector2(47, 44)
+position = Vector2(235, 54)
 
 [node name="Opozzap3" parent="." unique_id=1003578279 instance=ExtResource("2_rwgxs")]
-position = Vector2(559, 44)
+position = Vector2(593, 53)
+
+[node name="Opozzap2" parent="." unique_id=1209652749 instance=ExtResource("2_rwgxs")]
+position = Vector2(17, 217)
+
+[node name="Opozzap4" parent="." unique_id=1451348851 instance=ExtResource("2_rwgxs")]
+position = Vector2(119, 152)
 
 [node name="HP" parent="." unique_id=1412859120 instance=ExtResource("3_4wyf3")]
 unique_name_in_owner = true
@@ -50,14 +58,18 @@ unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=63205776]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=1187232654 instance=ExtResource("12_q5onr")]
+
 [node name="Transition" parent="." unique_id=2142637533 instance=ExtResource("10_w7kh3")]
 light_mask = 524288
 visibility_layer = 524288
 z_index = 100
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=63205776]
-
-[node name="PauseMenu" parent="CanvasLayer" unique_id=1187232654 instance=ExtResource("12_q5onr")]
+offset_left = -10.0
+offset_top = -23.0
+offset_right = 652.0
+offset_bottom = 330.0
 
 [node name="CTRShader" parent="." unique_id=1374949823 instance=ExtResource("8_4mrxx")]
 visible = false

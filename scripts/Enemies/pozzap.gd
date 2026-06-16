@@ -2,30 +2,28 @@ extends CharacterBody2D
 
 signal died
 signal shoot
-const speed = 4250.0
-const margin = 45
-var screen_size:Vector2
+const speed = 70.0
+const margin = 12
+var screen_size: Vector2
 var last_direction = Vector2.RIGHT
 var chasing: bool
 @onready var animated_sprite_2d = %AnimatedSprite2D
 
 func _ready() -> void:
 	add_to_group("enemy")
-	screen_size=get_viewport_rect().size
-	chasing=false
+	screen_size = get_viewport_rect().size
+	chasing = false
 
 func _physics_process(delta):
-	global_position = global_position.clamp(
-		Vector2(0,margin),
-		Vector2(screen_size.x, screen_size.y - margin)
-	)
-	move(delta)
+	position = position.clamp(Vector2(margin, 0), Vector2(screen_size.x - margin, screen_size.y))
+	move()
 	process_animation(last_direction)
 
-func move(delta):
+func move():
 	if !chasing:
-		velocity = last_direction * speed * delta
+		velocity = last_direction * speed
 	move_and_slide()
+	
 
 func play_animation(prefix: String, dir: Vector2) -> void:
 	var anim_name := ""
@@ -53,7 +51,7 @@ func process_animation(direction) -> void:
 func _on_timer_timeout() -> void:
 	if !chasing:
 		shoot_bullet()
-		last_direction=choose([Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN])
+		last_direction = choose([Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN])
 
 func shoot_bullet():
 	#if !shot_sfx.playing:
@@ -70,3 +68,5 @@ func _on_hurt_box_area_entered(area) -> void:
 		PLAYSFX.died()
 		died.emit(global_position)
 		queue_free()
+	if area.is_in_group("enemies"):
+		last_direction=-last_direction

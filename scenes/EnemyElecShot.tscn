@@ -9,6 +9,7 @@
 radius = 5.0990195
 
 [node name="ElecShot" type="CharacterBody2D" unique_id=768738282]
+collision_layer = 4
 script = ExtResource("1_4qdr7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1336355002]
