@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b7aknwdcdokso"
+path="res://.godot/imported/(C4) Rest Time.mp3-37a86fb602394de2d6d9e458e6241499.mp3str"
+
+[deps]
+
+source_file="res://assets/music/(C4) Rest Time.mp3"
+dest_files=["res://.godot/imported/(C4) Rest Time.mp3-37a86fb602394de2d6d9e458e6241499.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

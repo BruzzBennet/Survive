@@ -1,20 +1,14 @@
 [gd_scene format=3 uid="uid://b6a5j10xoom4g"]
 
-
 [ext_resource type="Script" uid="uid://ddkdtc4rexct0" path="res://scripts/Enemies/pozzap.gd" id="1_0nryl"]
-
 [ext_resource type="Texture2D" uid="uid://cc2ppc8f41e0o" path="res://assets/Pozzapeight.png" id="2_qwm0m"]
 [ext_resource type="Texture2D" uid="uid://chblt6cw2nvvx" path="res://assets/Pozzapback.png" id="3_qhhgb"]
 [ext_resource type="Texture2D" uid="uid://cdouo7ptqbadp" path="res://assets/Pozzapleft.png" id="4_edv5l"]
 [ext_resource type="Texture2D" uid="uid://c8pkc84gs21id" path="res://assets/Pozzapfront1.png" id="5_ad7tp"]
-[ext_resource type="AudioStream" uid="uid://43cr1wox4syq" path="res://assets/audio/Explosion(notmadebyme).wav" id="6_edv5l"]
-
 [ext_resource type="Script" uid="uid://km7uun1qgqgv" path="res://scripts/Enemies/Manager/PozzapElecShot.gd" id="6_p51up"]
 [ext_resource type="Script" uid="uid://cmxq4ewt74u6" path="res://scripts/Particles/Manager/died_fx_manager.gd" id="6_qhhgb"]
 [ext_resource type="PackedScene" uid="uid://c1r331jkecm7i" path="res://scenes/DiedExplosion.tscn" id="7_edv5l"]
 [ext_resource type="PackedScene" uid="uid://eql24fk7r6lp" path="res://scenes/EnemyElecShot.tscn" id="7_v28d2"]
-[ext_resource type="AudioStream" uid="uid://348wevqxdbws" path="res://assets/audio/Shot1.wav" id="9_v28d2"]
-
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p51up"]
 animations = [{
@@ -56,9 +50,7 @@ radius = 6.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0nryl"]
 radius = 7.0
-
 height = 16.0
-
 
 [node name="Pozzap" type="CharacterBody2D" unique_id=1242391046]
 collision_layer = 2
@@ -75,21 +67,9 @@ visible = false
 position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_v28d2")
 
-
 [node name="Shooter" type="Node2D" parent="." unique_id=1676290225]
 script = ExtResource("6_p51up")
 bullet_scene = ExtResource("7_v28d2")
-
-[node name="DiedSFX" type="AudioStreamPlayer2D" parent="." unique_id=781884565]
-unique_name_in_owner = true
-stream = ExtResource("6_edv5l")
-
-
-[node name="ShotSFX" type="AudioStreamPlayer2D" parent="." unique_id=425718987]
-unique_name_in_owner = true
-stream = ExtResource("9_v28d2")
-volume_db = -10.0
-
 
 [node name="DiedFXManager" type="Node2D" parent="." unique_id=379426974]
 script = ExtResource("6_qhhgb")
@@ -104,8 +84,6 @@ shape = SubResource("CapsuleShape2D_0nryl")
 autostart = true
 
 [connection signal="died" from="." to="DiedFXManager" method="_on_pozzap_died"]
-
 [connection signal="shoot" from="." to="Shooter" method="_on_pozzap_shoot"]
-
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

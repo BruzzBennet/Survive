@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://cy8cxo7rpoiy6"]
+
+[ext_resource type="Script" uid="uid://dw82ln8ammrff" path="res://scripts/game_over_screen.gd" id="1_iwahs"]
+[ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="2_61w2s"]
+[ext_resource type="PackedScene" uid="uid://d4fsptvwptuf4" path="res://scenes/ctr_shader.tscn" id="3_jw6e5"]
+
+[node name="GameOverScreen" type="Control" unique_id=1187232654]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iwahs")
+
+[node name="Panel" type="Panel" parent="." unique_id=90116705]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 320.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=982960716]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 80.0
+offset_right = 390.0
+offset_bottom = 230.0
+alignment = 2
+
+[node name="Restart" type="Button" parent="Panel/VBoxContainer" unique_id=1091542192]
+layout_mode = 2
+focus_neighbor_top = NodePath("../QuitGame")
+focus_neighbor_bottom = NodePath("../QuitGame")
+text = "Restart"
+
+[node name="QuitGame" type="Button" parent="Panel/VBoxContainer" unique_id=1442046280]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Restart")
+focus_neighbor_bottom = NodePath("../Restart")
+text = "Quit Game"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=966849323]
+
+[node name="Transition" parent="." unique_id=2142637533 instance=ExtResource("2_61w2s")]
+unique_name_in_owner = true
+layout_mode = 0
+
+[node name="Fade_Timer" type="Timer" parent="Transition" unique_id=2104988159]
+unique_name_in_owner = true
+
+[node name="CTRShader" parent="." unique_id=1374949823 instance=ExtResource("3_jw6e5")]
+
+[connection signal="focus_exited" from="Panel/VBoxContainer/Restart" to="." method="_on_restart_focus_exited"]
+[connection signal="pressed" from="Panel/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="focus_exited" from="Panel/VBoxContainer/QuitGame" to="." method="_on_quit_game_focus_exited"]
+[connection signal="pressed" from="Panel/VBoxContainer/QuitGame" to="." method="_on_quit_game_pressed"]

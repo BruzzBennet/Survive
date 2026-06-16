@@ -5,6 +5,7 @@ extends Control
 @onready var healthbar = %HPBar
 
 func _ready():
+	global_position = Vector2(320, 300)
 	healthbar.value=startingHP
 
 func set_value(health) -> void:

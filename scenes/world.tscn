@@ -1,13 +1,24 @@
 [gd_scene format=3 uid="uid://duhfj6u356hx2"]
 
-[ext_resource type="PackedScene" uid="uid://chg317hn7eqte" path="res://scenes/Player.tscn" id="1_rwgxs"]
+[ext_resource type="Script" uid="uid://dan8rxx63nj3x" path="res://scripts/world.gd" id="1_e3hyu"]
+[ext_resource type="PackedScene" uid="uid://chg317hn7eqte" path="res://scenes/player.tscn" id="1_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://brqav17v5sk2v" path="res://scenes/opozzap.tscn" id="2_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://cqg5231flqa6s" path="res://scenes/hp.tscn" id="3_4wyf3"]
-[ext_resource type="PackedScene" uid="uid://b4o3k7g63lm4w" path="res://scenes/wall test.tscn" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://d37vdgv23c2ih" path="res://scenes/Dodge.tscn" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://d4fsptvwptuf4" path="res://scenes/ctr_shader.tscn" id="8_4mrxx"]
+[ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="10_w7kh3"]
+[ext_resource type="PackedScene" uid="uid://c8slwdh6xqobl" path="res://scenes/pause_menu.tscn" id="12_q5onr"]
+
+[sub_resource type="Environment" id="Environment_4mrxx"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.35
 
 [node name="World" type="Node2D" unique_id=1779477526]
+script = ExtResource("1_e3hyu")
 
 [node name="Player" parent="." unique_id=707087302 instance=ExtResource("1_rwgxs")]
+unique_name_in_owner = true
 position = Vector2(289, 159)
 
 [node name="Opozzap" parent="." unique_id=1661657961 instance=ExtResource("2_rwgxs")]
@@ -24,11 +35,36 @@ position = Vector2(450, 205)
 
 [node name="HP" parent="." unique_id=1412859120 instance=ExtResource("3_4wyf3")]
 unique_name_in_owner = true
-z_index = 100
-offset_left = 298.0
-offset_top = 21.0
-offset_right = 298.0
-offset_bottom = 21.0
+anchors_preset = 0
+offset_left = 279.0
+offset_top = 17.0
+offset_right = 279.0
+offset_bottom = 17.0
 
-[node name="Node2D" parent="." unique_id=222366576 instance=ExtResource("4_k0juu")]
-position = Vector2(104, -49)
+[node name="Dodge" parent="." unique_id=1722135651 instance=ExtResource("4_k0juu")]
+unique_name_in_owner = true
+offset_left = 19.0
+offset_top = 56.0
+offset_right = 19.0
+offset_bottom = 56.0
+
+[node name="DeathTimer" type="Timer" parent="." unique_id=1937362618]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[node name="Transition" parent="." unique_id=2142637533 instance=ExtResource("10_w7kh3")]
+light_mask = 524288
+visibility_layer = 524288
+z_index = 100
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=63205776]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=1187232654 instance=ExtResource("12_q5onr")]
+
+[node name="CTRShader" parent="." unique_id=1374949823 instance=ExtResource("8_4mrxx")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1012215030]
+environment = SubResource("Environment_4mrxx")
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

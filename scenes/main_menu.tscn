@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://dmtjr0x5ddkvr"]
+
+[ext_resource type="Script" uid="uid://c4wa4pso7t1kk" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="2_ekxnf"]
+[ext_resource type="PackedScene" uid="uid://d4fsptvwptuf4" path="res://scenes/ctr_shader.tscn" id="3_bqqt6"]
+
+[node name="MainMenu" type="Node2D" unique_id=863299943]
+script = ExtResource("1_l6cm7")
+
+[node name="ButtonManager" type="Control" parent="." unique_id=781544773]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 320.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ButtonManager" unique_id=1736847011]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 80.0
+offset_right = 390.0
+offset_bottom = 230.0
+alignment = 1
+
+[node name="Start" type="Button" parent="ButtonManager/VBoxContainer" unique_id=1580976897]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Quit")
+focus_neighbor_bottom = NodePath("../Options")
+text = "Start Game"
+
+[node name="Options" type="Button" parent="ButtonManager/VBoxContainer" unique_id=862923371]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Start")
+focus_neighbor_bottom = NodePath("../Quit")
+text = "Options"
+
+[node name="Quit" type="Button" parent="ButtonManager/VBoxContainer" unique_id=917714894]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Options")
+focus_neighbor_bottom = NodePath("../Start")
+text = "Quit Game"
+
+[node name="Transition" parent="." unique_id=2142637533 instance=ExtResource("2_ekxnf")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Fade_Timer" type="Timer" parent="Transition" unique_id=146406683]
+unique_name_in_owner = true
+
+[node name="CTRShader" parent="." unique_id=1374949823 instance=ExtResource("3_bqqt6")]
+
+[connection signal="focus_exited" from="ButtonManager/VBoxContainer/Start" to="." method="_on_start_focus_exited"]
+[connection signal="pressed" from="ButtonManager/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="focus_exited" from="ButtonManager/VBoxContainer/Options" to="." method="_on_options_focus_exited"]
+[connection signal="pressed" from="ButtonManager/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="focus_exited" from="ButtonManager/VBoxContainer/Quit" to="." method="_on_quit_focus_exited"]
+[connection signal="pressed" from="ButtonManager/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="timeout" from="Transition/Fade_Timer" to="." method="_on_fade_timer_timeout"]

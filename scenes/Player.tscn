@@ -477,7 +477,7 @@ radius = 4.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jx8is"]
 radius = 5.0
-height = 20.0
+height = 18.0
 
 [sub_resource type="Animation" id="Animation_ke2ow"]
 resource_name = "Dodge"
@@ -592,30 +592,39 @@ slash_scene = ExtResource("25_j2b1d")
 [node name="DiedSFX" type="AudioStreamPlayer2D" parent="." unique_id=1993056925]
 unique_name_in_owner = true
 stream = ExtResource("28_t4otl")
+bus = &"SFX"
 
 [node name="SlashShotSFX" type="AudioStreamPlayer2D" parent="." unique_id=206371275]
 unique_name_in_owner = true
 stream = ExtResource("18_i4ail")
+volume_db = -5.0
+bus = &"SFX"
 script = ExtResource("19_l71n6")
 
 [node name="SlashSFX" type="AudioStreamPlayer2D" parent="." unique_id=1272984902]
 unique_name_in_owner = true
 stream = ExtResource("19_a38lo")
+volume_db = -7.0
+bus = &"SFX"
 script = ExtResource("21_ke2ow")
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=36923038]
 unique_name_in_owner = true
 stream = ExtResource("30_487ah")
+volume_db = -5.0
+bus = &"SFX"
 
 [node name="WalkSFX" type="AudioStreamPlayer2D" parent="." unique_id=1395085301]
 unique_name_in_owner = true
 stream = ExtResource("20_4ni07")
 volume_db = -10.0
+bus = &"SFX"
 script = ExtResource("23_ujl30")
 
 [node name="DashSFX" type="AudioStreamPlayer2D" parent="." unique_id=1128269113]
 unique_name_in_owner = true
 stream = ExtResource("21_l71n6")
+bus = &"SFX"
 
 [node name="HurtTimer" type="Timer" parent="." unique_id=1680255207]
 unique_name_in_owner = true
@@ -633,6 +642,7 @@ one_shot = true
 
 [node name="ShotTimer" type="Timer" parent="." unique_id=39533089]
 unique_name_in_owner = true
+wait_time = 0.4
 one_shot = true
 
 [node name="SlashTimer" type="Timer" parent="." unique_id=1428997967]
