@@ -6,7 +6,7 @@ signal shoot(angle,pos,dir)
 signal slash(angle,pos,dir,player)
 signal hurt_fx(pos)
 signal dash_fx
-const margin=55
+const margin=45
 var last_direction = Vector2.DOWN
 var can_shoot: bool = true
 var can_slash: bool = true
@@ -71,7 +71,7 @@ func update_fx():
 		hit_fx.play("RESET")
 
 func player_movement(delta):
-	position=position.clamp(Vector2(margin,margin),Vector2(screen_size.x - margin, screen_size.y - margin))
+	position=position.clamp(Vector2(0,margin),Vector2(screen_size.x, screen_size.y - margin))
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if is_dodging: 
 		dodge_speed=2

@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal died
 signal shoot
 const speed = 4250.0
-const margin = 55
+const margin = 45
 var screen_size:Vector2
 var last_direction = Vector2.RIGHT
 var chasing: bool
@@ -16,8 +16,8 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	global_position = global_position.clamp(
-		Vector2(margin,margin),
-		Vector2(screen_size.x - margin, screen_size.y - margin)
+		Vector2(0,margin),
+		Vector2(screen_size.x, screen_size.y - margin)
 	)
 	move(delta)
 	process_animation(last_direction)

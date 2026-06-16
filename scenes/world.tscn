@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dan8rxx63nj3x" path="res://scripts/world.gd" id="1_e3hyu"]
 [ext_resource type="PackedScene" uid="uid://chg317hn7eqte" path="res://scenes/player.tscn" id="1_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://djmppjsqywatj" path="res://scenes/bridgeofdoom.tscn" id="2_7r4gi"]
 [ext_resource type="PackedScene" uid="uid://brqav17v5sk2v" path="res://scenes/opozzap.tscn" id="2_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://cqg5231flqa6s" path="res://scenes/hp.tscn" id="3_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://d37vdgv23c2ih" path="res://scenes/Dodge.tscn" id="4_k0juu"]
@@ -17,21 +18,17 @@ glow_intensity = 0.35
 [node name="World" type="Node2D" unique_id=1779477526]
 script = ExtResource("1_e3hyu")
 
+[node name="Node2D" parent="." unique_id=337268180 instance=ExtResource("2_7r4gi")]
+
 [node name="Player" parent="." unique_id=707087302 instance=ExtResource("1_rwgxs")]
 unique_name_in_owner = true
-position = Vector2(289, 159)
+position = Vector2(315, 155)
 
 [node name="Opozzap" parent="." unique_id=1661657961 instance=ExtResource("2_rwgxs")]
-position = Vector2(127, 64)
-
-[node name="Opozzap2" parent="." unique_id=129304471 instance=ExtResource("2_rwgxs")]
-position = Vector2(131, 219)
+position = Vector2(47, 44)
 
 [node name="Opozzap3" parent="." unique_id=1003578279 instance=ExtResource("2_rwgxs")]
-position = Vector2(449, 62)
-
-[node name="Opozzap4" parent="." unique_id=1298456266 instance=ExtResource("2_rwgxs")]
-position = Vector2(450, 205)
+position = Vector2(559, 44)
 
 [node name="HP" parent="." unique_id=1412859120 instance=ExtResource("3_4wyf3")]
 unique_name_in_owner = true
@@ -63,6 +60,7 @@ z_index = 100
 [node name="PauseMenu" parent="CanvasLayer" unique_id=1187232654 instance=ExtResource("12_q5onr")]
 
 [node name="CTRShader" parent="." unique_id=1374949823 instance=ExtResource("8_4mrxx")]
+visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1012215030]
 environment = SubResource("Environment_4mrxx")
