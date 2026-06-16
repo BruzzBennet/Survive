@@ -1,37 +1,68 @@
-[gd_scene format=3 uid="uid://7s5a3t8wxqha"]
+[gd_scene format=3 uid="uid://duhfj6u356hx2"]
 
-[ext_resource type="PackedScene" uid="uid://bm6w2jgoovetr" path="res://scenes/Player.tscn" id="1_nnsk1"]
-[ext_resource type="Script" uid="uid://c8gwl8gy7dgrx" path="res://scripts/BulletManager.gd" id="2_71j4m"]
-[ext_resource type="Script" uid="uid://cxq5nyminoedr" path="res://scripts/label.gd" id="2_rwgxs"]
-[ext_resource type="PackedScene" uid="uid://2e7a6m6g18hl" path="res://scenes/bullet.tscn" id="3_k0juu"]
-[ext_resource type="Script" uid="uid://bt5ear6ex2hfp" path="res://scripts/slash_manager.gd" id="4_qfnet"]
-[ext_resource type="PackedScene" uid="uid://bdwv0idrljtqa" path="res://scenes/slash.tscn" id="5_i7141"]
+[ext_resource type="Script" uid="uid://dan8rxx63nj3x" path="res://scripts/world.gd" id="1_e3hyu"]
+[ext_resource type="PackedScene" uid="uid://chg317hn7eqte" path="res://scenes/player.tscn" id="1_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://djmppjsqywatj" path="res://scenes/bridgeofdoom.tscn" id="2_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://brqav17v5sk2v" path="res://scenes/opozzap.tscn" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://cqg5231flqa6s" path="res://scenes/hp.tscn" id="3_4wyf3"]
+[ext_resource type="PackedScene" uid="uid://d37vdgv23c2ih" path="res://scenes/Dodge.tscn" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://d4fsptvwptuf4" path="res://scenes/ctr_shader.tscn" id="8_4mrxx"]
+[ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="10_w7kh3"]
+[ext_resource type="PackedScene" uid="uid://c8slwdh6xqobl" path="res://scenes/pause_menu.tscn" id="12_q5onr"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_4wyf3"]
-font_size = 50
+[sub_resource type="Environment" id="Environment_4mrxx"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.35
 
-[node name="World" type="Node2D" unique_id=1176838]
+[node name="World" type="Node2D" unique_id=1779477526]
+script = ExtResource("1_e3hyu")
 
-[node name="Player" parent="." unique_id=631887673 instance=ExtResource("1_nnsk1")]
-position = Vector2(506, 236)
+[node name="Node2D" parent="." unique_id=337268180 instance=ExtResource("2_7r4gi")]
 
-[node name="BulletManager" type="Node2D" parent="." unique_id=535837237]
-script = ExtResource("2_71j4m")
-bullet_scene = ExtResource("3_k0juu")
-
-[node name="SlashManager" type="Node2D" parent="." unique_id=1295236817]
-position = Vector2(506, 236)
-script = ExtResource("4_qfnet")
-slash_scene = ExtResource("5_i7141")
-
-[node name="Label" type="Label" parent="." unique_id=119870519]
+[node name="Player" parent="." unique_id=707087302 instance=ExtResource("1_rwgxs")]
 unique_name_in_owner = true
-offset_right = 40.0
-offset_bottom = 23.0
-scale = Vector2(1.0050505, 1)
-text = "STA: 10"
-label_settings = SubResource("LabelSettings_4wyf3")
-script = ExtResource("2_rwgxs")
+position = Vector2(315, 155)
 
-[connection signal="shoot" from="Player" to="BulletManager" method="_on_player_shoot"]
-[connection signal="slash" from="Player" to="SlashManager" method="_on_player_slash"]
+[node name="Opozzap" parent="." unique_id=1661657961 instance=ExtResource("2_rwgxs")]
+position = Vector2(47, 44)
+
+[node name="Opozzap3" parent="." unique_id=1003578279 instance=ExtResource("2_rwgxs")]
+position = Vector2(559, 44)
+
+[node name="HP" parent="." unique_id=1412859120 instance=ExtResource("3_4wyf3")]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 279.0
+offset_top = 17.0
+offset_right = 279.0
+offset_bottom = 17.0
+
+[node name="Dodge" parent="." unique_id=1722135651 instance=ExtResource("4_k0juu")]
+unique_name_in_owner = true
+offset_left = 19.0
+offset_top = 56.0
+offset_right = 19.0
+offset_bottom = 56.0
+
+[node name="DeathTimer" type="Timer" parent="." unique_id=1937362618]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[node name="Transition" parent="." unique_id=2142637533 instance=ExtResource("10_w7kh3")]
+light_mask = 524288
+visibility_layer = 524288
+z_index = 100
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=63205776]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=1187232654 instance=ExtResource("12_q5onr")]
+
+[node name="CTRShader" parent="." unique_id=1374949823 instance=ExtResource("8_4mrxx")]
+visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1012215030]
+environment = SubResource("Environment_4mrxx")
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
