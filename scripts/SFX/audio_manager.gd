@@ -4,6 +4,7 @@ extends Node
 @onready var hurt_sfx = $HurtSFX
 @onready var died_sfx = $DiedSFX
 @onready var parried_sfx = $ParriedSFX
+@onready var enemy_spawn_sfx = $EnemySpawnSFX
 @onready var menu_move_sfx = get_node_or_null("MenuMove")
 @onready var menu_select_sfx = get_node_or_null("MenuSelect")
 @onready var start_tune_sfx = get_node_or_null("StartTune")
@@ -23,6 +24,10 @@ func died():
 func parried():
 	if not parried_sfx.is_playing():
 		parried_sfx.play()
+
+func enemySpawn():
+	if not enemy_spawn_sfx.is_playing():
+		enemy_spawn_sfx.play()
 
 func MenuMove():
 	menu_move_sfx.play()

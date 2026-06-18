@@ -23,6 +23,9 @@ fill_from = Vector2(0.5, 0.5)
 metadata/_snap_enabled = true
 
 [node name="Dodge" type="Control" unique_id=1412859120]
+light_mask = 524288
+visibility_layer = 524288
+z_index = 100
 layout_mode = 3
 anchor_right = 0.047000002
 anchor_bottom = 0.1
@@ -62,6 +65,8 @@ offset_left = -13.0
 offset_top = -10.0
 offset_right = 41.0
 offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 text = "RUN"
 horizontal_alignment = 1

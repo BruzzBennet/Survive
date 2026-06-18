@@ -8,11 +8,11 @@ func die(pos):
 	fx.global_position = pos
 	get_tree().current_scene.add_child(fx)
 
-func _on_pozzap_died(pos) -> void:
-	die(pos)
-
-func _on_opozzap_died(pos) -> void:
+func _on_opozzap_died_fx(pos) -> void:
 	die(pos)
 
 func _on_player_died(pos) -> void:
+	die(pos)
+
+func _on_pozzap_died(pos) -> void:
 	die(pos)

@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://dsd6ihfl2vkm6" path="res://assets/music/(A1) Start.mp3" id="6_5fnny"]
 [ext_resource type="AudioStream" uid="uid://bdmxh1pxlkw0v" path="res://assets/audio/MenuButtonFocus.wav" id="8_2yeu1"]
 [ext_resource type="AudioStream" uid="uid://csjg3qkfap6ld" path="res://assets/audio/MenuButtonSelect.wav" id="9_ctjgy"]
+[ext_resource type="AudioStream" uid="uid://bkjf1a5jo1a8g" path="res://assets/audio/SpawnEnemy1.wav" id="10_ctjgy"]
 
 [node name="PlaySFX" type="Node" unique_id=68871846]
 process_mode = 3
@@ -58,3 +59,8 @@ bus = &"UI SFX"
 unique_name_in_owner = true
 stream = ExtResource("9_ctjgy")
 bus = &"UI SFX"
+
+[node name="EnemySpawnSFX" type="AudioStreamPlayer2D" parent="." unique_id=2133149791]
+unique_name_in_owner = true
+stream = ExtResource("10_ctjgy")
+volume_db = 2.5

@@ -23,6 +23,7 @@ buses/default_bus_layout="uid://b0pcera1l4j13"
 
 BGM="*uid://drmvl3mlswcgt"
 PLAYSFX="*uid://b86aa2gg07a0u"
+SCORE="*uid://eggtn5e5bv5y"
 
 [display]
 

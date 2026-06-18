@@ -3,6 +3,7 @@ extends Control
 var was_pressed := false
 
 func _ready():
+	SCORE.get_highest()
 	$Transition.color = Color.BLACK
 	$Transition/AnimationPlayer.play("Fade_Out")
 	$Panel/VBoxContainer/Restart.grab_focus()

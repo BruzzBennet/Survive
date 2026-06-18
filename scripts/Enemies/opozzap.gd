@@ -1,7 +1,9 @@
 extends CharacterBody2D
 
 signal died
+signal died_fx
 signal summon
+var dead = false
 var summon_frames = [14]
 @export var health = 5
 @export var slash_damage = 1
@@ -11,6 +13,7 @@ var damage_animation
 @onready var animated_sprite_2d = %AnimatedSprite2D
 @onready var summoner = %PozzapSummoner
 @onready var hit_fx = %FX
+
 
 func _ready() -> void:
 	add_to_group("enemy")
@@ -32,9 +35,15 @@ func _on_hit_box_area_entered(area) -> void:
 			damage_animation = "ReallyHurt"
 		health -= damage
 		PLAYSFX.hurt()
+		if dead:
+			return
 		if health <= 0:
+			SCORE.increaseBy(100)
+			dead=true
 			PLAYSFX.died()
-			died.emit(global_position)
+			died_fx.emit(global_position)
+			died.emit()
+			print("Oppozzap died")
 			queue_free()
 		hit_fx.play(damage_animation)
 		await hit_fx.animation_finished

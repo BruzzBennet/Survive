@@ -37,12 +37,11 @@ var screen_size: Vector2
 @onready var dodge_time = %DodgeTimer
 @onready var stamina_recover_time = %StaminaRecoverTimer
 @onready var died_sfx = %DiedSFX
-@onready var hp = %HP
-@onready var dodgeUI = %Dodge
+@onready var hp = get_tree().current_scene.get_node("HP")
+@onready var dodgeUI = get_tree().current_scene.get_node("Dodge")
 
 
 func _ready():
-	#global_position = Vector2(320, 160)
 	screen_size = get_viewport_rect().size
 	hit_fx.play("RESET")
 	add_to_group("player")
@@ -71,7 +70,7 @@ func update_fx():
 		hit_fx.play("RESET")
 
 func player_movement(delta):
-	position = position.clamp(Vector2(margin, 0), Vector2(screen_size.x - margin, screen_size.y))
+	position = position.clamp(Vector2(margin, 0), Vector2(screen_size.x - margin, screen_size.y-margin))
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if is_dodging:
 		dodge_speed = 2

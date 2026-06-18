@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dw82ln8ammrff" path="res://scripts/game_over_screen.gd" id="1_iwahs"]
 [ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="2_61w2s"]
+[ext_resource type="Script" uid="uid://cbg018ohlqnw1" path="res://scripts/high_score_label.gd" id="2_cyfkl"]
+[ext_resource type="Script" uid="uid://bdsl852hj016k" path="res://scripts/score_label.gd" id="2_wa2qn"]
 [ext_resource type="PackedScene" uid="uid://d4fsptvwptuf4" path="res://scenes/ctr_shader.tscn" id="3_jw6e5"]
 
 [node name="GameOverScreen" type="Control" unique_id=1187232654]
@@ -41,9 +43,33 @@ text = "Quit Game"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=966849323]
 
+[node name="HighScoreLabel" type="Label" parent="." unique_id=1837871259]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 85.0
+offset_right = 351.0
+offset_bottom = 108.0
+text = "High Score: 0"
+horizontal_alignment = 1
+script = ExtResource("2_cyfkl")
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=358573513]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 115.0
+offset_right = 311.0
+offset_bottom = 138.0
+text = "Score: 0"
+horizontal_alignment = 1
+script = ExtResource("2_wa2qn")
+
 [node name="Transition" parent="." unique_id=2142637533 instance=ExtResource("2_61w2s")]
 unique_name_in_owner = true
 layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 662.0
+offset_bottom = 353.0
 
 [node name="Fade_Timer" type="Timer" parent="Transition" unique_id=2104988159]
 unique_name_in_owner = true

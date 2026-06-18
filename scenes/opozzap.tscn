@@ -239,7 +239,7 @@ unique_name_in_owner = true
 root_node = NodePath("../AnimatedSprite2D/ColorRect")
 libraries/ = SubResource("AnimationLibrary_1nsll")
 
-[connection signal="died" from="." to="DiedFXManager" method="_on_opozzap_died"]
+[connection signal="died_fx" from="." to="DiedFXManager" method="_on_opozzap_died_fx"]
 [connection signal="summon" from="." to="PozzapSummoner" method="_on_opozzap_summon"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
