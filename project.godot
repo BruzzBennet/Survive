@@ -13,7 +13,7 @@ config_version=5
 config/name="Survive"
 run/main_scene="uid://dmtjr0x5ddkvr"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="uid://crj501ojexmic"
+config/icon="uid://dogfxdmirmx2r"
 
 [audio]
 
