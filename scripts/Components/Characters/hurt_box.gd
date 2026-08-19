@@ -3,6 +3,7 @@ class_name HurtBox_Component
 
 var died_fx: PackedScene = preload("res://scenes/DiedExplosion.tscn")
 var hurt_fx: PackedScene = preload("res://scenes/hurtParticles.tscn")
+var shared_material: ShaderMaterial
 @export var max_health: int = 1
 @export var takes_damage_from: attack_source
 @export var score_value: int = 0
@@ -29,6 +30,11 @@ func _ready():
 	health = max_health
 	if takes_damage_from == attack_source.enemy:
 		sprite = get_parent().get_node("Skeleton/Sprite")
+		for piece in get_parent().get_node("Skeleton").get_children():
+			if piece is Sprite2D:
+				shared_material = ShaderMaterial.new()
+				shared_material.shader = preload("res://scenes/hurt_shader.gdshader")
+				piece.material = shared_material
 		hp = get_tree().current_scene.get_node("HP")
 		hp.reload(health)
 	else:
@@ -43,20 +49,40 @@ func _physics_process(_delta):
 			hurt_player()
 
 
-func play_hit_flash() -> void:
+func play_flash(invincible=false) -> void:
+	if !invincible:
+		sprite.material.set_shader_parameter("flash_color", Color(1.0, 0.0, 0.0, 1.0))
+	else:
+		sprite.material.set_shader_parameter("flash_color", Color(0.0, 0.0, 0.1, 1.0))
 	# Create a temporary tween that handles the animation timing
+
+	if takes_damage_from == attack_source.enemy:
+		# 1. Instantly set the shader modifier to 1.0 (Fully Red)
+		for piece in get_parent().get_node("Skeleton").get_children():
+			if piece is Sprite2D:
+				if !invincible:
+					piece.material.set_shader_parameter("flash_color", Color(1.0, 0.0, 0.0, 1.0))
+				else:
+					piece.material.set_shader_parameter("flash_color", Color(0.0, 0.0, 0.1, 1.0))
+				flash_action(piece)
+	else:
+		flash_action(sprite)
+
+func flash_action(sprite_to_flash):
+	sprite_to_flash.material.set_shader_parameter("flash_modifier", 1.0)
 	var tween = create_tween()
-	
-	# 1. Instantly set the shader modifier to 1.0 (Fully Red)
-	sprite.material.set_shader_parameter("flash_modifier", 1.0)
-	
-	# 2. Smoothly animate the parameter back to 0.0 over 0.2 seconds
+
+	# 2. Smoothly animate the parameter back to 0.0 over 1 second
 	tween.tween_property(
-		sprite.material,
+		sprite_to_flash.material,
 		"shader_parameter/flash_modifier",
 		0.0,
-		0.2
+		1
 	)
+
+func becomes_invincible():
+	play_flash(true)
+	is_invincible=true
 
 func knockback(attack: Attack):
 	get_parent().velocity = (global_position - attack.position).normalized() * attack.knockback
@@ -96,6 +122,7 @@ func add_death_explosion():
 	get_tree().current_scene.add_child(fx)
 
 func hurt_player():
+	play_flash()
 	hp.set_value(health)
 	var fx = hurt_fx.instantiate()
 	fx.global_position = global_position
@@ -111,7 +138,7 @@ func hit_stun():
 func hurt_enemy():
 	PLAYSFX.hurt()
 	if sprite.material:
-		play_hit_flash()
+		play_flash()
 
 func dead_enemy():
 	died.emit()

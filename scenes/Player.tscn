@@ -581,6 +581,7 @@ unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_pf23h")
 
 [node name="DashFX" type="Node2D" parent="." unique_id=1587423139]
+position = Vector2(1, -1)
 script = ExtResource("18_gl8cc")
 dash_scene = ExtResource("19_487ah")
 

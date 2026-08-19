@@ -1,7 +1,7 @@
 extends Marker2D
 
 @export var spawn_this_enemy: PackedScene = preload("res://scenes/pozzap.tscn")
-@export var spawn_this_player: PackedScene = preload("res://scenes/player.tscn")
+@export var spawn_this_player: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
 var hp_to_spawn: PackedScene = preload("res://scenes/hp.tscn")
 var stamina_to_spawn: PackedScene = preload("res://scenes/Dodge.tscn")
 var atk_to_spawn: PackedScene = preload("res://scenes/ShootStamina.tscn")

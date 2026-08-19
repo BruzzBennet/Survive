@@ -4,7 +4,7 @@ extends Node2D
 @export var bullet_scene : PackedScene
 
 
-func _on_node_2d_shoot(angle,pos,dir):
+func _on_node_2d_shoot(pos,dir):
 	var anim_name
 	var bullet=bullet_scene.instantiate()
 	add_child(bullet)
