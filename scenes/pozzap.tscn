@@ -936,6 +936,7 @@ attack = SubResource("Resource_v28d2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1845449117]
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_p51up")
+debug_color = Color(1, 0, 0, 0.25)
 
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("7_qhhgb")]
 score_value = 50
@@ -943,6 +944,7 @@ score_value = 50
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=273972341]
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_0nryl")
+debug_color = Color(0, 0.60038817, 0, 0.42000002)
 
 [node name="CollisionBox" type="CollisionShape2D" parent="." unique_id=2080288837]
 position = Vector2(0, 3)
