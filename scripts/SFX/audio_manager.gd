@@ -8,6 +8,11 @@ extends Node
 @onready var menu_move_sfx = get_node_or_null("MenuMove")
 @onready var menu_select_sfx = get_node_or_null("MenuSelect")
 @onready var start_tune_sfx = get_node_or_null("StartTune")
+@onready var slash_sfx = $SlashSFX
+@onready var slash_shot_sfx = $SlashShotSFX
+@onready var player_hurt_sfx = $PlayerHurtSFX
+@onready var walk_sfx = $WalkSFX
+@onready var dash_sfx = $DashSFX
 
 func shot():
 	if not shot_sfx.is_playing():
@@ -17,6 +22,10 @@ func hurt():
 	if not hurt_sfx.is_playing():
 		hurt_sfx.play()
 
+func player_hurt():
+	# if not player_hurt_sfx.is_playing():
+		player_hurt_sfx.play()
+
 func died():
 	#if not died_sfx.is_playing():
 		died_sfx.play()
@@ -24,6 +33,19 @@ func died():
 func parried():
 	if not parried_sfx.is_playing():
 		parried_sfx.play()
+
+func slash():
+	# if not slash_sfx.is_playing():
+		slash_sfx.play()
+
+func slash_shot():
+	slash_shot_sfx.play()
+
+func walk():
+	walk_sfx.play()
+
+func dash():
+	dash_sfx.play()
 
 func enemySpawn():
 	if not enemy_spawn_sfx.is_playing():

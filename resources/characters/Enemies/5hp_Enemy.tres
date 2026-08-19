@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="for_characters" format=3 uid="uid://cwiu3ykkamaqc"]
+
+[ext_resource type="PackedScene" uid="uid://c1r331jkecm7i" path="res://scenes/DiedExplosion.tscn" id="1_y8rxu"]
+[ext_resource type="Script" uid="uid://eax3p3u4r1eo" path="res://scripts/Components/Characters/hurt_box.gd" id="2_fkmfy"]
+
+[resource]
+script = ExtResource("2_fkmfy")
+health = 5
+metadata/_custom_type_script = "uid://tsrb7xa3vovu"

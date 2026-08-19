@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://d0akxf8sd4pr0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m76sq"]
+animations = []
+
+[sub_resource type="Animation" id="Animation_bhppl"]
+resource_name = "Hurt"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D2/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.22, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.25), Color(1, 1, 1, 0), Color(1, 0, 0, 0.25)]
+}
+
+[sub_resource type="Animation" id="Animation_5boow"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D2/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.25)]
+}
+
+[sub_resource type="Animation" id="Animation_xkyt3"]
+resource_name = "ReallyHurt"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D2/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.22, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.5), Color(1, 1, 1, 0), Color(1, 0, 0, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v64ls"]
+_data = {
+&"Hurt": SubResource("Animation_bhppl"),
+&"RESET": SubResource("Animation_5boow"),
+&"ReallyHurt": SubResource("Animation_xkyt3")
+}
+
+[node name="Sprite" type="Node2D" unique_id=1517362119]
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." unique_id=251179434]
+clip_children = 2
+sprite_frames = SubResource("SpriteFrames_m76sq")
+animation = &""
+
+[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D2" unique_id=819993479]
+offset_left = -20.0
+offset_top = -19.0
+offset_right = 20.0
+offset_bottom = 21.0
+color = Color(1, 0, 0, 0.25)
+metadata/_edit_use_anchors_ = true
+
+[node name="FX" type="AnimationPlayer" parent="." unique_id=1566750943]
+libraries/ = SubResource("AnimationLibrary_v64ls")

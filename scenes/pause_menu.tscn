@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c8slwdh6xqobl"]
 
-[ext_resource type="Script" uid="uid://caq4583yj1awu" path="res://scripts/pause_menu.gd" id="1_n87rw"]
+[ext_resource type="Script" uid="uid://caq4583yj1awu" path="res://scripts/Menus/pause_menu.gd" id="1_n87rw"]
 
 [node name="PauseMenu" type="Control" unique_id=1187232654]
 process_mode = 3
@@ -40,14 +40,20 @@ text = "Options"
 [node name="Restart" type="Button" parent="Panel/VBoxContainer" unique_id=1091542192]
 layout_mode = 2
 focus_neighbor_top = NodePath("../Options")
-focus_neighbor_bottom = NodePath("../QuitGame")
+focus_neighbor_bottom = NodePath("../Quit")
 text = "Restart"
+
+[node name="Quit" type="Button" parent="Panel/VBoxContainer" unique_id=1443383282]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Restart")
+focus_neighbor_bottom = NodePath("../QuitGame")
+text = "Quit"
 
 [node name="QuitGame" type="Button" parent="Panel/VBoxContainer" unique_id=1442046280]
 layout_mode = 2
-focus_neighbor_top = NodePath("../Restart")
+focus_neighbor_top = NodePath("../Quit")
 focus_neighbor_bottom = NodePath("../Continue")
-text = "Quit Game"
+text = "Exit Game"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=966849323]
 
@@ -56,5 +62,7 @@ text = "Quit Game"
 [connection signal="focus_exited" from="Panel/VBoxContainer/Options" to="." method="_on_options_focus_exited"]
 [connection signal="focus_exited" from="Panel/VBoxContainer/Restart" to="." method="_on_restart_focus_exited"]
 [connection signal="pressed" from="Panel/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="focus_exited" from="Panel/VBoxContainer/Quit" to="." method="_on_options_focus_exited"]
+[connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="focus_exited" from="Panel/VBoxContainer/QuitGame" to="." method="_on_quit_game_focus_exited"]
 [connection signal="pressed" from="Panel/VBoxContainer/QuitGame" to="." method="_on_quit_game_pressed"]

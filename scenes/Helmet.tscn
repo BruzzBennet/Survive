@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://b3luc1ehwiukg"]
+
+[ext_resource type="Shader" uid="uid://qxcmc8e7feku" path="res://shaders/palette_swap.gdshader" id="1_jgd7x"]
+[ext_resource type="Texture2D" uid="uid://cs2xu02132ckx" path="res://assets/palettes/MonRanger/palette_red.png" id="2_xu6lo"]
+[ext_resource type="Texture2D" uid="uid://crj501ojexmic" path="res://assets/MR/Helmet.png" id="3_4q6gg"]
+[ext_resource type="Script" uid="uid://bj0e5pun6w7gk" path="res://scripts/Player/shading.gd" id="4_p0i6v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bjf0m"]
+shader = ExtResource("1_jgd7x")
+shader_parameter/palette_from = ExtResource("2_xu6lo")
+shader_parameter/palette_size = 7
+shader_parameter/tolerance = 0.01
+
+[node name="Sprite" type="Sprite2D" unique_id=470606764]
+material = SubResource("ShaderMaterial_bjf0m")
+texture = ExtResource("3_4q6gg")
+script = ExtResource("4_p0i6v")

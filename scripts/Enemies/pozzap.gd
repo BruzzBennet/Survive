@@ -7,14 +7,14 @@ const margin = 12
 var screen_size: Vector2
 var last_direction = Vector2.RIGHT
 var chasing: bool
-@onready var animated_sprite_2d = %AnimatedSprite2D
+@onready var animated_sprite_2d = %SpriteAnimation
 
 func _ready() -> void:
 	add_to_group("enemy")
 	screen_size = get_viewport_rect().size
 	chasing = false
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	position = position.clamp(Vector2(margin, 0), Vector2(screen_size.x - margin, screen_size.y))
 	move()
 	process_animation(last_direction)
@@ -25,28 +25,22 @@ func move():
 	move_and_slide()
 	
 
-func play_animation(prefix: String, dir: Vector2) -> void:
+func play_animation(dir: Vector2) -> void:
 	var anim_name := ""
 
 	if dir.x > 0:
-		anim_name = prefix + "0"
+		anim_name = "Right"
 	elif dir.y < 0:
-		anim_name = prefix + "1"
+		anim_name = "Up"
 	elif dir.y > 0:
-		anim_name = prefix + "3"
+		anim_name = "Down"
 	elif dir.x < 0:
-		anim_name = prefix + "2"
+		anim_name = "Left"
 
-	if animated_sprite_2d.animation != anim_name:
-		animated_sprite_2d.play(anim_name)
-
-	if Input.is_key_pressed(KEY_C):
-		animated_sprite_2d.speed_scale = 2.0
-	else:
-		animated_sprite_2d.speed_scale = 1.0
+	animated_sprite_2d.play(anim_name)
 
 func process_animation(direction) -> void:
-	play_animation("move", direction)
+	play_animation(direction)
 
 func _on_timer_timeout() -> void:
 	if !chasing:

@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cy8cxo7rpoiy6"]
 
-[ext_resource type="Script" uid="uid://dw82ln8ammrff" path="res://scripts/game_over_screen.gd" id="1_iwahs"]
+[ext_resource type="Script" uid="uid://dw82ln8ammrff" path="res://scripts/Menus/game_over_screen.gd" id="1_iwahs"]
 [ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="2_61w2s"]
-[ext_resource type="Script" uid="uid://cbg018ohlqnw1" path="res://scripts/high_score_label.gd" id="2_cyfkl"]
-[ext_resource type="Script" uid="uid://bdsl852hj016k" path="res://scripts/score_label.gd" id="2_wa2qn"]
+[ext_resource type="Script" uid="uid://cbg018ohlqnw1" path="res://scripts/Trackers/high_score_label.gd" id="2_cyfkl"]
+[ext_resource type="Script" uid="uid://bdsl852hj016k" path="res://scripts/Trackers/score_label.gd" id="2_wa2qn"]
 [ext_resource type="PackedScene" uid="uid://d4fsptvwptuf4" path="res://scenes/ctr_shader.tscn" id="3_jw6e5"]
 
 [node name="GameOverScreen" type="Control" unique_id=1187232654]
@@ -31,34 +31,40 @@ alignment = 2
 
 [node name="Restart" type="Button" parent="Panel/VBoxContainer" unique_id=1091542192]
 layout_mode = 2
-focus_neighbor_top = NodePath("../QuitGame")
-focus_neighbor_bottom = NodePath("../QuitGame")
+focus_neighbor_top = NodePath("../ExitGame")
+focus_neighbor_bottom = NodePath("../MainMenu")
 text = "Restart"
 
-[node name="QuitGame" type="Button" parent="Panel/VBoxContainer" unique_id=1442046280]
+[node name="MainMenu" type="Button" parent="Panel/VBoxContainer" unique_id=441111570]
 layout_mode = 2
 focus_neighbor_top = NodePath("../Restart")
+focus_neighbor_bottom = NodePath("../ExitGame")
+text = "MainMenu"
+
+[node name="ExitGame" type="Button" parent="Panel/VBoxContainer" unique_id=1442046280]
+layout_mode = 2
+focus_neighbor_top = NodePath("../MainMenu")
 focus_neighbor_bottom = NodePath("../Restart")
-text = "Quit Game"
+text = "Exit Game"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=966849323]
 
 [node name="HighScoreLabel" type="Label" parent="." unique_id=1837871259]
 layout_mode = 0
-offset_left = 250.0
-offset_top = 85.0
-offset_right = 351.0
-offset_bottom = 108.0
+offset_left = 241.0
+offset_top = 59.0
+offset_right = 342.0
+offset_bottom = 82.0
 text = "High Score: 0"
 horizontal_alignment = 1
 script = ExtResource("2_cyfkl")
 
 [node name="ScoreLabel" type="Label" parent="." unique_id=358573513]
 layout_mode = 0
-offset_left = 250.0
-offset_top = 115.0
-offset_right = 311.0
-offset_bottom = 138.0
+offset_left = 241.0
+offset_top = 89.0
+offset_right = 302.0
+offset_bottom = 112.0
 text = "Score: 0"
 horizontal_alignment = 1
 script = ExtResource("2_wa2qn")
@@ -78,5 +84,7 @@ unique_name_in_owner = true
 
 [connection signal="focus_exited" from="Panel/VBoxContainer/Restart" to="." method="_on_restart_focus_exited"]
 [connection signal="pressed" from="Panel/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
-[connection signal="focus_exited" from="Panel/VBoxContainer/QuitGame" to="." method="_on_quit_game_focus_exited"]
-[connection signal="pressed" from="Panel/VBoxContainer/QuitGame" to="." method="_on_quit_game_pressed"]
+[connection signal="focus_exited" from="Panel/VBoxContainer/MainMenu" to="." method="_on_restart_focus_exited"]
+[connection signal="pressed" from="Panel/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="focus_exited" from="Panel/VBoxContainer/ExitGame" to="." method="_on_quit_game_focus_exited"]
+[connection signal="pressed" from="Panel/VBoxContainer/ExitGame" to="." method="_on_quit_game_pressed"]

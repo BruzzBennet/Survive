@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://dbboqp44ehvmv"]
+
+[sub_resource type="Animation" id="Animation_wgpis"]
+resource_name = "Hurt"
+length = 0.5
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 0.4043309),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.39215687), Color(1, 1, 1, 1), Color(1, 0, 0, 0.39215687)]
+}
+
+[sub_resource type="Animation" id="Animation_yoqpp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1nsll"]
+resource_name = "ReallyHurt"
+length = 0.5
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.20042337, 0.40657312),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.88235295), Color(1, 1, 1, 1), Color(1, 0, 0, 0.88235295)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1nsll"]
+_data = {
+&"Hurt": SubResource("Animation_wgpis"),
+&"RESET": SubResource("Animation_yoqpp"),
+&"ReallyHurt": SubResource("Animation_1nsll")
+}
+
+[node name="FX" type="AnimationPlayer" unique_id=960000973]
+libraries/ = SubResource("AnimationLibrary_1nsll")

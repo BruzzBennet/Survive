@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="level" format=3 uid="uid://cew80hh0fsje6"]
+
+[ext_resource type="PackedScene" uid="uid://70wmdfw4286o" path="res://assets/maps/map2.tscn" id="1_nvddv"]
+[ext_resource type="Script" uid="uid://pks0tfm1bus5" path="res://scripts/World/Resources/world_resource.gd" id="2_6yuri"]
+
+[resource]
+script = ExtResource("2_6yuri")
+enemy_spawn_points = PackedVector2Array(15, 280, 15, 175, 15, 105, 80, 175, 270, 207, 270, 105, 365, 207, 400, 175, 560, 280, 560, 175, 560, 85)
+player_spawn_point = Vector2(320, 270)
+map_layout = ExtResource("1_nvddv")
+metadata/_custom_type_script = "uid://pks0tfm1bus5"

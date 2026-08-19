@@ -25,14 +25,11 @@ metadata/_snap_enabled = true
 [node name="Dodge" type="Control" unique_id=1412859120]
 light_mask = 524288
 visibility_layer = 524288
-z_index = 100
+z_index = 99
 layout_mode = 3
 anchor_right = 0.047000002
 anchor_bottom = 0.1
-offset_left = -15.0
-offset_top = -16.0
-offset_right = -15.080002
-offset_bottom = -16.0
+offset_right = -0.08000183
 script = ExtResource("1_lte7n")
 
 [node name="DodgeBar" type="TextureProgressBar" parent="." unique_id=608056740]

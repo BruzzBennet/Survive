@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://pufbaj354pre" path="res://scripts/Player/Attacks/slash.gd" id="1_3c2nd"]
 [ext_resource type="Texture2D" uid="uid://dkc241shci8t5" path="res://assets/SlashAnimation.png" id="1_rkylg"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="3_fg1j7"]
+[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Components/Resources/Attack.gd" id="4_e2dr4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3c2nd"]
 atlas = ExtResource("1_rkylg")
@@ -60,6 +62,11 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="Resource" id="Resource_gu08y"]
+script = ExtResource("4_e2dr4")
+damage_done = 2.0
+metadata/_custom_type_script = "uid://doj80p0chh8d7"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5t3io"]
 size = Vector2(30, 26)
 
@@ -74,5 +81,8 @@ animation = &"Slash"
 frame = 6
 frame_progress = 1.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1444233969]
+[node name="PlayerHitBox" parent="." unique_id=80339694 instance=ExtResource("3_fg1j7")]
+attack = SubResource("Resource_gu08y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox" unique_id=1444233969]
 shape = SubResource("RectangleShape2D_5t3io")

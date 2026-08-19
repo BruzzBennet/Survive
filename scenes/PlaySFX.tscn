@@ -10,6 +10,14 @@
 [ext_resource type="AudioStream" uid="uid://bdmxh1pxlkw0v" path="res://assets/audio/MenuButtonFocus.wav" id="8_2yeu1"]
 [ext_resource type="AudioStream" uid="uid://csjg3qkfap6ld" path="res://assets/audio/MenuButtonSelect.wav" id="9_ctjgy"]
 [ext_resource type="AudioStream" uid="uid://bkjf1a5jo1a8g" path="res://assets/audio/SpawnEnemy1.wav" id="10_ctjgy"]
+[ext_resource type="AudioStream" uid="uid://b5vijeuq114j3" path="res://assets/audio/slashshot.mp3" id="11_1443v"]
+[ext_resource type="Script" uid="uid://yydqhu2ap6c7" path="res://scripts/Player/SFX/slashshot_sfx.gd" id="12_e3sun"]
+[ext_resource type="AudioStream" uid="uid://bs6u0275h8oso" path="res://assets/audio/slash.mp3" id="13_josl6"]
+[ext_resource type="Script" uid="uid://b5167xfyt3bcq" path="res://scripts/Player/SFX/slash_sfx.gd" id="14_c0j23"]
+[ext_resource type="AudioStream" uid="uid://b4hsf1ept0xr0" path="res://assets/audio/hurt2.wav" id="15_cks26"]
+[ext_resource type="AudioStream" uid="uid://wmdklot6o1v8" path="res://assets/audio/walkondirt.mp3" id="16_ngslh"]
+[ext_resource type="Script" uid="uid://bj8svuepxrurl" path="res://scripts/Player/SFX/walk_sfx.gd" id="17_b6f54"]
+[ext_resource type="AudioStream" uid="uid://b51px7epioyyn" path="res://assets/audio/Dash.mp3" id="18_obbcd"]
 
 [node name="PlaySFX" type="Node" unique_id=68871846]
 process_mode = 3
@@ -53,6 +61,7 @@ bus = &"SFX"
 [node name="MenuMove" type="AudioStreamPlayer2D" parent="." unique_id=2000714770]
 unique_name_in_owner = true
 stream = ExtResource("8_2yeu1")
+volume_db = -5.0
 bus = &"UI SFX"
 
 [node name="MenuSelect" type="AudioStreamPlayer2D" parent="." unique_id=6014951]
@@ -64,3 +73,35 @@ bus = &"UI SFX"
 unique_name_in_owner = true
 stream = ExtResource("10_ctjgy")
 volume_db = 2.5
+
+[node name="SlashShotSFX" type="AudioStreamPlayer2D" parent="." unique_id=1523253866]
+unique_name_in_owner = true
+stream = ExtResource("11_1443v")
+volume_db = -5.0
+bus = &"SFX"
+script = ExtResource("12_e3sun")
+
+[node name="SlashSFX" type="AudioStreamPlayer2D" parent="." unique_id=767364959]
+unique_name_in_owner = true
+stream = ExtResource("13_josl6")
+volume_db = -7.0
+bus = &"SFX"
+script = ExtResource("14_c0j23")
+
+[node name="PlayerHurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=1561160883]
+unique_name_in_owner = true
+stream = ExtResource("15_cks26")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="WalkSFX" type="AudioStreamPlayer2D" parent="." unique_id=925630765]
+unique_name_in_owner = true
+stream = ExtResource("16_ngslh")
+volume_db = -10.0
+bus = &"SFX"
+script = ExtResource("17_b6f54")
+
+[node name="DashSFX" type="AudioStreamPlayer2D" parent="." unique_id=1127411580]
+unique_name_in_owner = true
+stream = ExtResource("18_obbcd")
+bus = &"SFX"

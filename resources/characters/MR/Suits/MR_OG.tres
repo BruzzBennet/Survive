@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Suit" format=3 uid="uid://6t4jcp7r1k0w"]
+
+[ext_resource type="Resource" uid="uid://decanu1a0hm3i" path="res://resources/characters/MR/palettes/silver.tres" id="1_kti3w"]
+[ext_resource type="Texture2D" uid="uid://dwwxljqniuq2q" path="res://assets/MR/BodyParts/Helmets/Helmet_MROG.png" id="2_cx4wh"]
+[ext_resource type="Script" uid="uid://dk6b8jpr26pj2" path="res://scripts/Components/Resources/Suit.gd" id="3_47nsw"]
+
+[resource]
+script = ExtResource("3_47nsw")
+helmet = ExtResource("2_cx4wh")
+body_palette = ExtResource("1_kti3w")
+metadata/_custom_type_script = "uid://dk6b8jpr26pj2"

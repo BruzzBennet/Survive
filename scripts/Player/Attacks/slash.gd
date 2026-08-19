@@ -13,6 +13,6 @@ func _ready():
 	await animated_sprite_2d.animation_finished
 	queue_free()
 	
-func _process(delta):
+func _process(_delta):
 	if player:
 		global_position = player.global_position + direction * distance

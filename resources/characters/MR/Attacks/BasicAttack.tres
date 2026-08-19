@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Attack" format=3 uid="uid://c6vigti1qkfhc"]
+
+[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Components/Resources/Attack.gd" id="1_tov6g"]
+
+[resource]
+script = ExtResource("1_tov6g")
+knockback = 500.0
+metadata/_custom_type_script = "uid://doj80p0chh8d7"

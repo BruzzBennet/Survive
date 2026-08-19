@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MonRanger_pallete" format=3 uid="uid://dv3yq4k8v8kyj"]
+
+[ext_resource type="Texture2D" uid="uid://d1atusx708ash" path="res://assets/palettes/MonRanger/palette_green.png" id="1_1otro"]
+[ext_resource type="Script" uid="uid://bnfmd7c1yne3u" path="res://resources/characters/palettes/palette_resource.gd" id="2_mk12h"]
+
+[resource]
+script = ExtResource("2_mk12h")
+palette = ExtResource("1_1otro")
+metadata/_custom_type_script = "uid://bnfmd7c1yne3u"

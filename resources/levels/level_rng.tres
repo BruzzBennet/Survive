@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="level" format=3 uid="uid://c74udh774kyuw"]
+
+[ext_resource type="PackedScene" uid="uid://d1fivwj2nd2ty" path="res://assets/maps/rng_map.tscn" id="1_otna7"]
+[ext_resource type="Script" uid="uid://pks0tfm1bus5" path="res://scripts/World/Resources/world_resource.gd" id="2_aislv"]
+
+[resource]
+script = ExtResource("2_aislv")
+map_layout = ExtResource("1_otna7")
+metadata/_custom_type_script = "uid://pks0tfm1bus5"

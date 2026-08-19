@@ -1,0 +1,570 @@
+[gd_scene format=3 uid="uid://dsmcsdcp64qpl"]
+
+[ext_resource type="Script" uid="uid://c10ejeu4urueh" path="res://scripts/Menus/color_choose.gd" id="1_dkm3l"]
+[ext_resource type="PackedScene" uid="uid://b3luc1ehwiukg" path="res://scenes/Helmet.tscn" id="2_alvr3"]
+[ext_resource type="Resource" uid="uid://dw4jnvrupebkg" path="res://resources/characters/MR/palettes/red.tres" id="3_r7byj"]
+[ext_resource type="Texture2D" uid="uid://dkcxsyffyikiy" path="res://assets/palettes/MonRanger/palette_blue.png" id="4_eeap0"]
+[ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="4_pnobp"]
+[ext_resource type="Script" uid="uid://bnfmd7c1yne3u" path="res://resources/characters/palettes/palette_resource.gd" id="5_58usj"]
+[ext_resource type="PackedScene" uid="uid://d4fsptvwptuf4" path="res://scenes/ctr_shader.tscn" id="5_bysil"]
+[ext_resource type="Resource" uid="uid://qh1u2q1kl6xo" path="res://resources/characters/MR/palettes/yellow.tres" id="5_heul0"]
+[ext_resource type="Resource" uid="uid://dv3yq4k8v8kyj" path="res://resources/characters/MR/palettes/green.tres" id="6_wjvcq"]
+[ext_resource type="Resource" uid="uid://x3it1ssnlafn" path="res://resources/characters/MR/palettes/pink.tres" id="7_mv0lr"]
+[ext_resource type="Resource" uid="uid://cgmafrinwcw2i" path="res://resources/characters/MR/palettes/black.tres" id="8_xhftv"]
+[ext_resource type="Resource" uid="uid://decanu1a0hm3i" path="res://resources/characters/MR/palettes/silver.tres" id="9_yc3n7"]
+[ext_resource type="Resource" uid="uid://cseo0017cuwnb" path="res://resources/characters/MR/palettes/purple.tres" id="10_u1wph"]
+[ext_resource type="Resource" uid="uid://crpftbxxa6es" path="res://resources/characters/MR/palettes/orange.tres" id="11_ei4su"]
+[ext_resource type="Resource" uid="uid://cd1rsmfjcjion" path="res://resources/characters/MR/palettes/brown.tres" id="11_xhftv"]
+[ext_resource type="Resource" uid="uid://b5le0wblin430" path="res://resources/characters/MR/palettes/beige.tres" id="12_yc3n7"]
+[ext_resource type="Resource" uid="uid://bb4sy3ig8ppqf" path="res://resources/characters/MR/palettes/red_dark.tres" id="13_u1wph"]
+[ext_resource type="Resource" uid="uid://s0mbk0rwivsa" path="res://resources/characters/MR/palettes/blue_dark.tres" id="14_ei4su"]
+[ext_resource type="Resource" uid="uid://b5abk162wnhtu" path="res://resources/characters/MR/palettes/green_dark.tres" id="15_bmx4e"]
+[ext_resource type="Resource" uid="uid://dbwlrgdtwm6wp" path="res://resources/characters/MR/palettes/magenta.tres" id="16_cf3sd"]
+[ext_resource type="Resource" uid="uid://d14sfjv3eaifv" path="res://resources/characters/MR/palettes/yellow_green.tres" id="17_13acq"]
+[ext_resource type="Resource" uid="uid://ddrm1swnf0lvw" path="res://resources/characters/MR/palettes/green_light.tres" id="18_ibda6"]
+[ext_resource type="Resource" uid="uid://d3eai8puwudb" path="res://resources/characters/MR/palettes/cyan.tres" id="19_m41ug"]
+[ext_resource type="Resource" uid="uid://cdwri2egvh0mn" path="res://resources/characters/MR/palettes/grey.tres" id="20_uxr1o"]
+[ext_resource type="Resource" uid="uid://vk74l303xy6i" path="res://resources/characters/MR/palettes/purple_dark.tres" id="21_jmit5"]
+[ext_resource type="Resource" uid="uid://dao8k6i05xikh" path="res://resources/characters/MR/palettes/turquoise.tres" id="22_snkmd"]
+[ext_resource type="Shader" uid="uid://qxcmc8e7feku" path="res://shaders/palette_swap.gdshader" id="24_eeap0"]
+[ext_resource type="Texture2D" uid="uid://de7uv4o2xx5dg" path="res://scenes/palette_red.png" id="25_58usj"]
+[ext_resource type="Texture2D" uid="uid://bywqgehu8mx5x" path="res://assets/MRRunFront.png" id="26_qsiwa"]
+[ext_resource type="Script" uid="uid://bj0e5pun6w7gk" path="res://scripts/Player/shading.gd" id="27_kd6pl"]
+[ext_resource type="Script" uid="uid://0jskikmhh8e7" path="res://scripts/Player/shader_inheritor.gd" id="28_1ygvf"]
+
+[sub_resource type="Resource" id="Resource_qsiwa"]
+resource_local_to_scene = true
+script = ExtResource("5_58usj")
+palette = ExtResource("4_eeap0")
+metadata/_custom_type_script = "uid://bnfmd7c1yne3u"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mpqju"]
+shader = ExtResource("24_eeap0")
+shader_parameter/palette_from = ExtResource("25_58usj")
+shader_parameter/palette_size = 7
+shader_parameter/tolerance = 0.01
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm43j"]
+atlas = ExtResource("26_qsiwa")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kf2w4"]
+atlas = ExtResource("26_qsiwa")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvc4a"]
+atlas = ExtResource("26_qsiwa")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdfpu"]
+atlas = ExtResource("26_qsiwa")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xjaf0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm43j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kf2w4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvc4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdfpu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="ColorScreen" type="Control" unique_id=1187232654]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=90116705]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 320.0
+script = ExtResource("1_dkm3l")
+
+[node name="Red" type="Button" parent="Panel" unique_id=650185380]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.053000003
+anchor_top = 0.112
+anchor_right = 0.097
+anchor_bottom = 0.21900001
+offset_left = 111.08
+offset_top = 52.16
+offset_right = 110.92
+offset_bottom = 51.92
+focus_neighbor_left = NodePath("../Black")
+focus_neighbor_top = NodePath("../YellowGreen")
+focus_neighbor_right = NodePath("../Blue")
+focus_neighbor_bottom = NodePath("../Silver")
+
+[node name="Sprite2D" parent="Panel/Red" unique_id=470606764 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("3_r7byj")
+
+[node name="Blue" type="Button" parent="Panel" unique_id=153690133]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07
+anchor_top = 0.094000004
+anchor_right = 0.11400001
+anchor_bottom = 0.2
+offset_left = 130.2
+offset_top = 57.92
+offset_right = 130.04
+offset_bottom = 58.0
+focus_neighbor_left = NodePath("../Red")
+focus_neighbor_top = NodePath("../Magenta")
+focus_neighbor_right = NodePath("../Yellow")
+focus_neighbor_bottom = NodePath("../Grey")
+
+[node name="Sprite2D" parent="Panel/Blue" unique_id=1249203081 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = SubResource("Resource_qsiwa")
+
+[node name="Yellow" type="Button" parent="Panel" unique_id=1531499577]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.117000006
+anchor_top = 0.094000004
+anchor_right = 0.16100001
+anchor_bottom = 0.2
+offset_left = 130.12
+offset_top = 57.92
+offset_right = 129.95999
+offset_bottom = 58.0
+focus_neighbor_left = NodePath("../Blue")
+focus_neighbor_top = NodePath("../Turquoise")
+focus_neighbor_right = NodePath("../Green")
+focus_neighbor_bottom = NodePath("../Purple")
+
+[node name="Sprite2D" parent="Panel/Yellow" unique_id=1732499932 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("5_heul0")
+
+[node name="Green" type="Button" parent="Panel" unique_id=36210514]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.164
+anchor_top = 0.094000004
+anchor_right = 0.208
+anchor_bottom = 0.2
+offset_left = 130.04
+offset_top = 57.92
+offset_right = 129.88
+offset_bottom = 58.0
+focus_neighbor_left = NodePath("../Yellow")
+focus_neighbor_top = NodePath("../DarkPurple")
+focus_neighbor_right = NodePath("../Pink")
+focus_neighbor_bottom = NodePath("../Orange")
+
+[node name="Sprite2D" parent="Panel/Green" unique_id=839385590 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("6_wjvcq")
+
+[node name="Pink" type="Button" parent="Panel" unique_id=1103665976]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21100001
+anchor_top = 0.094000004
+anchor_right = 0.25500003
+anchor_bottom = 0.2
+offset_left = 129.95999
+offset_top = 57.92
+offset_right = 129.79999
+offset_bottom = 58.0
+focus_neighbor_left = NodePath("../Green")
+focus_neighbor_top = NodePath("../LightGreen")
+focus_neighbor_right = NodePath("../Black")
+focus_neighbor_bottom = NodePath("../Brown")
+
+[node name="Sprite2D" parent="Panel/Pink" unique_id=478554227 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("7_mv0lr")
+
+[node name="Black" type="Button" parent="Panel" unique_id=1627426502]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.053000003
+anchor_top = 0.112
+anchor_right = 0.097
+anchor_bottom = 0.21900001
+offset_left = 261.08
+offset_top = 52.16
+offset_right = 260.91998
+offset_bottom = 51.92
+focus_neighbor_left = NodePath("../Pink")
+focus_neighbor_top = NodePath("../Cyan")
+focus_neighbor_right = NodePath("../Red")
+focus_neighbor_bottom = NodePath("../Beige")
+
+[node name="Sprite2D" parent="Panel/Black" unique_id=1293990151 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("8_xhftv")
+
+[node name="Silver" type="Button" parent="Panel" unique_id=1853523007]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07
+anchor_top = 0.094000004
+anchor_right = 0.11400001
+anchor_bottom = 0.2
+offset_left = 100.2
+offset_top = 97.92
+offset_right = 100.03999
+offset_bottom = 98.0
+focus_neighbor_left = NodePath("../Beige")
+focus_neighbor_top = NodePath("../Red")
+focus_neighbor_right = NodePath("../Grey")
+focus_neighbor_bottom = NodePath("../DarkRed")
+
+[node name="Sprite2D" parent="Panel/Silver" unique_id=271286973 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("9_yc3n7")
+
+[node name="Grey" type="Button" parent="Panel" unique_id=2142326805]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.117000006
+anchor_top = 0.094000004
+anchor_right = 0.16100001
+anchor_bottom = 0.2
+offset_left = 100.119995
+offset_top = 97.92
+offset_right = 99.95999
+offset_bottom = 98.0
+focus_neighbor_left = NodePath("../Silver")
+focus_neighbor_top = NodePath("../Blue")
+focus_neighbor_right = NodePath("../Purple")
+focus_neighbor_bottom = NodePath("../DarkBlue")
+
+[node name="Sprite2D" parent="Panel/Grey" unique_id=1054158787 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("20_uxr1o")
+
+[node name="Purple" type="Button" parent="Panel" unique_id=2070122840]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.164
+anchor_top = 0.094000004
+anchor_right = 0.208
+anchor_bottom = 0.2
+offset_left = 100.03999
+offset_top = 97.92
+offset_right = 99.880005
+offset_bottom = 98.0
+focus_neighbor_left = NodePath("../Grey")
+focus_neighbor_top = NodePath("../Yellow")
+focus_neighbor_right = NodePath("../Orange")
+focus_neighbor_bottom = NodePath("../DarkGreen")
+
+[node name="Sprite2D" parent="Panel/Purple" unique_id=598916663 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("10_u1wph")
+
+[node name="Orange" type="Button" parent="Panel" unique_id=887565852]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21100001
+anchor_top = 0.094000004
+anchor_right = 0.25500003
+anchor_bottom = 0.2
+offset_left = 99.95999
+offset_top = 97.92
+offset_right = 99.79999
+offset_bottom = 98.0
+focus_neighbor_left = NodePath("../Purple")
+focus_neighbor_top = NodePath("../Green")
+focus_neighbor_right = NodePath("../Brown")
+focus_neighbor_bottom = NodePath("../DarkPurple")
+
+[node name="Sprite2D" parent="Panel/Orange" unique_id=823097467 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("11_ei4su")
+
+[node name="Brown" type="Button" parent="Panel" unique_id=1847839601]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.164
+anchor_top = 0.094000004
+anchor_right = 0.208
+anchor_bottom = 0.2
+offset_left = 160.04
+offset_top = 97.92
+offset_right = 159.88
+offset_bottom = 98.0
+focus_neighbor_left = NodePath("../Orange")
+focus_neighbor_top = NodePath("../Pink")
+focus_neighbor_right = NodePath("../Beige")
+focus_neighbor_bottom = NodePath("../LightGreen")
+
+[node name="Sprite2D" parent="Panel/Brown" unique_id=750880368 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("11_xhftv")
+
+[node name="Beige" type="Button" parent="Panel" unique_id=1897091919]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21100001
+anchor_top = 0.094000004
+anchor_right = 0.25500003
+anchor_bottom = 0.2
+offset_left = 159.95999
+offset_top = 97.92
+offset_right = 159.79999
+offset_bottom = 98.0
+focus_neighbor_left = NodePath("../Brown")
+focus_neighbor_top = NodePath("../Black")
+focus_neighbor_right = NodePath("../Silver")
+focus_neighbor_bottom = NodePath("../Cyan")
+
+[node name="Sprite2D" parent="Panel/Beige" unique_id=870155116 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("12_yc3n7")
+
+[node name="DarkRed" type="Button" parent="Panel" unique_id=767616888]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.053000003
+anchor_top = 0.112
+anchor_right = 0.097
+anchor_bottom = 0.21900001
+offset_left = 111.08
+offset_top = 132.16
+offset_right = 110.92
+offset_bottom = 131.92
+focus_neighbor_left = NodePath("../Cyan")
+focus_neighbor_top = NodePath("../Silver")
+focus_neighbor_right = NodePath("../DarkBlue")
+focus_neighbor_bottom = NodePath("../YellowGreen")
+
+[node name="Sprite2D" parent="Panel/DarkRed" unique_id=723677675 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("13_u1wph")
+
+[node name="DarkBlue" type="Button" parent="Panel" unique_id=768971836]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07
+anchor_top = 0.094000004
+anchor_right = 0.11400001
+anchor_bottom = 0.2
+offset_left = 130.2
+offset_top = 137.92
+offset_right = 130.04
+offset_bottom = 138.0
+focus_neighbor_left = NodePath("../DarkRed")
+focus_neighbor_top = NodePath("../Grey")
+focus_neighbor_right = NodePath("../DarkGreen")
+focus_neighbor_bottom = NodePath("../Magenta")
+
+[node name="Sprite2D" parent="Panel/DarkBlue" unique_id=553957191 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("14_ei4su")
+
+[node name="DarkGreen" type="Button" parent="Panel" unique_id=1051320623]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.117000006
+anchor_top = 0.094000004
+anchor_right = 0.16100001
+anchor_bottom = 0.2
+offset_left = 130.12
+offset_top = 137.92
+offset_right = 129.95999
+offset_bottom = 138.0
+focus_neighbor_left = NodePath("../DarkBlue")
+focus_neighbor_top = NodePath("../Purple")
+focus_neighbor_right = NodePath("../DarkPurple")
+focus_neighbor_bottom = NodePath("../Turquoise")
+
+[node name="Sprite2D" parent="Panel/DarkGreen" unique_id=1688165265 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("15_bmx4e")
+
+[node name="DarkPurple" type="Button" parent="Panel" unique_id=1644476535]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21100001
+anchor_top = 0.094000004
+anchor_right = 0.25500003
+anchor_bottom = 0.2
+offset_left = 99.95999
+offset_top = 137.92
+offset_right = 99.79999
+offset_bottom = 138.0
+focus_neighbor_left = NodePath("../DarkGreen")
+focus_neighbor_top = NodePath("../Orange")
+focus_neighbor_right = NodePath("../LightGreen")
+focus_neighbor_bottom = NodePath("../Green")
+
+[node name="Sprite2D" parent="Panel/DarkPurple" unique_id=1271268915 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("21_jmit5")
+
+[node name="LightGreen" type="Button" parent="Panel" unique_id=394380164]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.164
+anchor_top = 0.094000004
+anchor_right = 0.208
+anchor_bottom = 0.2
+offset_left = 160.04
+offset_top = 137.92
+offset_right = 159.88
+offset_bottom = 138.0
+focus_neighbor_left = NodePath("../DarkPurple")
+focus_neighbor_top = NodePath("../Brown")
+focus_neighbor_right = NodePath("../Cyan")
+focus_neighbor_bottom = NodePath("../Pink")
+
+[node name="Sprite2D" parent="Panel/LightGreen" unique_id=2011978722 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("18_ibda6")
+
+[node name="Cyan" type="Button" parent="Panel" unique_id=1686471162]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21100001
+anchor_top = 0.094000004
+anchor_right = 0.25500003
+anchor_bottom = 0.2
+offset_left = 159.95999
+offset_top = 137.92
+offset_right = 159.79999
+offset_bottom = 138.0
+focus_neighbor_left = NodePath("../LightGreen")
+focus_neighbor_top = NodePath("../Beige")
+focus_neighbor_right = NodePath("../DarkRed")
+focus_neighbor_bottom = NodePath("../Black")
+
+[node name="Sprite2D" parent="Panel/Cyan" unique_id=1495131272 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("19_m41ug")
+
+[node name="YellowGreen" type="Button" parent="Panel" unique_id=1060458289]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.053000003
+anchor_top = 0.112
+anchor_right = 0.097
+anchor_bottom = 0.21900001
+offset_left = 111.08
+offset_top = 172.16
+offset_right = 110.92
+offset_bottom = 171.92
+focus_neighbor_left = NodePath("../Turquoise")
+focus_neighbor_top = NodePath("../DarkRed")
+focus_neighbor_right = NodePath("../Magenta")
+focus_neighbor_bottom = NodePath("../Red")
+
+[node name="Sprite2D" parent="Panel/YellowGreen" unique_id=344202550 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("17_13acq")
+
+[node name="Magenta" type="Button" parent="Panel" unique_id=1493306813]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07
+anchor_top = 0.094000004
+anchor_right = 0.11400001
+anchor_bottom = 0.2
+offset_left = 130.2
+offset_top = 177.92
+offset_right = 130.04
+offset_bottom = 178.0
+focus_neighbor_left = NodePath("../YellowGreen")
+focus_neighbor_top = NodePath("../DarkBlue")
+focus_neighbor_right = NodePath("../Turquoise")
+focus_neighbor_bottom = NodePath("../Blue")
+
+[node name="Sprite2D" parent="Panel/Magenta" unique_id=262827765 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("16_cf3sd")
+
+[node name="Turquoise" type="Button" parent="Panel" unique_id=648285508]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.117000006
+anchor_top = 0.094000004
+anchor_right = 0.16100001
+anchor_bottom = 0.2
+offset_left = 130.12
+offset_top = 177.92
+offset_right = 129.95999
+offset_bottom = 178.0
+focus_neighbor_left = NodePath("../Magenta")
+focus_neighbor_top = NodePath("../DarkGreen")
+focus_neighbor_right = NodePath("../YellowGreen")
+focus_neighbor_bottom = NodePath("../Yellow")
+
+[node name="Sprite2D" parent="Panel/Turquoise" unique_id=1233616882 instance=ExtResource("2_alvr3")]
+position = Vector2(14, 18)
+scale = Vector2(2, 2)
+color = ExtResource("22_snkmd")
+
+[node name="Preview" type="AnimatedSprite2D" parent="." unique_id=570020550]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_mpqju")
+position = Vector2(410.00003, 158)
+scale = Vector2(5.5, 5.5)
+sprite_frames = SubResource("SpriteFrames_xjaf0")
+autoplay = "default"
+frame_progress = 0.49130946
+script = ExtResource("27_kd6pl")
+color = ExtResource("3_r7byj")
+
+[node name="Node2D" type="Node2D" parent="Preview" unique_id=1968725635]
+script = ExtResource("28_1ygvf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=966849323]
+
+[node name="Transition" parent="." unique_id=2142637533 instance=ExtResource("4_pnobp")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 662.0
+offset_bottom = 353.0
+
+[node name="Fade_Timer" type="Timer" parent="Transition" unique_id=2104988159]
+unique_name_in_owner = true
+
+[node name="CTRShader" parent="." unique_id=1374949823 instance=ExtResource("5_bysil")]
+
+[connection signal="focus_entered" from="Panel" to="Panel" method="_on_focus_entered"]

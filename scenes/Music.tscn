@@ -4,6 +4,10 @@
 [ext_resource type="Script" uid="uid://dqp3cohwpd55i" path="res://scripts/SFX/music.gd" id="1_khwbh"]
 [ext_resource type="AudioStream" uid="uid://brl2srhx3m3i3" path="res://assets/music/(C1) Stage 1.mp3" id="2_3e3qe"]
 [ext_resource type="AudioStream" uid="uid://dwgmdxnasqf1b" path="res://assets/music/(Z1) Game Over Tune 4.mp3" id="4_op8hu"]
+[ext_resource type="AudioStream" uid="uid://dwtyxil0rommk" path="res://assets/music/(B) Menu.mp3" id="5_y04fo"]
+[ext_resource type="AudioStream" uid="uid://sy3b85c5wqrn" path="res://assets/music/(C2) Boss Battle.mp3" id="6_kmgpq"]
+[ext_resource type="AudioStream" uid="uid://b7aknwdcdokso" path="res://assets/music/(C4) Rest Time.mp3" id="7_7s30x"]
+[ext_resource type="AudioStream" uid="uid://csel5eskkefiv" path="res://assets/music/(C0) Overworld.mp3" id="8_kmgpq"]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" unique_id=596401791]
 script = ExtResource("1_khwbh")
@@ -20,3 +24,16 @@ bus = &"Music"
 
 [node name="GameOver" type="AudioStreamPlayer2D" parent="." unique_id=1161924845]
 stream = ExtResource("4_op8hu")
+
+[node name="Menu" type="AudioStreamPlayer2D" parent="." unique_id=2053443764]
+stream = ExtResource("5_y04fo")
+
+[node name="BossBattle" type="AudioStreamPlayer2D" parent="." unique_id=331501879]
+stream = ExtResource("6_kmgpq")
+
+[node name="RestTime" type="AudioStreamPlayer2D" parent="." unique_id=2096437584]
+stream = ExtResource("7_7s30x")
+
+[node name="Overworld" type="AudioStreamPlayer2D" parent="." unique_id=147681724]
+stream = ExtResource("8_kmgpq")
+volume_db = -7.0

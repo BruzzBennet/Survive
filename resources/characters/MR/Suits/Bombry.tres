@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Suit" format=3 uid="uid://d0w2xqxekp5wa"]
+
+[ext_resource type="Resource" uid="uid://cgmafrinwcw2i" path="res://resources/characters/MR/palettes/black.tres" id="1_o0moa"]
+[ext_resource type="Texture2D" uid="uid://bs2y1ckx71emi" path="res://assets/MR/BodyParts/Helmets/Helmet_Bombry.png" id="2_cp3vt"]
+[ext_resource type="Script" uid="uid://dk6b8jpr26pj2" path="res://scripts/Components/Resources/Suit.gd" id="3_d4xoh"]
+
+[resource]
+script = ExtResource("3_d4xoh")
+helmet = ExtResource("2_cp3vt")
+body_palette = ExtResource("1_o0moa")
+metadata/_custom_type_script = "uid://dk6b8jpr26pj2"

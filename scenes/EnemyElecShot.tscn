@@ -2,26 +2,41 @@
 
 [ext_resource type="Texture2D" uid="uid://b8omkhbpr2qab" path="res://assets/Elecbullet.png" id="1_2e8nn"]
 [ext_resource type="Script" uid="uid://bkhns2leu0p5m" path="res://scripts/Enemies/Attacks/enemy_elec_shot.gd" id="1_4qdr7"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="3_pf2g1"]
+[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="4_a5rix"]
 [ext_resource type="Script" uid="uid://bip4nm76t78cb" path="res://scripts/Particles/parried_fx.gd" id="4_pf2g1"]
+[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Components/Resources/Attack.gd" id="4_qcr21"]
 [ext_resource type="PackedScene" uid="uid://5bbrtc4cfkdv" path="res://scenes/hurtParticles.tscn" id="5_a5rix"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4qdr7"]
 radius = 5.0990195
 
+[sub_resource type="Resource" id="Resource_2vgp6"]
+script = ExtResource("4_qcr21")
+source = 1
+metadata/_custom_type_script = "uid://doj80p0chh8d7"
+
 [node name="ElecShot" type="CharacterBody2D" unique_id=768738282]
 collision_layer = 4
 script = ExtResource("1_4qdr7")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1336355002]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1336355002]
 modulate = Color(1.5720325, 1.5720325, 1.5720325, 1)
 texture = ExtResource("1_2e8nn")
 
-[node name="HurtBox" type="Area2D" parent="." unique_id=901208586]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1482070671]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=578360245]
+light_mask = 2
 shape = SubResource("CircleShape2D_4qdr7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=578360245]
+[node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("3_pf2g1")]
+attack = SubResource("Resource_2vgp6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1482070671]
+shape = SubResource("CircleShape2D_4qdr7")
+
+[node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("4_a5rix")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=171254114]
 shape = SubResource("CircleShape2D_4qdr7")
 
 [node name="ParriedFX" type="Node2D" parent="." unique_id=396755958]
@@ -33,5 +48,4 @@ visible = false
 rect = Rect2(-5, -5, 10, 10)
 
 [connection signal="parried" from="." to="ParriedFX" method="_on_elec_shot_parried"]
-[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

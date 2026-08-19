@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cig77hp3ek6lm"]
+
+[ext_resource type="Script" uid="uid://umyy5mibg8o2" path="res://scripts/Player/UI/shoot_stamina.gd" id="1_u2pme"]
+[ext_resource type="Shader" uid="uid://cbjrfkuwbn76f" path="res://shaders/atk.gdshader" id="2_au7tn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_au7tn"]
+shader = ExtResource("2_au7tn")
+shader_parameter/value = 1.0
+shader_parameter/segments = 5
+shader_parameter/segment_gap = 0.075
+shader_parameter/inner_radius = 0.3
+shader_parameter/outer_radius = 0.5
+shader_parameter/bar_color = Color(0, 0.8, 0.3, 1)
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader_parameter/edge_softness = 0.05
+
+[node name="ATK" type="Control" unique_id=1412859120]
+light_mask = 524288
+visibility_layer = 524288
+z_index = 99
+layout_mode = 3
+anchor_right = 0.047000002
+anchor_bottom = 0.1
+offset_right = -0.08000183
+script = ExtResource("1_u2pme")
+
+[node name="ATKBar" type="ColorRect" parent="." unique_id=106199045]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_au7tn")
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1521311768]
+layout_mode = 1
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 37.0
+offset_bottom = 32.0
+scale = Vector2(0.5, 0.5)
+text = "ATK"
+horizontal_alignment = 1
+vertical_alignment = 1

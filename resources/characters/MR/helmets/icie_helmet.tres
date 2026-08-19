@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Helmet" format=3 uid="uid://da3ik1acshek0"]
+
+[ext_resource type="Texture2D" uid="uid://bkj4tucybt55q" path="res://assets/MR/BodyParts/Helmets/Helmet_Icie.png" id="1_bwqyg"]
+[ext_resource type="Script" uid="uid://dsinn3rmb4tc0" path="res://scripts/Components/Resources/Helmet.gd" id="2_jh0n4"]
+
+[resource]
+script = ExtResource("2_jh0n4")
+sprite = ExtResource("1_bwqyg")
+metadata/_custom_type_script = "uid://dsinn3rmb4tc0"

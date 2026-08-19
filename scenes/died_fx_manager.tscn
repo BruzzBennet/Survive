@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ccmsuq3tjem1b"]
+
+[ext_resource type="Script" uid="uid://cmxq4ewt74u6" path="res://scripts/Particles/Manager/died_fx_manager.gd" id="1_dcdbc"]
+[ext_resource type="PackedScene" uid="uid://c1r331jkecm7i" path="res://scenes/DiedExplosion.tscn" id="2_w508r"]
+
+[node name="DiedFXManager" type="Node2D" unique_id=271432607]
+script = ExtResource("1_dcdbc")
+fx_scene = ExtResource("2_w508r")

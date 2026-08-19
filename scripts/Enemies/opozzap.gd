@@ -1,50 +1,19 @@
 extends CharacterBody2D
 
-signal died
-signal died_fx
-signal summon
-var dead = false
 var summon_frames = [14]
-@export var health = 5
-@export var slash_damage = 1
-@export var bullet_damage = 1
-var damage
-var damage_animation
-@onready var animated_sprite_2d = %AnimatedSprite2D
-@onready var summoner = %PozzapSummoner
-@onready var hit_fx = %FX
+@onready var animated_sprite_2d = get_node("Sprite")
+@export var pozzap_to_summon : PackedScene
 
 
 func _ready() -> void:
 	add_to_group("enemy")
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	animated_sprite_2d.play()
 
-func _on_animated_sprite_2d_frame_changed() -> void:
+func _on_sprite_frame_changed() -> void:
 	if animated_sprite_2d.frame in summon_frames:
-		summon.emit(global_position, Vector2.RIGHT)
-
-func _on_hit_box_area_entered(area) -> void:
-	if area.is_in_group("bullet") or area.is_in_group("slash"):
-		if area.is_in_group("bullet"):
-			damage = bullet_damage
-			damage_animation = "Hurt"
-		else:
-			damage = slash_damage
-			damage_animation = "ReallyHurt"
-		health -= damage
-		PLAYSFX.hurt()
-		if dead:
-			return
-		if health <= 0:
-			SCORE.increaseBy(100)
-			dead=true
-			PLAYSFX.died()
-			died_fx.emit(global_position)
-			died.emit()
-			print("Oppozzap died")
-			queue_free()
-		hit_fx.play(damage_animation)
-		await hit_fx.animation_finished
-		hit_fx.play("RESET")
+		var pozzap=pozzap_to_summon.instantiate()
+		get_tree().current_scene.add_child(pozzap)
+		pozzap.global_position = global_position +  Vector2.RIGHT * 25
+		pozzap.add_to_group("enemies")

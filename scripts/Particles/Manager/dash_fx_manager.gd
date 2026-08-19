@@ -3,7 +3,7 @@ extends Node2D
 
 @export var dash_scene : PackedScene
 
-func _on_node_2d_dash_fx(angle,pos,dir):
+func _on_player_dash_fx(angle,pos,dir):
 	var dash=dash_scene.instantiate()
 	add_child(dash)
 	dash.rotation=angle  + deg_to_rad(-90)

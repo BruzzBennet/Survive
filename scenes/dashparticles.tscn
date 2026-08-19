@@ -7,6 +7,8 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.18714958), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [node name="CPUParticles2D" type="CPUParticles2D" unique_id=564290444]
+light_mask = 16
+visibility_layer = 16
 emitting = false
 amount = 4
 lifetime = 0.35000000000000003
