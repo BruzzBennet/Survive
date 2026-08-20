@@ -1,15 +1,24 @@
 extends Control
 
-@export var startingATK: float = 35.0
-@export var minDodge: float = 0.0
-@export var currentATK: float = 35.0
-@export var maxATK: float = 35.0
-@export var regeneration_rate: float = 5.0
-@export var depletion_rate: float = 0.5
 @onready var bar = %ATKBar
 @onready var atk_shown := bar.material as ShaderMaterial
+var maxATK 
+var regeneration_rate 
+var depletion_rate 
+var melee_depletion_rate 
+var startingATK
+var currentATK
+var min_ammo
 
-func _ready():
+
+func setup(weapon: Weapon):
+	maxATK = weapon.max_ammo
+	regeneration_rate = weapon.reload_rate
+	depletion_rate = weapon.depletion_rate
+	melee_depletion_rate = weapon.melee_depletion_rate
+	startingATK= maxATK
+	currentATK= maxATK
+	min_ammo = weapon.min_ammo
 	set_value(startingATK)
 
 func set_value(atk: float):
@@ -28,8 +37,18 @@ func regenerate(delta) -> void:
 	currentATK = min(currentATK, maxATK)
 	set_value(currentATK)
 
+func regenerate_more(delta) -> void:
+	currentATK += regeneration_rate * 1.5 * delta
+	currentATK = min(currentATK, maxATK)
+	set_value(currentATK)
+
 func reduce():
 	var depletion: float = depletion_rate
+	currentATK = max(0, currentATK - depletion)
+	set_value(currentATK)
+
+func reduce_by_melee():
+	var depletion: float = melee_depletion_rate
 	currentATK = max(0, currentATK - depletion)
 	set_value(currentATK)
 

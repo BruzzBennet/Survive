@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://dxp6b77hjridw" path="res://scripts/Player/player.gd" id="1_qfm1y"]
 [ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="2_2dvfe"]
 [ext_resource type="Texture2D" uid="uid://dyublfapax1r1" path="res://assets/MRright.png" id="2_fulsm"]
-[ext_resource type="Shader" uid="uid://qxcmc8e7feku" path="res://shaders/palette_swap.gdshader" id="2_j2b1d"]
 [ext_resource type="Texture2D" uid="uid://dlp0r2lfwbgui" path="res://assets/MRback.png" id="3_4r5pv"]
 [ext_resource type="Texture2D" uid="uid://cs2xu02132ckx" path="res://assets/palettes/MonRanger/palette_red.png" id="3_cs1tg"]
+[ext_resource type="Shader" uid="uid://bivbni0u3mi5d" path="res://shaders/palette_changer_and_hurt.gdshader" id="3_pf23h"]
 [ext_resource type="Texture2D" uid="uid://bkl5utej1ii0y" path="res://assets/MRleft.png" id="4_60mlk"]
 [ext_resource type="Texture2D" uid="uid://c0fatpw6tpg8f" path="res://assets/MRfront.png" id="5_i4ail"]
 [ext_resource type="Texture2D" uid="uid://dbcafibgfhhkg" path="res://assets/MRRightSlash.png" id="6_a38lo"]
@@ -24,9 +24,8 @@
 [ext_resource type="PackedScene" uid="uid://d4m0pld6u08hn" path="res://scenes/dashparticles.tscn" id="19_487ah"]
 [ext_resource type="Script" uid="uid://bj0e5pun6w7gk" path="res://scripts/Player/shading.gd" id="20_cs1tg"]
 [ext_resource type="Resource" uid="uid://dw4jnvrupebkg" path="res://resources/characters/MR/palettes/red.tres" id="21_2dvfe"]
-[ext_resource type="Script" uid="uid://c8gwl8gy7dgrx" path="res://scripts/Player/Attacks/Manager/BulletManager.gd" id="22_jc3p3"]
-[ext_resource type="PackedScene" uid="uid://2e7a6m6g18hl" path="res://scenes/bullet.tscn" id="23_hax0n"]
-[ext_resource type="Script" uid="uid://bt5ear6ex2hfp" path="res://scripts/Player/Attacks/Manager/slash_manager.gd" id="24_t4otl"]
+[ext_resource type="Script" uid="uid://c8gwl8gy7dgrx" path="res://scripts/Attacks/Bullets/BulletManager.gd" id="22_jc3p3"]
+[ext_resource type="Script" uid="uid://bt5ear6ex2hfp" path="res://scripts/Attacks/Melee_Effects/slash_manager.gd" id="24_t4otl"]
 [ext_resource type="PackedScene" uid="uid://bdwv0idrljtqa" path="res://scenes/slash.tscn" id="25_j2b1d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jc3p3"]
@@ -37,10 +36,12 @@ radius = 5.0
 height = 18.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_giy8y"]
-shader = ExtResource("2_j2b1d")
+shader = ExtResource("3_pf23h")
 shader_parameter/palette_from = ExtResource("3_cs1tg")
 shader_parameter/palette_size = 7
 shader_parameter/tolerance = 0.00999999977648
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_md1ol"]
 atlas = ExtResource("5_i4ail")
@@ -587,7 +588,6 @@ dash_scene = ExtResource("19_487ah")
 
 [node name="SlashShotManager" type="Node2D" parent="." unique_id=1619383811]
 script = ExtResource("22_jc3p3")
-bullet_scene = ExtResource("23_hax0n")
 
 [node name="SlashManager" type="Node2D" parent="." unique_id=279814579]
 script = ExtResource("24_t4otl")

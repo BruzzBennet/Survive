@@ -13,6 +13,8 @@ extends Node
 @onready var player_hurt_sfx = $PlayerHurtSFX
 @onready var walk_sfx = $WalkSFX
 @onready var dash_sfx = $DashSFX
+@onready var empty_gun = $EmptyAmmo
+@onready var recover_sfx = $Recover
 
 func shot():
 	if not shot_sfx.is_playing():
@@ -61,3 +63,13 @@ func MenuSelect():
 func start_tune():
 	if start_tune_sfx and !start_tune_sfx.is_playing():
 		start_tune_sfx.play()
+
+func out_of_ammo():
+	empty_gun.play()
+
+func recover():
+	if not recover_sfx.is_playing():
+		recover_sfx.play()
+
+func recover_stop():
+	recover_sfx.stop()

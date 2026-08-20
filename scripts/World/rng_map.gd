@@ -15,14 +15,22 @@ var map_grid=[Vector2(0,62),
 var spawn_points = []
 var enemies = []
 var starting_player_amount: int = 1
+var map_texture
+var tile_maps =[
+			preload("res://assets/Tiles/Tiles.png"),
+			preload("res://assets/Tiles/Tiles1.png"),
+			preload("res://assets/Tiles/Tiles2.png")
+		]
 @export var starting_enemy_amount: int = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
 	create_map()
 	spawn(1,starting_enemy_amount,[])
 
 func next_round():
+	map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
 	transition()
 	for section in spawn_points:
 		section.queue_free()
@@ -52,16 +60,23 @@ func create_map():
 		var instance = section.instantiate()
 		instance.position = grid_section
 		add_child(instance)
+		instance.tile_set.get_source(4).texture=map_texture
 		spawn_points.append(instance)
 
-func spawn(players: int, enemy_list: int, spawned_already: Array):
+func spawn(players: int, enemy_amount: int, spawned_already: Array):
 	for instance in spawn_points:
 		var spawner = instance.get_node_or_null("Spawner")
 		if spawner:
 			var type = randi_range(0,2)
-			if type == 0 && enemy_list>0 && !spawned_already.has(spawner):
-				spawner.spawn_enemy()
-				enemy_list -= 1
+			if type == 0 && enemy_amount>0 && !spawned_already.has(spawner):
+				var enemy_level
+				var max_level = 5
+				if enemy_amount>=max_level:
+					enemy_level= [1, max_level].pick_random()
+				else:
+					enemy_level=1
+				spawner.spawn_enemy(enemy_level)
+				enemy_amount -= enemy_level
 				spawned_already.append(spawner)
 			if type == 1 && players>0 && !spawned_already.has(spawner):
 				spawner.spawn_player()
@@ -69,5 +84,5 @@ func spawn(players: int, enemy_list: int, spawned_already: Array):
 				spawned_already.append(spawner)
 		else:
 			print("Spawner not found")
-	if players > 0 or enemy_list > 0:
-		spawn(players, enemy_list, spawned_already)
+	if players > 0 or enemy_amount > 0:
+		spawn(players, enemy_amount, spawned_already)

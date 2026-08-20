@@ -63,7 +63,7 @@ shape = SubResource("CapsuleShape2D_623t7")
 
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("4_yoqpp")]
 max_health = 5
-score_value = 500
+score_value = 300
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1325979040]
 shape = SubResource("CapsuleShape2D_yoqpp")

@@ -108,7 +108,7 @@ func Long_Range_Attack():
 	is_shooting = true
 	if can_shoot:
 		PLAYSFX.slash_shot()
-		shoot.emit(last_direction.angle(), position, last_direction)
+		shoot.emit(position, last_direction)
 		can_shoot = false
 		$ShotTimer.start()
 

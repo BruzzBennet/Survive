@@ -18,6 +18,8 @@
 [ext_resource type="AudioStream" uid="uid://wmdklot6o1v8" path="res://assets/audio/walkondirt.mp3" id="16_ngslh"]
 [ext_resource type="Script" uid="uid://bj8svuepxrurl" path="res://scripts/Player/SFX/walk_sfx.gd" id="17_b6f54"]
 [ext_resource type="AudioStream" uid="uid://b51px7epioyyn" path="res://assets/audio/Dash.mp3" id="18_obbcd"]
+[ext_resource type="AudioStream" uid="uid://ckoxwcvsj1unu" path="res://assets/audio/emptygun.mp3" id="19_e3sun"]
+[ext_resource type="AudioStream" uid="uid://bo1ci00jim1aj" path="res://assets/audio/PowerUpTaken.wav" id="20_josl6"]
 
 [node name="PlaySFX" type="Node" unique_id=68871846]
 process_mode = 3
@@ -105,3 +107,9 @@ script = ExtResource("17_b6f54")
 unique_name_in_owner = true
 stream = ExtResource("18_obbcd")
 bus = &"SFX"
+
+[node name="EmptyAmmo" type="AudioStreamPlayer2D" parent="." unique_id=1088871791]
+stream = ExtResource("19_e3sun")
+
+[node name="Recover" type="AudioStreamPlayer2D" parent="." unique_id=513680026]
+stream = ExtResource("20_josl6")

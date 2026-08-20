@@ -31,10 +31,10 @@ func _ready():
 	if takes_damage_from == attack_source.enemy:
 		sprite = get_parent().get_node("Skeleton/Sprite")
 		for piece in get_parent().get_node("Skeleton").get_children():
-			if piece is Sprite2D:
-				shared_material = ShaderMaterial.new()
-				shared_material.shader = preload("res://scenes/hurt_shader.gdshader")
-				piece.material = shared_material
+			if piece is Sprite2D and piece != sprite:
+					shared_material = ShaderMaterial.new()
+					shared_material.shader = preload("res://scenes/hurt_shader.gdshader")
+					piece.material = shared_material
 		hp = get_tree().current_scene.get_node("HP")
 		hp.reload(health)
 	else:
@@ -49,25 +49,6 @@ func _physics_process(_delta):
 			hurt_player()
 
 
-func play_flash(invincible=false) -> void:
-	if !invincible:
-		sprite.material.set_shader_parameter("flash_color", Color(1.0, 0.0, 0.0, 1.0))
-	else:
-		sprite.material.set_shader_parameter("flash_color", Color(0.0, 0.0, 0.1, 1.0))
-	# Create a temporary tween that handles the animation timing
-
-	if takes_damage_from == attack_source.enemy:
-		# 1. Instantly set the shader modifier to 1.0 (Fully Red)
-		for piece in get_parent().get_node("Skeleton").get_children():
-			if piece is Sprite2D:
-				if !invincible:
-					piece.material.set_shader_parameter("flash_color", Color(1.0, 0.0, 0.0, 1.0))
-				else:
-					piece.material.set_shader_parameter("flash_color", Color(0.0, 0.0, 0.1, 1.0))
-				flash_action(piece)
-	else:
-		flash_action(sprite)
-
 func flash_action(sprite_to_flash):
 	sprite_to_flash.material.set_shader_parameter("flash_modifier", 1.0)
 	var tween = create_tween()
@@ -80,8 +61,45 @@ func flash_action(sprite_to_flash):
 		1
 	)
 
+func change_color(character,color:Color):
+	character.material.set_shader_parameter("flash_modifier", 0.5)
+	character.material.set_shader_parameter("flash_color", color)
+
+func is_tired():
+	if takes_damage_from == attack_source.enemy:
+		for piece in get_parent().get_node("Skeleton").get_children():
+			if piece is Sprite2D:
+				# Frozen color: Color(0.25,0.75,1.0,0.5)
+				change_color(piece,Color(0.5,0.5,0.5,0.5))
+	else:
+		change_color(sprite,Color(0.25,0.75,0.1,0.5))
+
+func cancel_flash():
+	sprite.material.set_shader_parameter("flash_modifier", 0.0)
+	if takes_damage_from == attack_source.enemy:
+		for piece in get_parent().get_node("Skeleton").get_children():
+			if piece is Sprite2D:
+				piece.material.set_shader_parameter("flash_modifier", 0.0)
+
+func heals(amount:int):
+	PLAYSFX.recover()
+	play_flash(Color(0.0, 1.0, 0.0, 1.0))
+	hp.set_value(health+amount)
+
+func play_flash(color:Color):
+	sprite.material.set_shader_parameter("flash_color", color)
+
+	if takes_damage_from == attack_source.enemy:
+		for piece in get_parent().get_node("Skeleton").get_children():
+			if piece is Sprite2D:
+				piece.material.set_shader_parameter("flash_color", color)
+				flash_action(piece)
+	else:
+		flash_action(sprite)
+
 func becomes_invincible():
-	play_flash(true)
+	cancel_flash()
+	play_flash(Color(0.0, 0.0, 1.0, 1.0))
 	is_invincible=true
 
 func knockback(attack: Attack):
@@ -122,7 +140,7 @@ func add_death_explosion():
 	get_tree().current_scene.add_child(fx)
 
 func hurt_player():
-	play_flash()
+	play_flash(Color(1.0, 0.0, 0.0, 1.0))
 	hp.set_value(health)
 	var fx = hurt_fx.instantiate()
 	fx.global_position = global_position
@@ -138,7 +156,7 @@ func hit_stun():
 func hurt_enemy():
 	PLAYSFX.hurt()
 	if sprite.material:
-		play_flash()
+		play_flash(Color(1.0, 0.0, 0.0, 1.0))
 
 func dead_enemy():
 	died.emit()
