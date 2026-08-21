@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var max_lvl: int = 1
-@export var max_lvl_n = [13,27]
+@export var max_lvl_n = [13,31,17]
 @export var starting_enemy_amount: int = 1
 var map_grid=[Vector2(0,62), 
 			Vector2(0,190),
@@ -51,7 +51,15 @@ func transition():
 
 func create_map():
 	for grid_section in map_grid:
-		var lvl = randi_range(0,max_lvl)
+		var difficulty = randi_range(0,5)
+		var lvl
+		if difficulty < 2:
+			lvl = 0
+		elif difficulty < 4:
+			lvl = 1
+		else:
+			lvl = 2
+		# var lvl = randi_range(0,max_lvl)
 		# lvl = 0
 		var lvl_n = max_lvl_n[lvl]
 		var n = randi_range(0,lvl_n)
