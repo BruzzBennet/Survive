@@ -32,12 +32,27 @@ func set_value(atk: float):
 	else:
 		atk_shown.set_shader_parameter("bar_color", Color.RED)
 
+func flash(color):
+	atk_shown.set_shader_parameter("flash_color", color)
+	atk_shown.set_shader_parameter("flash_modifier", 1.0)
+	var tween = create_tween()
+
+	# 2. Smoothly animate the parameter back to 0.0 over 1 second
+	tween.tween_property(
+		atk_shown,
+		"shader_parameter/flash_modifier",
+		0.0,
+		1
+	)
+
 func regenerate(delta) -> void:
 	currentATK += regeneration_rate * delta
 	currentATK = min(currentATK, maxATK)
 	set_value(currentATK)
 
 func regenerate_more(delta) -> void:
+	if currentATK < maxATK:
+		flash(Color.GREEN)
 	currentATK += regeneration_rate * 1.5 * delta
 	currentATK = min(currentATK, maxATK)
 	set_value(currentATK)

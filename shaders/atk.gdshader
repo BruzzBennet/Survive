@@ -9,6 +9,9 @@ uniform vec4 bar_color : source_color = vec4(0.0, 0.8, 0.3, 1.0);
 uniform vec4 bg_color : source_color = vec4(0, 0, 0, 1.0);
 uniform float edge_softness : hint_range(0.0, 0.05) = 0.05;
 
+uniform float flash_modifier : hint_range(0.0, 1.0) = 0.0;
+uniform vec4 flash_color : source_color = vec4(1.0, 0.0, 0.0, 1.0); // Rojo por defecto
+
 
 void fragment() {
     // Center coordinates to range from -0.5 to 0.5
@@ -62,11 +65,18 @@ void fragment() {
 
    vec4 final_color = bg_color;
 
-   final_color.rgb = mix(
+  final_color.rgb = mix(
     final_color.rgb,
     bar_color.rgb,
     ring_mask * gap_mask * progress_mask
+	);
+	
+	final_color.rgb = mix(
+        final_color.rgb,
+        flash_color.rgb,
+        flash_modifier
     );
+
 
    COLOR = final_color;
 }

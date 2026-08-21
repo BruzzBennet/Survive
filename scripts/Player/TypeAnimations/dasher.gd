@@ -119,6 +119,7 @@ func Long_Range_Attack():
 func tired():
 	PLAYSFX.out_of_ammo()
 	$HurtBox.is_tired()
+	atkUI.flash(Color.RED)
 
 func dodge(delta):
 	if last_direction != Vector2.ZERO and Input.is_action_just_pressed("dash") and can_dodge:
@@ -133,6 +134,7 @@ func dodge(delta):
 		is_dodging = false
 	if dodgeUI.currentDodge <= 0:
 		can_dodge = false
+		dodgeUI.flash(Color.RED)
 
 func dash_fx(angle, pos, dir):
 	var dash_scene = preload("res://scenes/dashparticles.tscn")
@@ -166,7 +168,7 @@ func player_movement(delta):
 
 
 func healingATK(delta):
-	if atkUI.currentATK < atkUI.maxATK:
+	if atkUI.currentATK < atkUI.maxATK or dodgeUI.currentDodge < dodgeUI.maxDodge:
 		var idle = animated_sprite_2d.current_animation in [
 		"Idle_0",
 		"Idle_1",
@@ -175,19 +177,20 @@ func healingATK(delta):
 		]
 
 		if idle:
-			healing_animation_atk(delta)
+			recovering(delta)
 		else: 
 			if animated_sprite_2d.current_animation != "":
 				# print(animated_sprite_2d.current_animation)
 				idle_time = 0.0
 				PLAYSFX.recover_stop()
 
-func healing_animation_atk(delta):
+func recovering(delta):
 	idle_time += delta
 	if idle_time >=1:
 		atkUI.regenerate_more(delta)
+		dodgeUI.regenerate_more(delta)
 		PLAYSFX.recover()
-		$HurtBox.play_flash(Color(0.0, 1.0, 0.0, 1.0))
+		$HurtBox.play_flash(Color.GREEN)
 	else:
 		$HurtBox.cancel_flash()
 

@@ -14,7 +14,7 @@ metadata/_snap_enabled = true
 
 [sub_resource type="Gradient" id="Gradient_rtgxb"]
 offsets = PackedFloat32Array(0, 0.3953125, 0.45234805, 0.6774862, 0.7484375, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.47185197, 0.47185197, 0.47185197, 0, 0, 0.78431374, 0.29411766, 1, 0, 0.78431374, 0.29411766, 1, 0.5137255, 0.5137255, 0.5137255, 0, 1, 1, 1, 0)
+colors = PackedColorArray(0, 0, 0, 0, 0.47185197, 0.47185197, 0.47185197, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0.5137255, 0.5137255, 0.5137255, 0, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ped5p"]
 gradient = SubResource("Gradient_rtgxb")
@@ -34,6 +34,7 @@ script = ExtResource("1_lte7n")
 
 [node name="DodgeBar" type="TextureProgressBar" parent="." unique_id=608056740]
 unique_name_in_owner = true
+clip_children = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.49300003

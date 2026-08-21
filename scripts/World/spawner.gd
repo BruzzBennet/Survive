@@ -3,7 +3,7 @@ extends Marker2D
 var lvl_1_enemies=[
 	preload("res://scenes/pozzap.tscn"),
 	]
-var lvl_5_enemies=[
+var lvl_4_enemies=[
 	preload("res://scenes/opozzap.tscn"),
 	]
 
@@ -12,7 +12,7 @@ var dashplayer: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
 var spawn_this_player: PackedScene = dashplayer
 
 var hp_to_spawn: PackedScene = preload("res://scenes/hp.tscn")
-var stamina_to_spawn: PackedScene = preload("res://scenes/Dodge.tscn")
+var stamina_to_spawn: PackedScene = preload("res://scenes/UI/Run_Stamina.tscn")
 var atk_to_spawn: PackedScene = preload("res://scenes/ShootStamina.tscn")
 var spawn_points = []
 var current_round: float = 1.0
@@ -24,8 +24,8 @@ func get_enemies_by_level(lvl:int):
 	match lvl:
 		1:
 			enemy_list=lvl_1_enemies
-		5:
-			enemy_list=lvl_5_enemies
+		4:
+			enemy_list=lvl_4_enemies
 	return enemy_list
 
 func spawn_enemy(lvl:int) -> void:
@@ -56,7 +56,7 @@ func spawn_player():
 	
 	var stamina = stamina_to_spawn.instantiate()
 	get_tree().current_scene.add_child(stamina)
-	stamina.position = Vector2(355, 18)
+	stamina.position = Vector2(340, 2)
 
 	var player = spawn_this_player.instantiate()
 	get_tree().current_scene.add_child(player)

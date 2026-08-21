@@ -14,7 +14,9 @@ enum type {
 
 @export var bullet_scene : PackedScene
 
-@export var speed: int = 250
+@export var bullet_speed: int = 250
+@export var bullet_time_on_field: float = 0.4
+@export var enemies_bullet_pierces: int = 1 
 @export var max_ammo: float = 35.0
 @export var min_ammo: float = 7.0
 @export var reload_rate: float = 5.0

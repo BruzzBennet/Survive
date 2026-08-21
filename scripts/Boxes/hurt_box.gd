@@ -83,7 +83,7 @@ func cancel_flash():
 
 func heals(amount:int):
 	PLAYSFX.recover()
-	play_flash(Color(0.0, 1.0, 0.0, 1.0))
+	play_flash(Color.GREEN)
 	hp.set_value(health+amount)
 
 func play_flash(color:Color):
@@ -99,7 +99,7 @@ func play_flash(color:Color):
 
 func becomes_invincible():
 	cancel_flash()
-	play_flash(Color(0.0, 0.0, 1.0, 1.0))
+	play_flash(Color.BLUE)
 	is_invincible=true
 
 func knockback(attack: Attack):
@@ -140,7 +140,7 @@ func add_death_explosion():
 	get_tree().current_scene.add_child(fx)
 
 func hurt_player():
-	play_flash(Color(1.0, 0.0, 0.0, 1.0))
+	play_flash(Color.RED)
 	hp.set_value(health)
 	var fx = hurt_fx.instantiate()
 	fx.global_position = global_position
@@ -156,7 +156,7 @@ func hit_stun():
 func hurt_enemy():
 	PLAYSFX.hurt()
 	if sprite.material:
-		play_flash(Color(1.0, 0.0, 0.0, 1.0))
+		play_flash(Color.RED)
 
 func dead_enemy():
 	died.emit()

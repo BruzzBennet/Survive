@@ -16,7 +16,7 @@ func _ready() -> void:
 	SCORE.get_highest()
 	$Transition.color = Color.BLACK
 	$Transition/AnimationPlayer.play("Fade_Out")
-	BGM.playStage1()
+	BGM.playStageMusic()
 
 func _on_death_timer_timeout() -> void:
 	SCORE.check()

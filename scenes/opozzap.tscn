@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b6a5j10xoom4g" path="res://scenes/pozzap.tscn" id="4_3yju3"]
 [ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="4_623t7"]
 [ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="4_yoqpp"]
-[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Components/Resources/Attack.gd" id="5_623t7"]
+[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="5_623t7"]
 
 [sub_resource type="Shader" id="Shader_6tirb"]
 code = "shader_type canvas_item;
@@ -36,8 +36,7 @@ metadata/_custom_type_script = "uid://doj80p0chh8d7"
 height = 32.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yoqpp"]
-radius = 9.0
-height = 32.0
+height = 34.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bctdi"]
 radius = 9.0
@@ -60,6 +59,7 @@ attack = SubResource("Resource_wgpis")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1102843439]
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_623t7")
+debug_color = Color(1, 0, 0, 0.42000002)
 
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("4_yoqpp")]
 max_health = 5
@@ -67,6 +67,7 @@ score_value = 300
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1325979040]
 shape = SubResource("CapsuleShape2D_yoqpp")
+debug_color = Color(0, 0.60038817, 0, 0.42000002)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=536130041]
 position = Vector2(0, 2)

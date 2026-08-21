@@ -3,13 +3,17 @@ extends Node2D
 @export var weapon: Weapon
 var bullet_scene
 var speed
+var durability
+var time_on_field
 var shot_type
 var timeout_value = 0.1
 
 func setup(bullet:Weapon):
 	weapon=bullet
 	bullet_scene = weapon.bullet_scene
-	speed = weapon.speed
+	speed = weapon.bullet_speed
+	time_on_field = weapon.bullet_time_on_field
+	durability = weapon.enemies_bullet_pierces
 	shot_type=weapon.shot_type
 
 func shoot(pos,dir,shot_pattern_is=null):
@@ -25,12 +29,14 @@ func shoot(pos,dir,shot_pattern_is=null):
 			shot_is="triple_shot"
 	shot_pattern(pos,dir,shot_pattern_is,shot_is)
 
-func shot_pattern(pos,dir,shoot_pattern,shot_itself):
+func shot_pattern(pos,dir,shoot_pattern,shot_is):
 	match shoot_pattern:
+		"simple_shot":
+			simple_shot(pos,dir)
 		"circle_shot":
-			circle_shot(pos,dir,shot_itself)
+			circle_shot(pos,dir,shot_is)
 		"four_way_shot":
-			four_way_shot(pos,dir,shot_itself)
+			four_way_shot(pos,dir,shot_is)
 		null:
 			simple_shot(pos,dir)
 
@@ -54,6 +60,8 @@ func simple_shot(pos,dir):
 	bullet.get_node("AnimationPlayer").play(anim_name)
 	bullet.direction = dir.normalized()
 	bullet.speed=speed
+	bullet.max_time_on_field = time_on_field
+	bullet.max_enemies_pierced = durability
 	bullet.add_to_group("bullets")
 
 func continuous_shot_double(pos,dir):

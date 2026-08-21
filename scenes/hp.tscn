@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cqg5231flqa6s"]
 
 [ext_resource type="Script" uid="uid://c5drykhcjwhrd" path="res://scripts/Player/UI/hp.gd" id="1_al052"]
-[ext_resource type="Shader" uid="uid://b26tx1ru22wbh" path="res://shaders/hp.gdshader" id="2_rtgxb"]
+[ext_resource type="Shader" uid="uid://cbjrfkuwbn76f" path="res://shaders/atk.gdshader" id="2_rtgxb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rtgxb"]
 shader = ExtResource("2_rtgxb")
@@ -13,6 +13,8 @@ shader_parameter/outer_radius = 0.5
 shader_parameter/bar_color = Color(0, 0.8, 0.3, 1)
 shader_parameter/bg_color = Color(0, 0, 0, 1)
 shader_parameter/edge_softness = 0.05
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
 
 [node name="HP" type="Control" unique_id=1412859120]
 light_mask = 524288

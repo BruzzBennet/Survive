@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ddkdtc4rexct0" path="res://scripts/Enemies/pozzap.gd" id="1_0nryl"]
 [ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="2_edv5l"]
 [ext_resource type="Texture2D" uid="uid://6wt63q18jrb4" path="res://assets/Enemies/PozzapSheet.png" id="2_qwm0m"]
-[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Components/Resources/Attack.gd" id="5_p51up"]
+[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="5_p51up"]
 [ext_resource type="Script" uid="uid://km7uun1qgqgv" path="res://scripts/Enemies/Manager/PozzapElecShot.gd" id="6_p51up"]
 [ext_resource type="Script" uid="uid://cmxq4ewt74u6" path="res://scripts/Particles/Manager/died_fx_manager.gd" id="6_qhhgb"]
 [ext_resource type="PackedScene" uid="uid://c1r331jkecm7i" path="res://scenes/DiedExplosion.tscn" id="7_edv5l"]
@@ -31,7 +31,7 @@ height = 24.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ad7tp"]
 radius = 6.0
-height = 20.0
+height = 18.0
 
 [sub_resource type="Animation" id="Animation_qwm0m"]
 resource_name = "Down"
@@ -142,7 +142,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [6.0]
+"values": [7.0]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -314,7 +314,7 @@ tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [20.0]
+"values": [26.0]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
@@ -326,7 +326,7 @@ tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [10.0]
+"values": [11.0]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
@@ -649,7 +649,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [10.0]
+"values": [11.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -661,7 +661,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [20.0]
+"values": [24.0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -673,7 +673,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-1, 1)]
+"values": [Vector2(0, 0)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -821,7 +821,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [22.0]
+"values": [24.0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -833,7 +833,7 @@ tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [6.0]
+"values": [7.0]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
