@@ -20,7 +20,9 @@ var map_texture
 var tile_maps =[
 			preload("res://assets/Tiles/Tiles.png"),
 			preload("res://assets/Tiles/Tiles1.png"),
-			preload("res://assets/Tiles/Tiles2.png")
+			preload("res://assets/Tiles/Tiles2.png"),
+			preload("res://assets/Tiles/Tiles3.png"),
+			preload("res://assets/Tiles/Tiles4.png")
 		]
 var increase_dificulty: float = 0.0
 
