@@ -10,10 +10,10 @@ func _ready():
 
 func set_value(hp: float):
  if hp<current_hp:
-  print("less HP!")
+  # print("less HP!")
   flash(Color.RED)
  if hp>current_hp:
-  print("more HP!")
+  # print("more HP!")
   flash(Color.GREEN)
  current_hp=hp
  var percent = clamp(hp / max_hp, 0.0, 1.0)
@@ -40,7 +40,7 @@ func reload(hp):
   hp_shown.set_shader_parameter("bar_color", Color.RED)
 
 func flash(color: Color):
-  print("It does it!")
+  # print("It does it!")
   hp_shown.set_shader_parameter("flash_color", color)
   hp_shown.set_shader_parameter("flash_modifier", 1.0)
   var tween = create_tween()

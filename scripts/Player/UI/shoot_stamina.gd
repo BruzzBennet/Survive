@@ -30,6 +30,7 @@ func set_value(atk: float):
 	elif atk > maxATK * 0.2:
 		atk_shown.set_shader_parameter("bar_color", Color.YELLOW)
 	else:
+		PLAYSFX.alert()
 		atk_shown.set_shader_parameter("bar_color", Color.RED)
 
 func flash(color):

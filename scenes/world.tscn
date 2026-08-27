@@ -8,6 +8,17 @@
 [ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="10_w7kh3"]
 [ext_resource type="PackedScene" uid="uid://c8slwdh6xqobl" path="res://scenes/pause_menu.tscn" id="12_q5onr"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i7141"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_i7141"]
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4mrxx"]
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="Environment" id="Environment_4mrxx"]
 background_mode = 3
 glow_enabled = true
@@ -35,23 +46,23 @@ offset_top = -23.0
 offset_right = 652.0
 offset_bottom = 330.0
 
-[node name="ScoreLabel" type="Label" parent="." unique_id=1741771680]
-offset_left = 390.0
-offset_top = 33.0
-offset_right = 629.0
-offset_bottom = 56.0
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=40150643]
+offset_right = 640.0
+offset_bottom = 33.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_i7141")
+
+[node name="ScoreLabel" type="Label" parent="PanelContainer" unique_id=1741771680]
+layout_mode = 2
 text = "Score: 0"
+label_settings = SubResource("LabelSettings_i7141")
 horizontal_alignment = 2
 uppercase = true
 script = ExtResource("8_e3hyu")
 
-[node name="HighScoreLabel" type="Label" parent="." unique_id=1917688951]
-offset_left = 394.0
-offset_top = 4.0
-offset_right = 630.0
-offset_bottom = 27.0
+[node name="HighScoreLabel" type="Label" parent="PanelContainer" unique_id=1917688951]
+layout_mode = 2
 text = "High Score: 0"
-horizontal_alignment = 2
+label_settings = SubResource("LabelSettings_4mrxx")
 uppercase = true
 script = ExtResource("9_q5onr")
 

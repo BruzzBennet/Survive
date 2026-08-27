@@ -12,6 +12,8 @@ func _physics_process(_delta: float) -> void:
 	animated_sprite_2d.play()
 
 func _on_sprite_frame_changed() -> void:
+	if animated_sprite_2d.frame == 12:
+		$sfx.play()
 	if animated_sprite_2d.frame in summon_frames:
 		var pozzap=pozzap_to_summon.instantiate()
 		get_tree().current_scene.add_child(pozzap)

@@ -1,8 +1,14 @@
 extends Marker2D
 
 var lvl_1_enemies=[
-	preload("res://scenes/pozzap.tscn"),
+	preload("res://scenes/enemies/Icie.tscn")
 	]
+var lvl_2_enemies=[
+	preload("res://scenes/enemies/chomwing.tscn"),
+	]
+var lvl_3_enemies=[
+	preload("res://scenes/pozzap.tscn")
+]
 var lvl_4_enemies=[
 	preload("res://scenes/opozzap.tscn"),
 	]
@@ -24,6 +30,10 @@ func get_enemies_by_level(lvl:int):
 	match lvl:
 		1:
 			enemy_list=lvl_1_enemies
+		2:
+			enemy_list=lvl_2_enemies
+		3:
+			enemy_list=lvl_3_enemies
 		4:
 			enemy_list=lvl_4_enemies
 	return enemy_list

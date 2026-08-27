@@ -22,7 +22,7 @@ func _on_continue_pressed() -> void:
 	was_pressed=false
 
 func pause_screen():
-	if Input.is_action_just_pressed("pause") and %DeathTimer.time_left <= 0:
+	if Input.is_action_just_pressed("pause"):
 		was_pressed=false
 		if !get_tree().paused:
 			pause()

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bebyjivuy8kc1"]
+
+[ext_resource type="Script" uid="uid://dpnr36hx5iein" path="res://scripts/Enemies/follow_player.gd" id="1_fhmj7"]
+
+[node name="FollowBox" type="Area2D" unique_id=665233923]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_fhmj7")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1060167222]
+volume_db = -5.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

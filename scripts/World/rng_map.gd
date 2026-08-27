@@ -29,11 +29,13 @@ var increase_dificulty: float = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
+	$Map.tile_set.get_source(4).texture = map_texture
 	create_map()
 	spawn(1,starting_enemy_amount,[])
 
 func next_round():
 	map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
+	$Map.tile_set.get_source(4).texture = map_texture
 	transition()
 	for section in spawn_points:
 		section.queue_free()
@@ -86,9 +88,9 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 				var enemy_level
 				var max_level = 4
 				if enemy_amount>=max_level:
-					enemy_level= [1, max_level].pick_random()
-				else:
-					enemy_level=1
+					enemy_level= randi_range(1, max_level)
+				if enemy_amount<max_level:
+					enemy_level=enemy_amount
 				spawner.spawn_enemy(enemy_level)
 				enemy_amount -= enemy_level
 				spawned_already.append(spawner)

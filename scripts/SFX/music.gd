@@ -26,19 +26,19 @@ func playStageMusic():
 		# for bgm_used in bgm_list:
 			match bgm_used:
 				1:
-					print("PLAY STAGE 1")
+					# print("PLAY STAGE 1")
 					playStage1()
 					await stage1Tune.finished
 					print("FINISHED 1")
 
 				2:
-					print("PLAY STAGE 2")
+					# print("PLAY STAGE 2")
 					playStage2()
 					await stage2Tune.finished
 					print("FINISHED 2")
 
 				3:
-					print("PLAY STAGE 3")
+					# print("PLAY STAGE 3")
 					playStage3()
 					await stage3Tune.finished
 					print("FINISHED 3")

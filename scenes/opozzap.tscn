@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://c2exk4hq2mgh5" path="res://scripts/Enemies/opozzap.gd" id="1_1p6mm"]
 [ext_resource type="PackedScene" uid="uid://n0yky04500y2" path="res://scenes/character_sprite.tscn" id="2_wgpis"]
 [ext_resource type="PackedScene" uid="uid://b6a5j10xoom4g" path="res://scenes/pozzap.tscn" id="4_3yju3"]
-[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="4_623t7"]
 [ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="4_yoqpp"]
-[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="5_623t7"]
+[ext_resource type="AudioStream" uid="uid://cp2bgtlqmuc65" path="res://assets/audio/Oppozzap.wav" id="5_6tirb"]
 
 [sub_resource type="Shader" id="Shader_6tirb"]
 code = "shader_type canvas_item;
@@ -27,14 +26,6 @@ shader = SubResource("Shader_6tirb")
 shader_parameter/flash_modifier = 0.0
 shader_parameter/flash_color = Color(1, 0, 0, 1)
 
-[sub_resource type="Resource" id="Resource_wgpis"]
-script = ExtResource("5_623t7")
-source = 1
-metadata/_custom_type_script = "uid://doj80p0chh8d7"
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_623t7"]
-height = 32.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yoqpp"]
 height = 34.0
 
@@ -53,17 +44,9 @@ pozzap_to_summon = ExtResource("4_3yju3")
 material = SubResource("ShaderMaterial_wgpis")
 script = null
 
-[node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("4_623t7")]
-attack = SubResource("Resource_wgpis")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1102843439]
-position = Vector2(0, 2)
-shape = SubResource("CapsuleShape2D_623t7")
-debug_color = Color(1, 0, 0, 0.42000002)
-
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("4_yoqpp")]
 max_health = 5
-score_value = 300
+score_value = 500
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1325979040]
 shape = SubResource("CapsuleShape2D_yoqpp")
@@ -72,5 +55,8 @@ debug_color = Color(0, 0.60038817, 0, 0.42000002)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=536130041]
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_bctdi")
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="." unique_id=208172382]
+stream = ExtResource("5_6tirb")
 
 [connection signal="frame_changed" from="Sprite" to="." method="_on_sprite_frame_changed"]

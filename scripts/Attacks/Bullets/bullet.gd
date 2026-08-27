@@ -13,7 +13,7 @@ func _ready():
 
 func _on_area_entered(body):
 	if body is HurtBox_Component and body.get_parent().is_in_group("enemies"):
-		print("yes")
+		# print("yes")
 		enemies_pierced+=1
 	
 func _physics_process(delta):

@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://b51px7epioyyn" path="res://assets/audio/Dash.mp3" id="18_obbcd"]
 [ext_resource type="AudioStream" uid="uid://ckoxwcvsj1unu" path="res://assets/audio/emptygun.mp3" id="19_e3sun"]
 [ext_resource type="AudioStream" uid="uid://bo1ci00jim1aj" path="res://assets/audio/PowerUpTaken.wav" id="20_josl6"]
+[ext_resource type="AudioStream" uid="uid://b1inkejvy6lqp" path="res://assets/audio/Alert.wav" id="21_c0j23"]
 
 [node name="PlaySFX" type="Node" unique_id=68871846]
 process_mode = 3
@@ -113,3 +114,8 @@ stream = ExtResource("19_e3sun")
 
 [node name="Recover" type="AudioStreamPlayer2D" parent="." unique_id=513680026]
 stream = ExtResource("20_josl6")
+
+[node name="Alert" type="AudioStreamPlayer2D" parent="." unique_id=130881046]
+stream = ExtResource("21_c0j23")
+volume_db = -5.0
+pitch_scale = 1.35
