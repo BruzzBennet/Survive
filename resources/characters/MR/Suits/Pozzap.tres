@@ -2,10 +2,13 @@
 
 [ext_resource type="Resource" uid="uid://b5le0wblin430" path="res://resources/characters/MR/palettes/beige.tres" id="1_nx2wu"]
 [ext_resource type="Texture2D" uid="uid://cudv7ackguvfy" path="res://assets/MR/BodyParts/Helmets/Helmet_Pozzap.png" id="2_p6p0r"]
-[ext_resource type="Script" uid="uid://dk6b8jpr26pj2" path="res://scripts/Components/Resources/Suit.gd" id="3_lt3am"]
+[ext_resource type="Script" uid="uid://dk6b8jpr26pj2" path="res://scripts/Components/Weapons/Suit.gd" id="3_lt3am"]
 
 [resource]
 script = ExtResource("3_lt3am")
 helmet = ExtResource("2_p6p0r")
 body_palette = ExtResource("1_nx2wu")
+description = "Increase bullet reach but they deal less damage."
+boost_this = 1
+but_bane_this = 4
 metadata/_custom_type_script = "uid://dk6b8jpr26pj2"

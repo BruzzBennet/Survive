@@ -1,12 +1,12 @@
-[gd_scene format=3 uid="uid://dcclv4wy77u2a"]
+[gd_scene format=3 uid="uid://yrmyr6f8yung"]
 
-[ext_resource type="Script" uid="uid://bdx0cpvtgtkt0" path="res://scripts/Attacks/Bullets/bullet.gd" id="1_hidsh"]
-[ext_resource type="Texture2D" uid="uid://kwla42renok5" path="res://assets/Slash.png" id="2_0qpmt"]
-[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="3_b75s8"]
-[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="4_o3lak"]
+[ext_resource type="Script" uid="uid://bdx0cpvtgtkt0" path="res://scripts/Attacks/Bullets/bullet.gd" id="1_qf8ue"]
+[ext_resource type="Texture2D" uid="uid://c3xv3rjicutpn" path="res://assets/bullets/Chomwing_bullet.png" id="2_qf8ue"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="3_0546c"]
+[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="4_ah5l5"]
 
 [sub_resource type="Resource" id="Resource_qncy5"]
-script = ExtResource("4_o3lak")
+script = ExtResource("4_ah5l5")
 metadata/_custom_type_script = "uid://doj80p0chh8d7"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y25gk"]
@@ -32,7 +32,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerHitBox/CollisionShape2D:rotation")
+tracks/1/path = NodePath("HitBox/CollisionShape2D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -44,26 +44,26 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerHitBox/CollisionShape2D:position")
+tracks/2/path = NodePath("HitBox/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0.5)]
+"values": [Vector2(0.49999997, 0)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerHitBox/CollisionShape2D:shape:size")
+tracks/3/path = NodePath("HitBox/CollisionShape2D:shape:size")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(24, 9)]
+"values": [Vector2(20, 15)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -99,7 +99,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-0.75, 7)]
+"values": [Vector2(-1, 4)]
 }
 
 [sub_resource type="Animation" id="Animation_tamys"]
@@ -143,7 +143,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerHitBox/CollisionShape2D:rotation")
+tracks/3/path = NodePath("HitBox/CollisionShape2D:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -155,7 +155,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PlayerHitBox/CollisionShape2D:position")
+tracks/4/path = NodePath("HitBox/CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -167,14 +167,14 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("PlayerHitBox/CollisionShape2D:shape:size")
+tracks/5/path = NodePath("HitBox/CollisionShape2D:shape:size")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(24, 9)]
+"values": [Vector2(20, 15)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -225,7 +225,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.6250001, 7)]
+"values": [Vector2(0, 4)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -242,7 +242,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PlayerHitBox/CollisionShape2D:rotation")
+tracks/4/path = NodePath("HitBox/CollisionShape2D:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -254,26 +254,26 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("PlayerHitBox/CollisionShape2D:position")
+tracks/5/path = NodePath("HitBox/CollisionShape2D:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0.5)]
+"values": [Vector2(-0.5, 0)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("PlayerHitBox/CollisionShape2D:shape:size")
+tracks/6/path = NodePath("HitBox/CollisionShape2D:shape:size")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(24, 9)]
+"values": [Vector2(20, 15)]
 }
 
 [sub_resource type="Animation" id="Animation_1cfmv"]
@@ -317,7 +317,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerHitBox/CollisionShape2D:rotation")
+tracks/3/path = NodePath("HitBox/CollisionShape2D:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -329,26 +329,26 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PlayerHitBox/CollisionShape2D:position")
+tracks/4/path = NodePath("HitBox/CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -1)]
+"values": [Vector2(0, -0.5)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("PlayerHitBox/CollisionShape2D:shape:size")
+tracks/5/path = NodePath("HitBox/CollisionShape2D:shape:size")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(24, 9)]
+"values": [Vector2(20, 15)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -404,7 +404,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerHitBox/CollisionShape2D:rotation")
+tracks/3/path = NodePath("HitBox/CollisionShape2D:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -416,7 +416,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PlayerHitBox/CollisionShape2D:position")
+tracks/4/path = NodePath("HitBox/CollisionShape2D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -428,7 +428,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("PlayerHitBox/CollisionShape2D:shape:size")
+tracks/5/path = NodePath("HitBox/CollisionShape2D:shape:size")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -460,19 +460,21 @@ _data = {
 }
 
 [node name="bullet" type="CharacterBody2D" unique_id=1051852224]
-collision_layer = 8
-script = ExtResource("1_hidsh")
+collision_layer = 4
+collision_mask = 2
+platform_floor_layers = 4294967294
+script = ExtResource("1_qf8ue")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1273843954]
 modulate = Color(1.9655429, 1.9655429, 1.9655429, 1)
-texture = ExtResource("2_0qpmt")
+texture = ExtResource("2_qf8ue")
 
-[node name="PlayerHitBox" parent="." unique_id=80339694 instance=ExtResource("3_b75s8")]
+[node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("3_0546c")]
 collision_layer = 8
 collision_mask = 6
 attack = SubResource("Resource_qncy5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox" unique_id=405795565]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=405795565]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_y25gk")
 debug_color = Color(1, 0, 0, 0.42000002)

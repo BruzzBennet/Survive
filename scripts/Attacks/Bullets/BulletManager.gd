@@ -7,10 +7,14 @@ var durability
 var time_on_field
 var shot_type
 var timeout_value = 0.1
+var bullet_damage:= 1.0
 
 func setup(bullet:Weapon):
+	# print("setup!")
 	weapon=bullet
 	bullet_scene = weapon.bullet_scene
+	bullet_damage = bullet.bullet_damage
+	# print(str(self) + str(weapon.bullet_scene))
 	speed = weapon.bullet_speed
 	time_on_field = weapon.bullet_time_on_field
 	durability = weapon.enemies_bullet_pierces
@@ -46,6 +50,9 @@ func no_shot():
 func simple_shot(pos,dir):
 	var anim_name
 	var bullet=bullet_scene.instantiate()
+	bullet.damage_done=bullet_damage
+	print(bullet_damage)
+	# print(str(self) + str(weapon.bullet_scene))
 	add_child(bullet)
 	bullet.global_position = pos + dir * 10
 	# bullet.rotation=angle  + deg_to_rad(-90)

@@ -2,6 +2,7 @@ extends Resource
 class_name Weapon
 
 @export var sprite: Texture2D
+@export var description: String
 @export var melee_depletion_rate: float = 0.0 
 @export var weapon_type: type
 
@@ -13,12 +14,12 @@ enum type {
 }
 
 @export var bullet_scene : PackedScene
-
+@export var bullet_damage: float = 1.0
 @export var bullet_speed: int = 250
 @export var bullet_time_on_field: float = 0.4
 @export var enemies_bullet_pierces: int = 1 
-@export var max_ammo: float = 35.0
-@export var min_ammo: float = 7.0
+var max_ammo: float = 35.0
+var min_ammo: float = 7.0
 @export var reload_rate: float = 5.0
 @export var depletion_rate: float = 0.5
 @export var shot_type: shot_pattern 
@@ -29,5 +30,7 @@ enum shot_pattern{
 	continuous_shot_triple,
 	triple_shot
 }
+
+@export var effect: GDScript 
 
 

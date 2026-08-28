@@ -751,7 +751,7 @@ radius = 6.0
 height = 22.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6uv0u"]
-radius = 64.0
+radius = 48.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1839844215]
 collision_layer = 2
@@ -770,6 +770,8 @@ libraries/ = SubResource("AnimationLibrary_k4wci")
 [node name="EnemyMovement" parent="." unique_id=1062153470 instance=ExtResource("3_6uv0u")]
 
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("2_88rwa")]
+collision_layer = 2
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=829194139]
 position = Vector2(0, -1)
@@ -778,6 +780,8 @@ debug_color = Color(0, 0.60038817, 0, 0.42000002)
 
 [node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("3_jsaom")]
 position = Vector2(15, 1)
+collision_layer = 2
+collision_mask = 8
 attack = SubResource("Resource_p00xj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1017831453]

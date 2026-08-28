@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://djt8688q21i1j"]
 
+[ext_resource type="Script" uid="uid://cn1xrfoesrja4" path="res://scripts/Enemies/icie.gd" id="1_l6580"]
 [ext_resource type="PackedScene" uid="uid://ffrii0cvnsbc" path="res://scenes/enemies/enemy_movement.tscn" id="2_fu0ok"]
 [ext_resource type="Texture2D" uid="uid://beplf6glrkbnu" path="res://assets/Enemies/Icie.png" id="2_s1ktm"]
 [ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="3_fu0ok"]
@@ -645,7 +646,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fu0ok"]
-radius = 64.0
+radius = 48.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aorp8"]
 radius = 8.0
@@ -665,6 +666,8 @@ radius = 8.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=145538635]
 collision_layer = 2
+collision_mask = 11
+script = ExtResource("1_l6580")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1404793085]
 texture = ExtResource("2_s1ktm")
@@ -686,6 +689,8 @@ shape = SubResource("CircleShape2D_fu0ok")
 debug_color = Color(1, 1, 0, 0.42000002)
 
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("3_fu0ok")]
+collision_layer = 2
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=295741136]
 position = Vector2(0, 1)
@@ -699,6 +704,8 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_f3q5m")
 
 [node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("4_l6580")]
+collision_layer = 2
+collision_mask = 8
 attack = SubResource("Resource_oty2l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1981107426]

@@ -28,22 +28,70 @@ var shot_pattern
 var idle_time = 0.0
 
 func _ready():
+	if weapon.effect:
+		$WeaponEffect.set_script(weapon.effect)
+		$WeaponEffect._ready()
 	if weapon.weapon_type == Weapon.type.boot:
 		melee_shot_pattern = "no_shot"
 		shot_pattern = "four_way_shot"
 	if suit:
-		$Skeleton/Head_Back.texture = suit.helmet
-		$Skeleton/Head_Front.texture = suit.helmet
-		$Skeleton/Sprite.set_palette(suit.body_palette)
+		equip_suit(suit)
 	else:
 		$Skeleton/Head_Back.texture = null
 		$Skeleton/Head_Front.texture = null
 		if palette:
 			$Skeleton/Sprite.set_palette(palette)
-	equip(suit)
+	equip_suit_type(suit)
 	screen_size = get_viewport_rect().size
+	GLOBAL.weapon=weapon
+	# print(str(self) + str(weapon.bullet_scene))
+	# $BulletManager.setup(weapon)
 
-func equip(equipped_suit: Suit):
+func equip_suit(this_suit:Suit):
+	$Skeleton/Head_Back.texture = this_suit.helmet
+	$Skeleton/Head_Front.texture = this_suit.helmet
+	GLOBAL.player_palette=this_suit.body_palette
+	$Skeleton/Sprite.set_palette(this_suit.body_palette)
+	var boost_bane = 0.25
+	if this_suit.effect:
+		$SuitEffect.set_script(this_suit.effect)
+		$SuitEffect._ready()
+		boost_bane = 0.125
+	boost(this_suit,boost_bane)
+	bane(this_suit,(boost_bane*-1))
+
+func boost(this_suit,boost_bane):
+	match this_suit.boost_this:
+			this_suit.boost.speed:
+				max_speed+=(max_speed*boost_bane)
+			this_suit.boost.bullet_reach:
+				weapon.bullet_time_on_field+=boost_bane
+			this_suit.boost.ammo_saving:
+				weapon.depletion_rate-=boost_bane
+			this_suit.boost.defense:
+				$HurtBox.defense+=(boost_bane*2)
+			this_suit.boost.bullet_damage:
+				weapon.bullet_damage+=(boost_bane*4)
+			this_suit.boost.melee_damage:
+				$HitBox.attack.damage_done+=(boost_bane*4)
+
+func bane(this_suit,boost_bane):
+	match this_suit.but_bane_this:
+			this_suit.bane.speed:
+				max_speed+=(max_speed*boost_bane)
+			this_suit.bane.bullet_reach:
+				weapon.bullet_time_on_field+=boost_bane
+			this_suit.bane.ammo_saving:
+				weapon.depletion_rate-=boost_bane
+			this_suit.bane.defense:
+				$HurtBox.defense+=(boost_bane*4)
+			this_suit.bane.bullet_damage:
+				weapon.bullet_damage+=(boost_bane*2)
+				# print("Bullet Bane: "+str((boost_bane*2)))
+			this_suit.bane.melee_damage:
+				$HitBox.attack.damage_done+=(boost_bane*2)
+
+func equip_suit_type(equipped_suit: Suit):
 	var sprite_type
 	if equipped_suit:
 		sprite_type = "Base"

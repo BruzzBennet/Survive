@@ -9,6 +9,7 @@ var shared_material: ShaderMaterial
 @export var score_value: int = 50
 @export var receives_knockback: bool = false
 @export var gets_stunned: bool = false
+var defense:= 0.0
 
 enum attack_source {
 	player,
@@ -24,9 +25,17 @@ var is_invincible: bool = false
 var health: float
 var enemyCollisions = []
 var hp
+var yes_or_no_healer = randi_range(0,7)
 signal died
 
 func _ready():
+	if takes_damage_from == attack_source.enemy:
+			set_collision_layer_value(4, true)
+			set_collision_mask_value(2, true)
+			set_collision_mask_value(3, true)
+	elif takes_damage_from == attack_source.player:
+			set_collision_layer_value(2, true)
+			set_collision_mask_value(4, true)
 	health = max_health
 	if takes_damage_from == attack_source.enemy:
 		sprite = get_parent().get_node("Skeleton/Sprite")
@@ -82,9 +91,15 @@ func cancel_flash():
 				piece.material.set_shader_parameter("flash_modifier", 0.0)
 
 func heals(amount:int):
-	PLAYSFX.recover()
 	play_flash(Color.GREEN)
-	hp.set_value(health+amount)
+	var new_hp = health+amount
+	# print(str(health)+" to "+str(new_hp))
+	hp.set_value(new_hp)
+	if new_hp<=max_health:
+		health=new_hp
+	else:
+		SCORE.increaseBy(250)
+	# print("heals")
 
 func play_flash(color:Color):
 	sprite.material.set_shader_parameter("flash_color", color)
@@ -110,7 +125,8 @@ func knockback(attack: Attack):
 func damage(attack: Attack) -> void:
 	if !is_hurt and !is_invincible:
 		if takes_damage_from == attack.source:
-			health -= attack.damage_done
+			# print("Original health: " + str(health))
+			health -= (attack.damage_done - defense)
 			if gets_stunned:
 				hit_stun()	
 			if receives_knockback:
@@ -120,6 +136,8 @@ func damage(attack: Attack) -> void:
 				hurt_enemy()
 			elif takes_damage_from == attack_source.enemy:
 				hurt_player()
+
+			# print("New health: " + str(health))
 
 			if dead:
 				return
@@ -162,6 +180,16 @@ func dead_enemy():
 	died.emit()
 	SCORE.increaseBy(score_value)
 	PLAYSFX.died()
+	if yes_or_no_healer==0:
+		# print("slushie!")
+		call_deferred("item_drop")
+		
+
+func item_drop():
+	var slusshie=preload("res://scenes/items/healing_item.tscn")
+	var slushie = slusshie.instantiate()
+	slushie.global_position=global_position
+	get_tree().current_scene.add_child(slushie)
 
 func gameover():
 	var death_timer = get_tree().current_scene.get_node("DeathTimer")

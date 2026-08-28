@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Suit" format=3 uid="uid://yhgmh81rskgu"]
+
+[ext_resource type="Resource" uid="uid://decanu1a0hm3i" path="res://resources/characters/MR/palettes/silver.tres" id="1_7w06w"]
+[ext_resource type="Script" uid="uid://csr5lhw4amh0d" path="res://scripts/Components/effects/float.gd" id="2_raw2s"]
+[ext_resource type="Texture2D" uid="uid://cistp1mr0o283" path="res://assets/MR/BodyParts/Helmets/Helmet_Chomwing.png" id="3_lleen"]
+[ext_resource type="Script" uid="uid://dk6b8jpr26pj2" path="res://scripts/Components/Weapons/Suit.gd" id="4_xy6u4"]
+
+[resource]
+script = ExtResource("4_xy6u4")
+helmet = ExtResource("3_lleen")
+body_palette = ExtResource("1_7w06w")
+description = "The user can fly over walls. Deals extra melee damage and receives extra damage."
+boost_this = 5
+but_bane_this = 3
+effect = ExtResource("2_raw2s")
+metadata/_custom_type_script = "uid://dk6b8jpr26pj2"

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://c0bavo2iutyc7"]
+
+[ext_resource type="PackedScene" uid="uid://yrmyr6f8yung" path="res://scenes/bullets/chomwing_bullet.tscn" id="1_3arbs"]
+[ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="3_ul3u2"]
+[ext_resource type="Texture2D" uid="uid://d21j5nvg6bhx1" path="res://assets/Weapons/Boots/Boot_Chomwing.png" id="4_o4pyo"]
+
+[resource]
+script = ExtResource("3_ul3u2")
+sprite = ExtResource("4_o4pyo")
+description = "Its bullets fly through walls but waste a ton of stamina"
+melee_depletion_rate = 0.5
+weapon_type = 3
+bullet_scene = ExtResource("1_3arbs")
+depletion_rate = 2.0
+metadata/_custom_type_script = "uid://hig2h24o38p0"

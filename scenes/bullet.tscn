@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://2e7a6m6g18hl"]
 
 [ext_resource type="Script" uid="uid://c8gwl8gy7dgrx" path="res://scripts/Attacks/Bullets/BulletManager.gd" id="1_l5glv"]
+[ext_resource type="Resource" uid="uid://c0bavo2iutyc7" path="res://resources/characters/Weapons/Boots/chomwing_boot.tres" id="2_y25gk"]
 
 [node name="BulletManager" type="Node2D" unique_id=1570605682]
 script = ExtResource("1_l5glv")
+weapon = ExtResource("2_y25gk")
 
 [node name="Timer" type="Timer" parent="." unique_id=1708571867]
 wait_time = 0.2

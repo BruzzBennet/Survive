@@ -18,4 +18,5 @@ func _on_sprite_frame_changed() -> void:
 		var pozzap=pozzap_to_summon.instantiate()
 		get_tree().current_scene.add_child(pozzap)
 		pozzap.global_position = global_position +  Vector2.RIGHT * 25
+		pozzap.get_node("HurtBox").score_value=0
 		pozzap.add_to_group("enemies")

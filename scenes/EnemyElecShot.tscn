@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="3_pf2g1"]
 [ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="4_a5rix"]
 [ext_resource type="Script" uid="uid://bip4nm76t78cb" path="res://scripts/Particles/parried_fx.gd" id="4_pf2g1"]
-[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Components/Resources/Attack.gd" id="4_qcr21"]
+[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="4_qcr21"]
 [ext_resource type="PackedScene" uid="uid://5bbrtc4cfkdv" path="res://scenes/hurtParticles.tscn" id="5_a5rix"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4qdr7"]
@@ -35,6 +35,8 @@ attack = SubResource("Resource_2vgp6")
 shape = SubResource("CircleShape2D_4qdr7")
 
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("4_a5rix")]
+collision_layer = 4
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=171254114]
 shape = SubResource("CircleShape2D_4qdr7")

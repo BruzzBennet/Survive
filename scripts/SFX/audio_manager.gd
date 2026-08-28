@@ -16,6 +16,7 @@ extends Node
 @onready var empty_gun = $EmptyAmmo
 @onready var recover_sfx = $Recover
 @onready var alert_sfx = $Alert
+@onready var heal_sfx = $Heal
 
 func shot():
 	if not shot_sfx.is_playing():
@@ -78,3 +79,7 @@ func recover_stop():
 func alert():
 	if not alert_sfx.is_playing():
 		alert_sfx.play()
+
+func heal():
+	# if not alert_sfx.is_playing():
+		heal_sfx.play()

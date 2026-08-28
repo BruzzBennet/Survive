@@ -12,9 +12,10 @@ func set_value(hp: float):
  if hp<current_hp:
   # print("less HP!")
   flash(Color.RED)
- if hp>current_hp:
-  # print("more HP!")
+ if hp>=current_hp:
+  PLAYSFX.heal()
   flash(Color.GREEN)
+  # print("more HP!")
  current_hp=hp
  var percent = clamp(hp / max_hp, 0.0, 1.0)
  hp_shown.set_shader_parameter("value", percent)
