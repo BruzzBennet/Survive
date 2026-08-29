@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://dxbvop02luk8b"]
+
+[ext_resource type="PackedScene" uid="uid://c0u3a864ma6ks" path="res://scenes/bullets/pozzap_bullet.tscn" id="1_jvi0r"]
+[ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="2_6icff"]
+[ext_resource type="Texture2D" uid="uid://cve58dosfbjlj" path="res://assets/Weapons/Boots/Boot_Pozzap.png" id="3_2yw7f"]
+
+[resource]
+script = ExtResource("2_6icff")
+sprite = ExtResource("3_2yw7f")
+name = "Pozzap Boot"
+description = "Reach++, Ammo--"
+melee_depletion_rate = 0.5
+weapon_type = 3
+bullet_scene = ExtResource("1_jvi0r")
+boost_this = 1
+but_bane_this = 2
+metadata/_custom_type_script = "uid://hig2h24o38p0"

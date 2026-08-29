@@ -7,9 +7,10 @@
 [resource]
 script = ExtResource("3_ul3u2")
 sprite = ExtResource("4_o4pyo")
-description = "Its bullets fly through walls but waste a ton of stamina"
+name = "Chomwing Boot"
+description = "Speed++, Reach--. Its bullets fly through walls."
 melee_depletion_rate = 0.5
 weapon_type = 3
 bullet_scene = ExtResource("1_3arbs")
-depletion_rate = 2.0
+but_bane_this = 1
 metadata/_custom_type_script = "uid://hig2h24o38p0"

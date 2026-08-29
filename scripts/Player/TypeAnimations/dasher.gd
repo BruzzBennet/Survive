@@ -1,16 +1,16 @@
 extends CharacterBody2D
 class_name Player_Unit
 
-@export var max_speed: float = 185
-@export var accel: float = 10
-@export var friction: float = 0.25
-@export var dodge_speed = 1
+var max_speed: float = 185
+var accel: float = 10
+var friction: float = 0.25
+var dodge_speed = 1
+var dodge_min: float = 5.0
 @export var suit: Suit
 @export var weapon: Weapon
 @export var palette: MonRanger_pallete
 @export var footstep_frames: Array[int] = [0, 1]
 @export var attack_frames: Array[int]
-@export var dodge_min: float = 5.0
 @onready var animated_sprite_2d = %AnimationPlayer2D
 @onready var dodgeUI = get_tree().current_scene.get_node("Dodge")
 @onready var atkUI = get_tree().current_scene.get_node("ATK")
@@ -28,24 +28,41 @@ var shot_pattern
 var idle_time = 0.0
 
 func _ready():
-	if weapon.effect:
-		$WeaponEffect.set_script(weapon.effect)
-		$WeaponEffect._ready()
-	if weapon.weapon_type == Weapon.type.boot:
-		melee_shot_pattern = "no_shot"
-		shot_pattern = "four_way_shot"
+	# print("original max_speed: " + str(max_speed))
 	if suit:
 		equip_suit(suit)
+		# print("max_speed with suit: " + str(max_speed))
 	else:
 		$Skeleton/Head_Back.texture = null
 		$Skeleton/Head_Front.texture = null
 		if palette:
 			$Skeleton/Sprite.set_palette(palette)
+	
 	equip_suit_type(suit)
-	screen_size = get_viewport_rect().size
+	# print("max_speed with equip_suit_type: " + str(max_speed))
+
 	GLOBAL.weapon=weapon
 	# print(str(self) + str(weapon.bullet_scene))
-	# $BulletManager.setup(weapon)
+	
+	equip_weapon(weapon, suit)
+	# print("max_speed with weapon: " + str(max_speed))
+
+	screen_size = get_viewport_rect().size
+
+func equip_weapon(this_weapon:Weapon, this_suit:Suit):
+	var boost_bane = 0.25
+	if this_weapon.effect:
+		$WeaponEffect.set_script(this_weapon.effect)
+		$WeaponEffect._ready()
+		boost_bane = 0.125
+	$BulletManager.setup(this_weapon,this_suit)
+	modifiers(this_weapon,boost_bane)
+	weapon_attack_pattern(this_weapon)
+
+func weapon_attack_pattern(this_weapon:Weapon):
+	if this_weapon.weapon_type == Weapon.type.boot:
+		melee_shot_pattern = "no_shot"
+		shot_pattern = "four_way_shot"
 
 func equip_suit(this_suit:Suit):
 	$Skeleton/Head_Back.texture = this_suit.helmet
@@ -57,39 +74,40 @@ func equip_suit(this_suit:Suit):
 		$SuitEffect.set_script(this_suit.effect)
 		$SuitEffect._ready()
 		boost_bane = 0.125
-	boost(this_suit,boost_bane)
-	bane(this_suit,(boost_bane*-1))
+	modifiers(this_suit,boost_bane)
 
-func boost(this_suit,boost_bane):
-	match this_suit.boost_this:
-			this_suit.boost.speed:
-				max_speed+=(max_speed*boost_bane)
-			this_suit.boost.bullet_reach:
-				weapon.bullet_time_on_field+=boost_bane
-			this_suit.boost.ammo_saving:
-				weapon.depletion_rate-=boost_bane
-			this_suit.boost.defense:
-				$HurtBox.defense+=(boost_bane*2)
-			this_suit.boost.bullet_damage:
-				weapon.bullet_damage+=(boost_bane*4)
-			this_suit.boost.melee_damage:
-				$HitBox.attack.damage_done+=(boost_bane*4)
+func modifiers(this_suit:Variant,boost_bane:float):
+	var speed_boost=0.0
+	var ammo_boost=0.0
+	var def_boost=0.0
+	var melee_boost=0.0
+	
+	if this_suit.boost:
+		match this_suit.boost_this:
+				this_suit.boost.speed:
+					speed_boost+=(max_speed*boost_bane)
+				this_suit.boost.ammo_saving:
+					ammo_boost-=boost_bane
+				this_suit.boost.defense:
+					def_boost+=(boost_bane*2)
+				this_suit.boost.melee_damage:
+					melee_boost+=(boost_bane*4)
+	
+	if this_suit.bane:
+		match this_suit.but_bane_this:
+				this_suit.bane.speed:
+					speed_boost-=(max_speed*boost_bane)
+				this_suit.bane.ammo_saving:
+					ammo_boost+=boost_bane
+				this_suit.bane.defense:
+					def_boost-=(boost_bane*4)
+				this_suit.bane.melee_damage:
+					melee_boost-=(boost_bane*4)
 
-func bane(this_suit,boost_bane):
-	match this_suit.but_bane_this:
-			this_suit.bane.speed:
-				max_speed+=(max_speed*boost_bane)
-			this_suit.bane.bullet_reach:
-				weapon.bullet_time_on_field+=boost_bane
-			this_suit.bane.ammo_saving:
-				weapon.depletion_rate-=boost_bane
-			this_suit.bane.defense:
-				$HurtBox.defense+=(boost_bane*4)
-			this_suit.bane.bullet_damage:
-				weapon.bullet_damage+=(boost_bane*2)
-				# print("Bullet Bane: "+str((boost_bane*2)))
-			this_suit.bane.melee_damage:
-				$HitBox.attack.damage_done+=(boost_bane*2)
+	max_speed+=speed_boost
+	atkUI.depletion_rate-=ammo_boost
+	$HurtBox.defense+=def_boost
+	$HitBox.attack.damage_done+=melee_boost
 
 func equip_suit_type(equipped_suit: Suit):
 	var sprite_type

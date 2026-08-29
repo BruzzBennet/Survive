@@ -6,6 +6,7 @@ extends AudioStreamPlayer
 @onready var gameOverTune = $GameOver
 @onready var menuTune = $Menu
 @onready var overworldTune = $Overworld
+@onready var restTune = $RestTime
 var bgm_used
 
 # func stopStage1():
@@ -18,6 +19,7 @@ func stopMusic():
 	gameOverTune.stop()
 	menuTune.stop()
 	overworldTune.stop()
+	restTune.stop()
 
 func playStageMusic():
 	while true:
@@ -55,7 +57,6 @@ func playStage3():
 	stopMusic()
 	stage3Tune.play()
 		
-
 func GameOver():
 	stopMusic()
 	gameOverTune.play()
@@ -67,3 +68,7 @@ func playMenuMusic():
 func playOverworldMusic():
 	stopMusic()
 	overworldTune.play()
+
+func ShopTheme():
+	stopMusic()
+	restTune.play()

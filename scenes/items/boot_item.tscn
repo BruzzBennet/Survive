@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://cmtt624li5yr1"]
+
+[ext_resource type="Script" uid="uid://b2518i8rrlh3u" path="res://scripts/Items/shop_item.gd" id="1_iqlxx"]
+[ext_resource type="Texture2D" uid="uid://rtmlx08v16wn" path="res://assets/Weapons/Boots/Boot_Icie.png" id="2_ajq8o"]
+[ext_resource type="Resource" uid="uid://p4bis23aexhm" path="res://resources/characters/Weapons/Boots/icie_boot.tres" id="2_pffs2"]
+
+[sub_resource type="Animation" id="Animation_pffs2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_4xs5n"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mlpvh"]
+_data = {
+&"RESET": SubResource("Animation_pffs2"),
+&"idle": SubResource("Animation_4xs5n")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajq8o"]
+bg_color = Color(0, 0, 0, 0.5)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_pffs2"]
+line_spacing = 0.0
+font_size = 9
+
+[node name="Item" type="Node2D" unique_id=1644609114]
+script = ExtResource("1_iqlxx")
+weapon = ExtResource("2_pffs2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1474111844]
+position = Vector2(0, -5)
+scale = Vector2(2, 2)
+texture = ExtResource("2_ajq8o")
+hframes = 6
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1060392127]
+libraries/ = SubResource("AnimationLibrary_mlpvh")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1104734786]
+offset_left = -45.0
+offset_top = 6.0
+offset_right = 45.0
+offset_bottom = 29.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ajq8o")
+
+[node name="Label" type="Label" parent="PanelContainer" unique_id=270731792]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_pffs2")
+horizontal_alignment = 1
+autowrap_mode = 3

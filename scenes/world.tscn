@@ -47,6 +47,8 @@ offset_right = 652.0
 offset_bottom = 330.0
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=40150643]
+light_mask = 8192
+visibility_layer = 8192
 offset_right = 640.0
 offset_bottom = 33.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_i7141")

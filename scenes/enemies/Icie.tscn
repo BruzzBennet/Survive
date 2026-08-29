@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://djt8688q21i1j"]
 
 [ext_resource type="Script" uid="uid://cn1xrfoesrja4" path="res://scripts/Enemies/icie.gd" id="1_l6580"]
+[ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="2_1awcq"]
 [ext_resource type="PackedScene" uid="uid://ffrii0cvnsbc" path="res://scenes/enemies/enemy_movement.tscn" id="2_fu0ok"]
 [ext_resource type="Texture2D" uid="uid://beplf6glrkbnu" path="res://assets/Enemies/Icie.png" id="2_s1ktm"]
 [ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="3_fu0ok"]
@@ -8,6 +9,11 @@
 [ext_resource type="AudioStream" uid="uid://bi85dc6igdck0" path="res://assets/audio/complaint.wav" id="4_fu0ok"]
 [ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="4_l6580"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="5_1awcq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ydeur"]
+shader = ExtResource("2_1awcq")
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_ydeur"]
 resource_name = "0"
@@ -670,6 +676,7 @@ collision_mask = 11
 script = ExtResource("1_l6580")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1404793085]
+material = SubResource("ShaderMaterial_ydeur")
 texture = ExtResource("2_s1ktm")
 hframes = 3
 vframes = 4

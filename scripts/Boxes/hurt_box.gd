@@ -25,7 +25,7 @@ var is_invincible: bool = false
 var health: float
 var enemyCollisions = []
 var hp
-var yes_or_no_healer = randi_range(0,7)
+var yes_or_no_healer = 0
 signal died
 
 func _ready():
@@ -90,7 +90,7 @@ func cancel_flash():
 			if piece is Sprite2D:
 				piece.material.set_shader_parameter("flash_modifier", 0.0)
 
-func heals(amount:int):
+func heals(amount:float):
 	play_flash(Color.GREEN)
 	var new_hp = health+amount
 	# print(str(health)+" to "+str(new_hp))
@@ -180,7 +180,7 @@ func dead_enemy():
 	died.emit()
 	SCORE.increaseBy(score_value)
 	PLAYSFX.died()
-	if yes_or_no_healer==0:
+	if yes_or_no_healer==1:
 		# print("slushie!")
 		call_deferred("item_drop")
 		

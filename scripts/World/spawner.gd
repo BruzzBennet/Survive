@@ -22,8 +22,13 @@ var stamina_to_spawn: PackedScene = preload("res://scenes/UI/Run_Stamina.tscn")
 var atk_to_spawn: PackedScene = preload("res://scenes/ShootStamina.tscn")
 var spawn_points = []
 var current_round: float = 1.0
-@onready var rng_map=get_tree().current_scene.get_node("RNG_Map")
-@onready var enemies = rng_map.enemies
+var rng_map
+var enemies
+
+func _ready():
+	if get_tree().current_scene.find_child("RNG_Map"):
+		rng_map=get_tree().current_scene.get_node("RNG_Map")
+		enemies = rng_map.enemies
 
 func get_enemies_by_level(lvl:int):
 	var enemy_list
@@ -71,5 +76,5 @@ func spawn_player():
 	var player = spawn_this_player.instantiate()
 	get_tree().current_scene.add_child(player)
 	player.position = global_position
-	player.get_node("BulletManager").setup(GLOBAL.weapon)
+	# player.get_node("BulletManager").setup(GLOBAL.weapon,GLOBAL.suit)
 	player.get_node("Skeleton/Sprite").set_palette(GLOBAL.player_palette)

@@ -8,7 +8,8 @@
 script = ExtResource("3_lt3am")
 helmet = ExtResource("2_p6p0r")
 body_palette = ExtResource("1_nx2wu")
-description = "Increase bullet reach but they deal less damage."
+name = "Pozzap Suit"
+description = "Reach ++, Ammo--"
 boost_this = 1
-but_bane_this = 4
+but_bane_this = 2
 metadata/_custom_type_script = "uid://dk6b8jpr26pj2"

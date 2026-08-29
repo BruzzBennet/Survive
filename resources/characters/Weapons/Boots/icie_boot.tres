@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://p4bis23aexhm"]
+
+[ext_resource type="PackedScene" uid="uid://dcclv4wy77u2a" path="res://scenes/bullets/slash_bullet.tscn" id="1_xiaww"]
+[ext_resource type="Script" uid="uid://cy3f5fg3iv78f" path="res://scripts/Components/effects/extra_heal.gd" id="2_1r30u"]
+[ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="3_a1qy1"]
+[ext_resource type="Texture2D" uid="uid://rtmlx08v16wn" path="res://assets/Weapons/Boots/Boot_Icie.png" id="4_q8nm3"]
+
+[resource]
+script = ExtResource("3_a1qy1")
+sprite = ExtResource("4_q8nm3")
+name = "Icie Boot"
+description = "Melee+, Reach-. Gain +0.5 HP when healing."
+melee_depletion_rate = 0.5
+weapon_type = 3
+bullet_scene = ExtResource("1_xiaww")
+boost_this = 5
+but_bane_this = 1
+effect = ExtResource("2_1r30u")
+metadata/_custom_type_script = "uid://hig2h24o38p0"

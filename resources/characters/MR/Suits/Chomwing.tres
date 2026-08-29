@@ -9,8 +9,9 @@
 script = ExtResource("4_xy6u4")
 helmet = ExtResource("3_lleen")
 body_palette = ExtResource("1_7w06w")
-description = "The user can fly over walls. Deals extra melee damage and receives extra damage."
+name = "Chomwing Suit"
+description = "Melee+, Reach-. The user can fly over walls."
 boost_this = 5
-but_bane_this = 3
+but_bane_this = 1
 effect = ExtResource("2_raw2s")
 metadata/_custom_type_script = "uid://dk6b8jpr26pj2"
