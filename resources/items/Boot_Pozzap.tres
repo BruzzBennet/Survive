@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://cenaegryconho"]
+
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="1_pv7bm"]
+[ext_resource type="Resource" uid="uid://dxbvop02luk8b" path="res://resources/characters/Weapons/Boots/pozzap_boot.tres" id="2_btjld"]
+
+[resource]
+script = ExtResource("1_pv7bm")
+item_is = 1
+weapon = ExtResource("2_btjld")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"

@@ -23,7 +23,9 @@ func _on_restart_pressed() -> void:
 	$Transition/AnimationPlayer.play("Fade_In")
 	PLAYSFX.start_tune()
 	await $Transition/AnimationPlayer.animation_finished
-	get_tree().change_scene_to_file("res://scenes/world.tscn")
+	GLOBAL.restart()
+	BGM.playStageMusic()
+	get_tree().change_scene_to_file("res://scenes/worlds/rng_world.tscn")
 
 func _on_restart_focus_exited() -> void:
 	playMenuMove()

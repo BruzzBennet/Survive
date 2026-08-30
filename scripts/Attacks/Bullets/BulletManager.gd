@@ -8,44 +8,35 @@ var time_on_field
 var shot_type
 var timeout_value = 0.1
 var bullet_damage:= 1.0
+var pierce: = 1.0
 
 func setup(bullet:Weapon, boost:Suit):
-	# print("setup!")
 	weapon=bullet
 	bullet_scene = weapon.bullet_scene
 	bullet_damage = bullet.bullet_damage
-	# print(str(self) + str(weapon.bullet_scene))
 	speed = weapon.bullet_speed
 	time_on_field = weapon.bullet_time_on_field
 	durability = weapon.enemies_bullet_pierces
 	shot_type=weapon.shot_type
-	# print("Weapon: " + str(bullet))
 	modifiers(bullet)
 	if boost:
-		# print("Suit: " + str(boost))
 		modifiers(boost)
 
 func modifiers(this_suit:Variant):
 	var boost_bane = 0.25
-	# print("Bullet Manager - boost started")
-	if this_suit.effect:
-		boost_bane = 0.125
-
 	var reach_boost=0.0
 	var damage_boost=0.0
 	
 	if this_suit.boost:
-		# print("Bullet Manager - boosted")
 		match this_suit.boost_this:
 				this_suit.boost.bullet_reach:
-					reach_boost+=boost_bane/1.25
-				this_suit.boost.bullet_damage:
-					damage_boost+=(boost_bane*2)
+					reach_boost+=boost_bane/2
+				this_suit.boost.bullet_pierce:
+					pierce+=1
 	if this_suit.bane:
-		# print("Bullet Manager - baned")
 		match this_suit.but_bane_this:
 				this_suit.bane.bullet_reach:
-					reach_boost-=boost_bane/1.25
+					reach_boost-=boost_bane/2
 				this_suit.bane.bullet_damage:
 					damage_boost-=(boost_bane*2)
 	
@@ -84,6 +75,7 @@ func no_shot():
 func simple_shot(pos,dir):
 	var anim_name
 	var bullet=bullet_scene.instantiate()
+	bullet.new_pierce(pierce)
 	bullet.damage_done=bullet_damage
 	# print(bullet_damage)
 	# print(str(self) + str(weapon.bullet_scene))

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://df2nbd23piwyc"]
+
+[ext_resource type="PackedScene" uid="uid://h38wi5y5jcs0" path="res://scenes/items/healing_item.tscn" id="1_lcelj"]
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="2_p6ogo"]
+
+[resource]
+script = ExtResource("2_p6ogo")
+item_scene = ExtResource("1_lcelj")
+name = "Snack"
+description = "Heal 1 HP"
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"

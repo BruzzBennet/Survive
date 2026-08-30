@@ -21,6 +21,8 @@
 [ext_resource type="AudioStream" uid="uid://ckoxwcvsj1unu" path="res://assets/audio/emptygun.mp3" id="19_e3sun"]
 [ext_resource type="AudioStream" uid="uid://bo1ci00jim1aj" path="res://assets/audio/PowerUpTaken.wav" id="20_josl6"]
 [ext_resource type="AudioStream" uid="uid://b1inkejvy6lqp" path="res://assets/audio/Alert.wav" id="21_c0j23"]
+[ext_resource type="AudioStream" uid="uid://bah3axscuvte0" path="res://assets/audio/equip.mp3" id="22_cks26"]
+[ext_resource type="AudioStream" uid="uid://ct61tixhl2jy3" path="res://assets/audio/CrunchyMash.wav" id="23_ngslh"]
 
 [node name="PlaySFX" type="Node" unique_id=68871846]
 process_mode = 3
@@ -124,3 +126,10 @@ pitch_scale = 1.35
 stream = ExtResource("20_josl6")
 volume_db = 1.5
 pitch_scale = 1.5
+
+[node name="Equip" type="AudioStreamPlayer2D" parent="." unique_id=13305324]
+stream = ExtResource("22_cks26")
+volume_db = 5.0
+
+[node name="CrunchyMash" type="AudioStreamPlayer2D" parent="." unique_id=1365517175]
+stream = ExtResource("23_ngslh")

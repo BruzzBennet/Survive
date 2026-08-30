@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://dcqheu0e5s5ul" path="res://scenes/maps/LazyMap.tscn" id="2_n083y"]
 [ext_resource type="Texture2D" uid="uid://couo337d0cehh" path="res://assets/Tiles/Tiles.png" id="3_etjcj"]
 [ext_resource type="Script" uid="uid://c2arsgsl2lotg" path="res://scripts/World/spawner.gd" id="4_etjcj"]
+[ext_resource type="Script" uid="uid://c10m6n3me37y5" path="res://scripts/Items/item_shop_spawner.gd" id="5_etjcj"]
+[ext_resource type="PackedScene" uid="uid://cgrehgbf0gsnv" path="res://scenes/boxes/summon_spot.tscn" id="6_pm80a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_17ebl"]
 texture = ExtResource("3_etjcj")
@@ -109,6 +111,7 @@ script = ExtResource("4_etjcj")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1724317452]
 position = Vector2(320, 160)
+script = ExtResource("5_etjcj")
 
 [node name="Suit" type="Marker2D" parent="Node2D" unique_id=1148534034]
 position = Vector2(-112, 32)
@@ -118,3 +121,6 @@ position = Vector2(0, 32)
 
 [node name="Item" type="Marker2D" parent="Node2D" unique_id=361392309]
 position = Vector2(112, 32)
+
+[node name="SummonSpot" parent="." unique_id=1167084153 instance=ExtResource("6_pm80a")]
+position = Vector2(320, 96)

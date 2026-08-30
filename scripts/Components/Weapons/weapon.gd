@@ -22,7 +22,7 @@ var bullet_damage: float = 1.0
 var bullet_speed: int = 250
 var bullet_time_on_field: float = 0.4
 var reload_rate: float = 5.0
-var depletion_rate: float = 2.0
+var depletion_rate: float = 1.0
 @export var shot_type: shot_pattern 
 
 enum shot_pattern{
@@ -34,12 +34,13 @@ enum shot_pattern{
 
 @export var boost_this: boost
 enum boost {
+    bullet_has_effect,
+    effect,
     speed,
     bullet_reach,
     ammo_saving,
     defense,
-    bullet_damage,
-    melee_damage
+    bullet_pierce
 }
 
 @export var but_bane_this: bane

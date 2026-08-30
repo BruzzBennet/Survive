@@ -17,6 +17,8 @@ extends Node
 @onready var recover_sfx = $Recover
 @onready var alert_sfx = $Alert
 @onready var heal_sfx = $Heal
+@onready var equip_sfx = $Equip
+@onready var crunchyMash_sfx = $CrunchyMash
 
 func shot():
 	if not shot_sfx.is_playing():
@@ -83,3 +85,10 @@ func alert():
 func heal():
 	# if not alert_sfx.is_playing():
 		heal_sfx.play()
+
+func equip():
+	equip_sfx.play()
+
+func crunchyMash():
+	if not crunchyMash_sfx.is_playing():
+		crunchyMash_sfx.play()

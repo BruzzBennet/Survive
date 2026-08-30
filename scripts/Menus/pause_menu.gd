@@ -36,7 +36,9 @@ func _on_quit_game_pressed() -> void:
 func _on_restart_pressed() -> void:
 	was_pressed=true
 	PLAYSFX.MenuSelect()
-	get_tree().reload_current_scene()
+	GLOBAL.restart()
+	BGM.playStageMusic()
+	get_tree().change_scene_to_file("res://scenes/worlds/rng_world.tscn")
 
 func _process(_delta):
 	pause_screen()

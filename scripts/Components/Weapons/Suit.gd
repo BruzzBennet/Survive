@@ -7,12 +7,12 @@ class_name Suit
 @export var description: String
 @export var boost_this: boost
 enum boost {
+    effect,
     speed,
     bullet_reach,
     ammo_saving,
     defense,
-    bullet_damage,
-    melee_damage
+    bullet_pierce
 }
 
 @export var but_bane_this: bane
@@ -24,5 +24,6 @@ enum bane {
     bullet_damage,
     melee_damage
 }
+
 
 @export var effect: GDScript 

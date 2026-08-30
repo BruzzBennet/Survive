@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://cm62tiaa87qic"]
+
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="1_255s7"]
+[ext_resource type="Resource" uid="uid://yhgmh81rskgu" path="res://resources/characters/MR/Suits/Chomwing.tres" id="2_bokjm"]
+
+[resource]
+script = ExtResource("1_255s7")
+item_is = 2
+suit = ExtResource("2_bokjm")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"

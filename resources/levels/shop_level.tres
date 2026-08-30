@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="level" format=3 uid="uid://d1kfvk08ym8ey"]
+
+[ext_resource type="PackedScene" uid="uid://dbnbts34odlpm" path="res://assets/maps/shop.tscn" id="1_aohbg"]
+[ext_resource type="Script" uid="uid://pks0tfm1bus5" path="res://scripts/World/Resources/world_resource.gd" id="2_sq880"]
+
+[resource]
+script = ExtResource("2_sq880")
+player_spawn_point = Vector2(320, 288)
+map_layout = ExtResource("1_aohbg")
+metadata/_custom_type_script = "uid://pks0tfm1bus5"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://cqagoe3l62t02"]
+
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="1_yfku8"]
+[ext_resource type="Resource" uid="uid://bt8nuc4mcdljl" path="res://resources/characters/MR/Suits/Icie.tres" id="2_8s63y"]
+
+[resource]
+script = ExtResource("1_yfku8")
+item_is = 2
+suit = ExtResource("2_8s63y")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"

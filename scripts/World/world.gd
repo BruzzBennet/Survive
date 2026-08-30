@@ -9,14 +9,16 @@ var map_layout
 func _ready() -> void:
 	var bus_index = AudioServer.get_bus_index("SFX")
 	AudioServer.set_bus_mute(bus_index, false)
-	map_layout = this_level.map_layout.instantiate()
+	spawn_level(this_level)
+	# SCORE.actual = 0
+	SCORE.get_highest()
+
+func spawn_level(level_to_spawn:level):
+	map_layout = level_to_spawn.map_layout.instantiate()
 	add_child(map_layout)
 	move_child(map_layout,0)
-	SCORE.actual = 0
-	SCORE.get_highest()
 	$Transition.color = Color.BLACK
 	$Transition/AnimationPlayer.play("Fade_Out")
-	BGM.playStageMusic()
 
 func _on_death_timer_timeout() -> void:
 	SCORE.check()

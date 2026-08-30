@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://mvprhirir6in"]
+
+[ext_resource type="Script" uid="uid://b2518i8rrlh3u" path="res://scripts/Items/shop_item.gd" id="1_kmeu6"]
+[ext_resource type="Resource" uid="uid://df2nbd23piwyc" path="res://resources/items/healing_item.tres" id="2_kmeu6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajq8o"]
+bg_color = Color(0, 0, 0, 0.75000006)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_pffs2"]
+line_spacing = 0.0
+font_size = 9
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esxyk"]
+
+[node name="Item" type="Node2D" unique_id=1644609114]
+script = ExtResource("1_kmeu6")
+item = ExtResource("2_kmeu6")
+
+[node name="Sprite2D" type="Marker2D" parent="." unique_id=383816472]
+position = Vector2(0, -6)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1104734786]
+offset_left = -45.0
+offset_top = 6.0
+offset_right = 45.0
+offset_bottom = 29.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ajq8o")
+
+[node name="Label" type="Label" parent="PanelContainer" unique_id=270731792]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_pffs2")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1082529366]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=853203299]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_esxyk")
+debug_color = Color(0, 1, 0.70000815, 0.42000002)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

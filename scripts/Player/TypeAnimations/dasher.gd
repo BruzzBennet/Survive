@@ -27,35 +27,24 @@ var melee_shot_pattern
 var shot_pattern
 var idle_time = 0.0
 
+
 func _ready():
-	# print("original max_speed: " + str(max_speed))
 	if suit:
-		equip_suit(suit)
-		# print("max_speed with suit: " + str(max_speed))
+		equip_suit(GLOBAL.suit,GLOBAL.weapon)
 	else:
 		$Skeleton/Head_Back.texture = null
 		$Skeleton/Head_Front.texture = null
 		if palette:
 			$Skeleton/Sprite.set_palette(palette)
-	
-	equip_suit_type(suit)
-	# print("max_speed with equip_suit_type: " + str(max_speed))
 
-	GLOBAL.weapon=weapon
-	# print(str(self) + str(weapon.bullet_scene))
-	
-	equip_weapon(weapon, suit)
-	# print("max_speed with weapon: " + str(max_speed))
-
+	equip_weapon(GLOBAL.weapon, GLOBAL.suit)
 	screen_size = get_viewport_rect().size
 
 func equip_weapon(this_weapon:Weapon, this_suit:Suit):
+	GLOBAL.weapon=this_weapon
 	var boost_bane = 0.25
-	if this_weapon.effect:
-		$WeaponEffect.set_script(this_weapon.effect)
-		$WeaponEffect._ready()
-		boost_bane = 0.125
 	$BulletManager.setup(this_weapon,this_suit)
+	equip_suit_type(this_suit,this_weapon)
 	modifiers(this_weapon,boost_bane)
 	weapon_attack_pattern(this_weapon)
 
@@ -64,17 +53,19 @@ func weapon_attack_pattern(this_weapon:Weapon):
 		melee_shot_pattern = "no_shot"
 		shot_pattern = "four_way_shot"
 
-func equip_suit(this_suit:Suit):
-	$Skeleton/Head_Back.texture = this_suit.helmet
-	$Skeleton/Head_Front.texture = this_suit.helmet
-	GLOBAL.player_palette=this_suit.body_palette
-	$Skeleton/Sprite.set_palette(this_suit.body_palette)
-	var boost_bane = 0.25
-	if this_suit.effect:
-		$SuitEffect.set_script(this_suit.effect)
-		$SuitEffect._ready()
-		boost_bane = 0.125
-	modifiers(this_suit,boost_bane)
+func equip_suit(this_suit:Suit,this_weapon:Weapon):
+	if this_suit:
+		$Skeleton/Head_Back.texture = this_suit.helmet
+		$Skeleton/Head_Front.texture = this_suit.helmet
+		GLOBAL.player_palette=this_suit.body_palette
+		GLOBAL.suit=this_suit
+		$Skeleton/Sprite.set_palette(this_suit.body_palette)
+		var boost_bane = 0.25
+		modifiers(this_suit,boost_bane)
+	else:
+		$Skeleton/Sprite.set_palette(GLOBAL.player_palette) 
+	equip_suit_type(this_suit,this_weapon)
+	
 
 func modifiers(this_suit:Variant,boost_bane:float):
 	var speed_boost=0.0
@@ -87,11 +78,21 @@ func modifiers(this_suit:Variant,boost_bane:float):
 				this_suit.boost.speed:
 					speed_boost+=(max_speed*boost_bane)
 				this_suit.boost.ammo_saving:
+					print("checking ammo boost?")
 					ammo_boost-=boost_bane
 				this_suit.boost.defense:
 					def_boost+=(boost_bane*2)
-				this_suit.boost.melee_damage:
-					melee_boost+=(boost_bane*4)
+				this_suit.boost.effect:
+					if this_suit is Suit:
+						$SuitEffect.set_script(null)
+						$SuitEffect.set_script(this_suit.effect)
+						if this_suit.effect:
+							$SuitEffect.setup()
+					if this_suit is Weapon:
+						$WeaponEffect.set_script(null)
+						$WeaponEffect.set_script(this_suit.effect)
+						if this_suit.effect:
+							$WeaponEffect.setup()
 	
 	if this_suit.bane:
 		match this_suit.but_bane_this:
@@ -102,23 +103,23 @@ func modifiers(this_suit:Variant,boost_bane:float):
 				this_suit.bane.defense:
 					def_boost-=(boost_bane*4)
 				this_suit.bane.melee_damage:
-					melee_boost-=(boost_bane*4)
+					melee_boost-=(boost_bane*2)
 
 	max_speed+=speed_boost
 	atkUI.depletion_rate-=ammo_boost
 	$HurtBox.defense+=def_boost
 	$HitBox.attack.damage_done+=melee_boost
 
-func equip_suit_type(equipped_suit: Suit):
+func equip_suit_type(equipped_suit: Suit, this_weapon:Weapon):
 	var sprite_type
 	if equipped_suit:
 		sprite_type = "Base"
 	else:
 		sprite_type = ""
-	if weapon:
-		$Skeleton/Weapon_Back.texture = weapon.sprite
-		$Skeleton/Weapon_Front.texture = weapon.sprite
-		if weapon.weapon_type == Weapon.type.boot:
+	if this_weapon:
+		$Skeleton/Weapon_Back.texture = this_weapon.sprite
+		$Skeleton/Weapon_Front.texture = this_weapon.sprite
+		if this_weapon.weapon_type == Weapon.type.boot:
 			$Skeleton/Sprite.texture = load("res://assets/MR/BodyParts/MRDash" + sprite_type + ".png")
 	else:
 		$Skeleton/Sprite.texture = load("res://assets/MR/BodyParts/MRNormal" + sprite_type + ".png")
@@ -216,7 +217,7 @@ func dash_fx(angle, pos, dir):
 	dash.z_index = -1
 
 func player_movement(delta):
-	position = position.clamp(Vector2(margin, 0), Vector2(screen_size.x - margin, screen_size.y - margin))
+	position = position.clamp(Vector2(margin, 40), Vector2(screen_size.x - margin, screen_size.y - margin))
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if is_dodging:
 			dodge_speed = 2
@@ -224,7 +225,6 @@ func player_movement(delta):
 			dodge_speed = 1
 	if direction != Vector2.ZERO:
 		last_direction = direction
-		# print(last_direction)
 		
 	if direction != Vector2.ZERO:
 			velocity = velocity.lerp(direction * max_speed * dodge_speed, accel * delta)
@@ -288,13 +288,7 @@ func play_animation(prefix: String, dir: Vector2) -> void:
 	elif dir.x < 0:
 		anim_name = prefix + "2"
 
-	# if animated_sprite_2d != anim_name:
 	animated_sprite_2d.play(anim_name)
-
-	# if is_dodging:
-	# 	animated_sprite_2d.speed_scale = 2.0
-	# else:
-	# 	animated_sprite_2d.speed_scale = 1.0
 
 
 func walk_sfx():

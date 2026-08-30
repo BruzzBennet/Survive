@@ -1,15 +1,12 @@
 extends Node2D
 
-func _ready():
-	get_parent().get_node("HurtBox").area_entered.connect(heal)
+func setup():
+	get_parent().set_collision_mask_value(1, true)
+	var hurt_box = get_parent().get_node("HurtBox")
+
+	if !hurt_box.area_entered.is_connected(heal):
+		hurt_box.area_entered.connect(heal)
 
 func heal(body) -> void:
-	# print("it detects!")
 	if body is Healing_Item:
-		# print("original heal amount: " + str(body.heal_amount))
-		body.heal_amount+=0.5 
-		# print("new heal amount: " + str(body.heal_amount))
-		# print("detects healer!")
-		# if get_parent().get_node("HurtBox"):
-		# 	print("HurtBox exists!")
-		# get_parent().get_node("HurtBox").heals(0.5)
+		body.heal_amount += 0.5

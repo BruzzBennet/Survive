@@ -8,6 +8,9 @@ var max_enemies_pierced: int = 1
 var direction: Vector2 
 var damage_done:= 1.0
 
+func new_pierce(amount:int):
+	max_enemies_pierced=amount
+
 func _ready():
 	$HitBox.area_entered.connect(_on_area_entered)
 	add_to_group("bullet")

@@ -20,7 +20,8 @@ func _on_any_button_pressed(button: Button) -> void:
 	%Transition/AnimationPlayer.play("Fade_In")
 	PLAYSFX.start_tune()
 	await %Transition/AnimationPlayer.animation_finished
-	get_tree().change_scene_to_file("res://scenes/world.tscn")
+	BGM.playStageMusic()
+	get_tree().change_scene_to_file("res://scenes/worlds/rng_world.tscn")
 
 	# print("Button pressed: ", button.name)
 	
