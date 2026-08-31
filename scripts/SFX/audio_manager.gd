@@ -19,6 +19,7 @@ extends Node
 @onready var heal_sfx = $Heal
 @onready var equip_sfx = $Equip
 @onready var crunchyMash_sfx = $CrunchyMash
+@onready var portal_sfx = $PortalOpens
 
 func shot():
 	if not shot_sfx.is_playing():
@@ -80,6 +81,8 @@ func recover_stop():
 
 func alert():
 	if not alert_sfx.is_playing():
+		# alert_sfx.randomize()
+		alert_sfx.pitch_scale = randf_range(0.9, 1.35)
 		alert_sfx.play()
 
 func heal():
@@ -92,3 +95,7 @@ func equip():
 func crunchyMash():
 	if not crunchyMash_sfx.is_playing():
 		crunchyMash_sfx.play()
+
+func portal_opens():
+	# if not crunchyMash_sfx.is_playing():
+		portal_sfx.play()

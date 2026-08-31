@@ -27,12 +27,23 @@ var enemyCollisions = []
 var hp
 var yes_or_no_healer = 0
 signal died
+var damage_tile_location=[
+	Vector2i(2,2),
+	Vector2i(3,2),
+	Vector2i(2,3),
+	Vector2i(3,3),
+	Vector2i(2,4),
+	Vector2i(3,4),
+	Vector2i(2,2),
+	Vector2i(3,2)
+	]
 
 func _ready():
 	if takes_damage_from == attack_source.enemy:
 			set_collision_layer_value(4, true)
 			set_collision_mask_value(2, true)
 			set_collision_mask_value(3, true)
+			set_collision_mask_value(5, true)
 			health=GLOBAL.health
 	elif takes_damage_from == attack_source.player:
 			set_collision_layer_value(2, true)
@@ -99,6 +110,7 @@ func heals(amount:float):
 	if new_hp<=max_health:
 		health=new_hp
 	else:
+		health=max_health
 		SCORE.increaseBy(250)
 
 func play_flash(color:Color):
@@ -117,8 +129,12 @@ func becomes_invincible():
 	play_flash(Color.BLUE)
 	is_invincible=true
 
-func knockback(attack: Attack):
-	get_parent().velocity = (global_position - attack.position).normalized() * attack.knockback
+func knockback(attack: Variant):
+	if attack is Attack:
+		get_parent().velocity = (global_position - attack.position).normalized() * attack.knockback
+	else:
+		# if get_parent().last_direction.y>=0:
+			get_parent().velocity = -get_parent().last_direction.normalized() * 500
 	# get_parent().move_and_slide()
 
 
@@ -149,6 +165,20 @@ func damage(attack: Attack) -> void:
 					gameover()
 				get_parent().queue_free()
 
+func player_touched_poison():
+			health -= (1 - defense)
+			if gets_stunned:
+				hit_stun()	
+			# if receives_knockback:
+			# 	knockback(body.position)
+			hurt_player()
+			if dead:
+				return
+			if health <= 0:
+				dead = true
+				add_death_explosion()
+				gameover()
+				get_parent().queue_free()
 
 func add_death_explosion():
 	var fx = died_fx.instantiate()
@@ -195,9 +225,9 @@ func gameover():
 	var bus_index = AudioServer.get_bus_index("SFX")
 	AudioServer.set_bus_mute(bus_index, true)
 
-# func _on_area_entered(area):
-# 	if area.name == "HitBox":
-# 		enemyCollisions.append(area)
-
-# func _on_area_exited(area):
-# 	enemyCollisions.erase(area)
+func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	if body is TileMapLayer:
+		var layer_mask = PhysicsServer2D.body_get_collision_layer(body_rid)
+		if layer_mask & (1 << 4):
+			player_touched_poison()
+			knockback(body)

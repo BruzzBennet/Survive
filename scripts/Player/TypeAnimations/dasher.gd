@@ -78,7 +78,6 @@ func modifiers(this_suit:Variant,boost_bane:float):
 				this_suit.boost.speed:
 					speed_boost+=(max_speed*boost_bane)
 				this_suit.boost.ammo_saving:
-					print("checking ammo boost?")
 					ammo_boost-=boost_bane
 				this_suit.boost.defense:
 					def_boost+=(boost_bane*2)

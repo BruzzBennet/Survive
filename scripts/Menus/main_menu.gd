@@ -13,8 +13,9 @@ func _on_start_pressed() -> void:
 	#PLAYSFX.start_tune()
 	PLAYSFX.MenuSelect()
 	await $Transition/AnimationPlayer.animation_finished
-	get_tree().change_scene_to_file("res://scenes/EquipMenu.tscn")
-
+	# get_tree().change_scene_to_file("res://scenes/EquipMenu.tscn")
+	BGM.playStageMusic()
+	get_tree().change_scene_to_file("res://scenes/worlds/rng_world.tscn")
 
 func _on_options_pressed() -> void:
 	was_pressed=true

@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var max_lvl: int = 1
-@export var max_lvl_n = [13,31,17]
+@export var max_lvl_n = [13,31,17,9]
 # @export var starting_enemy_amount: int = 1
 var map_grid=[Vector2(0,62), 
 			Vector2(0,190),
@@ -40,22 +40,14 @@ func portal_opens():
 	portal.global_position = first_player_starting_point
 
 func next_round():
-	# map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
-	# $Map.tile_set.get_source(4).texture = map_texture
-	# transition()
-	# for section in spawn_points:
-	# 	section.queue_free()
-	# spawn_points.clear()
-	# create_map()
 	GLOBAL.current_level+=1
 	if GLOBAL.starting_enemy_amount<36:
 		GLOBAL.increase_dificulty +=0.5
 		if GLOBAL.increase_dificulty >= 1:
 			GLOBAL.starting_enemy_amount += 1
-			# print("starting enemy amount increased?")
-			# print(str(GLOBAL.starting_enemy_amount))
 			GLOBAL.increase_dificulty = 0.0
 	if GLOBAL.current_level % 7 == 0:
+		PLAYSFX.portal_opens()
 		portal_opens()	
 	else:
 		spawn(0, GLOBAL.starting_enemy_amount, [])
@@ -67,14 +59,16 @@ func transition():
 
 func create_map():
 	for grid_section in map_grid:
-		var difficulty = randi_range(0,5)
+		var difficulty = randi_range(0,(8 + GLOBAL.current_level/7))
 		var lvl
-		if difficulty < 2:
+		if difficulty < 4:
 			lvl = 0
-		elif difficulty < 4:
+		elif difficulty < 7:
 			lvl = 1
-		else:
+		elif difficulty < 9:
 			lvl = 2
+		else:
+			lvl=3
 		var lvl_n = max_lvl_n[lvl]
 		var n = randi_range(0,lvl_n)
 		var section_path="res://assets/maps/Sections/Level" + str(lvl) + "_" + str(n) + ".tscn"
@@ -112,5 +106,5 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 				spawned_already.append(spawner)
 		else:
 			print("Spawner not found")
-	if players > 0 or enemy_amount > 0:
+	if players > 0 and spawned_already.size()<9 or enemy_amount > 0 and spawned_already.size()<9:
 		spawn(players, enemy_amount, spawned_already)

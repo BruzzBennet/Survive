@@ -12,6 +12,7 @@ var min_ammo
 
 
 func setup(weapon: Weapon):
+	atk_shown.set_shader_parameter("flash_modifier", 0.0)
 	maxATK = weapon.max_ammo
 	regeneration_rate = weapon.reload_rate
 	depletion_rate = weapon.depletion_rate
@@ -22,6 +23,7 @@ func setup(weapon: Weapon):
 	set_value(startingATK)
 
 func set_value(atk: float):
+	atk_shown.set_shader_parameter("flash_modifier", 0.0)
 	#bar.value = atk
 	var percent = clamp(atk / maxATK, 0.0, 1.0)
 	atk_shown.set_shader_parameter("value", percent)

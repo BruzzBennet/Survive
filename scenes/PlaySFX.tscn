@@ -23,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://b1inkejvy6lqp" path="res://assets/audio/Alert.wav" id="21_c0j23"]
 [ext_resource type="AudioStream" uid="uid://bah3axscuvte0" path="res://assets/audio/equip.mp3" id="22_cks26"]
 [ext_resource type="AudioStream" uid="uid://ct61tixhl2jy3" path="res://assets/audio/CrunchyMash.wav" id="23_ngslh"]
+[ext_resource type="AudioStream" uid="uid://ciermrkha08fk" path="res://assets/audio/MagicalSurge.mp3" id="24_b6f54"]
 
 [node name="PlaySFX" type="Node" unique_id=68871846]
 process_mode = 3
@@ -119,7 +120,7 @@ stream = ExtResource("20_josl6")
 
 [node name="Alert" type="AudioStreamPlayer2D" parent="." unique_id=130881046]
 stream = ExtResource("21_c0j23")
-volume_db = -5.0
+volume_db = -15.0
 pitch_scale = 1.35
 
 [node name="Heal" type="AudioStreamPlayer2D" parent="." unique_id=1893224763]
@@ -133,3 +134,7 @@ volume_db = 5.0
 
 [node name="CrunchyMash" type="AudioStreamPlayer2D" parent="." unique_id=1365517175]
 stream = ExtResource("23_ngslh")
+
+[node name="PortalOpens" type="AudioStreamPlayer2D" parent="." unique_id=2018122995]
+stream = ExtResource("24_b6f54")
+volume_db = 3.5

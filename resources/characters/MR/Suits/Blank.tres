@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Suit" format=3 uid="uid://d0r0dsaa31kq5"]
+
+[ext_resource type="Resource" uid="uid://cgmafrinwcw2i" path="res://resources/characters/MR/palettes/black.tres" id="1_cfolp"]
+[ext_resource type="Texture2D" uid="uid://bbqbpqp0etgao" path="res://assets/MR/BodyParts/Helmets/Helmet_Blank.png" id="2_rtphm"]
+[ext_resource type="Script" uid="uid://dk6b8jpr26pj2" path="res://scripts/Components/Weapons/Suit.gd" id="3_680xj"]
+
+[resource]
+script = ExtResource("3_680xj")
+helmet = ExtResource("2_rtphm")
+body_palette = ExtResource("1_cfolp")
+name = "Blank_Suit"
+boost_this = 1
+metadata/_custom_type_script = "uid://dk6b8jpr26pj2"

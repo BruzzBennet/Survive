@@ -7,7 +7,8 @@ extends Control
 func _ready():
  set_value(GLOBAL.health, false)
 
-func set_value(hp: float, spawned=true):
+func set_value(hp: float, spawned=true): 
+ hp_shown.set_shader_parameter("flash_modifier", 0.0)
  
  if hp<GLOBAL.health:
   flash(Color.RED)
@@ -17,7 +18,8 @@ func set_value(hp: float, spawned=true):
    PLAYSFX.heal()
    flash(Color.GREEN)
 
- GLOBAL.health=hp
+ if hp<=max_hp:
+  GLOBAL.health=hp
  var percent = clamp(GLOBAL.health / max_hp, 0.0, 1.0)
  hp_shown.set_shader_parameter("value", percent)
  if hp > 2:
