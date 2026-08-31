@@ -104,10 +104,10 @@ func modifiers(this_suit:Variant,boost_bane:float):
 				this_suit.bane.melee_damage:
 					melee_boost-=(boost_bane*2)
 
-	max_speed+=speed_boost
-	atkUI.depletion_rate-=ammo_boost
-	$HurtBox.defense+=def_boost
-	$HitBox.attack.damage_done+=melee_boost
+	max_speed=GLOBAL.max_speed+speed_boost
+	atkUI.depletion_rate= GLOBAL.ammo+ammo_boost
+	$HurtBox.defense=GLOBAL.defense+def_boost
+	$HitBox.attack.damage_done=GLOBAL.melee_damage+melee_boost
 
 func equip_suit_type(equipped_suit: Suit, this_weapon:Weapon):
 	var sprite_type

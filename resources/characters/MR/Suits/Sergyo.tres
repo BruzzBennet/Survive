@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Suit" format=3 uid="uid://xu0m4a1mvh7p"]
+
+[ext_resource type="Resource" uid="uid://decanu1a0hm3i" path="res://resources/characters/MR/palettes/silver.tres" id="1_vvygo"]
+[ext_resource type="Texture2D" uid="uid://cdvna1lu7nk8l" path="res://assets/MR/BodyParts/Helmets/Helmet_Sergyo.png" id="2_wpncp"]
+[ext_resource type="Script" uid="uid://dk6b8jpr26pj2" path="res://scripts/Components/Weapons/Suit.gd" id="3_bkvn4"]
+
+[resource]
+script = ExtResource("3_bkvn4")
+helmet = ExtResource("2_wpncp")
+body_palette = ExtResource("1_vvygo")
+name = "Helmetless"
+boost_this = 1
+metadata/_custom_type_script = "uid://dk6b8jpr26pj2"

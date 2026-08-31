@@ -56,7 +56,7 @@ func regenerate(delta) -> void:
 func regenerate_more(delta) -> void:
 	if currentATK < maxATK:
 		flash(Color.GREEN)
-	currentATK += regeneration_rate * 1.5 * delta
+	currentATK += regeneration_rate * 2 * delta
 	currentATK = min(currentATK, maxATK)
 	set_value(currentATK)
 
