@@ -68,12 +68,12 @@ func spawn_player():
 
 	var hp = hp_to_spawn.instantiate()
 	get_tree().current_scene.add_child(hp)
-	# hp.set_value(GLOBAL.health)
+	hp.set_value(GLOBAL.health, false)
 	hp.position = Vector2(305, 2)
 	
-	var stamina = stamina_to_spawn.instantiate()
-	get_tree().current_scene.add_child(stamina)
-	stamina.position = Vector2(340, 2)
+	# var stamina = stamina_to_spawn.instantiate()
+	# get_tree().current_scene.add_child(stamina)
+	# stamina.position = Vector2(340, 2)
 
 	var player = spawn_this_player.instantiate()
 	get_tree().current_scene.add_child(player)

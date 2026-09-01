@@ -1,15 +1,13 @@
-extends Area2D
+extends CharacterBody2D
 class_name Healing_Item
 
-var idle:float=0.0
-var heal_amount:=1.0	
+# var idle=0.0
+# @onready var timer = get_parent().get_node("Timer")
 
-# func _process(delta: float) -> void:
-# 	idle+=delta
-# 	if idle>=5.0:
+# func _on_area_entered(body) -> void:
+# 	if body is HurtBox_Component: 
+# 		timer.start()
+# 		await timer.timeout
 # 		get_parent().queue_free()
 
-func _on_area_entered(body) -> void:
-	if body is HurtBox_Component: 
-		await body.heals(heal_amount)
-		get_parent().queue_free()
+		

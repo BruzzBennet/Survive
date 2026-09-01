@@ -35,7 +35,7 @@ height = 28.0
 
 [node name="Opozzap" type="CharacterBody2D" unique_id=1661657961]
 collision_layer = 2
-collision_mask = 9
+collision_mask = 11
 motion_mode = 1
 script = ExtResource("1_1p6mm")
 pozzap_to_summon = ExtResource("4_3yju3")

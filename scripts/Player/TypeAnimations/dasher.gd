@@ -12,7 +12,7 @@ var dodge_min: float = 5.0
 @export var footstep_frames: Array[int] = [0, 1]
 @export var attack_frames: Array[int]
 @onready var animated_sprite_2d = %AnimationPlayer2D
-@onready var dodgeUI = get_tree().current_scene.get_node("Dodge")
+# @onready var dodgeUI = get_tree().current_scene.get_node("Dodge")
 @onready var atkUI = get_tree().current_scene.get_node("ATK")
 const margin = 12
 var last_direction = Vector2.DOWN
@@ -37,12 +37,13 @@ func _ready():
 		if palette:
 			$Skeleton/Sprite.set_palette(palette)
 
-	equip_weapon(GLOBAL.weapon, GLOBAL.suit)
+	# equip_weapon(GLOBAL.weapon, GLOBAL.suit)
 	screen_size = get_viewport_rect().size
 
 func equip_weapon(this_weapon:Weapon, this_suit:Suit):
-	GLOBAL.weapon=this_weapon
 	var boost_bane = 0.25
+	modifiers(GLOBAL.weapon,boost_bane,-1)
+	GLOBAL.weapon=this_weapon
 	$BulletManager.setup(this_weapon,this_suit)
 	equip_suit_type(this_suit,this_weapon)
 	modifiers(this_weapon,boost_bane)
@@ -55,23 +56,25 @@ func weapon_attack_pattern(this_weapon:Weapon):
 
 func equip_suit(this_suit:Suit,this_weapon:Weapon):
 	if this_suit:
+		var boost_bane = 0.25
+		modifiers(GLOBAL.suit,boost_bane,-1)
 		$Skeleton/Head_Back.texture = this_suit.helmet
 		$Skeleton/Head_Front.texture = this_suit.helmet
 		GLOBAL.player_palette=this_suit.body_palette
 		GLOBAL.suit=this_suit
 		$Skeleton/Sprite.set_palette(this_suit.body_palette)
-		var boost_bane = 0.25
 		modifiers(this_suit,boost_bane)
 	else:
 		$Skeleton/Sprite.set_palette(GLOBAL.player_palette) 
 	equip_suit_type(this_suit,this_weapon)
 	
 
-func modifiers(this_suit:Variant,boost_bane:float):
+func modifiers(this_suit:Variant,boost_bane:float,increase_by:int=1):
 	var speed_boost=0.0
 	var ammo_boost=0.0
 	var def_boost=0.0
-	var melee_boost=0.0
+	var melee_boost=0.04
+	boost_bane=boost_bane*increase_by
 	
 	if this_suit.boost:
 		match this_suit.boost_this:
@@ -84,14 +87,25 @@ func modifiers(this_suit:Variant,boost_bane:float):
 				this_suit.boost.effect:
 					if this_suit is Suit:
 						$SuitEffect.set_script(null)
-						$SuitEffect.set_script(this_suit.effect)
-						if this_suit.effect:
-							$SuitEffect.setup()
-					if this_suit is Weapon:
+						if increase_by>0:
+							$SuitEffect.set_script(this_suit.effect)
+							if this_suit.effect:
+								$SuitEffect.setup()
+								print("set up in suit!")
+					elif this_suit is Weapon:
 						$WeaponEffect.set_script(null)
-						$WeaponEffect.set_script(this_suit.effect)
-						if this_suit.effect:
-							$WeaponEffect.setup()
+						if increase_by>0:
+							$WeaponEffect.set_script(this_suit.effect)
+							if this_suit.effect:
+								$WeaponEffect.setup()
+								# print(
+								# 	"set up in weapon! | increase_by: ",
+								# 	increase_by,
+								# 	" | weapon: ",
+								# 	this_suit,
+								# 	" | caller stack:"
+								# )
+								# print_stack()
 	
 	if this_suit.bane:
 		match this_suit.but_bane_this:
@@ -104,10 +118,10 @@ func modifiers(this_suit:Variant,boost_bane:float):
 				this_suit.bane.melee_damage:
 					melee_boost-=(boost_bane*2)
 
-	max_speed=GLOBAL.max_speed+speed_boost
-	atkUI.depletion_rate= GLOBAL.ammo+ammo_boost
-	$HurtBox.defense=GLOBAL.defense+def_boost
-	$HitBox.attack.damage_done=GLOBAL.melee_damage+melee_boost
+	max_speed=GLOBAL.max_speed+speed_boost*increase_by
+	atkUI.depletion_rate= GLOBAL.ammo+ammo_boost*increase_by
+	$HurtBox.defense=GLOBAL.defense+def_boost*increase_by
+	$HitBox.attack.damage_done=GLOBAL.melee_damage+melee_boost*increase_by
 
 func equip_suit_type(equipped_suit: Suit, this_weapon:Weapon):
 	var sprite_type
@@ -127,16 +141,14 @@ func _physics_process(delta: float) -> void:
 	healingATK(delta)
 	walk_sfx()
 	player_movement(delta)
-	dodge(delta)
 	if Input.is_action_pressed("attack"):
 		attack()
 	if Input.is_action_pressed("shoot"):
 		shoot()
-	if dodgeUI:
-		if !can_dodge and dodgeUI.currentDodge >= dodge_min:
-			can_dodge = true
 	if !can_hit and atkUI.currentATK >= atkUI.min_ammo:
 		can_hit = true
+	if !is_attacking:
+		$HurtBox.no_longer_invincible()
 
 func attack():
 	is_attacking = true
@@ -159,7 +171,7 @@ func Short_Range_Attack():
 		if weapon.weapon_type == Weapon.type.boot:
 			$HurtBox.becomes_invincible()
 	else:
-		$HurtBox.is_invincible = false
+		$HurtBox.no_longer_invincible()
 
 func shoot():
 	atkUI.reduce()
@@ -188,20 +200,20 @@ func tired():
 	$HurtBox.is_tired()
 	atkUI.flash(Color.RED)
 
-func dodge(delta):
-	if last_direction != Vector2.ZERO and Input.is_action_just_pressed("dash") and can_dodge:
-		dash_fx(last_direction.angle(), position, last_direction)
-		PLAYSFX.dash()
-	if last_direction != Vector2.ZERO and Input.is_action_pressed("dash") and can_dodge:
-		is_dodging = true
-		$HurtBox.becomes_invincible()
-		dodgeUI.reduce(delta)
-	else:
-		$HurtBox.is_invincible = false
-		is_dodging = false
-	if dodgeUI.currentDodge <= 0:
-		can_dodge = false
-		dodgeUI.flash(Color.RED)
+# func dodge(delta):
+# 	if last_direction != Vector2.ZERO and Input.is_action_just_pressed("dash") and can_dodge:
+# 		dash_fx(last_direction.angle(), position, last_direction)
+# 		PLAYSFX.dash()
+# 	if last_direction != Vector2.ZERO and Input.is_action_pressed("dash") and can_dodge:
+# 		is_dodging = true
+# 		$HurtBox.becomes_invincible()
+# 		# dodgeUI.reduce(delta)
+# 	else:
+# 		$HurtBox.is_invincible = false
+# 		is_dodging = false
+# 	if dodgeUI.currentDodge <= 0:
+# 		can_dodge = false
+# 		dodgeUI.flash(Color.RED)
 
 func dash_fx(angle, pos, dir):
 	var dash_scene = preload("res://scenes/dashparticles.tscn")
@@ -234,7 +246,8 @@ func player_movement(delta):
 
 
 func healingATK(delta):
-	if atkUI.currentATK < atkUI.maxATK or dodgeUI.currentDodge < dodgeUI.maxDodge:
+	# if atkUI.currentATK < atkUI.maxATK or dodgeUI.currentDodge < dodgeUI.maxDodge:
+	if atkUI.currentATK < atkUI.maxATK:
 		var idle = animated_sprite_2d.current_animation in [
 		"Idle_0",
 		"Idle_1",
@@ -254,7 +267,7 @@ func recovering(delta):
 	idle_time += delta
 	if idle_time >=1:
 		atkUI.regenerate_more(delta)
-		dodgeUI.regenerate_more(delta)
+		# dodgeUI.regenerate_more(delta)
 		PLAYSFX.recover()
 		$HurtBox.play_flash(Color.GREEN)
 	else:

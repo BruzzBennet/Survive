@@ -89,7 +89,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [Vector2(-10, 4), Vector2(-10, 2), Vector2(-10, 4)]
+"values": [Vector2(-9, 3), Vector2(-9, 2), Vector2(-9, 4)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -98,10 +98,10 @@ tracks/6/path = NodePath("HitBox/CollisionShape2D:shape:height")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [14.0]
+"values": [18.0, 18.0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -110,10 +110,10 @@ tracks/7/path = NodePath("HitBox/CollisionShape2D:shape:radius")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [6.0]
+"values": [6.0, 6.0]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
@@ -239,7 +239,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [14.0]
+"values": [16.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -251,7 +251,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(-15, 5), Vector2(-15, 3), Vector2(-15, 3), Vector2(-15, 5)]
+"values": [Vector2(-15, 6), Vector2(-15, 4), Vector2(-15, 4), Vector2(-15, 6)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -389,7 +389,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(-19, 4), Vector2(-19, 2), Vector2(-19, 2), Vector2(-19, 3)]
+"values": [Vector2(-21, 4), Vector2(-20, 2), Vector2(-20, 2), Vector2(-19, 3)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -401,7 +401,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [14.0]
+"values": [18.0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -539,7 +539,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [14.0]
+"values": [16.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -724,6 +724,30 @@ tracks/8/keys = {
 "update": 0,
 "values": [22.0]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("HitBox/CollisionShape2D:shape:radius")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [6.0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("HitBox/CollisionShape2D:shape:height")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [18.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k4wci"]
 _data = {
@@ -744,7 +768,7 @@ metadata/_custom_type_script = "uid://doj80p0chh8d7"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6eesj"]
 radius = 6.0
-height = 14.0
+height = 18.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r6aag"]
 radius = 6.0
@@ -794,6 +818,7 @@ position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_r6aag")
 
 [node name="FollowBox" parent="." unique_id=665233923 instance=ExtResource("7_ec30e")]
+visible = false
 follow_sfx = ExtResource("8_6uv0u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FollowBox" unique_id=405793208]

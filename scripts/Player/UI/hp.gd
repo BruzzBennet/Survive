@@ -1,10 +1,11 @@
 extends Control
 
-@export var max_hp: float = 3.0
+@onready var max_hp:float = 4.0
 @onready var healthbar = %HPBar
 @onready var hp_shown := healthbar.material as ShaderMaterial
 
 func _ready():
+ edit_max_hp(max_hp)
  set_value(GLOBAL.health, false)
 
 func set_value(hp: float, spawned=true): 
@@ -18,8 +19,9 @@ func set_value(hp: float, spawned=true):
    PLAYSFX.heal()
    flash(Color.GREEN)
 
- if hp<=max_hp:
-  GLOBAL.health=hp
+ GLOBAL.health=hp
+ GLOBAL.health=clamp(GLOBAL.health,0,max_hp)
+
  var percent = clamp(GLOBAL.health / max_hp, 0.0, 1.0)
  hp_shown.set_shader_parameter("value", percent)
  if hp > 2:

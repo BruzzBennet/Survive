@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cw6cd3flyltnt"]
+
+[ext_resource type="Script" uid="uid://hi1uwbq7jn6u" path="res://scripts/Boxes/takes_poison_tile_damage.gd" id="1_up8gj"]
+
+[node name="Damage_from_Poision_Tile" type="Area2D" unique_id=309937513]
+script = ExtResource("1_up8gj")
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

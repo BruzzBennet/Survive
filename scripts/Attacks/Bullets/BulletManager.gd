@@ -18,12 +18,14 @@ func setup(bullet:Weapon, boost:Suit):
 	time_on_field = weapon.bullet_time_on_field
 	durability = weapon.enemies_bullet_pierces
 	shot_type=weapon.shot_type
+	modifiers(GLOBAL.weapon,-1)
 	modifiers(bullet)
 	if boost:
+		modifiers(GLOBAL.suit,-1)
 		modifiers(boost)
 
-func modifiers(this_suit:Variant):
-	var boost_bane = 0.25
+func modifiers(this_suit:Variant,increase_by:int=1):
+	var boost_bane = 0.25*increase_by
 	var reach_boost=0.0
 	var damage_boost=0.0
 	

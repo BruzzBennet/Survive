@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var max_lvl: int = 1
-@export var max_lvl_n = [13,31,17,9]
+@export var max_lvl_n = [13,31,17,18]
 # @export var starting_enemy_amount: int = 1
 var map_grid=[Vector2(0,62), 
 			Vector2(0,190),
@@ -26,6 +26,7 @@ var tile_maps =[
 		]
 var enemy_difficulty:= 1
 var first_player_starting_point
+var current_level=0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,13 +41,13 @@ func portal_opens():
 	portal.global_position = first_player_starting_point
 
 func next_round():
-	GLOBAL.current_level+=1
+	current_level+=1
 	if GLOBAL.starting_enemy_amount<36:
 		GLOBAL.increase_dificulty +=0.5
 		if GLOBAL.increase_dificulty >= 1:
 			GLOBAL.starting_enemy_amount += 1
 			GLOBAL.increase_dificulty = 0.0
-	if GLOBAL.current_level % 7 == 0:
+	if current_level % 3 == 0:
 		PLAYSFX.portal_opens()
 		portal_opens()	
 	else:

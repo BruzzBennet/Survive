@@ -27,6 +27,6 @@ emission_shape = 1
 emission_sphere_radius = 6.0
 gravity = Vector2(0, -64)
 scale_amount_max = 2.0
-color = Color(0.735357, 1, 1, 1)
+color = Color(0.5370987, 1, 1, 1)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

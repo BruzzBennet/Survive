@@ -10,6 +10,7 @@ var shared_material: ShaderMaterial
 @export var receives_knockback: bool = false
 @export var gets_stunned: bool = false
 var defense:= 0.0
+var extra_heal=0.0
 
 enum attack_source {
 	player,
@@ -40,6 +41,7 @@ var damage_tile_location=[
 
 func _ready():
 	if takes_damage_from == attack_source.enemy:
+			print(str(extra_heal))
 			set_collision_layer_value(4, true)
 			set_collision_mask_value(2, true)
 			set_collision_mask_value(3, true)
@@ -65,10 +67,10 @@ func _ready():
 		sprite.material = sprite.material.duplicate()
 		sprite.material.set_shader_parameter("flash_modifier", 0)
 
-func _physics_process(_delta):
-	if !is_hurt:
-		for enemyArea in enemyCollisions:
-			hurt_player()
+# func _physics_process(_delta):
+# 	if !is_hurt:
+# 		for enemyArea in enemyCollisions:
+# 			hurt_player()
 
 
 func flash_action(sprite_to_flash):
@@ -80,7 +82,7 @@ func flash_action(sprite_to_flash):
 		sprite_to_flash.material,
 		"shader_parameter/flash_modifier",
 		0.0,
-		1
+		1.5
 	)
 
 func change_color(character,color:Color):
@@ -103,9 +105,10 @@ func cancel_flash():
 			if piece is Sprite2D:
 				piece.material.set_shader_parameter("flash_modifier", 0.0)
 
-func heals(amount:float):
+func heals():
 	play_flash(Color.GREEN)
-	var new_hp = health+amount
+	var new_hp = health+1+extra_heal
+	print("extra heal:" + str(extra_heal))
 	hp.set_value(new_hp)
 	if new_hp<=max_health:
 		health=new_hp
@@ -128,6 +131,9 @@ func becomes_invincible():
 	cancel_flash()
 	play_flash(Color.BLUE)
 	is_invincible=true
+
+func no_longer_invincible():
+	is_invincible=false
 
 func knockback(attack: Variant):
 	if attack is Attack:
@@ -195,9 +201,11 @@ func hurt_player():
 
 func hit_stun():
 	is_hurt = true
+	print("is hurt!")
 	hurt_time.start()
 	await hurt_time.timeout
 	is_hurt = false
+	print("can be hurt again!")
 
 func hurt_enemy():
 	PLAYSFX.hurt()
@@ -225,9 +233,8 @@ func gameover():
 	var bus_index = AudioServer.get_bus_index("SFX")
 	AudioServer.set_bus_mute(bus_index, true)
 
-func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	if body is TileMapLayer:
-		var layer_mask = PhysicsServer2D.body_get_collision_layer(body_rid)
-		if layer_mask & (1 << 4):
-			player_touched_poison()
-			knockback(body)
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is Healing_Item:
+		await heals()
+		body.queue_free()
