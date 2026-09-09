@@ -1,0 +1,179 @@
+[gd_scene format=3 uid="uid://15e181ogowwd"]
+
+[ext_resource type="Script" uid="uid://bxq5krfknir3p" path="res://scripts/Enemies/bombry.gd" id="1_q7ugj"]
+[ext_resource type="PackedScene" uid="uid://ffrii0cvnsbc" path="res://scenes/enemies/enemy_movement.tscn" id="1_wkfc6"]
+[ext_resource type="PackedScene" uid="uid://bebyjivuy8kc1" path="res://scenes/boxes/followbox.tscn" id="2_3aiav"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="3_q7ugj"]
+[ext_resource type="Texture2D" uid="uid://ckfyunyxos0bh" path="res://assets/Enemies/Bombry.png" id="4_0kfug"]
+[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="5_0kfug"]
+[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="5_ros7y"]
+[ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="6_0kfug"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eb7jf"]
+radius = 96.0
+
+[sub_resource type="Resource" id="Resource_ros7y"]
+script = ExtResource("5_0kfug")
+damage_done = 2.0
+source = 1
+metadata/_custom_type_script = "uid://doj80p0chh8d7"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_df0fb"]
+radius = 18.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ros7y"]
+shader = ExtResource("6_0kfug")
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_vfq0v"]
+resource_name = "0"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_i0e0g"]
+resource_name = "1"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_q7afn"]
+resource_name = "2"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_aejcd"]
+resource_name = "3"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_lgeaq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pqtu3"]
+_data = {
+&"0": SubResource("Animation_vfq0v"),
+&"1": SubResource("Animation_i0e0g"),
+&"2": SubResource("Animation_q7afn"),
+&"3": SubResource("Animation_aejcd"),
+&"RESET": SubResource("Animation_lgeaq")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b6yx7"]
+radius = 7.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0kfug"]
+size = Vector2(14, 8)
+
+[node name="Bombry" type="CharacterBody2D" unique_id=1335751659]
+collision_layer = 2
+collision_mask = 11
+motion_mode = 1
+script = ExtResource("1_q7ugj")
+
+[node name="EnemyMovement" parent="." unique_id=1062153470 instance=ExtResource("1_wkfc6")]
+speed = 90.0
+
+[node name="FollowBox" parent="." unique_id=665233923 instance=ExtResource("2_3aiav")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FollowBox" unique_id=1602232753]
+shape = SubResource("CircleShape2D_eb7jf")
+debug_color = Color(1, 1, 0, 0.42000002)
+
+[node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("3_q7ugj")]
+attack = SubResource("Resource_ros7y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1676579324]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_df0fb")
+debug_color = Color(1, 0, 0, 0.42000002)
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1348130334]
+material = SubResource("ShaderMaterial_ros7y")
+texture = ExtResource("4_0kfug")
+hframes = 4
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1120120117]
+libraries/ = SubResource("AnimationLibrary_pqtu3")
+
+[node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("5_ros7y")]
+collision_layer = 2
+collision_mask = 8
+score_value = 100
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=924731486]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_b6yx7")
+debug_color = Color(0, 0.60038817, 0, 0.42000002)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=597351521]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_0kfug")
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]

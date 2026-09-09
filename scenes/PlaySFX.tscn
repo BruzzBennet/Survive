@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://bah3axscuvte0" path="res://assets/audio/equip.mp3" id="22_cks26"]
 [ext_resource type="AudioStream" uid="uid://ct61tixhl2jy3" path="res://assets/audio/CrunchyMash.wav" id="23_ngslh"]
 [ext_resource type="AudioStream" uid="uid://ciermrkha08fk" path="res://assets/audio/MagicalSurge.mp3" id="24_b6f54"]
+[ext_resource type="AudioStream" uid="uid://g2flnmnf067q" path="res://assets/audio/Pick Coin.wav" id="25_obbcd"]
 
 [node name="PlaySFX" type="Node" unique_id=68871846]
 process_mode = 3
@@ -138,3 +139,6 @@ stream = ExtResource("23_ngslh")
 [node name="PortalOpens" type="AudioStreamPlayer2D" parent="." unique_id=2018122995]
 stream = ExtResource("24_b6f54")
 volume_db = 3.5
+
+[node name="Coin" type="AudioStreamPlayer2D" parent="." unique_id=1397326816]
+stream = ExtResource("25_obbcd")

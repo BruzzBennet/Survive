@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cd8rr6cux2g02"]
+
+[ext_resource type="Script" uid="uid://c4i6f2o26m6ee" path="res://scripts/Items/coin.gd" id="1_t11da"]
+[ext_resource type="Texture2D" uid="uid://cemtq8vuyl25t" path="res://assets/items/Coin1.png" id="2_e764u"]
+[ext_resource type="Texture2D" uid="uid://dk6xo04pg4y10" path="res://assets/items/Coin2.png" id="3_weiq1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5cp4d"]
+radius = 12.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b82bw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_e764u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_weiq1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Coin" type="CharacterBody2D" unique_id=602996005]
+position = Vector2(1, -1)
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_t11da")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1429405274]
+shape = SubResource("CircleShape2D_5cp4d")
+debug_color = Color(1, 0, 0.70000815, 0.42000002)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=715652895]
+sprite_frames = SubResource("SpriteFrames_b82bw")
+frame_progress = 0.65552056
+
+[node name="Area2D" type="Area2D" parent="." unique_id=966543952]
+collision_mask = 9
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=1247786213]
+shape = SubResource("CircleShape2D_5cp4d")
+debug_color = Color(1, 0, 0.70000815, 0.42000002)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

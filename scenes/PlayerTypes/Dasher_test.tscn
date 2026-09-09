@@ -1,28 +1,27 @@
-[gd_scene format=3 uid="uid://d1f5mv123yrhj"]
+[gd_scene format=3 uid="uid://bbeq51ryfxbxa"]
 
-[ext_resource type="Script" uid="uid://bw34c428d43uu" path="res://scripts/Player/TypeAnimations/dasher.gd" id="1_m8apo"]
-[ext_resource type="Texture2D" uid="uid://ddps1u5bhw5fe" path="res://assets/Weapons/Boots/Boot_1.png" id="1_vnhk6"]
-[ext_resource type="PackedScene" uid="uid://2e7a6m6g18hl" path="res://scenes/bullet.tscn" id="2_lmgta"]
-[ext_resource type="Resource" uid="uid://dg74d284s0b7e" path="res://resources/characters/Weapons/Boots/1_boot.tres" id="2_t2guo"]
-[ext_resource type="Texture2D" uid="uid://cjlc00tcuntch" path="res://assets/MR/BodyParts/MRDashBase.png" id="3_sjba3"]
-[ext_resource type="Script" uid="uid://bj0e5pun6w7gk" path="res://scripts/Player/shading.gd" id="4_553x6"]
-[ext_resource type="PackedScene" uid="uid://cw6cd3flyltnt" path="res://scenes/boxes/damage_from_poision_tile.tscn" id="4_txggv"]
-[ext_resource type="Texture2D" uid="uid://de7uv4o2xx5dg" path="res://scenes/palette_red.png" id="5_33f0w"]
-[ext_resource type="Shader" uid="uid://bivbni0u3mi5d" path="res://shaders/palette_changer_and_hurt.gdshader" id="5_yjc1k"]
-[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="6_33f0w"]
-[ext_resource type="Texture2D" uid="uid://dwwxljqniuq2q" path="res://assets/MR/BodyParts/Helmets/Helmet_MROG.png" id="6_yjc1k"]
-[ext_resource type="Texture2D" uid="uid://dxddbd3vkpdtx" path="res://assets/palettes/MonRanger/palette_yellow.png" id="7_lmgta"]
-[ext_resource type="Resource" uid="uid://dv3yq4k8v8kyj" path="res://resources/characters/MR/palettes/green.tres" id="9_u33sq"]
-[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="13_t2guo"]
-[ext_resource type="Resource" uid="uid://c52eksclkoven" path="res://resources/characters/MR/Attacks/2damage1knockback.tres" id="14_txggv"]
+[ext_resource type="Script" uid="uid://bw34c428d43uu" path="res://scripts/Player/TypeAnimations/dasher.gd" id="1_yerjg"]
+[ext_resource type="Resource" uid="uid://dg74d284s0b7e" path="res://resources/characters/Weapons/Boots/1_boot.tres" id="2_g8bmx"]
+[ext_resource type="PackedScene" uid="uid://cw6cd3flyltnt" path="res://scenes/boxes/damage_from_poision_tile.tscn" id="3_husju"]
+[ext_resource type="Texture2D" uid="uid://ddps1u5bhw5fe" path="res://assets/Weapons/Boots/Boot_1.png" id="4_15rl1"]
+[ext_resource type="Texture2D" uid="uid://dwwxljqniuq2q" path="res://assets/MR/BodyParts/Helmets/Helmet_MROG.png" id="5_nu5ej"]
+[ext_resource type="Shader" uid="uid://bivbni0u3mi5d" path="res://shaders/palette_changer_and_hurt.gdshader" id="6_cb82a"]
+[ext_resource type="Texture2D" uid="uid://de7uv4o2xx5dg" path="res://scenes/palette_red.png" id="7_jsgsd"]
+[ext_resource type="Texture2D" uid="uid://dxddbd3vkpdtx" path="res://assets/palettes/MonRanger/palette_yellow.png" id="8_hln5p"]
+[ext_resource type="Texture2D" uid="uid://cjlc00tcuntch" path="res://assets/MR/BodyParts/MRDashBase.png" id="9_hgiiy"]
+[ext_resource type="Script" uid="uid://bj0e5pun6w7gk" path="res://scripts/Player/shading.gd" id="10_juk8b"]
+[ext_resource type="Resource" uid="uid://dv3yq4k8v8kyj" path="res://resources/characters/MR/palettes/green.tres" id="11_vfvf5"]
+[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="12_8b45u"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="13_npmjc"]
+[ext_resource type="Resource" uid="uid://c52eksclkoven" path="res://resources/characters/MR/Attacks/2damage1knockback.tres" id="14_58oao"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yjc1k"]
 size = Vector2(9, 10)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yjc1k"]
-shader = ExtResource("5_yjc1k")
-shader_parameter/palette_from = ExtResource("5_33f0w")
-shader_parameter/palette_to = ExtResource("7_lmgta")
+shader = ExtResource("6_cb82a")
+shader_parameter/palette_from = ExtResource("7_jsgsd")
+shader_parameter/palette_to = ExtResource("8_hln5p")
 shader_parameter/palette_size = 7
 shader_parameter/tolerance = 0.01
 shader_parameter/flash_modifier = 0.0
@@ -4880,15 +4879,12 @@ height = 36.0
 position = Vector2(-1, 2)
 collision_layer = 8
 collision_mask = 3
-script = ExtResource("1_m8apo")
-weapon = ExtResource("2_t2guo")
+script = ExtResource("1_yerjg")
+weapon = ExtResource("2_g8bmx")
 footstep_frames = Array[int]([0, 1, 2, 3, 5, 7, 9, 11, 13, 15, 17, 19])
 attack_frames = Array[int]([20, 23])
 
-[node name="BulletManager" parent="." unique_id=1570605682 instance=ExtResource("2_lmgta")]
-weapon = null
-
-[node name="Damage_from_Poision_Tile" parent="." unique_id=309937513 instance=ExtResource("4_txggv")]
+[node name="Damage_from_Poision_Tile" parent="." unique_id=309937513 instance=ExtResource("3_husju")]
 position = Vector2(2, 0)
 collision_layer = 8
 collision_mask = 23
@@ -4910,35 +4906,35 @@ clip_children = 2
 [node name="Weapon_Back" type="Sprite2D" parent="Skeleton" unique_id=1709505806]
 visible = false
 position = Vector2(-3, 7)
-texture = ExtResource("1_vnhk6")
+texture = ExtResource("4_15rl1")
 hframes = 6
 frame = 3
 
 [node name="Head_Back" type="Sprite2D" parent="Skeleton" unique_id=709854751]
 visible = false
 position = Vector2(0, -4)
-texture = ExtResource("6_yjc1k")
+texture = ExtResource("5_nu5ej")
 hframes = 4
 frame = 3
 
 [node name="Sprite" type="Sprite2D" parent="Skeleton" unique_id=2109886587]
 material = SubResource("ShaderMaterial_yjc1k")
-texture = ExtResource("3_sjba3")
+texture = ExtResource("9_hgiiy")
 hframes = 4
 vframes = 6
 frame = 1
-script = ExtResource("4_553x6")
-color = ExtResource("9_u33sq")
+script = ExtResource("10_juk8b")
+color = ExtResource("11_vfvf5")
 
 [node name="Head_Front" type="Sprite2D" parent="Skeleton" unique_id=2004407693]
 position = Vector2(1, -4)
-texture = ExtResource("6_yjc1k")
+texture = ExtResource("5_nu5ej")
 hframes = 4
 frame = 1
 
 [node name="Weapon_Front" type="Sprite2D" parent="Skeleton" unique_id=608860788]
 position = Vector2(-1, 8)
-texture = ExtResource("1_vnhk6")
+texture = ExtResource("4_15rl1")
 hframes = 6
 frame = 1
 
@@ -4946,10 +4942,10 @@ frame = 1
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_tjlm8")
 
-[node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("6_33f0w")]
+[node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("12_8b45u")]
 collision_layer = 0
 collision_mask = 3
-max_health = 4
+max_health = 3
 takes_damage_from = 1
 receives_knockback = true
 gets_stunned = true
@@ -4958,21 +4954,13 @@ gets_stunned = true
 shape = SubResource("CapsuleShape2D_pdgpv")
 debug_color = Color(0, 0.60038817, 0, 0.42000002)
 
-[node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("13_t2guo")]
+[node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("13_npmjc")]
 collision_layer = 8
 collision_mask = 6
 monitorable = false
-attack = ExtResource("14_txggv")
+attack = ExtResource("14_58oao")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1097395801]
 position = Vector2(0, -1)
 shape = SubResource("CapsuleShape2D_t2guo")
 debug_color = Color(1, 0, 0, 0.42000002)
-
-[node name="AttackAnimationTimer" type="Timer" parent="." unique_id=1701234945]
-wait_time = 0.2
-one_shot = true
-
-[node name="WeaponEffect" type="Node2D" parent="." unique_id=373212495]
-
-[node name="SuitEffect" type="Node2D" parent="." unique_id=2021726517]

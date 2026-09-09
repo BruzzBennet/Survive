@@ -1,22 +1,16 @@
-extends Marker2D
+extends Node2D
 
 var lvl_1_enemies=[
 	preload("res://scenes/enemies/Icie.tscn")
 	]
 var lvl_2_enemies=[
 	preload("res://scenes/enemies/chomwing.tscn"),
-	preload("res://scenes/enemies/Bombry.tscn")
 	]
 var lvl_3_enemies=[
 	preload("res://scenes/pozzap.tscn")
 ]
 var lvl_4_enemies=[
 	preload("res://scenes/opozzap.tscn"),
-	]
-
-
-var items=[
-	preload("res://scenes/items/coin.tscn")
 	]
 
 var normalplayer: PackedScene = preload("res://scenes/player.tscn")
@@ -28,13 +22,15 @@ var stamina_to_spawn: PackedScene = preload("res://scenes/UI/Run_Stamina.tscn")
 var atk_to_spawn: PackedScene = preload("res://scenes/ShootStamina.tscn")
 var spawn_points = []
 var current_round: float = 1.0
-var rng_map
+var map
 var enemies = []
 
 func _ready():
-	if get_tree().current_scene.get_node_or_null("RNG_Map"):
-		rng_map=get_tree().current_scene.get_node("RNG_Map")
-		enemies = rng_map.enemies
+	if get_tree().current_scene.get_node_or_null("Built_Map"):
+		map=get_tree().current_scene.get_node("Built_Map")
+	else:
+		map=get_parent()
+		enemies = map.enemies
 	
 
 func get_enemies_by_level(lvl:int):
@@ -48,15 +44,14 @@ func get_enemies_by_level(lvl:int):
 			enemy_list=lvl_3_enemies
 		4:
 			enemy_list=lvl_4_enemies
-	# enemy_list=lvl_3_enemies
 	return enemy_list
 
-func spawn_enemy(lvl:int) -> void:
+func spawn_enemy(lvl:int, location: Vector2) -> void:
 	var enemy_list=get_enemies_by_level(lvl)
 	var spawn_this_enemy=enemy_list[randi_range(0, enemy_list.size() - 1)]
 	var enemy=spawn_this_enemy.instantiate()
 	get_tree().current_scene.add_child(enemy)
-	enemy.global_position = global_position
+	enemy.global_position = location
 	enemies.append(enemy)
 	enemy.add_to_group("enemies")
 	var hitbox = enemy.get_node("HurtBox")
@@ -65,9 +60,9 @@ func spawn_enemy(lvl:int) -> void:
 func enemy_died(enemy):
 	enemies.erase(enemy)
 	if enemies.is_empty():
-		rng_map.call_deferred("next_round")
+		map.call_deferred("next_round")
 
-func spawn_player():
+func spawn_player(location:Vector2):
 	var atk = atk_to_spawn.instantiate()
 	get_tree().current_scene.add_child(atk)
 	atk.setup(GLOBAL.weapon)
@@ -84,14 +79,7 @@ func spawn_player():
 
 	var player = spawn_this_player.instantiate()
 	get_tree().current_scene.add_child(player)
-	player.position = global_position
+	player.position = location
 	player.equip_weapon(GLOBAL.weapon,GLOBAL.suit)
 	player.equip_suit(GLOBAL.suit,GLOBAL.weapon)
 	# player.get_node("Skeleton/Sprite").set_palette(GLOBAL.player_palette)
-
-
-func spawn_item() -> void:
-	var spawn_this_enemy=items[randi_range(0, items.size() - 1)]
-	var item=spawn_this_enemy.instantiate()
-	add_child(item)
-	item.global_position = global_position

@@ -99,3 +99,6 @@ tile_set = SubResource("TileSet_ww3q3")
 
 [node name="Spawner" parent="." unique_id=215909436 instance=ExtResource("2_sigb7")]
 position = Vector2(64, 96)
+
+[node name="Item" parent="." unique_id=2048708042 instance=ExtResource("2_sigb7")]
+position = Vector2(64, 16)

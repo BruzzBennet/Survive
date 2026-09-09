@@ -99,3 +99,6 @@ func crunchyMash():
 func portal_opens():
 	# if not crunchyMash_sfx.is_playing():
 		portal_sfx.play()
+
+func pick_coin():
+	$Coin.play()

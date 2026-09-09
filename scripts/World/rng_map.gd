@@ -34,6 +34,7 @@ func _ready() -> void:
 	$Map.tile_set.get_source(4).texture = map_texture
 	create_map()
 	spawn(1,GLOBAL.starting_enemy_amount,[])
+	# print_tree_pretty()
 
 func portal_opens():
 	var portal = preload("res://scenes/boxes/summon_spot.tscn").instantiate()
@@ -41,6 +42,7 @@ func portal_opens():
 	portal.global_position = first_player_starting_point
 
 func next_round():
+	remove_items()
 	current_level+=1
 	if GLOBAL.starting_enemy_amount<36:
 		GLOBAL.increase_dificulty +=0.5
@@ -60,7 +62,7 @@ func transition():
 
 func create_map():
 	for grid_section in map_grid:
-		var difficulty = randi_range(0,(8 + GLOBAL.current_level/7))
+		var difficulty = randi_range(0,(8 + GLOBAL.current_level/6))
 		var lvl
 		if difficulty < 4:
 			lvl = 0
@@ -107,5 +109,19 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 				spawned_already.append(spawner)
 		else:
 			print("Spawner not found")
+		var item = instance.get_node_or_null("Item")
+		if item:
+			var do_or_not= randi_range(0,3)
+			if do_or_not == 3:
+				item.spawn_item()	
 	if players > 0 and spawned_already.size()<9 or enemy_amount > 0 and spawned_already.size()<9:
 		spawn(players, enemy_amount, spawned_already)
+
+func remove_items():
+	for instance in spawn_points:
+		var item = instance.get_node_or_null("Item")
+		if item:
+			var item_spawned=item.get_node_or_null("Coin")
+			if item_spawned: 
+				item_spawned.explode(item_spawned)
+				item_spawned.queue_free()

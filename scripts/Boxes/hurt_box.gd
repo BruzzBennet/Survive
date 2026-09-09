@@ -50,6 +50,7 @@ func _ready():
 	elif takes_damage_from == attack_source.player:
 			set_collision_layer_value(2, true)
 			set_collision_mask_value(4, true)
+			set_collision_mask_value(5, true)
 			health = max_health
 
 	if takes_damage_from == attack_source.enemy:
@@ -157,6 +158,7 @@ func damage(attack: Attack) -> void:
 			if takes_damage_from == attack_source.player:
 				hurt_enemy()
 			elif takes_damage_from == attack_source.enemy:
+				print("DAMAGE:", attack.damage_done, " HP BEFORE:", health)
 				hurt_player()
 
 			if dead:

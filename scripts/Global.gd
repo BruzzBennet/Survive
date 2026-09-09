@@ -20,7 +20,7 @@ func restart():
     starting_enemy_amount= 3
     increase_dificulty = 0.0
     max_speed = 185
-    health=3.0
+    health=4.0
     melee_damage = 2.0
     defense = 0
     ammo = 1.0
