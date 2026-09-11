@@ -9,6 +9,7 @@ class_name Attack
 enum attack_source {
     player,
     enemy,
+    both,
     test
 }
 

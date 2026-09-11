@@ -15,6 +15,7 @@ var extra_heal=0.0
 enum attack_source {
 	player,
 	enemy,
+	both,
 	none
 }
 

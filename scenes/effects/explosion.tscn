@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://6gqvqsp365lw"]
+
+[ext_resource type="Script" uid="uid://cr4iur2uuu4wx" path="res://scripts/Particles/died_explosion.gd" id="1_d6bb2"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="2_yqd0p"]
+[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="3_3eccc"]
+
+[sub_resource type="Curve" id="Curve_h5l37"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="Resource" id="Resource_w4g6p"]
+script = ExtResource("3_3eccc")
+damage_done = 2.0
+metadata/_custom_type_script = "uid://doj80p0chh8d7"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6by2u"]
+radius = 32.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" unique_id=828938797]
+emitting = false
+amount = 300
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 100.0
+scale_amount_min = 2.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_h5l37")
+script = ExtResource("1_d6bb2")
+
+[node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("2_yqd0p")]
+collision_mask = 7
+attack = SubResource("Resource_w4g6p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=761063693]
+shape = SubResource("CircleShape2D_6by2u")
+debug_color = Color(1, 0, 0, 0.42000002)
+
+[connection signal="finished" from="." to="." method="_on_finished"]
