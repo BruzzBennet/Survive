@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://bmujv15gka2i"]
+
+[ext_resource type="Script" uid="uid://6rhx8j5u4qa5" path="res://scripts/Attacks/Bullets/bomb.gd" id="1_mopht"]
+[ext_resource type="Texture2D" uid="uid://c3ee4te2p1fki" path="res://assets/bullets/BombBullet.png" id="2_lpuq3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ffnc2"]
+radius = 5.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=272047002]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_mopht")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1876856369]
+texture = ExtResource("2_lpuq3")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1523381360]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_ffnc2")
+debug_color = Color(1, 0, 0, 0.42000002)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1479261002]
+collision_layer = 8
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1796659932]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_ffnc2")
+debug_color = Color(1, 0, 0, 0.42000002)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

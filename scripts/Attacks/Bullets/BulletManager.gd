@@ -92,7 +92,8 @@ func simple_shot(pos,dir):
 		anim_name = "1"
 	elif dir.x < 0:
 		anim_name = "2"
-	bullet.get_node("AnimationPlayer").play(anim_name)
+	if bullet.get_node_or_null("AnimationPlayer"):
+		bullet.get_node("AnimationPlayer").play(anim_name)
 	bullet.direction = dir.normalized()
 	bullet.speed=speed
 	bullet.max_time_on_field = time_on_field

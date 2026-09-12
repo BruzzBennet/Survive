@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" uid="uid://decanu1a0hm3i" path="res://resources/characters/MR/palettes/silver.tres" id="1_kti3w"]
 [ext_resource type="Texture2D" uid="uid://dwwxljqniuq2q" path="res://assets/MR/BodyParts/Helmets/Helmet_MROG.png" id="2_cx4wh"]
-[ext_resource type="Script" uid="uid://dk6b8jpr26pj2" path="res://scripts/Components/Resources/Suit.gd" id="3_47nsw"]
+[ext_resource type="Script" uid="uid://dk6b8jpr26pj2" path="res://scripts/Components/Weapons/Suit.gd" id="3_47nsw"]
 
 [resource]
 script = ExtResource("3_47nsw")

@@ -15,7 +15,8 @@ var item =[
 var boot=[
 			preload("res://resources/items/Boot_Chomwing.tres"),
 			preload("res://resources/items/Boot_Icie.tres"),
-			preload("res://resources/items/Boot_Pozzap.tres")
+			preload("res://resources/items/Boot_Pozzap.tres"),
+			preload("res://resources/items/Boot_Bombry.tres")
 		]
 var suit=[
 			preload("res://resources/items/Suit_Chomwing.tres"),
