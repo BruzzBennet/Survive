@@ -5,7 +5,8 @@ var tile_maps =[
 			preload("res://assets/Tiles/Tiles1.png"),
 			preload("res://assets/Tiles/Tiles2.png"),
 			preload("res://assets/Tiles/Tiles3.png"),
-			preload("res://assets/Tiles/Tiles4.png")
+			preload("res://assets/Tiles/Tiles4.png"),
+			preload("res://assets/Tiles/Tiles5.png")
 		]
 var item =[
 			preload("res://scenes/items/suit_item.tscn"),

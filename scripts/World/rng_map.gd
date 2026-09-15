@@ -22,7 +22,8 @@ var tile_maps =[
 			preload("res://assets/Tiles/Tiles1.png"),
 			preload("res://assets/Tiles/Tiles2.png"),
 			preload("res://assets/Tiles/Tiles3.png"),
-			preload("res://assets/Tiles/Tiles4.png")
+			preload("res://assets/Tiles/Tiles4.png"),
+			preload("res://assets/Tiles/Tiles5.png")
 		]
 var enemy_difficulty:= 1
 var first_player_starting_point
