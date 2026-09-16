@@ -7,7 +7,7 @@ var current_level:= 1
 var starting_enemy_amount:= 3
 var increase_dificulty: float = 0.0
 var max_speed: float = 185
-var health:=4.0
+var health:=5.0
 var melee_damage = 2.0
 var defense = 0
 var ammo = 1.0
@@ -20,7 +20,7 @@ func restart():
     starting_enemy_amount= 3
     increase_dificulty = 0.0
     max_speed = 185
-    health=4.0
+    health=5.0
     melee_damage = 2.0
     defense = 0
     ammo = 1.0

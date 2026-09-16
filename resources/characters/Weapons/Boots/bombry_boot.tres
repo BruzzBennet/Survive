@@ -8,9 +8,8 @@
 script = ExtResource("2_spsox")
 sprite = ExtResource("3_8r2ux")
 name = "Bombry Boot"
-description = "Defense-. Bullets explode on touch."
-melee_depletion_rate = 0.5
+description = "Ammo-. Bullets explode on touch."
 weapon_type = 3
 bullet_scene = ExtResource("1_x76n4")
-but_bane_this = 3
+but_bane_this = 2
 metadata/_custom_type_script = "uid://hig2h24o38p0"

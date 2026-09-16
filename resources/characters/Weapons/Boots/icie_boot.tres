@@ -10,7 +10,6 @@ script = ExtResource("3_a1qy1")
 sprite = ExtResource("4_q8nm3")
 name = "Icie Boot"
 description = "Reach-. Gain +0.5 HP when healing."
-melee_depletion_rate = 0.25
 weapon_type = 3
 bullet_scene = ExtResource("1_xiaww")
 boost_this = 1

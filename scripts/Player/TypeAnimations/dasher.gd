@@ -114,7 +114,7 @@ func modifiers(this_suit:Variant,boost_bane:float,increase_by:int=1):
 				this_suit.bane.ammo_saving:
 					ammo_boost+=boost_bane
 				this_suit.bane.defense:
-					def_boost-=(boost_bane*4)
+					def_boost-=(boost_bane*2)
 				this_suit.bane.melee_damage:
 					melee_boost-=(boost_bane*2)
 
@@ -152,7 +152,10 @@ func _physics_process(delta: float) -> void:
 
 func attack():
 	is_attacking = true
-	atkUI.reduce_by_melee()
+	if weapon.weapon_type == Weapon.type.boot:
+		atkUI.reduce_by_melee(2)
+	else:
+		atkUI.reduce_by_melee()
 	if atkUI.currentATK >= atkUI.min_ammo:
 		$HurtBox.cancel_flash()
 		Short_Range_Attack()
@@ -174,7 +177,10 @@ func Short_Range_Attack():
 		$HurtBox.no_longer_invincible()
 
 func shoot():
-	atkUI.reduce()
+	if weapon.weapon_type == Weapon.type.boot:
+		atkUI.reduce(2)
+	else:
+		atkUI.reduce()
 	if atkUI.currentATK >= atkUI.min_ammo:
 		$HurtBox.cancel_flash()
 		Long_Range_Attack()

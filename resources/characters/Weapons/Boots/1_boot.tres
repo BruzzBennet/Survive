@@ -8,8 +8,7 @@
 script = ExtResource("1_bny52")
 sprite = ExtResource("1_vdmra")
 name = "Boot"
-description = "Attacks on all sides. Low-range and spends the most Stamina"
-melee_depletion_rate = 0.25
+description = "Attacks on all sides but wastes the most Stamina."
 weapon_type = 3
 bullet_scene = ExtResource("1_duroo")
 boost_this = 2

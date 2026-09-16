@@ -1,6 +1,6 @@
 extends Control
 
-@onready var max_hp:float = 4.0
+@onready var max_hp=5.0
 @onready var healthbar = %HPBar
 @onready var hp_shown := healthbar.material as ShaderMaterial
 
