@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://ccd3440oqpca8"]
+
+[ext_resource type="PackedScene" uid="uid://yrmyr6f8yung" path="res://scenes/bullets/chomwing_bullet.tscn" id="1_g35rg"]
+[ext_resource type="AudioStream" uid="uid://b5vijeuq114j3" path="res://assets/audio/slashshot.mp3" id="2_mq7jh"]
+[ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="3_mepl4"]
+[ext_resource type="Texture2D" uid="uid://c8gwyr374ixrk" path="res://assets/Weapons/Guns/Chomwing_Gun.png" id="4_g35rg"]
+
+[resource]
+script = ExtResource("3_mepl4")
+sprite = ExtResource("4_g35rg")
+name = "Chomwing Gun"
+description = "Defense-. Its bullets fly through walls."
+weapon_type = 1
+bullet_scene = ExtResource("1_g35rg")
+but_bane_this = 3
+metadata/_custom_type_script = "uid://hig2h24o38p0"

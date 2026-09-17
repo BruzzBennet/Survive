@@ -460,8 +460,8 @@ _data = {
 }
 
 [node name="bullet" type="CharacterBody2D" unique_id=1051852224]
-collision_layer = 4
-collision_mask = 2
+collision_layer = 32
+collision_mask = 0
 platform_floor_layers = 4294967294
 script = ExtResource("1_qf8ue")
 

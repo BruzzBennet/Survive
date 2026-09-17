@@ -4,7 +4,7 @@ class_name Weapon
 @export var sprite: Texture2D
 @export var name: String
 @export var description: String
-var melee_depletion_rate: float = 0.5
+var melee_depletion_rate: float = 0.35
 @export var weapon_type: type
 
 enum type {

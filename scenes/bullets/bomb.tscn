@@ -7,7 +7,7 @@
 radius = 5.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=272047002]
-collision_layer = 8
+collision_layer = 32
 collision_mask = 7
 script = ExtResource("1_mopht")
 

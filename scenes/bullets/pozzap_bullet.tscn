@@ -413,7 +413,7 @@ _data = {
 
 [node name="bullet" type="CharacterBody2D" unique_id=1051852224]
 scale = Vector2(2, 2)
-collision_layer = 8
+collision_layer = 32
 script = ExtResource("1_i6nmg")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1273843954]

@@ -3360,6 +3360,8 @@ hframes = 7
 
 [node name="Damage_from_Poision_Tile" parent="." unique_id=309937513 instance=ExtResource("12_vllqc")]
 position = Vector2(-10.447872, 12.104998)
+collision_layer = 0
+collision_mask = 23
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Damage_from_Poision_Tile" unique_id=520055218]
 visibility_layer = 7

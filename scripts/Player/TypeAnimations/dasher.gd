@@ -185,7 +185,7 @@ func Short_Range_Attack():
 
 func shoot():
 	if weapon.weapon_type == Weapon.type.boot:
-		atkUI.reduce(2.5)
+		atkUI.reduce(1.5)
 	elif weapon.weapon_type == Weapon.type.gun:
 		atkUI.reduce(1.5)
 	else:

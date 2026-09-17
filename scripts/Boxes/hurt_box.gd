@@ -42,7 +42,7 @@ var damage_tile_location=[
 
 func _ready():
 	if takes_damage_from == attack_source.enemy:
-			print(str(extra_heal))
+			# print(str(extra_heal))
 			set_collision_layer_value(4, true)
 			set_collision_mask_value(2, true)
 			set_collision_mask_value(3, true)
@@ -52,6 +52,7 @@ func _ready():
 			set_collision_layer_value(2, true)
 			set_collision_mask_value(4, true)
 			set_collision_mask_value(5, true)
+			set_collision_mask_value(6, true)
 			health = max_health
 
 	if takes_damage_from == attack_source.enemy:
@@ -110,7 +111,7 @@ func cancel_flash():
 func heals():
 	play_flash(Color.GREEN)
 	var new_hp = health+1+extra_heal
-	print("extra heal:" + str(extra_heal))
+	# print("extra heal:" + str(extra_heal))
 	hp.set_value(new_hp)
 	if new_hp<=max_health:
 		health=new_hp
@@ -159,7 +160,7 @@ func damage(attack: Attack) -> void:
 			if takes_damage_from == attack_source.player:
 				hurt_enemy()
 			elif takes_damage_from == attack_source.enemy:
-				print("DAMAGE:", attack.damage_done, " HP BEFORE:", health)
+				# print("DAMAGE:", attack.damage_done, " HP BEFORE:", health)
 				hurt_player()
 
 			if dead:
@@ -204,11 +205,11 @@ func hurt_player():
 
 func hit_stun():
 	is_hurt = true
-	print("is hurt!")
+	# print("is hurt!")
 	hurt_time.start()
 	await hurt_time.timeout
 	is_hurt = false
-	print("can be hurt again!")
+	# print("can be hurt again!")
 
 func hurt_enemy():
 	PLAYSFX.hurt()

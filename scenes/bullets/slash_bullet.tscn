@@ -460,7 +460,7 @@ _data = {
 }
 
 [node name="bullet" type="CharacterBody2D" unique_id=1051852224]
-collision_layer = 8
+collision_layer = 32
 script = ExtResource("1_hidsh")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1273843954]
@@ -468,8 +468,8 @@ modulate = Color(1.9655429, 1.9655429, 1.9655429, 1)
 texture = ExtResource("2_0qpmt")
 
 [node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("3_b75s8")]
-collision_layer = 8
-collision_mask = 6
+collision_layer = 32
+collision_mask = 7
 attack = SubResource("Resource_qncy5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=405795565]

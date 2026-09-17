@@ -21,7 +21,8 @@ var boot=[
 			preload("res://resources/items/Boot_Bombry.tres")
 		]
 var gun=[
-			preload("res://resources/items/Gun_Bombry.tres")
+			preload("res://resources/items/Gun_Bombry.tres"),
+			preload("res://resources/items/Gun_Chomwing.tres")
 		]
 var suit=[
 			preload("res://resources/items/Suit_Chomwing.tres"),

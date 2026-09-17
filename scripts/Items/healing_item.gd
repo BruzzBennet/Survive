@@ -5,9 +5,8 @@ class_name Healing_Item
 # @onready var timer = get_parent().get_node("Timer")
 
 # func _on_area_entered(body) -> void:
-# 	if body is HurtBox_Component: 
-# 		timer.start()
-# 		await timer.timeout
-# 		get_parent().queue_free()
+#     if body is Player_Unit: 
+#         body.get_node("HurtBox").heals()
+#     queue_free()
 
 		
