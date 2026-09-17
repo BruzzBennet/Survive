@@ -1,26 +1,35 @@
 extends Node
 
+var base_weapon=preload("res://resources/characters/Weapons/Guns/Lazer_Gun.tres")
+var base_suit=preload("res://resources/characters/MR/Suits/MR_OG.tres")
+var base_health=7.0
+
+var shootplayer: PackedScene = preload("res://scenes/PlayerTypes/Shooter.tscn")
+var dashplayer: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
+var base_player_type=shootplayer
+
+var player_type=base_player_type
 var player_palette: MonRanger_pallete = preload("res://resources/characters/MR/palettes/turquoise.tres")
-var weapon: Weapon = preload("res://resources/characters/Weapons/Boots/1_boot.tres")
-var suit: Suit = preload("res://resources/characters/MR/Suits/MR_OG.tres")
+var weapon: Weapon = base_weapon
+var suit: Suit = base_suit
 var current_level:= 1
 var starting_enemy_amount:= 3
 var increase_dificulty: float = 0.0
 var max_speed: float = 185
-var health:=5.0
+var health=base_health
 var melee_damage = 2.0
 var defense = 0
 var ammo = 1.0
 
 func restart():
     SCORE.actual=0
-    weapon = preload("res://resources/characters/Weapons/Boots/1_boot.tres")
-    suit=  preload("res://resources/characters/MR/Suits/MR_OG.tres")
-    current_level= 1
+    player_type=base_player_type
+    weapon = base_weapon
+    suit= base_suit
     starting_enemy_amount= 3
     increase_dificulty = 0.0
     max_speed = 185
-    health=5.0
+    health=base_health
     melee_damage = 2.0
     defense = 0
     ammo = 1.0

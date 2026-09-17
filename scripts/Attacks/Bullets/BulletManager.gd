@@ -45,9 +45,18 @@ func modifiers(this_suit:Variant,increase_by:int=1):
 	time_on_field+=reach_boost
 	bullet_damage+=damage_boost
 
-
+func playsfx(shot_pattern_is=null):
+	var sfx = $AudioStreamPlayer2D
+	if shot_pattern_is!="simple_shot" or !shot_pattern_is:
+		sfx.stream=weapon.extra_bullet_sfx
+	else:
+		sfx.stream=weapon.bullet_sfx
+	if not sfx.is_playing():
+		sfx.pitch_scale = randf_range(0.9, 1.35)
+		sfx.play()
 
 func shoot(pos,dir,shot_pattern_is=null):
+	playsfx(shot_pattern_is)
 	var shot_is
 	match shot_type:
 		weapon.shot_pattern.simple_shot:
@@ -56,7 +65,7 @@ func shoot(pos,dir,shot_pattern_is=null):
 			shot_is="continuous_shot_double"
 		weapon.shot_pattern.continuous_shot_triple:
 			shot_is="continuous_shot_triple"
-		weapon.shot_pattern.simple_shot:
+		weapon.shot_pattern.triple_shot:
 			shot_is="triple_shot"
 	shot_pattern(pos,dir,shot_pattern_is,shot_is)
 
@@ -68,6 +77,8 @@ func shot_pattern(pos,dir,shoot_pattern,shot_is):
 			circle_shot(pos,dir,shot_is)
 		"four_way_shot":
 			four_way_shot(pos,dir,shot_is)
+		"triple_shot":
+			triple_shot(pos,dir)
 		null:
 			simple_shot(pos,dir)
 

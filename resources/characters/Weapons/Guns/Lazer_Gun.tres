@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://diqat8ll4su0h"]
+
+[ext_resource type="PackedScene" uid="uid://c0u3a864ma6ks" path="res://scenes/bullets/pozzap_bullet.tscn" id="1_5d8ou"]
+[ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="2_3kpkr"]
+[ext_resource type="AudioStream" uid="uid://bjsbc7k5ox72s" path="res://assets/audio/Shoot.wav" id="2_jli0g"]
+[ext_resource type="AudioStream" uid="uid://nkdueophkmhg" path="res://assets/audio/RapidShoot.wav" id="3_abtv4"]
+[ext_resource type="Texture2D" uid="uid://3kybjfo0bofs" path="res://assets/Weapons/Guns/Lazer_Gun.png" id="3_jli0g"]
+
+[resource]
+script = ExtResource("2_3kpkr")
+sprite = ExtResource("3_jli0g")
+name = "Gun"
+description = "All attacks are Long-Range, but low damage"
+weapon_type = 1
+bullet_scene = ExtResource("1_5d8ou")
+boost_this = 2
+bullet_sfx = ExtResource("2_jli0g")
+extra_bullet_sfx = ExtResource("3_abtv4")
+metadata/_custom_type_script = "uid://hig2h24o38p0"

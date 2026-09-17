@@ -11,7 +11,7 @@ var dodge_min: float = 5.0
 @export var palette: MonRanger_pallete
 @export var footstep_frames: Array[int] = [0, 1]
 @export var attack_frames: Array[int]
-@onready var animated_sprite_2d = %AnimationPlayer2D
+@onready var animated_sprite_2d = $AnimationPlayer2D
 # @onready var dodgeUI = get_tree().current_scene.get_node("Dodge")
 @onready var atkUI = get_tree().current_scene.get_node("ATK")
 const margin = 12
@@ -53,6 +53,9 @@ func weapon_attack_pattern(this_weapon:Weapon):
 	if this_weapon.weapon_type == Weapon.type.boot:
 		melee_shot_pattern = "no_shot"
 		shot_pattern = "four_way_shot"
+	elif this_weapon.weapon_type == Weapon.type.gun:
+		melee_shot_pattern = "simple_shot"
+		shot_pattern = "triple_shot"
 
 func equip_suit(this_suit:Suit,this_weapon:Weapon):
 	if this_suit:
@@ -114,7 +117,7 @@ func modifiers(this_suit:Variant,boost_bane:float,increase_by:int=1):
 				this_suit.bane.ammo_saving:
 					ammo_boost+=boost_bane
 				this_suit.bane.defense:
-					def_boost-=(boost_bane*2)
+					def_boost-=(boost_bane*4)
 				this_suit.bane.melee_damage:
 					melee_boost-=(boost_bane*2)
 
@@ -145,17 +148,18 @@ func _physics_process(delta: float) -> void:
 		attack()
 	if Input.is_action_pressed("shoot"):
 		shoot()
-	if !can_hit and atkUI.currentATK >= atkUI.min_ammo:
-		can_hit = true
+	if weapon.weapon_type != Weapon.type.gun:
+		if !can_hit and atkUI.currentATK >= atkUI.min_ammo:
+			can_hit = true
 	if !is_attacking:
 		$HurtBox.no_longer_invincible()
 
 func attack():
 	is_attacking = true
-	if weapon.weapon_type == Weapon.type.boot:
-		atkUI.reduce_by_melee(2)
-	else:
-		atkUI.reduce_by_melee()
+	# if weapon.weapon_type == Weapon.type.boot:
+	# 	atkUI.reduce_by_melee(1.5)
+	# else:
+	atkUI.reduce_by_melee()
 	if atkUI.currentATK >= atkUI.min_ammo:
 		$HurtBox.cancel_flash()
 		Short_Range_Attack()
@@ -171,14 +175,19 @@ func attack():
 func Short_Range_Attack():
 	is_attacking = true
 	if can_hit:
-		if weapon.weapon_type == Weapon.type.boot:
-			$HurtBox.becomes_invincible()
+		# if weapon.weapon_type == Weapon.type.boot:
+		# 	$HurtBox.becomes_invincible()
+		if weapon.weapon_type == Weapon.type.gun:
+			$BulletManager.shoot(position, last_direction, melee_shot_pattern)
+			can_hit = false
 	else:
 		$HurtBox.no_longer_invincible()
 
 func shoot():
 	if weapon.weapon_type == Weapon.type.boot:
-		atkUI.reduce(2)
+		atkUI.reduce(2.5)
+	elif weapon.weapon_type == Weapon.type.gun:
+		atkUI.reduce(1.5)
 	else:
 		atkUI.reduce()
 	if atkUI.currentATK >= atkUI.min_ammo:
@@ -197,7 +206,7 @@ func Long_Range_Attack():
 	# Short_Range_Attack()
 	is_shooting = true
 	if can_shoot:
-		PLAYSFX.slash_shot()
+		# PLAYSFX.slash_shot()
 		$BulletManager.shoot(position, last_direction, shot_pattern)
 		can_shoot = false
 

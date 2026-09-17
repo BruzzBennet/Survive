@@ -20,8 +20,9 @@ var items=[
 	]
 
 var normalplayer: PackedScene = preload("res://scenes/player.tscn")
+var shootplayer: PackedScene = preload("res://scenes/PlayerTypes/Shooter.tscn")
 var dashplayer: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
-var spawn_this_player: PackedScene = dashplayer
+var spawn_this_player: PackedScene = GLOBAL.player_type
 
 var hp_to_spawn: PackedScene = preload("res://scenes/hp.tscn")
 var stamina_to_spawn: PackedScene = preload("res://scenes/UI/Run_Stamina.tscn")

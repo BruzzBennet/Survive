@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dbqq03a30b587"]
+
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="1_8nj7g"]
+[ext_resource type="Resource" uid="uid://bpfrlapg6lgke" path="res://resources/characters/Weapons/Guns/Bombry_Gun.tres" id="2_slg3p"]
+
+[resource]
+script = ExtResource("1_8nj7g")
+item_is = 1
+weapon = ExtResource("2_slg3p")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"

@@ -28,12 +28,33 @@ func build_sprite(sprite_origin):
 	$Sprite2D.texture=sprite_origin
 	$AnimationPlayer.play("idle")
 
+var shootplayer: PackedScene = preload("res://scenes/PlayerTypes/Shooter.tscn")
+var dashplayer: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
+
+func switch_weapon(weapon,body):
+	var player_scene
+	match weapon.weapon_type:
+		Weapon.type.boot:
+			player_scene=dashplayer
+		Weapon.type.gun:
+			player_scene=shootplayer
+	GLOBAL.player_type=player_scene
+	var player = player_scene.instantiate()
+	get_tree().current_scene.add_child(player)
+	player.position = body.global_position
+	body.queue_free()
+	player.equip_suit(GLOBAL.suit,weapon)
+	player.equip_weapon(weapon,GLOBAL.suit)
+	GLOBAL.weapon=weapon
 
 func _on_area_2d_body_entered(body) -> void:
 	if body is Player_Unit:
 		match item.item_is:
 			item.item_type.weapon:
-				body.equip_weapon(item.weapon,GLOBAL.suit)
+				if GLOBAL.weapon.weapon_type != item.weapon.weapon_type:
+					call_deferred("switch_weapon", item.weapon, body)
+				else:
+					body.equip_weapon(item.weapon,GLOBAL.suit)
 				PLAYSFX.equip()
 			item.item_type.suit:
 				body.equip_suit(item.suit,GLOBAL.weapon)

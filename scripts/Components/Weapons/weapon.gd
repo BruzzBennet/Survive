@@ -4,7 +4,7 @@ class_name Weapon
 @export var sprite: Texture2D
 @export var name: String
 @export var description: String
-var melee_depletion_rate: float = 0.25
+var melee_depletion_rate: float = 0.5
 @export var weapon_type: type
 
 enum type {
@@ -54,5 +54,8 @@ enum bane {
 }
 
 @export var effect: GDScript 
+
+@export var bullet_sfx : AudioStream = preload("res://assets/audio/slashshot.mp3")
+@export var extra_bullet_sfx : AudioStream = preload("res://assets/audio/slashshot.mp3")
 
 

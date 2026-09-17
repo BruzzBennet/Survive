@@ -11,13 +11,17 @@ var tile_maps =[
 var item =[
 			preload("res://scenes/items/suit_item.tscn"),
 			preload("res://scenes/items/boot_item.tscn"),
-			preload("res://scenes/items/normal_item.tscn")
+			preload("res://scenes/items/normal_item.tscn"),
+			preload("res://scenes/items/gun_item.tscn")
 		]
 var boot=[
 			preload("res://resources/items/Boot_Chomwing.tres"),
 			preload("res://resources/items/Boot_Icie.tres"),
 			preload("res://resources/items/Boot_Pozzap.tres"),
 			preload("res://resources/items/Boot_Bombry.tres")
+		]
+var gun=[
+			preload("res://resources/items/Gun_Bombry.tres")
 		]
 var suit=[
 			preload("res://resources/items/Suit_Chomwing.tres"),
@@ -51,4 +55,6 @@ func create_item(this_item:Array):
 			spawned_item.item = suit.pick_random()
 		preload("res://scenes/items/normal_item.tscn"):
 			spawned_item.item = normal_item.pick_random()
+		preload("res://scenes/items/gun_item.tscn"):
+			spawned_item.item = gun.pick_random()
 	return spawned_item

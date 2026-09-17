@@ -60,12 +60,12 @@ func regenerate_more(delta) -> void:
 	currentATK = min(currentATK, maxATK)
 	set_value(currentATK)
 
-func reduce(times: int = 1):
+func reduce(times: float = 1):
 	var depletion: float = depletion_rate * times
 	currentATK = max(0, currentATK - depletion)
 	set_value(currentATK)
 
-func reduce_by_melee(times: int = 1):
+func reduce_by_melee(times: float = 1):
 	var depletion: float = melee_depletion_rate * times
 	currentATK = max(0, currentATK - depletion)
 	set_value(currentATK)

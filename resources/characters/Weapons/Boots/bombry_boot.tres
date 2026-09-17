@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://2tpq5svvu5gg"]
 
 [ext_resource type="PackedScene" uid="uid://bmujv15gka2i" path="res://scenes/bullets/bomb.tscn" id="1_x76n4"]
+[ext_resource type="AudioStream" uid="uid://cwy0bt2iirh15" path="res://assets/audio/bomb_throw.wav" id="2_8r2ux"]
 [ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="2_spsox"]
 [ext_resource type="Texture2D" uid="uid://0ide1vxpeieh" path="res://assets/Weapons/Boots/Boot_Bombry.png" id="3_8r2ux"]
 
@@ -8,8 +9,10 @@
 script = ExtResource("2_spsox")
 sprite = ExtResource("3_8r2ux")
 name = "Bombry Boot"
-description = "Ammo-. Bullets explode on touch."
+description = "Defense-. Bullets explode on touch."
 weapon_type = 3
 bullet_scene = ExtResource("1_x76n4")
-but_bane_this = 2
+but_bane_this = 3
+bullet_sfx = ExtResource("2_8r2ux")
+extra_bullet_sfx = ExtResource("2_8r2ux")
 metadata/_custom_type_script = "uid://hig2h24o38p0"
