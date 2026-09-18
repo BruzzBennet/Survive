@@ -12,7 +12,6 @@ var dodge_min: float = 5.0
 @export var footstep_frames: Array[int] = [0, 1]
 @export var attack_frames: Array[int]
 @onready var animated_sprite_2d = $AnimationPlayer2D
-# @onready var dodgeUI = get_tree().current_scene.get_node("Dodge")
 @onready var atkUI = get_tree().current_scene.get_node("ATK")
 const margin = 12
 var last_direction = Vector2.DOWN
@@ -37,27 +36,31 @@ func _ready():
 		if palette:
 			$Skeleton/Sprite.set_palette(palette)
 
-	# equip_weapon(GLOBAL.weapon, GLOBAL.suit)
 	screen_size = get_viewport_rect().size
 
 func equip_weapon(this_weapon:Weapon, this_suit:Suit):
 	var boost_bane = 0.25
 	modifiers(GLOBAL.weapon,boost_bane,-1)
 	GLOBAL.weapon=this_weapon
+	$Skeleton/Weapon_Back.texture = this_weapon.sprite
+	$Skeleton/Weapon_Front.texture = this_weapon.sprite
 	$BulletManager.setup(this_weapon,this_suit)
-	equip_suit_type(this_suit,this_weapon)
 	modifiers(this_weapon,boost_bane)
 	weapon_attack_pattern(this_weapon)
 
 func weapon_attack_pattern(this_weapon:Weapon):
-	if this_weapon.weapon_type == Weapon.type.boot:
-		melee_shot_pattern = "no_shot"
-		shot_pattern = "four_way_shot"
-	elif this_weapon.weapon_type == Weapon.type.gun:
-		melee_shot_pattern = "simple_shot"
-		shot_pattern = "triple_shot"
+	match this_weapon.weapon_type:
+		Weapon.type.boot:
+			melee_shot_pattern = "no_shot"
+			shot_pattern = "four_way_shot"
+		Weapon.type.gun:
+			melee_shot_pattern = "simple_shot"
+			shot_pattern = "triple_shot"
+		Weapon.type.blade:
+			melee_shot_pattern = "no_shot"
+			shot_pattern = "simple_shot"
 
-func equip_suit(this_suit:Suit,this_weapon:Weapon):
+func equip_suit(this_suit:Suit,_this_weapon:Weapon):
 	if this_suit:
 		var boost_bane = 0.25
 		modifiers(GLOBAL.suit,boost_bane,-1)
@@ -69,24 +72,27 @@ func equip_suit(this_suit:Suit,this_weapon:Weapon):
 		modifiers(this_suit,boost_bane)
 	else:
 		$Skeleton/Sprite.set_palette(GLOBAL.player_palette) 
-	equip_suit_type(this_suit,this_weapon)
-	
+
+
 
 func modifiers(this_suit:Variant,boost_bane:float,increase_by:int=1):
 	var speed_boost=0.0
 	var ammo_boost=0.0
 	var def_boost=0.0
-	var melee_boost=0.04
+	var melee_boost=0.0
 	boost_bane=boost_bane*increase_by
 	
 	if this_suit.boost:
 		match this_suit.boost_this:
 				this_suit.boost.speed:
-					speed_boost+=(max_speed*boost_bane)
+					speed_boost+=(max_speed*boost_bane*2)
+					max_speed=GLOBAL.max_speed+speed_boost*increase_by
 				this_suit.boost.ammo_saving:
 					ammo_boost-=boost_bane
+					atkUI.depletion_rate= GLOBAL.ammo+ammo_boost*increase_by
 				this_suit.boost.defense:
 					def_boost+=(boost_bane*2)
+					$HurtBox.defense=GLOBAL.defense+def_boost*increase_by
 				this_suit.boost.effect:
 					if this_suit is Suit:
 						$SuitEffect.set_script(null)
@@ -94,51 +100,29 @@ func modifiers(this_suit:Variant,boost_bane:float,increase_by:int=1):
 							$SuitEffect.set_script(this_suit.effect)
 							if this_suit.effect:
 								$SuitEffect.setup()
-								print("set up in suit!")
 					elif this_suit is Weapon:
 						$WeaponEffect.set_script(null)
 						if increase_by>0:
 							$WeaponEffect.set_script(this_suit.effect)
 							if this_suit.effect:
 								$WeaponEffect.setup()
-								# print(
-								# 	"set up in weapon! | increase_by: ",
-								# 	increase_by,
-								# 	" | weapon: ",
-								# 	this_suit,
-								# 	" | caller stack:"
-								# )
-								# print_stack()
+								$HitBox.attack.damage_done=GLOBAL.melee_damage+melee_boost*increase_by
 	
 	if this_suit.bane:
 		match this_suit.but_bane_this:
 				this_suit.bane.speed:
-					speed_boost-=(max_speed*boost_bane)
+					speed_boost-=(max_speed*boost_bane*2)
+					max_speed=GLOBAL.max_speed+speed_boost*increase_by
 				this_suit.bane.ammo_saving:
 					ammo_boost+=boost_bane
+					atkUI.depletion_rate= GLOBAL.ammo+ammo_boost*increase_by
 				this_suit.bane.defense:
-					def_boost-=(boost_bane*4)
+					def_boost-=(boost_bane*2)
+					$HurtBox.defense=GLOBAL.defense+def_boost*increase_by
 				this_suit.bane.melee_damage:
 					melee_boost-=(boost_bane*2)
+					$HitBox.attack.damage_done=GLOBAL.melee_damage+melee_boost*increase_by
 
-	max_speed=GLOBAL.max_speed+speed_boost*increase_by
-	atkUI.depletion_rate= GLOBAL.ammo+ammo_boost*increase_by
-	$HurtBox.defense=GLOBAL.defense+def_boost*increase_by
-	$HitBox.attack.damage_done=GLOBAL.melee_damage+melee_boost*increase_by
-
-func equip_suit_type(equipped_suit: Suit, this_weapon:Weapon):
-	var sprite_type
-	if equipped_suit:
-		sprite_type = "Base"
-	else:
-		sprite_type = ""
-	if this_weapon:
-		$Skeleton/Weapon_Back.texture = this_weapon.sprite
-		$Skeleton/Weapon_Front.texture = this_weapon.sprite
-		if this_weapon.weapon_type == Weapon.type.boot:
-			$Skeleton/Sprite.texture = load("res://assets/MR/BodyParts/MRDash" + sprite_type + ".png")
-	else:
-		$Skeleton/Sprite.texture = load("res://assets/MR/BodyParts/MRNormal" + sprite_type + ".png")
 
 func _physics_process(delta: float) -> void:
 	healingATK(delta)
@@ -148,7 +132,7 @@ func _physics_process(delta: float) -> void:
 		attack()
 	if Input.is_action_pressed("shoot"):
 		shoot()
-	if weapon.weapon_type != Weapon.type.gun:
+	if weapon.weapon_type == Weapon.type.boot:
 		if !can_hit and atkUI.currentATK >= atkUI.min_ammo:
 			can_hit = true
 	if !is_attacking:
@@ -156,9 +140,6 @@ func _physics_process(delta: float) -> void:
 
 func attack():
 	is_attacking = true
-	# if weapon.weapon_type == Weapon.type.boot:
-	# 	atkUI.reduce_by_melee(1.5)
-	# else:
 	atkUI.reduce_by_melee()
 	if atkUI.currentATK >= atkUI.min_ammo:
 		$HurtBox.cancel_flash()
@@ -175,21 +156,13 @@ func attack():
 func Short_Range_Attack():
 	is_attacking = true
 	if can_hit:
-		# if weapon.weapon_type == Weapon.type.boot:
-		# 	$HurtBox.becomes_invincible()
-		if weapon.weapon_type == Weapon.type.gun:
-			$BulletManager.shoot(position, last_direction, melee_shot_pattern)
-			can_hit = false
+		$BulletManager.shoot(position, last_direction, melee_shot_pattern)
+		can_hit = false
 	else:
 		$HurtBox.no_longer_invincible()
 
 func shoot():
-	if weapon.weapon_type == Weapon.type.boot:
-		atkUI.reduce(1.5)
-	elif weapon.weapon_type == Weapon.type.gun:
-		atkUI.reduce(1.5)
-	else:
-		atkUI.reduce()
+	atkUI.reduce()
 	if atkUI.currentATK >= atkUI.min_ammo:
 		$HurtBox.cancel_flash()
 		Long_Range_Attack()
@@ -203,10 +176,8 @@ func shoot():
 		is_shooting = false
 
 func Long_Range_Attack():
-	# Short_Range_Attack()
 	is_shooting = true
 	if can_shoot:
-		# PLAYSFX.slash_shot()
 		$BulletManager.shoot(position, last_direction, shot_pattern)
 		can_shoot = false
 
@@ -214,21 +185,6 @@ func tired():
 	PLAYSFX.out_of_ammo()
 	$HurtBox.is_tired()
 	atkUI.flash(Color.RED)
-
-# func dodge(delta):
-# 	if last_direction != Vector2.ZERO and Input.is_action_just_pressed("dash") and can_dodge:
-# 		dash_fx(last_direction.angle(), position, last_direction)
-# 		PLAYSFX.dash()
-# 	if last_direction != Vector2.ZERO and Input.is_action_pressed("dash") and can_dodge:
-# 		is_dodging = true
-# 		$HurtBox.becomes_invincible()
-# 		# dodgeUI.reduce(delta)
-# 	else:
-# 		$HurtBox.is_invincible = false
-# 		is_dodging = false
-# 	if dodgeUI.currentDodge <= 0:
-# 		can_dodge = false
-# 		dodgeUI.flash(Color.RED)
 
 func dash_fx(angle, pos, dir):
 	var dash_scene = preload("res://scenes/dashparticles.tscn")
@@ -261,7 +217,6 @@ func player_movement(delta):
 
 
 func healingATK(delta):
-	# if atkUI.currentATK < atkUI.maxATK or dodgeUI.currentDodge < dodgeUI.maxDodge:
 	if atkUI.currentATK < atkUI.maxATK:
 		var idle = animated_sprite_2d.current_animation in [
 		"Idle_0",
@@ -274,7 +229,6 @@ func healingATK(delta):
 			recovering(delta)
 		else: 
 			if animated_sprite_2d.current_animation != "":
-				# print(animated_sprite_2d.current_animation)
 				idle_time = 0.0
 				PLAYSFX.recover_stop()
 
@@ -282,7 +236,6 @@ func recovering(delta):
 	idle_time += delta
 	if idle_time >=1:
 		atkUI.regenerate_more(delta)
-		# dodgeUI.regenerate_more(delta)
 		PLAYSFX.recover()
 		$HurtBox.play_flash(Color.GREEN)
 	else:

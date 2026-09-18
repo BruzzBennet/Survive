@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://dpna40n7xfpkk"]
+
+[ext_resource type="PackedScene" uid="uid://bmujv15gka2i" path="res://scenes/bullets/bomb.tscn" id="1_c3s3l"]
+[ext_resource type="AudioStream" uid="uid://c8auegmv7t80r" path="res://assets/audio/nullpunch.wav" id="2_ewktf"]
+[ext_resource type="AudioStream" uid="uid://cwy0bt2iirh15" path="res://assets/audio/bomb_throw.wav" id="2_mxga4"]
+[ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="4_67gs8"]
+[ext_resource type="Texture2D" uid="uid://dfir532sxa8u3" path="res://assets/Weapons/Blade/Bomb_Blade.png" id="4_ewktf"]
+
+[resource]
+script = ExtResource("4_67gs8")
+sprite = ExtResource("4_ewktf")
+name = "Bomb Club"
+description = "Reach-. Bullets explode on impact."
+bullet_scene = ExtResource("1_c3s3l")
+enemies_bullet_pierces = 2
+but_bane_this = 1
+bullet_sfx = ExtResource("2_mxga4")
+extra_bullet_sfx = ExtResource("2_ewktf")
+metadata/_custom_type_script = "uid://hig2h24o38p0"

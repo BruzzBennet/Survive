@@ -12,7 +12,8 @@ var item =[
 			preload("res://scenes/items/suit_item.tscn"),
 			preload("res://scenes/items/boot_item.tscn"),
 			preload("res://scenes/items/normal_item.tscn"),
-			preload("res://scenes/items/gun_item.tscn")
+			preload("res://scenes/items/gun_item.tscn"),
+			preload("res://scenes/items/blade_item.tscn")
 		]
 var boot=[
 			preload("res://resources/items/Boot_Chomwing.tres"),
@@ -23,6 +24,10 @@ var boot=[
 var gun=[
 			preload("res://resources/items/Gun_Bombry.tres"),
 			preload("res://resources/items/Gun_Chomwing.tres")
+		]
+var blade=[
+			preload("res://resources/items/Blade_Bombry.tres"),
+			preload("res://resources/items/Blade_Pozzap.tres")
 		]
 var suit=[
 			preload("res://resources/items/Suit_Chomwing.tres"),
@@ -36,7 +41,6 @@ var normal_item=[
 var map_texture
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	BGM.ShopTheme()
 	map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
@@ -58,4 +62,6 @@ func create_item(this_item:Array):
 			spawned_item.item = normal_item.pick_random()
 		preload("res://scenes/items/gun_item.tscn"):
 			spawned_item.item = gun.pick_random()
+		preload("res://scenes/items/blade_item.tscn"):
+			spawned_item.item = blade.pick_random()
 	return spawned_item

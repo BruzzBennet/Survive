@@ -6,7 +6,6 @@ extends Area2D
 
 func _on_body_entered(body) -> void:
 	if body is Player_Unit:
-		# print("It works!")
 		if follow_sfx:
 			sfx_player.stream = follow_sfx
 			sfx_player.play()

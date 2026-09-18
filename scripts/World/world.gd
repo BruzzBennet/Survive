@@ -5,12 +5,10 @@ extends Node2D
 var current_round: float = 1.0
 var map_layout
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var bus_index = AudioServer.get_bus_index("SFX")
 	AudioServer.set_bus_mute(bus_index, false)
 	spawn_level(this_level)
-	# SCORE.actual = 0
 	SCORE.get_highest()
 
 func spawn_level(level_to_spawn:level):

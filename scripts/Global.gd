@@ -1,12 +1,13 @@
 extends Node
 
-var base_weapon=preload("res://resources/characters/Weapons/Guns/Lazer_Gun.tres")
+var base_weapon=preload("res://resources/characters/Weapons/Blades/1_Blade.tres")
 var base_suit=preload("res://resources/characters/MR/Suits/MR_OG.tres")
 var base_health=7.0
 
 var shootplayer: PackedScene = preload("res://scenes/PlayerTypes/Shooter.tscn")
 var dashplayer: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
-var base_player_type=shootplayer
+var slashplayer: PackedScene = preload("res://scenes/PlayerTypes/Slasher.tscn")
+var base_player_type=slashplayer
 
 var player_type=base_player_type
 var player_palette: MonRanger_pallete = preload("res://resources/characters/MR/palettes/turquoise.tres")

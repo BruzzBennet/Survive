@@ -2,7 +2,6 @@ extends Node2D
 
 @export var max_lvl: int = 1
 @export var max_lvl_n = [13,31,17,18]
-# @export var starting_enemy_amount: int = 1
 var map_grid=[Vector2(0,62), 
 			Vector2(0,190),
 			Vector2(128,62), 
@@ -29,13 +28,11 @@ var enemy_difficulty:= 1
 var first_player_starting_point
 var current_level=0
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
 	$Map.tile_set.get_source(4).texture = map_texture
 	create_map()
 	spawn(1,GLOBAL.starting_enemy_amount,[])
-	# print_tree_pretty()
 
 func portal_opens():
 	var portal = preload("res://scenes/boxes/summon_spot.tscn").instantiate()

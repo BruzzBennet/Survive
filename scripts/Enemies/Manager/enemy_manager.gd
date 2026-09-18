@@ -16,18 +16,11 @@ func summon_enemy(spawn_point) -> void:
 
 
 func enemy_died(enemy):
-	# print("Before erase:", enemies.size())
-
 	enemies.erase(enemy)
-
-	# print("After erase:", enemies.size())
-
 	if enemies.is_empty():
-	# 	print("Starting next round")
 		call_deferred("next_round")
 
 func next_round():
-	# print("Enemies list size:", enemies.size())
 	if current_round<5:
 		current_round+=0.5
 	var available_spawn_points = spawn_points.duplicate()

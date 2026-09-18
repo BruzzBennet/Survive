@@ -34,16 +34,6 @@ func set_value(hp: float, spawned=true):
 func edit_max_hp(hp: float):
   hp_shown.set_shader_parameter("segments", hp)
 
-# func reload(hp):
-#  max_hp=hp
-#  GLOBAL.health=max_hp
-#  hp_shown.set_shader_parameter("segments", hp)
-#  if hp > 2:
-#   hp_shown.set_shader_parameter("bar_color", Color.GREEN)
-#  elif hp > 1:
-#   hp_shown.set_shader_parameter("bar_color", Color.YELLOW)
-#  else:
-#   hp_shown.set_shader_parameter("bar_color", Color.RED)
 
 func flash(color: Color):
   hp_shown.set_shader_parameter("flash_color", color)

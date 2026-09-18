@@ -34,5 +34,4 @@ func switch() -> void:
 		if change_scene_to == 0:
 			tree.change_scene_to_file("res://scenes/worlds/shop_world.tscn")
 		else:
-			# BGM.playStageMusic()
 			tree.change_scene_to_file("res://scenes/worlds/rng_world.tscn")

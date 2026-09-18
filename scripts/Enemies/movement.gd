@@ -48,10 +48,7 @@ func play_animation(dir: Vector2) -> void:
 			anim_name = "1"
 		else:
 			anim_name = "3"
-
 	else:
-		# Keep the previous animation when nearly diagonal
-		# return
 		if dir.x > 0:
 			anim_name = "0"
 		else:

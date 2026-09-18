@@ -73,13 +73,8 @@ func spawn_player(location:Vector2):
 	hp.set_value(GLOBAL.health, false)
 	hp.position = Vector2(305, 2)
 	
-	# var stamina = stamina_to_spawn.instantiate()
-	# get_tree().current_scene.add_child(stamina)
-	# stamina.position = Vector2(340, 2)
-
 	var player = spawn_this_player.instantiate()
 	get_tree().current_scene.add_child(player)
 	player.position = location
 	player.equip_weapon(GLOBAL.weapon,GLOBAL.suit)
 	player.equip_suit(GLOBAL.suit,GLOBAL.weapon)
-	# player.get_node("Skeleton/Sprite").set_palette(GLOBAL.player_palette)

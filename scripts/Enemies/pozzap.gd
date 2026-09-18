@@ -7,11 +7,9 @@ var chasing: bool
 @onready var pozzap = $EnemyMovement
 
 func _on_timer_timeout() -> void:
-	# if !chasing:
 		shoot_bullet()
 	
 func shoot_bullet():
-	#if !shot_sfx.playing:
 	PLAYSFX.shot()
 	shoot.emit(pozzap.last_direction.angle(), position, pozzap.last_direction)
 

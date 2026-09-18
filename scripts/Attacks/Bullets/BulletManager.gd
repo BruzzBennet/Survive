@@ -79,6 +79,10 @@ func shot_pattern(pos,dir,shoot_pattern,shot_is):
 			four_way_shot(pos,dir,shot_is)
 		"triple_shot":
 			triple_shot(pos,dir)
+		"c_shot_triple":
+			continuous_shot_triple(pos,dir)
+		"c_shot_double":
+			continuous_shot_double(pos,dir)
 		null:
 			simple_shot(pos,dir)
 
@@ -90,11 +94,8 @@ func simple_shot(pos,dir):
 	var bullet=bullet_scene.instantiate()
 	bullet.new_pierce(pierce)
 	bullet.damage_done=bullet_damage
-	# print(bullet_damage)
-	# print(str(self) + str(weapon.bullet_scene))
 	add_child(bullet)
 	bullet.global_position = pos + dir * 10
-	# bullet.rotation=angle  + deg_to_rad(-90)
 	if dir.x > 0:
 		anim_name = "0"
 	elif dir.y < 0:

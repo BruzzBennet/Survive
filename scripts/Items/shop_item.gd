@@ -30,6 +30,7 @@ func build_sprite(sprite_origin):
 
 var shootplayer: PackedScene = preload("res://scenes/PlayerTypes/Shooter.tscn")
 var dashplayer: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
+var slashplayer: PackedScene = preload("res://scenes/PlayerTypes/Slasher.tscn")
 
 func switch_weapon(weapon,body):
 	var player_scene
@@ -38,6 +39,8 @@ func switch_weapon(weapon,body):
 			player_scene=dashplayer
 		Weapon.type.gun:
 			player_scene=shootplayer
+		Weapon.type.blade:
+			player_scene=slashplayer
 	GLOBAL.player_type=player_scene
 	var player = player_scene.instantiate()
 	get_tree().current_scene.add_child(player)

@@ -49,7 +49,6 @@ func get_enemies_by_level(lvl:int):
 			enemy_list=lvl_3_enemies
 		4:
 			enemy_list=lvl_4_enemies
-	# enemy_list=lvl_3_enemies
 	return enemy_list
 
 func spawn_enemy(lvl:int) -> void:
@@ -79,16 +78,11 @@ func spawn_player():
 	hp.set_value(GLOBAL.health, false)
 	hp.position = Vector2(305, 2)
 	
-	# var stamina = stamina_to_spawn.instantiate()
-	# get_tree().current_scene.add_child(stamina)
-	# stamina.position = Vector2(340, 2)
-
 	var player = spawn_this_player.instantiate()
 	get_tree().current_scene.add_child(player)
 	player.position = global_position
 	player.equip_weapon(GLOBAL.weapon,GLOBAL.suit)
 	player.equip_suit(GLOBAL.suit,GLOBAL.weapon)
-	# player.get_node("Skeleton/Sprite").set_palette(GLOBAL.player_palette)
 
 
 func spawn_item() -> void:

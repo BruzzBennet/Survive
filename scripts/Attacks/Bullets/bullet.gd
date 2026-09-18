@@ -18,14 +18,12 @@ func _ready():
 
 func _on_area_entered(body):
 	if body is HurtBox_Component and body.get_parent().is_in_group("enemies"):
-		# print("yes")
 		enemies_pierced+=1
 	
 func _physics_process(delta):
 	time_on_field += delta
 	velocity = direction * speed
 	move_and_slide()
-	# if !floating:
 	if get_slide_collision_count() > 0 or enemies_pierced>=max_enemies_pierced or time_on_field>=max_time_on_field:
 		queue_free()
 

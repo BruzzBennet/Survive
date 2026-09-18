@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://chqpciolosqo8"]
+
+[ext_resource type="PackedScene" uid="uid://dcclv4wy77u2a" path="res://scenes/bullets/slash_bullet.tscn" id="1_lxcnd"]
+[ext_resource type="AudioStream" uid="uid://b5vijeuq114j3" path="res://assets/audio/slashshot.mp3" id="2_di4mg"]
+[ext_resource type="AudioStream" uid="uid://bs6u0275h8oso" path="res://assets/audio/slash.mp3" id="2_tjtrc"]
+[ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="3_tjtrc"]
+[ext_resource type="Texture2D" uid="uid://lthgfou14u5y" path="res://assets/Weapons/Blade/Blade.png" id="4_h6wiw"]
+
+[resource]
+script = ExtResource("3_tjtrc")
+sprite = ExtResource("4_h6wiw")
+name = "Blade"
+description = "Pierce+, Reach-"
+bullet_scene = ExtResource("1_lxcnd")
+enemies_bullet_pierces = 2
+boost_this = 2
+bullet_sfx = ExtResource("2_tjtrc")
+metadata/_custom_type_script = "uid://hig2h24o38p0"

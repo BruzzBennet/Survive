@@ -4,7 +4,6 @@
 [ext_resource type="AudioStream" uid="uid://dew0relhlqdg8" path="res://assets/audio/ShotMedium.wav" id="2_2yw7f"]
 [ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="2_6icff"]
 [ext_resource type="Texture2D" uid="uid://cve58dosfbjlj" path="res://assets/Weapons/Boots/Boot_Pozzap.png" id="3_2yw7f"]
-[ext_resource type="AudioStream" uid="uid://b6tw1difuisra" path="res://assets/audio/Laser_Shoot5(5).wav" id="3_hh2v0"]
 
 [resource]
 script = ExtResource("2_6icff")
@@ -16,5 +15,5 @@ bullet_scene = ExtResource("1_jvi0r")
 boost_this = 4
 but_bane_this = 1
 bullet_sfx = ExtResource("2_2yw7f")
-extra_bullet_sfx = ExtResource("3_hh2v0")
+extra_bullet_sfx = ExtResource("2_2yw7f")
 metadata/_custom_type_script = "uid://hig2h24o38p0"

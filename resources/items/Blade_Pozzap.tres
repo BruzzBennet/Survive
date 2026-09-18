@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dbh3l8052c48q"]
+
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="1_h88m2"]
+[ext_resource type="Resource" uid="uid://ed3v0qgvrmhx" path="res://resources/characters/Weapons/Blades/Pozzap_Blade.tres" id="2_olrsn"]
+
+[resource]
+script = ExtResource("1_h88m2")
+item_is = 1
+weapon = ExtResource("2_olrsn")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"

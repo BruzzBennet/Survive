@@ -10,10 +10,8 @@ func _on_start_pressed() -> void:
 	$ButtonManager/VBoxContainer/Start.release_focus()
 	$Transition.show()
 	$Transition/AnimationPlayer.play("Fade_In")
-	#PLAYSFX.start_tune()
 	PLAYSFX.MenuSelect()
 	await $Transition/AnimationPlayer.animation_finished
-	# get_tree().change_scene_to_file("res://scenes/EquipMenu.tscn")
 	BGM.playStageMusic()
 	get_tree().change_scene_to_file("res://scenes/worlds/rng_world.tscn")
 

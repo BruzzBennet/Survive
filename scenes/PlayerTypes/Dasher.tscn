@@ -4949,7 +4949,7 @@ libraries/ = SubResource("AnimationLibrary_tjlm8")
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("6_33f0w")]
 collision_layer = 0
 collision_mask = 3
-max_health = 4
+max_health = 7
 takes_damage_from = 1
 receives_knockback = true
 gets_stunned = true

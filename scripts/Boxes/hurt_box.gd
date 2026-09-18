@@ -42,7 +42,6 @@ var damage_tile_location=[
 
 func _ready():
 	if takes_damage_from == attack_source.enemy:
-			# print(str(extra_heal))
 			set_collision_layer_value(4, true)
 			set_collision_mask_value(2, true)
 			set_collision_mask_value(3, true)
@@ -63,17 +62,11 @@ func _ready():
 					shared_material.shader = preload("res://scenes/hurt_shader.gdshader")
 					piece.material = shared_material
 		hp = get_tree().current_scene.get_node("HP")
-		# hp.set_value(health)
 	else:
 		sprite = get_parent().get_node("Sprite")
 	if sprite.material:
 		sprite.material = sprite.material.duplicate()
 		sprite.material.set_shader_parameter("flash_modifier", 0)
-
-# func _physics_process(_delta):
-# 	if !is_hurt:
-# 		for enemyArea in enemyCollisions:
-# 			hurt_player()
 
 
 func flash_action(sprite_to_flash):
@@ -109,9 +102,9 @@ func cancel_flash():
 				piece.material.set_shader_parameter("flash_modifier", 0.0)
 
 func heals():
+	cancel_flash()
 	play_flash(Color.GREEN)
 	var new_hp = health+1+extra_heal
-	# print("extra heal:" + str(extra_heal))
 	hp.set_value(new_hp)
 	if new_hp<=max_health:
 		health=new_hp
@@ -142,9 +135,7 @@ func knockback(attack: Variant):
 	if attack is Attack:
 		get_parent().velocity = (global_position - attack.position).normalized() * attack.knockback
 	else:
-		# if get_parent().last_direction.y>=0:
 			get_parent().velocity = -get_parent().last_direction.normalized() * 500
-	# get_parent().move_and_slide()
 
 
 func damage(attack: Attack) -> void:
@@ -157,11 +148,11 @@ func damage(attack: Attack) -> void:
 			if receives_knockback:
 				knockback(attack)
 
-			if takes_damage_from == attack_source.player:
-				hurt_enemy()
-			elif takes_damage_from == attack_source.enemy:
-				# print("DAMAGE:", attack.damage_done, " HP BEFORE:", health)
-				hurt_player()
+			match takes_damage_from:
+				attack_source.player:
+					hurt_enemy()
+				attack_source.enemy:
+					hurt_player()
 
 			if dead:
 				return
@@ -179,8 +170,6 @@ func player_touched_poison():
 			health -= (1 - defense)
 			if gets_stunned:
 				hit_stun()	
-			# if receives_knockback:
-			# 	knockback(body.position)
 			hurt_player()
 			if dead:
 				return
@@ -205,11 +194,9 @@ func hurt_player():
 
 func hit_stun():
 	is_hurt = true
-	# print("is hurt!")
 	hurt_time.start()
 	await hurt_time.timeout
 	is_hurt = false
-	# print("can be hurt again!")
 
 func hurt_enemy():
 	PLAYSFX.hurt()

@@ -23,11 +23,3 @@ func _on_any_button_pressed(button: Button) -> void:
 	BGM.playStageMusic()
 	get_tree().change_scene_to_file("res://scenes/worlds/rng_world.tscn")
 
-	# print("Button pressed: ", button.name)
-	
-	# # Match by button name or property to trigger specific actions
-	# match button.name:
-	# 	"StartButton":
-	# 		print("Starting game...")
-	# 	"ExitButton":
-	# 		print("Exiting...")

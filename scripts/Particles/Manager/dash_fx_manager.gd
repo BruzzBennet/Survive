@@ -9,8 +9,6 @@ func _on_player_dash_fx(angle,pos,dir):
 	dash.rotation=angle  + deg_to_rad(-90)
 	if dir == Vector2.UP:
 		dash.global_position = pos - dir * 10
-	#elif dir == Vector2.RIGHT or dir==Vector2.LEFT:
-	#	dash.global_position = pos + Vector2(0, 16) + dir * 10
 	else:
 		dash.global_position = pos + Vector2(0, 16) - dir * 10
 	dash.direction = dir.normalized()
