@@ -1,11 +1,11 @@
 extends CharacterBody2D
 class_name Player_Unit
 
-var max_speed: float = 185
-var accel: float = 10
+var max_speed
+var accel: float = 50
 var friction: float = 0.25
-var dodge_speed = 1
-var dodge_min: float = 5.0
+# var dodge_speed: = 1.0
+# var dodge_min: float = 5.0
 @export var suit: Suit
 @export var weapon: Weapon
 @export var palette: MonRanger_pallete
@@ -25,11 +25,16 @@ var can_hit: bool = true
 var melee_shot_pattern
 var shot_pattern
 var idle_time = 0.0
-
+var invincible_time=0.0
+var start_end = false
 
 func _ready():
+	max_speed=GLOBAL.max_speed
+	$HurtBox.becomes_invincible(false)
 	if suit:
-		equip_suit(GLOBAL.suit,GLOBAL.weapon)
+		$Skeleton/Head_Back.texture = suit.helmet
+		$Skeleton/Head_Front.texture = suit.helmet
+		$Skeleton/Sprite.set_palette(suit.body_palette)
 	else:
 		$Skeleton/Head_Back.texture = null
 		$Skeleton/Head_Front.texture = null
@@ -51,14 +56,17 @@ func equip_weapon(this_weapon:Weapon, this_suit:Suit):
 func weapon_attack_pattern(this_weapon:Weapon):
 	match this_weapon.weapon_type:
 		Weapon.type.boot:
-			melee_shot_pattern = "no_shot"
+			melee_shot_pattern = "short_shot"
 			shot_pattern = "four_way_shot"
 		Weapon.type.gun:
 			melee_shot_pattern = "simple_shot"
 			shot_pattern = "triple_shot"
 		Weapon.type.blade:
-			melee_shot_pattern = "no_shot"
+			melee_shot_pattern = "short_shot"
 			shot_pattern = "simple_shot"
+		Weapon.type.none:
+			melee_shot_pattern = "no_shot"
+			shot_pattern = "no_shot"
 
 func equip_suit(this_suit:Suit,_this_weapon:Weapon):
 	if this_suit:
@@ -76,55 +84,53 @@ func equip_suit(this_suit:Suit,_this_weapon:Weapon):
 
 
 func modifiers(this_suit:Variant,boost_bane:float,increase_by:int=1):
-	var speed_boost=0.0
-	var ammo_boost=0.0
-	var def_boost=0.0
-	var melee_boost=0.0
+	max_speed=GLOBAL.max_speed
+	atkUI.depletion_rate = GLOBAL.ammo
+	$HurtBox.defense = GLOBAL.defense
 	boost_bane=boost_bane*increase_by
+	$SuitEffect.set_script(null)
+	$WeaponEffect.set_script(null)
 	
 	if this_suit.boost:
 		match this_suit.boost_this:
-				this_suit.boost.speed:
-					speed_boost+=(max_speed*boost_bane*2)
-					max_speed=GLOBAL.max_speed+speed_boost*increase_by
-				this_suit.boost.ammo_saving:
-					ammo_boost-=boost_bane
-					atkUI.depletion_rate= GLOBAL.ammo+ammo_boost*increase_by
-				this_suit.boost.defense:
-					def_boost+=(boost_bane*2)
-					$HurtBox.defense=GLOBAL.defense+def_boost*increase_by
-				this_suit.boost.effect:
+			this_suit.boost.speed:
+				max_speed += GLOBAL.max_speed * 0.5
+			this_suit.boost.ammo_saving:
+				atkUI.depletion_rate = GLOBAL.ammo - 0.25
+			this_suit.boost.defense:
+				$HurtBox.defense = GLOBAL.defense + (0.5)
+			this_suit.boost.effect:
+				if this_suit.effect:
 					if this_suit is Suit:
 						$SuitEffect.set_script(null)
 						if increase_by>0:
 							$SuitEffect.set_script(this_suit.effect)
-							if this_suit.effect:
-								$SuitEffect.setup()
+							$SuitEffect.setup()
 					elif this_suit is Weapon:
 						$WeaponEffect.set_script(null)
 						if increase_by>0:
 							$WeaponEffect.set_script(this_suit.effect)
-							if this_suit.effect:
-								$WeaponEffect.setup()
-								$HitBox.attack.damage_done=GLOBAL.melee_damage+melee_boost*increase_by
-	
+							$WeaponEffect.setup()
+
 	if this_suit.bane:
 		match this_suit.but_bane_this:
-				this_suit.bane.speed:
-					speed_boost-=(max_speed*boost_bane*2)
-					max_speed=GLOBAL.max_speed+speed_boost*increase_by
-				this_suit.bane.ammo_saving:
-					ammo_boost+=boost_bane
-					atkUI.depletion_rate= GLOBAL.ammo+ammo_boost*increase_by
-				this_suit.bane.defense:
-					def_boost-=(boost_bane*2)
-					$HurtBox.defense=GLOBAL.defense+def_boost*increase_by
-				this_suit.bane.melee_damage:
-					melee_boost-=(boost_bane*2)
-					$HitBox.attack.damage_done=GLOBAL.melee_damage+melee_boost*increase_by
+			this_suit.bane.speed:
+				max_speed -= GLOBAL.max_speed * 0.5
+			this_suit.bane.ammo_saving:
+				atkUI.depletion_rate = GLOBAL.ammo + 0.25
+			this_suit.bane.defense:
+				$HurtBox.defense = GLOBAL.defense - (0.5)
 
 
 func _physics_process(delta: float) -> void:
+	var stop_at=1.0
+	# print(invincible_time)
+	if invincible_time<stop_at:
+		invincible_time+=delta
+		if invincible_time>=stop_at:
+			$HurtBox.no_longer_invincible()
+			start_end=true
+	
 	healingATK(delta)
 	walk_sfx()
 	player_movement(delta)
@@ -132,15 +138,18 @@ func _physics_process(delta: float) -> void:
 		attack()
 	if Input.is_action_pressed("shoot"):
 		shoot()
-	if weapon.weapon_type == Weapon.type.boot:
-		if !can_hit and atkUI.currentATK >= atkUI.min_ammo:
-			can_hit = true
-	if !is_attacking:
-		$HurtBox.no_longer_invincible()
+	# if weapon.weapon_type == Weapon.type.boot:
+	# 	if !can_hit and atkUI.currentATK >= atkUI.min_ammo:
+	# 		can_hit = true
+	# if !is_attacking and start_end==true:
+	# 	$HurtBox.no_longer_invincible()
 
 func attack():
 	is_attacking = true
-	atkUI.reduce_by_melee()
+	if weapon.weapon_type != Weapon.type.none:
+		atkUI.reduce_by_melee()
+	if weapon.weapon_type == Weapon.type.gun:
+		atkUI.reduce_by_melee(1.5)
 	if atkUI.currentATK >= atkUI.min_ammo:
 		$HurtBox.cancel_flash()
 		Short_Range_Attack()
@@ -156,13 +165,19 @@ func attack():
 func Short_Range_Attack():
 	is_attacking = true
 	if can_hit:
+		# $HurtBox.becomes_invincible()
 		$BulletManager.shoot(position, last_direction, melee_shot_pattern)
 		can_hit = false
-	else:
-		$HurtBox.no_longer_invincible()
+	# elif start_end==true:
+	# 	$HurtBox.no_longer_invincible()
 
 func shoot():
-	atkUI.reduce()
+	if weapon.weapon_type == Weapon.type.boot:
+			atkUI.reduce(2)
+	elif weapon.weapon_type == Weapon.type.gun:
+			atkUI.reduce(1.35)
+	elif weapon.weapon_type != Weapon.type.none:
+		atkUI.reduce()
 	if atkUI.currentATK >= atkUI.min_ammo:
 		$HurtBox.cancel_flash()
 		Long_Range_Attack()
@@ -201,15 +216,17 @@ func dash_fx(angle, pos, dir):
 func player_movement(delta):
 	position = position.clamp(Vector2(margin, 40), Vector2(screen_size.x - margin, screen_size.y - margin))
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	if is_dodging:
-			dodge_speed = 2
-	else:
-			dodge_speed = 1
+	# if is_dodging:
+	# 		dodge_speed = 2
+	# else:
+	# 		dodge_speed = 1.35
 	if direction != Vector2.ZERO:
 		last_direction = direction
 		
 	if direction != Vector2.ZERO:
-			velocity = velocity.lerp(direction * max_speed * dodge_speed, accel * delta)
+			velocity = velocity.lerp(direction * max_speed, accel * delta)
+			# print("speed: "+str(direction * max_speed * dodge_speed))
+			# print("weight: "+ str(accel * delta))
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
 	process_animation(direction)
@@ -274,5 +291,5 @@ func play_animation(prefix: String, dir: Vector2) -> void:
 func walk_sfx():
 	if $Skeleton/Sprite.frame in footstep_frames:
 		PLAYSFX.walk()
-	if $Skeleton/Sprite.frame in attack_frames:
-		PLAYSFX.slash()
+	# if $Skeleton/Sprite.frame in attack_frames:
+	# 	PLAYSFX.slash()

@@ -9,8 +9,8 @@
 script = ExtResource("3_mepl4")
 sprite = ExtResource("4_g35rg")
 name = "Chomwing Gun"
-description = "Defense-. Its bullets fly through walls."
+description = "Reach-. Its bullets fly through walls."
 weapon_type = 1
 bullet_scene = ExtResource("1_g35rg")
-but_bane_this = 3
+but_bane_this = 1
 metadata/_custom_type_script = "uid://hig2h24o38p0"

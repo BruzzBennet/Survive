@@ -9,10 +9,10 @@
 script = ExtResource("3_76vav")
 sprite = ExtResource("4_vr5oi")
 name = "Bombry Bomb"
-description = "Reach-. Bullets explode on touch."
+description = "Defense-. Bullets explode on touch."
 weapon_type = 1
 bullet_scene = ExtResource("1_vr5oi")
-but_bane_this = 1
+but_bane_this = 3
 bullet_sfx = ExtResource("2_8f8ty")
 extra_bullet_sfx = ExtResource("2_8f8ty")
 metadata/_custom_type_script = "uid://hig2h24o38p0"

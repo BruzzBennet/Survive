@@ -11,6 +11,7 @@ helmet = ExtResource("2_wotig")
 body_palette = ExtResource("1_ki4vn")
 name = "Icie Suit"
 description = "Reach-. Heal +0.5 HP when healing."
+boost_this = 1
 but_bane_this = 1
 effect = ExtResource("2_qaxk2")
 metadata/_custom_type_script = "uid://dk6b8jpr26pj2"

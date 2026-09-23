@@ -39,6 +39,7 @@ var damage_tile_location=[
 	Vector2i(2,2),
 	Vector2i(3,2)
 	]
+var idle=0.0
 
 func _ready():
 	if takes_damage_from == attack_source.enemy:
@@ -123,12 +124,16 @@ func play_flash(color:Color):
 	else:
 		flash_action(sprite)
 
-func becomes_invincible():
+func becomes_invincible(flash=true):
+	# print("works")
 	cancel_flash()
-	play_flash(Color.BLUE)
+	if flash:
+		play_flash(Color.BLUE)
 	is_invincible=true
 
 func no_longer_invincible():
+	# cancel_flash()
+	# print("stop")
 	is_invincible=false
 
 func knockback(attack: Variant):

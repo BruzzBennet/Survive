@@ -8,7 +8,8 @@ var lvl_2_enemies=[
 	preload("res://scenes/enemies/Bombry.tscn")
 	]
 var lvl_3_enemies=[
-	preload("res://scenes/pozzap.tscn")
+	preload("res://scenes/pozzap.tscn"),
+	preload("res://scenes/enemies/clamik.tscn")
 ]
 var lvl_4_enemies=[
 	preload("res://scenes/opozzap.tscn"),
@@ -19,9 +20,6 @@ var items=[
 	preload("res://scenes/items/coin.tscn")
 	]
 
-var normalplayer: PackedScene = preload("res://scenes/player.tscn")
-var shootplayer: PackedScene = preload("res://scenes/PlayerTypes/Shooter.tscn")
-var dashplayer: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
 var spawn_this_player: PackedScene = GLOBAL.player_type
 
 var hp_to_spawn: PackedScene = preload("res://scenes/hp.tscn")

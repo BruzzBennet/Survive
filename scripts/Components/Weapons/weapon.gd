@@ -11,13 +11,14 @@ enum type {
     blade,
 	gun,
 	arm,
-	boot
+	boot,
+    none
 }
 
 @export var bullet_scene : PackedScene
 @export var enemies_bullet_pierces: int = 1 
 var max_ammo: float = 35.0
-var min_ammo: float = 7.0
+var min_ammo: float = 5.0
 var bullet_damage: float = 1.0
 var bullet_speed: int = 250
 var bullet_time_on_field: float = 0.4

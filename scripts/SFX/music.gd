@@ -19,6 +19,7 @@ func stopMusic():
 	restTune.stop()
 
 func playStageMusic():
+	stopMusic()
 	while true:
 			bgm_used = randi_range(1, 3)
 			match bgm_used:

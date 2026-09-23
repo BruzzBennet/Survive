@@ -9,5 +9,4 @@ script = ExtResource("3_bkvn4")
 helmet = ExtResource("2_wpncp")
 body_palette = ExtResource("1_vvygo")
 name = "Helmetless"
-boost_this = 1
 metadata/_custom_type_script = "uid://dk6b8jpr26pj2"

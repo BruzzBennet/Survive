@@ -43,15 +43,15 @@ func next_round():
 	remove_items()
 	current_level+=1
 	if GLOBAL.starting_enemy_amount<36:
-		GLOBAL.increase_dificulty +=0.5
-		if GLOBAL.increase_dificulty >= 1:
-			GLOBAL.starting_enemy_amount += 1
-			GLOBAL.increase_dificulty = 0.0
-	if current_level % 3 == 0:
-		PLAYSFX.portal_opens()
-		portal_opens()	
-	else:
-		spawn(0, GLOBAL.starting_enemy_amount, [])
+		# GLOBAL.increase_dificulty +=0.5
+		# if GLOBAL.increase_dificulty >= 1.5:
+		GLOBAL.starting_enemy_amount += 1
+	# 		GLOBAL.increase_dificulty = 0.0
+	# if current_level % 3 == 0:
+	PLAYSFX.portal_opens()
+	portal_opens()	
+	# else:
+	# 	spawn(0, GLOBAL.starting_enemy_amount, [])
 
 func transition():
 	var transition_node = get_tree().current_scene.get_node("Transition")
@@ -86,6 +86,7 @@ func create_map():
 func spawn(players: int, enemy_amount: int, spawned_already: Array):
 	var times: = 0
 	var enemy_level=0
+	var max_level = 4
 	for instance in spawn_points:	
 		var spawner = instance.get_node_or_null("Spawner")
 		if players > 0 and times == 0:
@@ -97,7 +98,6 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 		if spawner:
 			var type = randi_range(0,2)
 			if type == 0 && enemy_amount>0 && !spawned_already.has(spawner):
-				var max_level = 4
 				if enemy_amount>enemy_level:
 					enemy_level= randi_range(1, max_level)
 					if enemy_level>enemy_amount:
@@ -110,7 +110,13 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 		var item = instance.get_node_or_null("Item")
 		if item:
 			var do_or_not= randi_range(0,3)
-			if do_or_not == 3:
+			if GLOBAL.starting_enemy_amount>=36:
+				if do_or_not < 3:
+					enemy_level= randi_range(1, max_level)
+					item.spawn_enemy(enemy_level)
+				else:
+					item.spawn_item()
+			elif do_or_not == 3:
 				item.spawn_item()	
 	if players > 0 and spawned_already.size()<9 or enemy_amount > 0 and spawned_already.size()<9:
 		spawn(players, enemy_amount, spawned_already)

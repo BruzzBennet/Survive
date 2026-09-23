@@ -11,6 +11,7 @@ helmet = ExtResource("3_ukhm3")
 body_palette = ExtResource("1_cp3vt")
 name = "Bombry Suit"
 description = "Defense-. When hit, damage nearby enemies."
+boost_this = 1
 but_bane_this = 3
 effect = ExtResource("2_d4xoh")
 metadata/_custom_type_script = "uid://dk6b8jpr26pj2"

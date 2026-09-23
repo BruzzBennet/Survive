@@ -21,7 +21,7 @@ func switch() -> void:
 
 	GLOBAL.current_level += 1
 
-	if tree.current_scene.scene_file_path == "res://scenes/worlds/shop_world.tscn":
+	if tree.current_scene.scene_file_path != "res://scenes/worlds/rng_world.tscn":
 		BGM.playStageMusic()
 		tree.change_scene_to_file("res://scenes/worlds/rng_world.tscn")
 	else:

@@ -10,7 +10,7 @@
 script = ExtResource("1_bny52")
 sprite = ExtResource("1_vdmra")
 name = "Boot"
-description = "Attacks on all sides but wastes the most Stamina."
+description = "Attacks on all sides but wastes the most Ammo."
 weapon_type = 3
 bullet_scene = ExtResource("1_duroo")
 boost_this = 2

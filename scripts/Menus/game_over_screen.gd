@@ -25,7 +25,7 @@ func _on_restart_pressed() -> void:
 	await $Transition/AnimationPlayer.animation_finished
 	GLOBAL.restart()
 	BGM.playStageMusic()
-	get_tree().change_scene_to_file("res://scenes/worlds/rng_world.tscn")
+	get_tree().change_scene_to_file("res://scenes/worlds/start_world.tscn")
 
 func _on_restart_focus_exited() -> void:
 	playMenuMove()

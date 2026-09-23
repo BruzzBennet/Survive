@@ -3218,6 +3218,7 @@ collision_layer = 8
 collision_mask = 7
 script = ExtResource("1_cnsif")
 weapon = ExtResource("2_knag2")
+footstep_frames = Array[int]([4, 6, 8, 10, 12, 14, 16, 18, 24, 26, 28, 30, 32, 34, 36, 38])
 
 [node name="BulletManager" parent="." unique_id=1570605682 instance=ExtResource("2_nbmp8")]
 weapon = null
@@ -3254,14 +3255,12 @@ visible = false
 position = Vector2(0.5, -5)
 texture = ExtResource("4_cxmm0")
 hframes = 4
-frame = 2
 
 [node name="Weapon_Front" type="Sprite2D" parent="Skeleton" unique_id=1138429761]
 position = Vector2(-0.5, 4)
 rotation = -1.5707964
 texture = ExtResource("3_knag2")
 hframes = 7
-frame = 1
 
 [node name="Damage_from_Poision_Tile" parent="." unique_id=309937513 instance=ExtResource("12_vllqc")]
 position = Vector2(-10.447872, 12.104998)
@@ -3293,7 +3292,7 @@ shape = SubResource("RectangleShape2D_rc84n")
 debug_color = Color(0, 0.60038817, 0, 0.42000002)
 
 [node name="AttackAnimationTimer" type="Timer" parent="." unique_id=106038525]
-wait_time = 0.2
+wait_time = 0.05
 one_shot = true
 
 [node name="WeaponEffect" type="Node2D" parent="." unique_id=1701021021]

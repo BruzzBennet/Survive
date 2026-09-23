@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://b6akedjjm22h7"]
+
+[ext_resource type="Script" uid="uid://dan8rxx63nj3x" path="res://scripts/World/world.gd" id="1_fyw50"]
+[ext_resource type="PackedScene" uid="uid://b7n0ft2xn5w0y" path="res://assets/maps/Choose_Your_Weapon.tscn" id="2_r5xff"]
+[ext_resource type="PackedScene" uid="uid://c8slwdh6xqobl" path="res://scenes/pause_menu.tscn" id="3_08rx5"]
+[ext_resource type="Script" uid="uid://pks0tfm1bus5" path="res://scripts/World/Resources/world_resource.gd" id="3_ja5x8"]
+[ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="4_ja5x8"]
+[ext_resource type="Script" uid="uid://bdsl852hj016k" path="res://scripts/Trackers/score_label.gd" id="5_d3y2x"]
+[ext_resource type="Script" uid="uid://cbg018ohlqnw1" path="res://scripts/Trackers/high_score_label.gd" id="6_4ux33"]
+[ext_resource type="PackedScene" uid="uid://d4fsptvwptuf4" path="res://scenes/ctr_shader.tscn" id="7_h1g7i"]
+
+[sub_resource type="Resource" id="Resource_d3y2x"]
+script = ExtResource("3_ja5x8")
+map_layout = ExtResource("2_r5xff")
+metadata/_custom_type_script = "uid://pks0tfm1bus5"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i7141"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_i7141"]
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4mrxx"]
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Environment" id="Environment_4mrxx"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.35
+
+[node name="World" type="Node2D" unique_id=1779477526]
+script = ExtResource("1_fyw50")
+this_level = SubResource("Resource_d3y2x")
+
+[node name="DeathTimer" type="Timer" parent="." unique_id=1937362618]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=63205776]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=1187232654 instance=ExtResource("3_08rx5")]
+
+[node name="Transition" parent="." unique_id=2142637533 instance=ExtResource("4_ja5x8")]
+light_mask = 524288
+visibility_layer = 524288
+z_index = 100
+offset_left = -10.0
+offset_top = -23.0
+offset_right = 652.0
+offset_bottom = 330.0
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=40150643]
+light_mask = 8192
+visibility_layer = 8192
+offset_right = 640.0
+offset_bottom = 33.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_i7141")
+
+[node name="ScoreLabel" type="Label" parent="PanelContainer" unique_id=1741771680]
+layout_mode = 2
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_i7141")
+horizontal_alignment = 2
+uppercase = true
+script = ExtResource("5_d3y2x")
+
+[node name="HighScoreLabel" type="Label" parent="PanelContainer" unique_id=1917688951]
+layout_mode = 2
+text = "High Score: 0"
+label_settings = SubResource("LabelSettings_4mrxx")
+uppercase = true
+script = ExtResource("6_4ux33")
+
+[node name="CTRShader" parent="." unique_id=1374949823 instance=ExtResource("7_h1g7i")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1012215030]
+environment = SubResource("Environment_4mrxx")
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

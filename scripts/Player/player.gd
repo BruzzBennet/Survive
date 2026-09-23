@@ -178,4 +178,3 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		
 	if animated_sprite_2d.animation.begins_with("stand_slash"):
 		is_shooting = false
-

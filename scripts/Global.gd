@@ -1,22 +1,23 @@
 extends Node
 
-var base_weapon=preload("res://resources/characters/Weapons/Blades/1_Blade.tres")
+var base_weapon=preload("res://resources/characters/Weapons/no_weapon.tres")
 var base_suit=preload("res://resources/characters/MR/Suits/MR_OG.tres")
-var base_health=7.0
+var base_health=5.0
 
+var normalplayer: PackedScene = preload("res://scenes/PlayerTypes/base.tscn")
 var shootplayer: PackedScene = preload("res://scenes/PlayerTypes/Shooter.tscn")
 var dashplayer: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
 var slashplayer: PackedScene = preload("res://scenes/PlayerTypes/Slasher.tscn")
-var base_player_type=slashplayer
+var base_player_type=normalplayer
 
 var player_type=base_player_type
 var player_palette: MonRanger_pallete = preload("res://resources/characters/MR/palettes/turquoise.tres")
 var weapon: Weapon = base_weapon
 var suit: Suit = base_suit
 var current_level:= 1
-var starting_enemy_amount:= 3
+var starting_enemy_amount:= 6
 var increase_dificulty: float = 0.0
-var max_speed: float = 185
+var max_speed: float = 200
 var health=base_health
 var melee_damage = 2.0
 var defense = 0

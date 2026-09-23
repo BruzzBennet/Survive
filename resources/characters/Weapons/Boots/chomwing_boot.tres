@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://c0bavo2iutyc7"]
 
 [ext_resource type="PackedScene" uid="uid://yrmyr6f8yung" path="res://scenes/bullets/chomwing_bullet.tscn" id="1_3arbs"]
+[ext_resource type="AudioStream" uid="uid://b5vijeuq114j3" path="res://assets/audio/slashshot.mp3" id="2_3arbs"]
+[ext_resource type="AudioStream" uid="uid://bs6u0275h8oso" path="res://assets/audio/slash.mp3" id="3_s267n"]
 [ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="3_ul3u2"]
 [ext_resource type="Texture2D" uid="uid://d21j5nvg6bhx1" path="res://assets/Weapons/Boots/Boot_Chomwing.png" id="4_o4pyo"]
 
@@ -12,4 +14,5 @@ description = "Ammo-. Its bullets fly through walls."
 weapon_type = 3
 bullet_scene = ExtResource("1_3arbs")
 but_bane_this = 2
+extra_bullet_sfx = ExtResource("3_s267n")
 metadata/_custom_type_script = "uid://hig2h24o38p0"

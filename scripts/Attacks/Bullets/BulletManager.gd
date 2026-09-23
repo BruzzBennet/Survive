@@ -83,13 +83,15 @@ func shot_pattern(pos,dir,shoot_pattern,shot_is):
 			continuous_shot_triple(pos,dir)
 		"c_shot_double":
 			continuous_shot_double(pos,dir)
+		"short_shot":
+			simple_shot(pos,dir,0.25)
 		null:
 			simple_shot(pos,dir)
 
 func no_shot():
 	pass
 
-func simple_shot(pos,dir):
+func simple_shot(pos,dir,dur:=1.0):
 	var anim_name
 	var bullet=bullet_scene.instantiate()
 	bullet.new_pierce(pierce)
@@ -108,7 +110,7 @@ func simple_shot(pos,dir):
 		bullet.get_node("AnimationPlayer").play(anim_name)
 	bullet.direction = dir.normalized()
 	bullet.speed=speed
-	bullet.max_time_on_field = time_on_field
+	bullet.max_time_on_field = time_on_field*dur
 	bullet.max_enemies_pierced = durability
 	bullet.add_to_group("bullets")
 

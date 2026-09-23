@@ -7,8 +7,8 @@ class_name Suit
 @export var description: String
 @export var boost_this: boost
 enum boost {
-    effect,
     speed,
+    effect,
     bullet_reach,
     ammo_saving,
     defense,

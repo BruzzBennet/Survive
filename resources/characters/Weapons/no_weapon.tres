@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://el7ltrdphpbv"]
+
+[ext_resource type="PackedScene" uid="uid://dcclv4wy77u2a" path="res://scenes/bullets/slash_bullet.tscn" id="1_h1sec"]
+[ext_resource type="AudioStream" uid="uid://ckoxwcvsj1unu" path="res://assets/audio/emptygun.mp3" id="2_dcl36"]
+[ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="2_h1sec"]
+
+[resource]
+script = ExtResource("2_h1sec")
+weapon_type = 4
+bullet_scene = ExtResource("1_h1sec")
+boost_this = 2
+bullet_sfx = ExtResource("2_dcl36")
+extra_bullet_sfx = ExtResource("2_dcl36")
+metadata/_custom_type_script = "uid://hig2h24o38p0"
