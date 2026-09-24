@@ -135,7 +135,8 @@ motion_mode = 1
 script = ExtResource("1_q7ugj")
 
 [node name="EnemyMovement" parent="." unique_id=1062153470 instance=ExtResource("1_wkfc6")]
-speed = 90.0
+speed = 100.0
+time_to_change_dir = 0.8
 
 [node name="FollowBox" parent="." unique_id=665233923 instance=ExtResource("2_3aiav")]
 

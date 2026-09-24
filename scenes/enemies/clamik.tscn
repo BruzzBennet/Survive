@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://baokf0masusfq"]
 
+[ext_resource type="PackedScene" uid="uid://cxx0lnyj56lld" path="res://scenes/enemies/jump.tscn" id="1_0j5im"]
 [ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="1_vrar2"]
 [ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="2_0j5im"]
 [ext_resource type="Texture2D" uid="uid://t5m55tnu7elx" path="res://assets/Enemies/Clamik-Sheet.png" id="2_4kxel"]
@@ -7,7 +8,8 @@
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="4_bakjf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t1ttg"]
-radius = 14.0
+radius = 11.0
+height = 26.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bakjf"]
 shader = ExtResource("2_0j5im")
@@ -43,6 +45,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [Vector2(25, 0), Vector2(23, 2), Vector2(3, 20), Vector2(-10, 17), Vector2(-22, -3), Vector2(-20, -10), Vector2(3, -24), Vector2(13, -21)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../HurtBox/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2857143, 0.42857143, 0.5714286, 0.85714287, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-4, 2), Vector2(0, -1), Vector2(3, 1), Vector2(4, 3), Vector2(0, 5), Vector2(-2, 3.5)]
+}
 
 [sub_resource type="Animation" id="Animation_cllw4"]
 length = 0.001
@@ -70,6 +84,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(25, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../HurtBox/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ji4b5"]
 _data = {
@@ -90,6 +116,10 @@ radius = 9.0
 height = 24.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=284202086]
+collision_layer = 2
+collision_mask = 3
+
+[node name="Jump" parent="." unique_id=1671140223 instance=ExtResource("1_0j5im")]
 
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("1_vrar2")]
 max_health = 3

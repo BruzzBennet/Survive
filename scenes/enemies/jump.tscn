@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cxx0lnyj56lld"]
+
+[ext_resource type="Script" uid="uid://ddibrqcvtnsiu" path="res://scripts/Enemies/jumping.gd" id="1_u07if"]
+
+[node name="Jump" type="Node2D" unique_id=1671140223]
+script = ExtResource("1_u07if")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=683106847]
+volume_db = -5.0

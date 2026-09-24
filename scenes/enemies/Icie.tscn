@@ -652,7 +652,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fu0ok"]
-radius = 48.0
+radius = 64.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aorp8"]
 radius = 8.0
@@ -687,6 +687,8 @@ root_node = NodePath("../Sprite")
 libraries/ = SubResource("AnimationLibrary_q7fmb")
 
 [node name="EnemyMovement" parent="." unique_id=1062153470 instance=ExtResource("2_fu0ok")]
+speed = 75.0
+time_to_change_dir = 1.0
 
 [node name="FollowBox" parent="." unique_id=665233923 instance=ExtResource("3_s1ktm")]
 follow_sfx = ExtResource("4_fu0ok")

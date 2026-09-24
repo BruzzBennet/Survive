@@ -25,7 +25,8 @@ var map_texture
 
 func _ready():
 	BGM.playOverworldMusic()
-	map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
+	# map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
+	map_texture=preload("res://assets/Tiles/TilesS.png")
 	$Map.tile_set.get_source(4).texture = map_texture
 	$PlayerSpawn.spawn_player()
 	$Node2D/Suit.add_child(spawn_weapon(blade))

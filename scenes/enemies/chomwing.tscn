@@ -775,7 +775,7 @@ radius = 6.0
 height = 22.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6uv0u"]
-radius = 48.0
+radius = 128.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1839844215]
 collision_layer = 2
@@ -792,6 +792,8 @@ frame = 1
 libraries/ = SubResource("AnimationLibrary_k4wci")
 
 [node name="EnemyMovement" parent="." unique_id=1062153470 instance=ExtResource("3_6uv0u")]
+speed = 100.0
+time_to_change_dir = 3.0
 
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("2_88rwa")]
 collision_layer = 2
@@ -818,7 +820,6 @@ position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_r6aag")
 
 [node name="FollowBox" parent="." unique_id=665233923 instance=ExtResource("7_ec30e")]
-visible = false
 follow_sfx = ExtResource("8_6uv0u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FollowBox" unique_id=405793208]

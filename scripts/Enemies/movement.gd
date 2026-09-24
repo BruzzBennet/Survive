@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var speed = 70.0
+@export var time_to_change_dir:=1.6
 const margin = 12
 var screen_size: Vector2
 var last_direction = Vector2.RIGHT
@@ -20,7 +21,7 @@ func _physics_process(_delta):
 	move()
 	if !chasing:
 		idle_time += _delta
-		if idle_time >= 1.6:
+		if idle_time >= time_to_change_dir:
 			last_direction = choose([Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN])
 			idle_time = 0.0
 	process_animation(last_direction)
@@ -32,7 +33,21 @@ func move():
 		boost = 1.0
 	this_enemy.velocity = last_direction * speed * boost
 	this_enemy.move_and_slide()
+	if this_enemy.get_slide_collision_count() > 0:
+		change_direction_after_wall()
 	
+func change_direction_after_wall():
+
+	if last_direction.x != 0:
+		last_direction = choose([
+			Vector2.UP,
+			Vector2.DOWN
+		])
+	else:
+		last_direction = choose([
+			Vector2.LEFT,
+			Vector2.RIGHT
+		])
 
 func play_animation(dir: Vector2) -> void:
 	var anim_name := "0"

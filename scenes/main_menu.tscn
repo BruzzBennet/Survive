@@ -1,11 +1,100 @@
 [gd_scene format=3 uid="uid://dmtjr0x5ddkvr"]
 
-[ext_resource type="Script" uid="uid://c4wa4pso7t1kk" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Script" uid="uid://c4wa4pso7t1kk" path="res://scripts/Menus/main_menu.gd" id="1_l6cm7"]
 [ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="2_ekxnf"]
+[ext_resource type="AudioStream" uid="uid://dm0ceqj6opueb" path="res://assets/audio/(A2) StartMenu.mp3" id="2_oa1go"]
+[ext_resource type="Texture2D" uid="uid://d3f3st34istlf" path="res://assets/MainMenu/MonRangerbg.png" id="2_rtw2f"]
 [ext_resource type="PackedScene" uid="uid://d4fsptvwptuf4" path="res://scenes/ctr_shader.tscn" id="3_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://dgure16j48d54" path="res://assets/MainMenu/MonRangerS.png" id="6_oa1go"]
+[ext_resource type="Texture2D" uid="uid://bg38b72j8en1p" path="res://assets/MainMenu/MonRangerLogoS1.png" id="6_rtw2f"]
+
+[sub_resource type="Animation" id="Animation_oa1go"]
+resource_name = "Idle"
+length = 3.6
+loop_mode = 1
+step = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MonRangerS:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2, 1.8, 2.4, 3, 3.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(485, 190), Vector2(485, 195), Vector2(485, 190), Vector2(485, 195), Vector2(485, 190), Vector2(485, 195), Vector2(485, 190)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MonRangerbg:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(376.00003, 158.00002), Vector2(264.00003, 159)]
+}
+
+[sub_resource type="Animation" id="Animation_tbmy8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MonRangerS:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(485, 200)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MonRangerbg:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(264.00003, 158.00002)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jk1qb"]
+_data = {
+&"Idle": SubResource("Animation_oa1go"),
+&"RESET": SubResource("Animation_tbmy8")
+}
 
 [node name="MainMenu" type="Node2D" unique_id=863299943]
 script = ExtResource("1_l6cm7")
+
+[node name="Song" type="AudioStreamPlayer2D" parent="." unique_id=1661417496]
+stream = ExtResource("2_oa1go")
+volume_db = -10.0
+autoplay = true
+
+[node name="MonRangerbg" type="Sprite2D" parent="." unique_id=1508478148]
+position = Vector2(264.00003, 158.00002)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("2_rtw2f")
+
+[node name="MonRangerLogoS1" type="Sprite2D" parent="." unique_id=1975867259]
+position = Vector2(230, 76)
+texture = ExtResource("6_rtw2f")
+
+[node name="MonRangerS" type="Sprite2D" parent="." unique_id=181612438]
+position = Vector2(485, 200)
+texture = ExtResource("6_oa1go")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=200994261]
+libraries/ = SubResource("AnimationLibrary_jk1qb")
+autoplay = &"Idle"
 
 [node name="ButtonManager" type="Control" parent="." unique_id=781544773]
 layout_mode = 3
@@ -15,10 +104,10 @@ offset_bottom = 320.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ButtonManager" unique_id=1736847011]
 layout_mode = 0
-offset_left = 240.0
-offset_top = 80.0
-offset_right = 390.0
-offset_bottom = 230.0
+offset_left = 147.375
+offset_top = 116.375
+offset_right = 297.375
+offset_bottom = 266.375
 alignment = 1
 
 [node name="Start" type="Button" parent="ButtonManager/VBoxContainer" unique_id=1580976897]
