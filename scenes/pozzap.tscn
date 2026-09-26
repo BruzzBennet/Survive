@@ -4,9 +4,7 @@
 [ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="2_edv5l"]
 [ext_resource type="Texture2D" uid="uid://6wt63q18jrb4" path="res://assets/Enemies/PozzapSheet.png" id="2_qwm0m"]
 [ext_resource type="PackedScene" uid="uid://ffrii0cvnsbc" path="res://scenes/enemies/enemy_movement.tscn" id="4_njonf"]
-[ext_resource type="PackedScene" uid="uid://bebyjivuy8kc1" path="res://scenes/boxes/followbox.tscn" id="4_v28d2"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="5_p51up"]
-[ext_resource type="AudioStream" uid="uid://b88j8ammhw066" path="res://assets/audio/Pozzap.wav" id="6_dmctb"]
 [ext_resource type="Script" uid="uid://km7uun1qgqgv" path="res://scripts/Enemies/Manager/PozzapElecShot.gd" id="6_p51up"]
 [ext_resource type="Script" uid="uid://cmxq4ewt74u6" path="res://scripts/Particles/Manager/died_fx_manager.gd" id="6_qhhgb"]
 [ext_resource type="PackedScene" uid="uid://c1r331jkecm7i" path="res://scenes/DiedExplosion.tscn" id="7_edv5l"]
@@ -18,9 +16,6 @@
 shader = ExtResource("2_edv5l")
 shader_parameter/flash_modifier = 0.0
 shader_parameter/flash_color = Color(1, 0, 0, 1)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_njonf"]
-radius = 48.0
 
 [sub_resource type="Resource" id="Resource_v28d2"]
 script = ExtResource("5_p51up")
@@ -938,13 +933,6 @@ frame = 1
 
 [node name="EnemyMovement" parent="." unique_id=1062153470 instance=ExtResource("4_njonf")]
 
-[node name="FollowBox" parent="." unique_id=665233923 instance=ExtResource("4_v28d2")]
-follow_sfx = ExtResource("6_dmctb")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FollowBox" unique_id=2065936538]
-shape = SubResource("CircleShape2D_njonf")
-debug_color = Color(1, 1, 0.70000815, 0.42000002)
-
 [node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("9_p51up")]
 collision_layer = 2
 collision_mask = 8
@@ -978,6 +966,7 @@ script = ExtResource("6_qhhgb")
 fx_scene = ExtResource("7_edv5l")
 
 [node name="Timer" type="Timer" parent="." unique_id=1338123486]
+wait_time = 2.0
 autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=625720989]

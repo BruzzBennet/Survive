@@ -16,18 +16,22 @@ var item =[
 			preload("res://scenes/items/blade_item.tscn")
 		]
 var boot=[
+			preload("res://resources/items/Boot_1.tres"),
 			preload("res://resources/items/Boot_Chomwing.tres"),
 			preload("res://resources/items/Boot_Icie.tres"),
 			preload("res://resources/items/Boot_Pozzap.tres"),
 			preload("res://resources/items/Boot_Bombry.tres")
 		]
 var gun=[
+			preload("res://resources/items/Gun_Lazer.tres"),
 			preload("res://resources/items/Gun_Bombry.tres"),
 			preload("res://resources/items/Gun_Chomwing.tres")
 		]
 var blade=[
+			preload("res://resources/items/Blade_1.tres"),
 			preload("res://resources/items/Blade_Bombry.tres"),
-			preload("res://resources/items/Blade_Pozzap.tres")
+			preload("res://resources/items/Blade_Pozzap.tres"),
+			preload("res://resources/items/Blade_Icie.tres")
 		]
 var suit=[
 			preload("res://resources/items/Suit_Chomwing.tres"),

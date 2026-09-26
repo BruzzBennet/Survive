@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b6akedjjm22h7"]
 
 [ext_resource type="Script" uid="uid://dan8rxx63nj3x" path="res://scripts/World/world.gd" id="1_fyw50"]
-[ext_resource type="PackedScene" uid="uid://b7n0ft2xn5w0y" path="res://assets/maps/Choose_Your_Weapon.tscn" id="2_r5xff"]
+[ext_resource type="PackedScene" uid="uid://b4eft45ueevd6" path="res://assets/maps/Tutorial.tscn" id="2_r5xff"]
 [ext_resource type="PackedScene" uid="uid://c8slwdh6xqobl" path="res://scenes/pause_menu.tscn" id="3_08rx5"]
 [ext_resource type="Script" uid="uid://pks0tfm1bus5" path="res://scripts/World/Resources/world_resource.gd" id="3_ja5x8"]
 [ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="4_ja5x8"]

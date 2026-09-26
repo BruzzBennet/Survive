@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://0fi1tb3y00rq"]
+
+[ext_resource type="PackedScene" uid="uid://dcclv4wy77u2a" path="res://scenes/bullets/slash_bullet.tscn" id="1_nano4"]
+[ext_resource type="AudioStream" uid="uid://b5vijeuq114j3" path="res://assets/audio/slashshot.mp3" id="2_4h5i3"]
+[ext_resource type="Script" uid="uid://cy3f5fg3iv78f" path="res://scripts/Components/effects/extra_heal.gd" id="3_8ajhy"]
+[ext_resource type="AudioStream" uid="uid://bs6u0275h8oso" path="res://assets/audio/slash.mp3" id="4_b3jbh"]
+[ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="5_8wwfb"]
+[ext_resource type="Texture2D" uid="uid://c54xvyi3k25pw" path="res://assets/Weapons/Blade/Icie_Blade.png" id="6_nano4"]
+
+[resource]
+script = ExtResource("5_8wwfb")
+sprite = ExtResource("6_nano4")
+name = "Icie Spear"
+description = "Reach-. Gain +0.5 HP when healing."
+bullet_scene = ExtResource("1_nano4")
+boost_this = 1
+but_bane_this = 1
+effect = ExtResource("3_8ajhy")
+extra_bullet_sfx = ExtResource("4_b3jbh")
+metadata/_custom_type_script = "uid://hig2h24o38p0"

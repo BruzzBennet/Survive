@@ -12,7 +12,6 @@ sprite = ExtResource("4_lx66n")
 name = "Pozzap Club"
 description = "Ammo+, Reach-"
 bullet_scene = ExtResource("1_lx66n")
-enemies_bullet_pierces = 2
 boost_this = 4
 but_bane_this = 1
 bullet_sfx = ExtResource("2_3m877")

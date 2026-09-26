@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://b6p0dyo5i7m8n"]
+
+[ext_resource type="PackedScene" uid="uid://dcclv4wy77u2a" path="res://scenes/bullets/slash_bullet.tscn" id="1_a2of1"]
+[ext_resource type="AudioStream" uid="uid://bs6u0275h8oso" path="res://assets/audio/slash.mp3" id="2_r0e2n"]
+[ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="3_aqfa0"]
+
+[resource]
+script = ExtResource("3_aqfa0")
+bullet_scene = ExtResource("1_a2of1")
+boost_this = 2
+bullet_sfx = ExtResource("2_r0e2n")
+extra_bullet_sfx = ExtResource("2_r0e2n")
+metadata/_custom_type_script = "uid://hig2h24o38p0"

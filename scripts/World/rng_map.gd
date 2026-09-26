@@ -41,7 +41,7 @@ func portal_opens():
 
 func next_round():
 	remove_items()
-	current_level+=1
+	GLOBAL.current_level+=1
 	if GLOBAL.starting_enemy_amount<36:
 		# GLOBAL.increase_dificulty +=0.5
 		# if GLOBAL.increase_dificulty >= 1.5:

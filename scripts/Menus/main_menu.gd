@@ -14,7 +14,7 @@ func _on_start_pressed() -> void:
 	PLAYSFX.start_tune()
 	await $Transition/AnimationPlayer.animation_finished
 	BGM.playStageMusic()
-	get_tree().change_scene_to_file("res://scenes/worlds/start_world.tscn")
+	get_tree().change_scene_to_file(GLOBAL.starting_level)
 
 func _on_options_pressed() -> void:
 	was_pressed=true

@@ -1,10 +1,11 @@
 extends Control
 
-@onready var max_hp=5.0
+@onready var max_hp
 @onready var healthbar = %HPBar
 @onready var hp_shown := healthbar.material as ShaderMaterial
 
 func _ready():
+ max_hp=GLOBAL.base_health
  edit_max_hp(max_hp)
  set_value(GLOBAL.health, false)
 

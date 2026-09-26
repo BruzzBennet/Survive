@@ -4,7 +4,7 @@ class_name HurtBox_Component
 var died_fx: PackedScene = preload("res://scenes/DiedExplosion.tscn")
 var hurt_fx: PackedScene = preload("res://scenes/hurtParticles.tscn")
 var shared_material: ShaderMaterial
-@export var max_health: int = 1
+@export var max_health: float = 1.0
 @export var takes_damage_from: attack_source
 @export var score_value: int = 50
 @export var receives_knockback: bool = false
@@ -48,6 +48,7 @@ func _ready():
 			set_collision_mask_value(3, true)
 			set_collision_mask_value(5, true)
 			health=GLOBAL.health
+			max_health=GLOBAL.base_health
 	elif takes_damage_from == attack_source.player:
 			set_collision_layer_value(2, true)
 			set_collision_mask_value(4, true)

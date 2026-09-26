@@ -17,8 +17,9 @@ func _ready() -> void:
 	chasing = false
 
 func _physics_process(_delta):
-	this_enemy.position = this_enemy.position.clamp(Vector2(margin, 40), Vector2(screen_size.x - margin, screen_size.y - margin))
 	move()
+	check_margins()
+	this_enemy.position = this_enemy.position.clamp(Vector2(margin, 40), Vector2(screen_size.x - margin, screen_size.y - margin))
 	if !chasing:
 		idle_time += _delta
 		if idle_time >= time_to_change_dir:
@@ -36,6 +37,30 @@ func move():
 	if this_enemy.get_slide_collision_count() > 0:
 		change_direction_after_wall()
 	
+func check_margins():
+
+	var pos = this_enemy.position
+
+	if pos.x <= margin:
+		# Hit left edge → choose vertical direction
+		if last_direction.x < 0:
+			change_direction_after_wall()
+
+	elif pos.x >= screen_size.x - margin:
+		# Hit right edge → choose vertical direction
+		if last_direction.x > 0:
+			change_direction_after_wall()
+
+	elif pos.y <= 40:
+		# Hit top edge → choose horizontal direction
+		if last_direction.y < 0:
+			change_direction_after_wall()
+
+	elif pos.y >= screen_size.y - margin:
+		# Hit bottom edge → choose horizontal direction
+		if last_direction.y > 0:
+			change_direction_after_wall()
+
 func change_direction_after_wall():
 
 	if last_direction.x != 0:

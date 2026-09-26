@@ -38,7 +38,7 @@ func _on_restart_pressed() -> void:
 	PLAYSFX.MenuSelect()
 	GLOBAL.restart()
 	BGM.playStageMusic()
-	get_tree().change_scene_to_file("res://scenes/worlds/start_world.tscn")
+	get_tree().change_scene_to_file(GLOBAL.starting_level)
 
 func _process(_delta):
 	pause_screen()

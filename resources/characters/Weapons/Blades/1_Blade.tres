@@ -12,7 +12,6 @@ sprite = ExtResource("4_h6wiw")
 name = "Blade"
 description = "Strong but short range. Wastes the least Ammo"
 bullet_scene = ExtResource("1_lxcnd")
-enemies_bullet_pierces = 2
 boost_this = 2
 extra_bullet_sfx = ExtResource("2_tjtrc")
 metadata/_custom_type_script = "uid://hig2h24o38p0"

@@ -54,7 +54,7 @@ func _on_area_2d_body_entered(body) -> void:
 	if body is Player_Unit:
 		match item.item_is:
 			item.item_type.weapon:
-				if GLOBAL.weapon.weapon_type != item.weapon.weapon_type:
+				if GLOBAL.weapon.weapon_type != item.weapon.weapon_type or GLOBAL.weapon==preload("res://resources/characters/Weapons/weaponless.tres"):
 					call_deferred("switch_weapon", item.weapon, body)
 				else:
 					body.equip_weapon(item.weapon,GLOBAL.suit)

@@ -12,7 +12,6 @@ sprite = ExtResource("4_ewktf")
 name = "Bomb Club"
 description = "Reach-. Bullets explode on impact."
 bullet_scene = ExtResource("1_c3s3l")
-enemies_bullet_pierces = 2
 but_bane_this = 1
 bullet_sfx = ExtResource("2_mxga4")
 extra_bullet_sfx = ExtResource("2_ewktf")

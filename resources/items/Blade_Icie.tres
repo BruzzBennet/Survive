@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bw4s680n2ywxu"]
+
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="1_5bn3m"]
+[ext_resource type="Resource" uid="uid://0fi1tb3y00rq" path="res://resources/characters/Weapons/Blades/Icie_Blade.tres" id="2_lcud4"]
+
+[resource]
+script = ExtResource("1_5bn3m")
+item_is = 1
+weapon = ExtResource("2_lcud4")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"
