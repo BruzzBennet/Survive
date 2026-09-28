@@ -1,13 +1,13 @@
 extends Node2D
 
-var tile_maps =[
-			preload("res://assets/Tiles/Tiles.png"),
-			preload("res://assets/Tiles/Tiles1.png"),
-			preload("res://assets/Tiles/Tiles2.png"),
-			preload("res://assets/Tiles/Tiles3.png"),
-			preload("res://assets/Tiles/Tiles4.png"),
-			preload("res://assets/Tiles/Tiles5.png")
-		]
+# var tile_maps =[
+# 			preload("res://assets/Tiles/Tiles.png"),
+# 			preload("res://assets/Tiles/Tiles1.png"),
+# 			preload("res://assets/Tiles/Tiles2.png"),
+# 			preload("res://assets/Tiles/Tiles3.png"),
+# 			preload("res://assets/Tiles/Tiles4.png"),
+# 			preload("res://assets/Tiles/Tiles5.png")
+# 		]
 var item =[
 			preload("res://scenes/items/suit_item.tscn"),
 			preload("res://scenes/items/boot_item.tscn"),
@@ -47,8 +47,8 @@ var map_texture
 
 func _ready():
 	BGM.ShopTheme()
-	map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
-	$Map.tile_set.get_source(4).texture = map_texture
+	# map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
+	# $Map.tile_set.get_source(4).texture = map_texture
 	$PlayerSpawn.spawn_player()
 	$Node2D/Suit.add_child(create_item(item))
 	$Node2D/Weapon.add_child(create_item(item))

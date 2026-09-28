@@ -1,6 +1,7 @@
 extends Resource
 class_name Item
 
+@export var mon_sprite: Texture2D
 @export var name: String
 @export var description: String
 @export var item_is: item_type

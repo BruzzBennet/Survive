@@ -1,10 +1,12 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://dvctsiu6as6g8"]
 
+[ext_resource type="Texture2D" uid="uid://c5l3s62fram2m" path="res://assets/cards/Mons/pozzap.png" id="1_1vm1f"]
 [ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="1_8otyb"]
 [ext_resource type="Resource" uid="uid://dakpg7dnutbts" path="res://resources/characters/MR/Suits/Pozzap.tres" id="2_1vm1f"]
 
 [resource]
 script = ExtResource("1_8otyb")
+mon_sprite = ExtResource("1_1vm1f")
 item_is = 2
 suit = ExtResource("2_1vm1f")
 metadata/_custom_type_script = "uid://c38u5aaaos1gy"

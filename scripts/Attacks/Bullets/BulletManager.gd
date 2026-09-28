@@ -26,24 +26,23 @@ func setup(bullet:Weapon, boost:Suit):
 
 func modifiers(this_suit:Variant,increase_by:int=1):
 	var boost_bane = 0.25*increase_by
-	var reach_boost=0.0
+	# var reach_boost=0.0
 	var damage_boost=0.0
 	
 	if this_suit.boost:
 		match this_suit.boost_this:
 				this_suit.boost.bullet_reach:
-					reach_boost+=boost_bane/2
+					time_on_field=weapon.bullet_time_on_field/2.25
 				this_suit.boost.bullet_pierce:
 					pierce+=1
 	if this_suit.bane:
 		match this_suit.but_bane_this:
 				this_suit.bane.bullet_reach:
-					reach_boost-=boost_bane/2
+					time_on_field=weapon.bullet_time_on_field/2.25
 				this_suit.bane.bullet_damage:
 					damage_boost-=(boost_bane*2)
-	
-	time_on_field+=reach_boost
-	bullet_damage+=damage_boost
+					bullet_damage+=damage_boost
+
 
 func playsfx(shot_pattern_is=null):
 	var sfx = $AudioStreamPlayer2D
@@ -111,6 +110,7 @@ func simple_shot(pos,dir,dur:=1.0):
 	bullet.direction = dir.normalized()
 	bullet.speed=speed
 	bullet.max_time_on_field = time_on_field*dur
+	# print(str(bullet.max_time_on_field))
 	bullet.max_enemies_pierced = durability
 	bullet.add_to_group("bullets")
 

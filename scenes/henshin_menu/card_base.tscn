@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://csbksfn8wegm7"]
+
+[ext_resource type="Script" uid="uid://dap4owc1csu1r" path="res://scripts/Menus/henshin_menu/card.gd" id="1_cj6du"]
+[ext_resource type="Texture2D" uid="uid://lqntlnhad3wa" path="res://assets/cards/Card.png" id="4_deeji"]
+
+[node name="CardBase" type="Node2D" unique_id=706061897]
+script = ExtResource("1_cj6du")
+
+[node name="Card" type="Sprite2D" parent="." unique_id=155985345]
+texture = ExtResource("4_deeji")
+
+[node name="Mon" type="Sprite2D" parent="." unique_id=1831833925]
+position = Vector2(24, 12)
+offset = Vector2(-24, -21)
+
+[node name="Type" type="Sprite2D" parent="." unique_id=1602442849]
+position = Vector2(0, 15)

@@ -96,7 +96,7 @@ func modifiers(this_suit:Variant,boost_bane:float,increase_by:int=1):
 			this_suit.boost.speed:
 				max_speed += GLOBAL.max_speed * 0.5
 			this_suit.boost.ammo_saving:
-				atkUI.depletion_rate = GLOBAL.ammo - 0.25
+				atkUI.depletion_rate = GLOBAL.ammo - 0.35
 			this_suit.boost.defense:
 				$HurtBox.defense = GLOBAL.defense + (0.5)
 			this_suit.boost.effect:
@@ -117,7 +117,7 @@ func modifiers(this_suit:Variant,boost_bane:float,increase_by:int=1):
 			this_suit.bane.speed:
 				max_speed -= GLOBAL.max_speed * 0.5
 			this_suit.bane.ammo_saving:
-				atkUI.depletion_rate = GLOBAL.ammo + 0.25
+				atkUI.depletion_rate = GLOBAL.ammo + 0.35
 			this_suit.bane.defense:
 				$HurtBox.defense = GLOBAL.defense - (0.5)
 
