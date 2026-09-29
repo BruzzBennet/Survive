@@ -79,6 +79,7 @@ func spawn_player():
 	var player = spawn_this_player.instantiate()
 	get_tree().current_scene.add_child(player)
 	player.position = global_position
+	# player.reset_stats()
 	player.equip_weapon(GLOBAL.weapon,GLOBAL.suit)
 	player.equip_suit(GLOBAL.suit,GLOBAL.weapon)
 

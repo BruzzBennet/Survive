@@ -8,6 +8,11 @@
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="5_0kfug"]
 [ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="5_ros7y"]
 [ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="6_0kfug"]
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="9_i0e0g"]
+[ext_resource type="Resource" uid="uid://dbqq03a30b587" path="res://resources/items/Gun_Bombry.tres" id="10_q7afn"]
+[ext_resource type="Resource" uid="uid://c3fqsy8yu0i2o" path="res://resources/items/Boot_Bombry.tres" id="11_aejcd"]
+[ext_resource type="Resource" uid="uid://bqtx48kbeccts" path="res://resources/items/Suit_Bombry.tres" id="12_lgeaq"]
+[ext_resource type="Resource" uid="uid://24keyjcrskmc" path="res://resources/items/Blade_Bombry.tres" id="13_pqtu3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eb7jf"]
 radius = 96.0
@@ -165,6 +170,7 @@ libraries/ = SubResource("AnimationLibrary_pqtu3")
 collision_layer = 2
 collision_mask = 8
 score_value = 100
+items_it_can_drop = Array[ExtResource("9_i0e0g")]([ExtResource("10_q7afn"), ExtResource("11_aejcd"), ExtResource("12_lgeaq"), ExtResource("13_pqtu3")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=924731486]
 position = Vector2(0, 1)

@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://djt8688q21i1j"]
 
-[ext_resource type="Script" uid="uid://cn1xrfoesrja4" path="res://scripts/Enemies/icie.gd" id="1_l6580"]
 [ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="2_1awcq"]
 [ext_resource type="PackedScene" uid="uid://ffrii0cvnsbc" path="res://scenes/enemies/enemy_movement.tscn" id="2_fu0ok"]
 [ext_resource type="Texture2D" uid="uid://beplf6glrkbnu" path="res://assets/Enemies/Icie.png" id="2_s1ktm"]
@@ -9,6 +8,11 @@
 [ext_resource type="AudioStream" uid="uid://bi85dc6igdck0" path="res://assets/audio/complaint.wav" id="4_fu0ok"]
 [ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="4_l6580"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="5_1awcq"]
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="7_vjgsm"]
+[ext_resource type="Resource" uid="uid://cqagoe3l62t02" path="res://resources/items/Suit_Icie.tres" id="8_450o4"]
+[ext_resource type="Resource" uid="uid://esu63s8l24lr" path="res://resources/items/Boot_Icie.tres" id="9_q7fmb"]
+[ext_resource type="Resource" uid="uid://bw4s680n2ywxu" path="res://resources/items/Blade_Icie.tres" id="10_aorp8"]
+[ext_resource type="Resource" uid="uid://df2nbd23piwyc" path="res://resources/items/healing_item.tres" id="11_f3q5m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ydeur"]
 shader = ExtResource("2_1awcq")
@@ -673,7 +677,6 @@ radius = 10.049875
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=145538635]
 collision_layer = 2
 collision_mask = 11
-script = ExtResource("1_l6580")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1404793085]
 material = SubResource("ShaderMaterial_ydeur")
@@ -700,6 +703,7 @@ debug_color = Color(1, 1, 0, 0.42000002)
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("3_fu0ok")]
 collision_layer = 2
 collision_mask = 8
+items_it_can_drop = Array[ExtResource("7_vjgsm")]([ExtResource("8_450o4"), ExtResource("9_q7fmb"), ExtResource("10_aorp8"), ExtResource("11_f3q5m")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=295741136]
 position = Vector2(0, 1)

@@ -6,8 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://ffrii0cvnsbc" path="res://scenes/enemies/enemy_movement.tscn" id="3_6uv0u"]
 [ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="3_jsaom"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="4_ec30e"]
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="5_q2ogp"]
+[ext_resource type="Resource" uid="uid://ch3spvnhbrq0q" path="res://resources/items/Gun_Chomwing.tres" id="6_k4wci"]
+[ext_resource type="Resource" uid="uid://00xevbr7aupb" path="res://resources/items/Boot_Chomwing.tres" id="7_2mpat"]
 [ext_resource type="PackedScene" uid="uid://bebyjivuy8kc1" path="res://scenes/boxes/followbox.tscn" id="7_ec30e"]
 [ext_resource type="AudioStream" uid="uid://dux2y88mw0k6e" path="res://assets/audio/bib.wav" id="8_6uv0u"]
+[ext_resource type="Resource" uid="uid://cm62tiaa87qic" path="res://resources/items/Suit_Chomwing.tres" id="8_p00xj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ec30e"]
 shader = ExtResource("2_jsaom")
@@ -798,6 +802,7 @@ time_to_change_dir = 3.0
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("2_88rwa")]
 collision_layer = 2
 collision_mask = 8
+items_it_can_drop = Array[ExtResource("5_q2ogp")]([ExtResource("6_k4wci"), ExtResource("7_2mpat"), ExtResource("8_p00xj")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=829194139]
 position = Vector2(0, -1)

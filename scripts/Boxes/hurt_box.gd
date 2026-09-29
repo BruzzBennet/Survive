@@ -9,8 +9,10 @@ var shared_material: ShaderMaterial
 @export var score_value: int = 50
 @export var receives_knockback: bool = false
 @export var gets_stunned: bool = false
+@export var items_it_can_drop : Array[Item]
 var defense:= 0.0
 var extra_heal=0.0
+var drops_items:bool
 
 enum attack_source {
 	player,
@@ -49,12 +51,14 @@ func _ready():
 			set_collision_mask_value(5, true)
 			health=GLOBAL.health
 			max_health=GLOBAL.base_health
+			drops_items=false
 	elif takes_damage_from == attack_source.player:
 			set_collision_layer_value(2, true)
 			set_collision_mask_value(4, true)
 			set_collision_mask_value(5, true)
 			set_collision_mask_value(6, true)
 			health = max_health
+			drops_items=true
 
 	if takes_damage_from == attack_source.enemy:
 		sprite = get_parent().get_node("Skeleton/Sprite")
@@ -213,15 +217,32 @@ func dead_enemy():
 	died.emit()
 	SCORE.increaseBy(score_value)
 	PLAYSFX.died()
-	if yes_or_no_healer==1:
+	var drop_item = randi_range(0,2)
+	if drop_item==1:
 		call_deferred("item_drop")
 		
 
 func item_drop():
-	var slusshie=preload("res://scenes/items/healing_item.tscn")
-	var slushie = slusshie.instantiate()
-	slushie.global_position=global_position
-	get_tree().current_scene.add_child(slushie)
+	# var slusshie=preload("res://scenes/items/healing_item.tscn")
+	# var slushie = slusshie.instantiate()
+	# slushie.global_position=global_position
+	# get_tree().current_scene.add_child(slushie)
+	if !items_it_can_drop.is_empty():
+		var item_dropped=items_it_can_drop.pick_random()
+		if item_dropped.item_is != item_dropped.item_type.normal_item:
+			var card_item_drop=preload("res://scenes/items/card_item.tscn")
+			var card_drop = card_item_drop.instantiate()
+			card_drop.global_position=global_position
+			# print(str(item_dropped))
+			card_drop.add_item(item_dropped)
+			get_tree().current_scene.add_child(card_drop)
+		else:
+			spawn(item_dropped.item_scene)
+
+func spawn(this: Variant):
+	var spawn_this=this.instantiate()
+	spawn_this.global_position=global_position
+	get_tree().current_scene.add_child(spawn_this)
 
 func gameover():
 	var death_timer = get_tree().current_scene.get_node("DeathTimer")
@@ -229,7 +250,7 @@ func gameover():
 	BGM.GameOver()
 	var bus_index = AudioServer.get_bus_index("SFX")
 	AudioServer.set_bus_mute(bus_index, true)
-
+	
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Healing_Item:

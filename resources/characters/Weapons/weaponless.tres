@@ -6,6 +6,7 @@
 
 [resource]
 script = ExtResource("3_aqfa0")
+weapon_type = 4
 bullet_scene = ExtResource("1_a2of1")
 boost_this = 2
 bullet_sfx = ExtResource("2_r0e2n")

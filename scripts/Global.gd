@@ -28,15 +28,33 @@ var defense = 0
 var ammo = 1.0
 
 func restart():
-    SCORE.actual=0
-    player_type=base_player_type
-    weapon = base_weapon
-    suit= base_suit
-    starting_enemy_amount= base_enemy_amount
-    increase_dificulty = 0.0
-    max_speed = 185
-    health=base_health
-    melee_damage = 2.0
-    defense = 0
-    ammo = 1.0
-    current_level= 1
+	SCORE.actual=0
+	player_type=base_player_type
+	weapon = base_weapon
+	suit= base_suit
+	starting_enemy_amount= base_enemy_amount
+	increase_dificulty = 0.0
+	max_speed = 185
+	health=base_health
+	melee_damage = 2.0
+	defense = 0
+	ammo = 1.0
+	current_level= 1
+
+var suits : Array[Suit] 
+var weapons : Array[Weapon] 
+var deck_size:= 3
+
+func add_weapon(weapon_added:Weapon):
+	if weapons.size() < deck_size:
+		weapons.append(weapon_added)
+		print("Weapon amount: "+str(weapons.size()))
+	else:
+		print("weapons full!")
+
+func add_suit(suit_added:Suit):
+	if suits.size() < deck_size:
+		suits.append(suit_added)
+		print("Suit amount: "+str(suits.size()))
+	else:
+		print("suits full!")

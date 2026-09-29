@@ -10,7 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://c1r331jkecm7i" path="res://scenes/DiedExplosion.tscn" id="7_edv5l"]
 [ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="7_qhhgb"]
 [ext_resource type="PackedScene" uid="uid://eql24fk7r6lp" path="res://scenes/EnemyElecShot.tscn" id="7_v28d2"]
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="8_pdacj"]
 [ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="9_p51up"]
+[ext_resource type="Resource" uid="uid://cenaegryconho" path="res://resources/items/Boot_Pozzap.tres" id="9_sa7vm"]
+[ext_resource type="Resource" uid="uid://dvctsiu6as6g8" path="res://resources/items/Suit_Pozzap.tres" id="10_8306c"]
+[ext_resource type="Resource" uid="uid://dbh3l8052c48q" path="res://resources/items/Blade_Pozzap.tres" id="11_grlkr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qhhgb"]
 shader = ExtResource("2_edv5l")
@@ -947,6 +951,7 @@ debug_color = Color(1, 0, 0, 0.25)
 collision_layer = 2
 collision_mask = 8
 score_value = 100
+items_it_can_drop = Array[ExtResource("8_pdacj")]([ExtResource("9_sa7vm"), ExtResource("10_8306c"), ExtResource("11_grlkr")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=273972341]
 position = Vector2(0, -1)

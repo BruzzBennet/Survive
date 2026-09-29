@@ -27,9 +27,10 @@ var shot_pattern
 var idle_time = 0.0
 var invincible_time=0.0
 var start_end = false
+var ammo_reduce
 
 func _ready():
-	max_speed=GLOBAL.max_speed
+	reset_stats()
 	$HurtBox.becomes_invincible(false)
 	if suit:
 		$Skeleton/Head_Back.texture = suit.helmet
@@ -45,7 +46,7 @@ func _ready():
 
 func equip_weapon(this_weapon:Weapon, this_suit:Suit):
 	var boost_bane = 0.25
-	modifiers(GLOBAL.weapon,boost_bane,-1)
+	# modifiers(GLOBAL.weapon,boost_bane,-1)
 	GLOBAL.weapon=this_weapon
 	$Skeleton/Weapon_Back.texture = this_weapon.sprite
 	$Skeleton/Weapon_Front.texture = this_weapon.sprite
@@ -65,13 +66,13 @@ func weapon_attack_pattern(this_weapon:Weapon):
 			melee_shot_pattern = "short_shot"
 			shot_pattern = "simple_shot"
 		Weapon.type.none:
-			melee_shot_pattern = "no_shot"
-			shot_pattern = "no_shot"
+			melee_shot_pattern = "short_shot"
+			shot_pattern = "medium_shot"
 
 func equip_suit(this_suit:Suit,_this_weapon:Weapon):
 	if this_suit:
 		var boost_bane = 0.25
-		modifiers(GLOBAL.suit,boost_bane,-1)
+		# modifiers(GLOBAL.suit,boost_bane,-1)
 		$Skeleton/Head_Back.texture = this_suit.helmet
 		$Skeleton/Head_Front.texture = this_suit.helmet
 		GLOBAL.player_palette=this_suit.body_palette
@@ -81,12 +82,16 @@ func equip_suit(this_suit:Suit,_this_weapon:Weapon):
 	else:
 		$Skeleton/Sprite.set_palette(GLOBAL.player_palette) 
 
+func reset_stats():
+	max_speed=GLOBAL.max_speed
+	# atkUI.depletion_rate = GLOBAL.ammo
+	$HurtBox.defense = GLOBAL.defense
+	ammo_reduce=GLOBAL.ammo
+	max_speed=GLOBAL.max_speed
+	# print("Original Ammo: "+str(ammo_reduce))
 
 
 func modifiers(this_suit:Variant,boost_bane:float,increase_by:int=1):
-	max_speed=GLOBAL.max_speed
-	atkUI.depletion_rate = GLOBAL.ammo
-	$HurtBox.defense = GLOBAL.defense
 	boost_bane=boost_bane*increase_by
 	$SuitEffect.set_script(null)
 	$WeaponEffect.set_script(null)
@@ -96,7 +101,7 @@ func modifiers(this_suit:Variant,boost_bane:float,increase_by:int=1):
 			this_suit.boost.speed:
 				max_speed += GLOBAL.max_speed * 0.5
 			this_suit.boost.ammo_saving:
-				atkUI.depletion_rate = GLOBAL.ammo - 0.35
+				ammo_reduce-= 0.15
 			this_suit.boost.defense:
 				$HurtBox.defense = GLOBAL.defense + (0.5)
 			this_suit.boost.effect:
@@ -117,9 +122,11 @@ func modifiers(this_suit:Variant,boost_bane:float,increase_by:int=1):
 			this_suit.bane.speed:
 				max_speed -= GLOBAL.max_speed * 0.5
 			this_suit.bane.ammo_saving:
-				atkUI.depletion_rate = GLOBAL.ammo + 0.35
+				ammo_reduce += 0.3
 			this_suit.bane.defense:
 				$HurtBox.defense = GLOBAL.defense - (0.5)
+
+	# print("Modified Ammo: "+str(ammo_reduce))
 
 
 func _physics_process(delta: float) -> void:
@@ -146,10 +153,10 @@ func _physics_process(delta: float) -> void:
 
 func attack():
 	is_attacking = true
-	if weapon.weapon_type != Weapon.type.none:
-		atkUI.reduce_by_melee()
+	# if weapon.weapon_type != Weapon.type.none:
+	atkUI.reduce_by_melee(ammo_reduce)
 	if weapon.weapon_type == Weapon.type.gun:
-		atkUI.reduce_by_melee(1.5)
+		atkUI.reduce_by_melee(ammo_reduce*1.5)
 	if atkUI.currentATK >= atkUI.min_ammo:
 		$HurtBox.cancel_flash()
 		Short_Range_Attack()
@@ -173,11 +180,12 @@ func Short_Range_Attack():
 
 func shoot():
 	if weapon.weapon_type == Weapon.type.boot:
-			atkUI.reduce(2)
+			atkUI.reduce(ammo_reduce*2)
 	elif weapon.weapon_type == Weapon.type.gun:
-			atkUI.reduce(1.5)
-	elif weapon.weapon_type != Weapon.type.none:
-		atkUI.reduce()
+			atkUI.reduce(ammo_reduce*1.5)
+	# elif weapon.weapon_type != Weapon.type.none:
+	else:
+		atkUI.reduce(ammo_reduce)
 	if atkUI.currentATK >= atkUI.min_ammo:
 		$HurtBox.cancel_flash()
 		Long_Range_Attack()

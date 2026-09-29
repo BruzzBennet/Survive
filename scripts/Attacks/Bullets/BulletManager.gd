@@ -10,19 +10,20 @@ var timeout_value = 0.1
 var bullet_damage:= 1.0
 var pierce: = 1.0
 
-func setup(bullet:Weapon, boost:Suit):
+func setup(bullet:Weapon, suit:Suit):
 	weapon=bullet
 	bullet_scene = weapon.bullet_scene
 	bullet_damage = bullet.bullet_damage
 	speed = weapon.bullet_speed
 	time_on_field = weapon.bullet_time_on_field
+	# print("Original Reach:" + str(time_on_field))
 	durability = weapon.enemies_bullet_pierces
 	shot_type=weapon.shot_type
-	modifiers(GLOBAL.weapon,-1)
+	# modifiers(GLOBAL.weapon,-1)
 	modifiers(bullet)
-	if boost:
-		modifiers(GLOBAL.suit,-1)
-		modifiers(boost)
+	if suit:
+		# modifiers(GLOBAL.suit,-1)
+		modifiers(suit)
 
 func modifiers(this_suit:Variant,increase_by:int=1):
 	var boost_bane = 0.25*increase_by
@@ -32,17 +33,18 @@ func modifiers(this_suit:Variant,increase_by:int=1):
 	if this_suit.boost:
 		match this_suit.boost_this:
 				this_suit.boost.bullet_reach:
-					time_on_field=weapon.bullet_time_on_field/2.25
+					time_on_field=time_on_field*2
 				this_suit.boost.bullet_pierce:
 					pierce+=1
 	if this_suit.bane:
 		match this_suit.but_bane_this:
 				this_suit.bane.bullet_reach:
-					time_on_field=weapon.bullet_time_on_field/2.25
+					time_on_field=time_on_field/2
 				this_suit.bane.bullet_damage:
 					damage_boost-=(boost_bane*2)
 					bullet_damage+=damage_boost
 
+	# print("Modified Reach: "+str(time_on_field))
 
 func playsfx(shot_pattern_is=null):
 	var sfx = $AudioStreamPlayer2D
@@ -84,6 +86,10 @@ func shot_pattern(pos,dir,shoot_pattern,shot_is):
 			continuous_shot_double(pos,dir)
 		"short_shot":
 			simple_shot(pos,dir,0.265)
+		"medium_shot":
+			simple_shot(pos,dir,0.5)
+		"double_shot":
+			double_shot(pos,dir)
 		null:
 			simple_shot(pos,dir)
 
@@ -123,6 +129,10 @@ func continuous_shot_triple(pos,dir):
 	await continuous_shot_double(pos,dir)
 	await get_tree().create_timer(timeout_value).timeout
 	simple_shot(pos,dir)
+
+func double_shot(pos,dir):
+	simple_shot(pos,dir.rotated(deg_to_rad(45)))
+	simple_shot(pos,dir.rotated(deg_to_rad(-45)))
 
 func triple_shot(pos,dir):
 	simple_shot(pos,dir)

@@ -8,15 +8,22 @@ var item_type_icon: String
 
 
 func _ready():
+	# print("ready to setup item!")
 	if item_summoned:
 		setup(item_summoned)
 
+func get_item():
+	return item_summoned
+
 func setup(item:Item):
-	if item.mon_sprite:
+	# print("item setup!")
+	item_summoned=item
+	if get_node_or_null("Mon") and item.mon_sprite:
 		$Mon.texture=item.mon_sprite
 	item_name = item.name
 	item_description = item.description
 	item_icon_is(item)
+	# print("item set up is: "+ str(item))
 
 
 func item_icon_is(item: Item):
