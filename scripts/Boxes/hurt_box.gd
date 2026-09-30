@@ -4,7 +4,7 @@ class_name HurtBox_Component
 var died_fx: PackedScene = preload("res://scenes/DiedExplosion.tscn")
 var hurt_fx: PackedScene = preload("res://scenes/hurtParticles.tscn")
 var shared_material: ShaderMaterial
-@export var max_health: float = 1.0
+@export var max_health: float = 0.5
 @export var takes_damage_from: attack_source
 @export var score_value: int = 50
 @export var receives_knockback: bool = false
@@ -110,7 +110,7 @@ func cancel_flash():
 func heals():
 	cancel_flash()
 	play_flash(Color.GREEN)
-	var new_hp = health+1+extra_heal
+	var new_hp = health+0.5+extra_heal
 	hp.set_value(new_hp)
 	if new_hp<=max_health:
 		health=new_hp
@@ -195,6 +195,7 @@ func add_death_explosion():
 	get_tree().current_scene.add_child(fx)
 
 func hurt_player():
+	cancel_flash()
 	play_flash(Color.RED)
 	hp.set_value(health)
 	var fx = hurt_fx.instantiate()
@@ -211,6 +212,7 @@ func hit_stun():
 func hurt_enemy():
 	PLAYSFX.hurt()
 	if sprite.material:
+		cancel_flash()
 		play_flash(Color.RED)
 
 func dead_enemy():

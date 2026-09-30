@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bcelcn2nsi8lb"]
+
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="1_cn81u"]
+[ext_resource type="Texture2D" uid="uid://dqw0etqnmrkme" path="res://assets/cards/Mons/MR_Big_Helmet.png" id="1_xx6wr"]
+[ext_resource type="Resource" uid="uid://6t4jcp7r1k0w" path="res://resources/characters/MR/Suits/MR_OG.tres" id="2_xx6wr"]
+
+[resource]
+script = ExtResource("1_cn81u")
+mon_sprite = ExtResource("1_xx6wr")
+item_is = 2
+suit = ExtResource("2_xx6wr")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"

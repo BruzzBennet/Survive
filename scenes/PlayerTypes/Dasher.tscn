@@ -4876,7 +4876,7 @@ height = 20.0
 radius = 18.0
 height = 36.0
 
-[node name="Character" type="CharacterBody2D" unique_id=2063378091]
+[node name="Player" type="CharacterBody2D" unique_id=2063378091]
 position = Vector2(-1, 2)
 collision_layer = 8
 collision_mask = 3

@@ -32,7 +32,7 @@
 [ext_resource type="Script" uid="uid://bj0e5pun6w7gk" path="res://scripts/Player/shading.gd" id="27_kd6pl"]
 [ext_resource type="Script" uid="uid://0jskikmhh8e7" path="res://scripts/Player/shader_inheritor.gd" id="28_1ygvf"]
 
-[sub_resource type="Resource" id="Resource_qsiwa"]
+[sub_resource type="Resource" id="Resource_eeap0"]
 resource_local_to_scene = true
 script = ExtResource("5_58usj")
 palette = ExtResource("4_eeap0")
@@ -136,7 +136,7 @@ focus_neighbor_bottom = NodePath("../Grey")
 [node name="Sprite2D" parent="Panel/Blue" unique_id=1249203081 instance=ExtResource("2_alvr3")]
 position = Vector2(14, 18)
 scale = Vector2(2, 2)
-color = SubResource("Resource_qsiwa")
+color = SubResource("Resource_eeap0")
 
 [node name="Yellow" type="Button" parent="Panel" unique_id=1531499577]
 layout_mode = 1

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://b1hjwfncupfc0"]
+
+[ext_resource type="PackedScene" uid="uid://b6whdqri3ld1c" path="res://scenes/items/recharge_item.tscn" id="1_vprq7"]
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="2_tprp8"]
+
+[resource]
+script = ExtResource("2_tprp8")
+name = "Recharger"
+description = "Reload your current weapon's Ammo"
+item_scene = ExtResource("1_vprq7")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"

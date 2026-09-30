@@ -17,7 +17,9 @@ var lvl_4_enemies=[
 
 
 var items=[
-	preload("res://scenes/items/coin.tscn")
+	preload("res://scenes/items/coin.tscn"),
+	preload("res://scenes/items/healing_item.tscn"),
+	preload("res://scenes/items/recharge_item.tscn")
 	]
 
 var spawn_this_player: PackedScene = GLOBAL.player_type
@@ -65,7 +67,7 @@ func enemy_died(enemy):
 	if enemies.is_empty():
 		rng_map.call_deferred("next_round")
 
-func spawn_player():
+func spawn_player(first_time=false):
 	var atk = atk_to_spawn.instantiate()
 	get_tree().current_scene.add_child(atk)
 	atk.setup(GLOBAL.weapon)
@@ -82,6 +84,8 @@ func spawn_player():
 	# player.reset_stats()
 	player.equip_weapon(GLOBAL.weapon,GLOBAL.suit)
 	player.equip_suit(GLOBAL.suit,GLOBAL.weapon)
+	if first_time:
+		player.reset_ammo()
 
 
 func spawn_item() -> void:

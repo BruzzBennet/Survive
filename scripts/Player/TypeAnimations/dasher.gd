@@ -44,6 +44,14 @@ func _ready():
 
 	screen_size = get_viewport_rect().size
 
+func reset_ammo(on_start=true):
+	GLOBAL.weapon.current_ammo=GLOBAL.weapon.max_ammo
+	atkUI.setup(GLOBAL.weapon)
+	if !on_start:
+		atkUI.flash(Color.GREEN)
+		PLAYSFX.recover()
+		$HurtBox.play_flash(Color.GREEN)
+
 func equip_weapon(this_weapon:Weapon, this_suit:Suit):
 	var boost_bane = 0.25
 	# modifiers(GLOBAL.weapon,boost_bane,-1)
@@ -53,6 +61,8 @@ func equip_weapon(this_weapon:Weapon, this_suit:Suit):
 	$BulletManager.setup(this_weapon,this_suit)
 	modifiers(this_weapon,boost_bane)
 	weapon_attack_pattern(this_weapon)
+	atkUI.setup(this_weapon)
+
 
 func weapon_attack_pattern(this_weapon:Weapon):
 	match this_weapon.weapon_type:
@@ -138,35 +148,38 @@ func _physics_process(delta: float) -> void:
 			$HurtBox.no_longer_invincible()
 			start_end=true
 	
-	healingATK(delta)
-	walk_sfx()
-	player_movement(delta)
-	if Input.is_action_pressed("attack"):
-		attack()
-	if Input.is_action_pressed("shoot"):
-		shoot()
-	# if weapon.weapon_type == Weapon.type.boot:
-	# 	if !can_hit and atkUI.currentATK >= atkUI.min_ammo:
-	# 		can_hit = true
-	# if !is_attacking and start_end==true:
-	# 	$HurtBox.no_longer_invincible()
+	# healingATK(delta)
+	if GLOBAL.about_to_henshin==false:
+		walk_sfx()
+		player_movement(delta)
+		if Input.is_action_pressed("attack"):
+			attack()
+		if Input.is_action_pressed("shoot"):
+			shoot()
+	else:
+		play_animation("Idle_", last_direction)
+		# if weapon.weapon_type == Weapon.type.boot:
+		# 	if !can_hit and atkUI.currentATK >= atkUI.min_ammo:
+		# 		can_hit = true
+		# if !is_attacking and start_end==true:
+		# 	$HurtBox.no_longer_invincible()
 
 func attack():
 	is_attacking = true
-	# if weapon.weapon_type != Weapon.type.none:
-	atkUI.reduce_by_melee(ammo_reduce)
 	if weapon.weapon_type == Weapon.type.gun:
-		atkUI.reduce_by_melee(ammo_reduce*1.5)
-	if atkUI.currentATK >= atkUI.min_ammo:
+		atkUI.reduce_by_melee(ammo_reduce*0.5)
+	elif weapon.weapon_type == Weapon.type.boot:
+		atkUI.reduce_by_melee(ammo_reduce*0.25)
+	if atkUI.currentATK < atkUI.min_ammo and weapon.weapon_type == Weapon.type.gun:
+			tired()
+			can_hit = false
+			is_attacking = false
+	else:
 		$HurtBox.cancel_flash()
 		Short_Range_Attack()
 		$AttackAnimationTimer.start()
 		await $AttackAnimationTimer.timeout
 		can_hit = true
-		is_attacking = false
-	else:
-		tired()
-		can_hit = false
 		is_attacking = false
 
 func Short_Range_Attack():
@@ -206,7 +219,7 @@ func Long_Range_Attack():
 
 func tired():
 	PLAYSFX.out_of_ammo()
-	$HurtBox.is_tired()
+	# $HurtBox.is_tired()
 	atkUI.flash(Color.RED)
 
 func dash_fx(angle, pos, dir):
@@ -269,7 +282,7 @@ func recovering(delta):
 
 func process_animation(direction) -> void:
 	if direction != Vector2.ZERO:
-		PLAYSFX.recover_stop()
+		# PLAYSFX.recover_stop()
 		if is_attacking or is_shooting:
 			play_animation("Walk_Attack_", direction)
 		else:

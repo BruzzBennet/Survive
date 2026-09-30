@@ -8,4 +8,6 @@
 script = ExtResource("3_47nsw")
 helmet = ExtResource("2_kti3w")
 body_palette = ExtResource("1_kti3w")
+name = "MonRanger Suit"
+description = "The most basic suit. "
 metadata/_custom_type_script = "uid://dk6b8jpr26pj2"

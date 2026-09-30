@@ -1,19 +1,23 @@
 [gd_scene format=3 uid="uid://h38wi5y5jcs0"]
 
 [ext_resource type="Script" uid="uid://j7deltat742f" path="res://scripts/Items/healing_item.gd" id="1_sec44"]
+[ext_resource type="PackedScene" uid="uid://3lwoa7tsv1fj" path="res://scenes/items/itemUpDown.tscn" id="2_2wxb6"]
 [ext_resource type="Texture2D" uid="uid://bo03fg88ukheo" path="res://assets/items/IcieSlushie.png" id="2_c6ww5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2wxb6"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3bpr0"]
 size = Vector2(16, 16)
 
 [node name="HealingItem" type="CharacterBody2D" unique_id=909775596]
 collision_mask = 8
 script = ExtResource("1_sec44")
 
+[node name="ItemUpDown" parent="." unique_id=329888079 instance=ExtResource("2_2wxb6")]
+position = Vector2(0.25, -1)
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=664375169]
 texture = ExtResource("2_c6ww5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=728420883]
 position = Vector2(0.25, -1)
-shape = SubResource("RectangleShape2D_2wxb6")
+shape = SubResource("RectangleShape2D_3bpr0")
 debug_color = Color(1, 0.60038817, 0.70000815, 0.42000002)

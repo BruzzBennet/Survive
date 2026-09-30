@@ -85,9 +85,9 @@ func shot_pattern(pos,dir,shoot_pattern,shot_is):
 		"c_shot_double":
 			continuous_shot_double(pos,dir)
 		"short_shot":
-			simple_shot(pos,dir,0.265)
+			simple_shot(pos,dir,0.35)
 		"medium_shot":
-			simple_shot(pos,dir,0.5)
+			simple_shot(pos,dir,0.65)
 		"double_shot":
 			double_shot(pos,dir)
 		null:

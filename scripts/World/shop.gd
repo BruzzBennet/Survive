@@ -34,13 +34,15 @@ var blade=[
 			preload("res://resources/items/Blade_Icie.tres")
 		]
 var suit=[
+			preload("res://resources/items/Suit_MR.tres"),
 			preload("res://resources/items/Suit_Chomwing.tres"),
 			preload("res://resources/items/Suit_Icie.tres"),
 			preload("res://resources/items/Suit_Pozzap.tres"),
 			preload("res://resources/items/Suit_Bombry.tres")
 		]
 var normal_item=[
-			preload("res://resources/items/healing_item.tres")
+			preload("res://resources/items/healing_item.tres"),
+			preload("res://resources/items/recharge_item.tres")
 		]
 var map_texture
 

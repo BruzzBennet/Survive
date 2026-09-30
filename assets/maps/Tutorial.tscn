@@ -1,14 +1,12 @@
 [gd_scene format=4 uid="uid://b4eft45ueevd6"]
 
-[ext_resource type="Script" path="res://scripts/World/tutorial_map.gd" id="1_ulifj"]
+[ext_resource type="Script" uid="uid://d42k7smvwvpp" path="res://scripts/World/tutorial_map.gd" id="1_ulifj"]
 [ext_resource type="PackedScene" uid="uid://dcqheu0e5s5ul" path="res://scenes/maps/LazyMap.tscn" id="2_el6w6"]
 [ext_resource type="Texture2D" uid="uid://djyfobi8to0tr" path="res://assets/Tiles/TilesS.png" id="3_ogar2"]
 [ext_resource type="Script" uid="uid://c2arsgsl2lotg" path="res://scripts/World/spawner.gd" id="4_6vdjy"]
 [ext_resource type="PackedScene" uid="uid://cgrehgbf0gsnv" path="res://scenes/boxes/summon_spot.tscn" id="4_ulifj"]
 [ext_resource type="PackedScene" uid="uid://cigy3geh1va3x" path="res://scenes/items/card_item.tscn" id="6_kyti1"]
-[ext_resource type="Resource" uid="uid://mn58qfdpvbbh" path="res://resources/items/Blade_1.tres" id="7_3jw5k"]
-[ext_resource type="Resource" uid="uid://nlchrse8qc2f" path="res://resources/items/Gun_Lazer.tres" id="8_kcb7c"]
-[ext_resource type="Resource" uid="uid://cjkddf3p8qlq1" path="res://resources/items/Boot_1.tres" id="9_v2gfh"]
+[ext_resource type="Resource" uid="uid://bcelcn2nsi8lb" path="res://resources/items/Suit_MR.tres" id="7_ogar2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_17ebl"]
 texture = ExtResource("3_ogar2")
@@ -116,14 +114,6 @@ tile_set = SubResource("TileSet_ww3q3")
 [node name="SummonSpot" parent="." unique_id=1167084153 instance=ExtResource("4_ulifj")]
 position = Vector2(320, 144)
 
-[node name="Dropped_Card" parent="." unique_id=1870751650 instance=ExtResource("6_kyti1")]
-position = Vector2(620, 120)
-item_summoned = ExtResource("7_3jw5k")
-
-[node name="Dropped_Card2" parent="." unique_id=18995420 instance=ExtResource("6_kyti1")]
-position = Vector2(620, 155)
-item_summoned = ExtResource("8_kcb7c")
-
-[node name="Dropped_Card3" parent="." unique_id=663270163 instance=ExtResource("6_kyti1")]
-position = Vector2(620, 190)
-item_summoned = ExtResource("9_v2gfh")
+[node name="Dropped_Card4" parent="." unique_id=1870751650 instance=ExtResource("6_kyti1")]
+position = Vector2(321, 230)
+item_summoned = ExtResource("7_ogar2")

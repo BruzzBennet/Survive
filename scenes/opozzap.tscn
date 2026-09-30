@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://b6a5j10xoom4g" path="res://scenes/pozzap.tscn" id="4_3yju3"]
 [ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="4_yoqpp"]
 [ext_resource type="AudioStream" uid="uid://cp2bgtlqmuc65" path="res://assets/audio/Oppozzap.wav" id="5_6tirb"]
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="5_wgpis"]
+[ext_resource type="Resource" uid="uid://b1hjwfncupfc0" path="res://resources/items/recharge_item.tres" id="6_yoqpp"]
 
 [sub_resource type="Shader" id="Shader_6tirb"]
 code = "shader_type canvas_item;
@@ -47,8 +49,9 @@ script = null
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("4_yoqpp")]
 collision_layer = 2
 collision_mask = 8
-max_health = 5
+max_health = 4.5
 score_value = 500
+items_it_can_drop = Array[ExtResource("5_wgpis")]([ExtResource("6_yoqpp")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1325979040]
 shape = SubResource("CapsuleShape2D_yoqpp")

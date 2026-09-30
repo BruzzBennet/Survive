@@ -114,10 +114,12 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 				if do_or_not < 3:
 					enemy_level= randi_range(1, max_level)
 					item.spawn_enemy(enemy_level)
-				else:
+				elif !spawned_already.has(item):
 					item.spawn_item()
-			elif do_or_not == 3:
+					spawned_already.append(item)
+			elif do_or_not == 3 && !spawned_already.has(item):
 				item.spawn_item()	
+				spawned_already.append(item)
 	if players > 0 and spawned_already.size()<9 or enemy_amount > 0 and spawned_already.size()<9:
 		spawn(players, enemy_amount, spawned_already)
 

@@ -19,7 +19,7 @@ radius = 96.0
 
 [sub_resource type="Resource" id="Resource_ros7y"]
 script = ExtResource("5_0kfug")
-damage_done = 2.0
+damage_done = 1.0
 source = 1
 metadata/_custom_type_script = "uid://doj80p0chh8d7"
 

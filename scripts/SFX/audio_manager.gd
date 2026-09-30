@@ -74,6 +74,7 @@ func out_of_ammo():
 
 func recover():
 	if not recover_sfx.is_playing():
+		# print("why?")
 		recover_sfx.play()
 
 func recover_stop():

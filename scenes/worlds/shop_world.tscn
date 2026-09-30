@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dan8rxx63nj3x" path="res://scripts/World/world.gd" id="1_c6rhq"]
 [ext_resource type="Resource" uid="uid://d1kfvk08ym8ey" path="res://resources/levels/shop_level.tres" id="2_jt6mf"]
 [ext_resource type="PackedScene" uid="uid://c8slwdh6xqobl" path="res://scenes/pause_menu.tscn" id="3_d1ax2"]
+[ext_resource type="PackedScene" uid="uid://byswe6q6yfjxy" path="res://scenes/henshin_menu/henshin_menu.tscn" id="3_jt6mf"]
 [ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="4_qi054"]
 [ext_resource type="Script" uid="uid://bdsl852hj016k" path="res://scripts/Trackers/score_label.gd" id="5_kds8y"]
 [ext_resource type="Script" uid="uid://cbg018ohlqnw1" path="res://scripts/Trackers/high_score_label.gd" id="6_1ioap"]
@@ -35,7 +36,9 @@ one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=63205776]
 
-[node name="PauseMenu" parent="CanvasLayer" unique_id=1187232654 instance=ExtResource("3_d1ax2")]
+[node name="HenshinMenu" parent="CanvasLayer" unique_id=1187232654 instance=ExtResource("3_jt6mf")]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=48230163 instance=ExtResource("3_d1ax2")]
 
 [node name="Transition" parent="." unique_id=2142637533 instance=ExtResource("4_qi054")]
 light_mask = 524288

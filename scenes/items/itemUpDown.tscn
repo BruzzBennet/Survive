@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://3lwoa7tsv1fj"]
+
+[ext_resource type="Script" uid="uid://7ehd7x01d3jt" path="res://scripts/Items/item_up_down.gd" id="1_ct8qi"]
+
+[node name="ItemUpDown" type="Node2D" unique_id=329888079]
+script = ExtResource("1_ct8qi")

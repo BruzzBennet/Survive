@@ -9,16 +9,18 @@ var melee_depletion_rate
 var startingATK
 var currentATK
 var min_ammo
+var current_weapon: Weapon
 
 
 func setup(weapon: Weapon):
+	current_weapon = weapon
 	atk_shown.set_shader_parameter("flash_modifier", 0.0)
 	maxATK = weapon.max_ammo
 	regeneration_rate = weapon.reload_rate
 	depletion_rate = weapon.depletion_rate
 	melee_depletion_rate = weapon.melee_depletion_rate
-	startingATK= maxATK
-	currentATK= maxATK
+	startingATK= weapon.current_ammo
+	currentATK= weapon.current_ammo
 	min_ammo = weapon.min_ammo
 	set_value(startingATK)
 
@@ -32,7 +34,7 @@ func set_value(atk: float):
 	elif atk > maxATK * 0.2:
 		atk_shown.set_shader_parameter("bar_color", Color.YELLOW)
 	else:
-		PLAYSFX.alert()
+		# PLAYSFX.alert()
 		atk_shown.set_shader_parameter("bar_color", Color.RED)
 
 func flash(color):
@@ -63,11 +65,13 @@ func regenerate_more(delta) -> void:
 func reduce(times: float = 1):
 	var depletion: float = depletion_rate * times
 	currentATK = max(0, currentATK - depletion)
+	current_weapon.current_ammo = currentATK
 	set_value(currentATK)
 
 func reduce_by_melee(times: float = 1):
 	var depletion: float = melee_depletion_rate * times
 	currentATK = max(0, currentATK - depletion)
+	current_weapon.current_ammo = currentATK
 	set_value(currentATK)
 
 func _process(delta: float) -> void:

@@ -3768,7 +3768,7 @@ _data = {
 &"Walk_Attack_3": SubResource("Animation_bgf6c")
 }
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1106704411]
+[node name="Player" type="CharacterBody2D" unique_id=1106704411]
 collision_layer = 8
 collision_mask = 7
 script = ExtResource("1_jptdl")

@@ -33,6 +33,7 @@ var dashplayer: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
 var slashplayer: PackedScene = preload("res://scenes/PlayerTypes/Slasher.tscn")
 
 func switch_weapon(weapon,body):
+	weapon.current_ammo = weapon.max_ammo
 	var player_scene
 	match weapon.weapon_type:
 		Weapon.type.boot:

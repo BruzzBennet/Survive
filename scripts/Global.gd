@@ -3,8 +3,8 @@ extends Node
 var starting_level="res://scenes/worlds/start_world.tscn"
 
 var base_weapon=preload("res://resources/characters/Weapons/weaponless.tres")
-var base_suit=preload("res://resources/characters/MR/Suits/MR_OG.tres")
-var base_health=6.0
+var base_suit=preload("res://resources/characters/MR/Suits/Sergyo.tres")
+var base_health=5.0
 var base_enemy_amount: = 1
 
 var normal: PackedScene = preload("res://scenes/PlayerTypes/base.tscn")
@@ -26,6 +26,7 @@ var health=base_health
 var melee_damage = 2.0
 var defense = 0
 var ammo = 1.0
+var about_to_henshin:=false
 
 func restart():
 	SCORE.actual=0
@@ -40,21 +41,12 @@ func restart():
 	defense = 0
 	ammo = 1.0
 	current_level= 1
+	about_to_henshin=false
+	deck = []
 
-var suits : Array[Suit] 
-var weapons : Array[Weapon] 
-var deck_size:= 3
+var deck = []
+var deck_size:= 5
 
-func add_weapon(weapon_added:Weapon):
-	if weapons.size() < deck_size:
-		weapons.append(weapon_added)
-		print("Weapon amount: "+str(weapons.size()))
-	else:
-		print("weapons full!")
-
-func add_suit(suit_added:Suit):
-	if suits.size() < deck_size:
-		suits.append(suit_added)
-		print("Suit amount: "+str(suits.size()))
-	else:
-		print("suits full!")
+func add_card(card:Item):
+	if deck.size() < deck_size:
+		deck.append(card)

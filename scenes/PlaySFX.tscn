@@ -118,6 +118,7 @@ stream = ExtResource("19_e3sun")
 
 [node name="Recover" type="AudioStreamPlayer2D" parent="." unique_id=513680026]
 stream = ExtResource("20_josl6")
+volume_db = 1.5
 
 [node name="Alert" type="AudioStreamPlayer2D" parent="." unique_id=130881046]
 stream = ExtResource("21_c0j23")

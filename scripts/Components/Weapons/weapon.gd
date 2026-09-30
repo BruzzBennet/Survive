@@ -17,12 +17,13 @@ enum type {
 
 @export var bullet_scene : PackedScene
 @export var enemies_bullet_pierces: int = 1 
-var max_ammo: float = 35.0
-var min_ammo: float = 5.0
+var max_ammo: float = 50.0
+var current_ammo: float = 50.0
+var min_ammo: float = 1.0
 var bullet_damage: float = 1.0
 var bullet_speed: int = 250
 var bullet_time_on_field: float = 0.4
-var reload_rate: float = 7.0
+var reload_rate: float = 0.0
 var depletion_rate: float = 1.0
 @export var shot_type: shot_pattern 
 
