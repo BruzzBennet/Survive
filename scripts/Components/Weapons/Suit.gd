@@ -7,6 +7,7 @@ class_name Suit
 @export var description: String
 @export var boost_this: boost
 enum boost {
+    none,
     speed,
     effect,
     bullet_reach,
@@ -17,6 +18,7 @@ enum boost {
 
 @export var but_bane_this: bane
 enum bane {
+    none,
     speed,
     bullet_reach,
     ammo_saving,

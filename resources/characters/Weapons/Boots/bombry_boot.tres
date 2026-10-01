@@ -10,7 +10,7 @@
 script = ExtResource("2_spsox")
 sprite = ExtResource("3_8r2ux")
 name = "Bombry Boot"
-description = "Ammo-. Bullets explode on touch."
+description = "Bullets explode on touch."
 weapon_type = 3
 bullet_scene = ExtResource("1_x76n4")
 boost_this = 1
