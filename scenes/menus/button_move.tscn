@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dstfd2nwh8man"]
+
+[ext_resource type="Script" uid="uid://bvwfein8lqcpi" path="res://scripts/Menus/ButtonMoveSFX.gd" id="1_bv5a6"]
+
+[node name="ButtonMove" type="Node2D" unique_id=378590368]
+script = ExtResource("1_bv5a6")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=2102021086]

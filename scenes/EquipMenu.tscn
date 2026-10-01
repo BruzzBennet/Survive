@@ -566,5 +566,3 @@ offset_bottom = 353.0
 unique_name_in_owner = true
 
 [node name="CTRShader" parent="." unique_id=1374949823 instance=ExtResource("5_bysil")]
-
-[connection signal="focus_entered" from="Panel" to="Panel" method="_on_focus_entered"]

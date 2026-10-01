@@ -20,6 +20,8 @@ extends Node
 @onready var equip_sfx = $Equip
 @onready var crunchyMash_sfx = $CrunchyMash
 @onready var portal_sfx = $PortalOpens
+@onready var unequip_sfx = $Unequip
+@onready var get_card_sfx = $GetCard
 
 func shot():
 	if not shot_sfx.is_playing():
@@ -103,3 +105,13 @@ func portal_opens():
 
 func pick_coin():
 	$Coin.play()
+
+func unequip():
+	if not unequip_sfx.is_playing():
+		# alert_sfx.randomize()
+		unequip_sfx.pitch_scale = randf_range(0.9, 1.35)
+		unequip_sfx.play()
+
+func get_card():
+	# if not get_card_sfx.is_playing():
+	get_card_sfx.play()

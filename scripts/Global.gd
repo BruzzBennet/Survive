@@ -28,6 +28,9 @@ var defense = 0
 var ammo = 1.0
 var about_to_henshin:=false
 
+func equip_weapon(this_weapon:Weapon):
+	weapon=this_weapon
+
 func restart():
 	SCORE.actual=0
 	player_type=base_player_type

@@ -3,6 +3,12 @@
 [ext_resource type="Script" uid="uid://dap4owc1csu1r" path="res://scripts/Menus/henshin_menu/card.gd" id="1_cj6du"]
 [ext_resource type="Texture2D" uid="uid://lqntlnhad3wa" path="res://assets/cards/Card.png" id="4_deeji"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdjtb"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcgng"]
+bg_color = Color(0, 1, 0, 1)
+
 [node name="CardBase" type="Node2D" unique_id=706061897]
 script = ExtResource("1_cj6du")
 
@@ -15,3 +21,12 @@ offset = Vector2(-24, -21)
 
 [node name="Type" type="Sprite2D" parent="." unique_id=1602442849]
 position = Vector2(0, 15)
+
+[node name="Ammo" type="ProgressBar" parent="." unique_id=2121918318]
+offset_left = -16.0
+offset_top = 28.0
+offset_right = 16.0
+offset_bottom = 36.0
+theme_override_styles/background = SubResource("StyleBoxFlat_kdjtb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_tcgng")
+show_percentage = false

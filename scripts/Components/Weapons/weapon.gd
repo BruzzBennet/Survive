@@ -36,6 +36,7 @@ enum shot_pattern{
 
 @export var boost_this: boost
 enum boost {
+    none,
     bullet_has_effect,
     effect,
     speed,
@@ -47,6 +48,7 @@ enum boost {
 
 @export var but_bane_this: bane
 enum bane {
+    none,
     speed,
     bullet_reach,
     ammo_saving,

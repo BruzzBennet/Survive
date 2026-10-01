@@ -23,15 +23,17 @@ func switch() -> void:
 
 	if tree.current_scene.scene_file_path != "res://scenes/worlds/rng_world.tscn":
 		BGM.playStageMusic()
-		tree.change_scene_to_file("res://scenes/worlds/rng_world.tscn")
-	else:
-		var change_scene_to
-		if GLOBAL.current_level % 3 == 0:
-			change_scene_to=randi_range(0,1)
-		else:
-			change_scene_to=randi_range(0,2)
+	# 	tree.change_scene_to_file("res://scenes/worlds/rng_world.tscn")
+	# else:
+	# 	var change_scene_to
+	# 	if GLOBAL.current_level % 3 == 0:
+	# 		change_scene_to=randi_range(0,1)
+	# 	else:
+	# 		change_scene_to=randi_range(0,2)
 		
-		if change_scene_to == 0:
-			tree.change_scene_to_file("res://scenes/worlds/shop_world.tscn")
-		else:
-			tree.change_scene_to_file("res://scenes/worlds/rng_world.tscn")
+	# 	if change_scene_to == 0:
+	# 		tree.change_scene_to_file("res://scenes/worlds/shop_world.tscn")
+	# 	else:
+	# 		tree.change_scene_to_file("res://scenes/worlds/rng_world.tscn")
+
+	tree.change_scene_to_file("res://scenes/worlds/rng_world.tscn")

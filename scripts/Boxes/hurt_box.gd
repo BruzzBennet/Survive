@@ -225,17 +225,20 @@ func dead_enemy():
 		
 
 func item_drop():
-	# var slusshie=preload("res://scenes/items/healing_item.tscn")
-	# var slushie = slusshie.instantiate()
-	# slushie.global_position=global_position
-	# get_tree().current_scene.add_child(slushie)
 	if !items_it_can_drop.is_empty():
-		var item_dropped=items_it_can_drop.pick_random()
+		var item_to_be_dropped=items_it_can_drop.pick_random()
+		match item_to_be_dropped.item_is:
+			item_to_be_dropped.item_type.weapon:
+				var card = item_to_be_dropped.weapon.duplicate()
+				item_to_be_dropped.weapon = card
+			item_to_be_dropped.item_type.suit:
+				var card = item_to_be_dropped.suit.duplicate()
+				item_to_be_dropped.suit = card
+		var item_dropped=item_to_be_dropped
 		if item_dropped.item_is != item_dropped.item_type.normal_item:
 			var card_item_drop=preload("res://scenes/items/card_item.tscn")
 			var card_drop = card_item_drop.instantiate()
 			card_drop.global_position=global_position
-			# print(str(item_dropped))
 			card_drop.add_item(item_dropped)
 			get_tree().current_scene.add_child(card_drop)
 		else:

@@ -13,7 +13,6 @@ name = "Gun"
 description = "All attacks are Long-Range, but low damage"
 weapon_type = 1
 bullet_scene = ExtResource("1_5d8ou")
-boost_this = 2
 bullet_sfx = ExtResource("2_jli0g")
 extra_bullet_sfx = ExtResource("3_abtv4")
 metadata/_custom_type_script = "uid://hig2h24o38p0"

@@ -21,10 +21,12 @@
 [ext_resource type="AudioStream" uid="uid://ckoxwcvsj1unu" path="res://assets/audio/emptygun.mp3" id="19_e3sun"]
 [ext_resource type="AudioStream" uid="uid://bo1ci00jim1aj" path="res://assets/audio/PowerUpTaken.wav" id="20_josl6"]
 [ext_resource type="AudioStream" uid="uid://b1inkejvy6lqp" path="res://assets/audio/Alert.wav" id="21_c0j23"]
-[ext_resource type="AudioStream" uid="uid://bah3axscuvte0" path="res://assets/audio/equip.mp3" id="22_cks26"]
+[ext_resource type="AudioStream" uid="uid://0nh5u784oibi" path="res://assets/audio/HenshinShortN1.mp3" id="22_obbcd"]
 [ext_resource type="AudioStream" uid="uid://ct61tixhl2jy3" path="res://assets/audio/CrunchyMash.wav" id="23_ngslh"]
 [ext_resource type="AudioStream" uid="uid://ciermrkha08fk" path="res://assets/audio/MagicalSurge.mp3" id="24_b6f54"]
 [ext_resource type="AudioStream" uid="uid://g2flnmnf067q" path="res://assets/audio/Pick Coin.wav" id="25_obbcd"]
+[ext_resource type="AudioStream" uid="uid://dj6u5v35s5yux" path="res://assets/audio/deactivate.mp3" id="26_mte22"]
+[ext_resource type="AudioStream" uid="uid://ba2082skeyjtd" path="res://assets/audio/InsertCard.mp3" id="27_dgm6k"]
 
 [node name="PlaySFX" type="Node" unique_id=68871846]
 process_mode = 3
@@ -131,8 +133,7 @@ volume_db = 1.5
 pitch_scale = 1.5
 
 [node name="Equip" type="AudioStreamPlayer2D" parent="." unique_id=13305324]
-stream = ExtResource("22_cks26")
-volume_db = 5.0
+stream = ExtResource("22_obbcd")
 
 [node name="CrunchyMash" type="AudioStreamPlayer2D" parent="." unique_id=1365517175]
 stream = ExtResource("23_ngslh")
@@ -143,3 +144,9 @@ volume_db = 3.5
 
 [node name="Coin" type="AudioStreamPlayer2D" parent="." unique_id=1397326816]
 stream = ExtResource("25_obbcd")
+
+[node name="Unequip" type="AudioStreamPlayer2D" parent="." unique_id=1623698076]
+stream = ExtResource("26_mte22")
+
+[node name="GetCard" type="AudioStreamPlayer2D" parent="." unique_id=59050012]
+stream = ExtResource("27_dgm6k")

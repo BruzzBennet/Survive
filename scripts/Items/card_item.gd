@@ -14,5 +14,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player_Unit:
 		if item and GLOBAL.deck.size() < GLOBAL.deck_size:
 			if item.item_is == item.item_type.weapon or item.item_is == item.item_type.suit:
-				GLOBAL.add_card(item)						
+				PLAYSFX.get_card()
+				GLOBAL.add_card(item.duplicate())						
 				queue_free()

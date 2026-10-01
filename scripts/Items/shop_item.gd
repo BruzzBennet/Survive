@@ -48,20 +48,22 @@ func switch_weapon(weapon,body):
 	player.position = body.global_position
 	body.queue_free()
 	player.equip_suit(GLOBAL.suit,weapon)
-	player.equip_weapon(weapon,GLOBAL.suit)
-	GLOBAL.weapon=weapon
+	var new_weapon = weapon.duplicate()
+	player.equip_weapon(new_weapon,GLOBAL.suit)
+	GLOBAL.weapon=new_weapon
 
 func _on_area_2d_body_entered(body) -> void:
 	if body is Player_Unit:
 		match item.item_is:
 			item.item_type.weapon:
+				PLAYSFX.equip()
 				if GLOBAL.weapon.weapon_type != item.weapon.weapon_type or GLOBAL.weapon==preload("res://resources/characters/Weapons/weaponless.tres"):
 					call_deferred("switch_weapon", item.weapon, body)
 				else:
 					body.equip_weapon(item.weapon,GLOBAL.suit)
-				PLAYSFX.equip()
 			item.item_type.suit:
-				body.equip_suit(item.suit,GLOBAL.weapon)
 				PLAYSFX.equip()
-		PLAYSFX.crunchyMash()
+				body.equip_suit(item.suit,GLOBAL.weapon)
+				
+		# PLAYSFX.crunchyMash()
 		get_parent().get_parent().done()
