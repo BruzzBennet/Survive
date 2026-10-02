@@ -130,7 +130,6 @@ func play_flash(color:Color):
 		flash_action(sprite)
 
 func becomes_invincible(flash=true):
-	# print("works")
 	cancel_flash()
 	if flash:
 		play_flash(Color.BLUE)
@@ -138,8 +137,12 @@ func becomes_invincible(flash=true):
 
 func no_longer_invincible():
 	# cancel_flash()
-	# print("stop")
 	is_invincible=false
+
+func invincible(time=0.65,flash=true):
+	becomes_invincible(flash)
+	await get_tree().create_timer(time).timeout
+	no_longer_invincible()
 
 func knockback(attack: Variant):
 	if attack is Attack:
@@ -215,9 +218,10 @@ func hurt_enemy():
 		cancel_flash()
 		play_flash(Color.RED)
 
-func dead_enemy():
+func dead_enemy(increase_score=true):
 	died.emit()
-	SCORE.increaseBy(score_value)
+	if increase_score:
+		SCORE.increaseBy(score_value)
 	PLAYSFX.died()
 	var drop_item = randi_range(0,2)
 	if drop_item==1:

@@ -7,6 +7,14 @@ func _ready():
 		add_item(item_summoned)
 
 func add_item(item:Item):
+	item.duplicate()
+	match item.item_is:
+			item.item_type.weapon:
+				var card = item.weapon.duplicate()
+				item.weapon = card
+			item.item_type.suit:
+				var card = item.suit.duplicate()
+				item.suit = card
 	$Node2D.setup(item)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

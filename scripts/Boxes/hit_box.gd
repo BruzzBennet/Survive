@@ -6,6 +6,8 @@ class_name HitBox_Component
 func _on_area_entered(body):
 	if body is HurtBox_Component: 
 		body.damage(attack)
+	if body is InvincibleBox_Component:
+		body.blocked()
 
 func _ready() -> void:
 	if attack:

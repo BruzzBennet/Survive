@@ -90,6 +90,8 @@ func shot_pattern(pos,dir,shoot_pattern,shot_is):
 			simple_shot(pos,dir,0.65)
 		"double_shot":
 			double_shot(pos,dir)
+		"area_shot":
+			area_shot(pos)
 		null:
 			simple_shot(pos,dir)
 
@@ -105,12 +107,14 @@ func simple_shot(pos,dir,dur:=1.0):
 	bullet.global_position = pos + dir * 10
 	if dir.x > 0:
 		anim_name = "0"
-	elif dir.y < 0:
-		anim_name = "3"
+	elif dir.x < 0 and dir.y > 0:
+		anim_name = "2"
 	elif dir.y > 0:
 		anim_name = "1"
 	elif dir.x < 0:
 		anim_name = "2"
+	elif dir.y < 0:
+		anim_name = "3"
 	if bullet.get_node_or_null("AnimationPlayer"):
 		bullet.get_node("AnimationPlayer").play(anim_name)
 	bullet.direction = dir.normalized()
@@ -164,3 +168,13 @@ func four_way_shot(pos,_dir,func_to_use):
 	my_func.call(pos,Vector2.RIGHT)
 	my_func.call(pos,Vector2.DOWN)
 	my_func.call(pos,Vector2.LEFT)
+
+func area_shot(pos):
+	simple_shot(pos, Vector2.UP)
+	simple_shot(pos, Vector2.from_angle(deg_to_rad(45)))
+	simple_shot(pos, Vector2.RIGHT)
+	simple_shot(pos, Vector2.from_angle(deg_to_rad(135)))
+	simple_shot(pos, Vector2.DOWN)
+	simple_shot(pos, Vector2.from_angle(deg_to_rad(225)))
+	simple_shot(pos, Vector2.LEFT)
+	simple_shot(pos, Vector2.from_angle(deg_to_rad(315)))

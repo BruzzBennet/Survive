@@ -6,10 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://djyfobi8to0tr" path="res://assets/Tiles/TilesS.png" id="4_qc8te"]
 [ext_resource type="PackedScene" uid="uid://cgrehgbf0gsnv" path="res://scenes/boxes/summon_spot.tscn" id="5_hu8wq"]
 [ext_resource type="PackedScene" uid="uid://cigy3geh1va3x" path="res://scenes/items/card_item.tscn" id="6_b6vvq"]
-[ext_resource type="Resource" uid="uid://bcelcn2nsi8lb" path="res://resources/items/Suit_MR.tres" id="7_b87nq"]
-[ext_resource type="Resource" uid="uid://mn58qfdpvbbh" path="res://resources/items/Blade_1.tres" id="8_qc8te"]
-[ext_resource type="Resource" uid="uid://nlchrse8qc2f" path="res://resources/items/Gun_Lazer.tres" id="9_hu8wq"]
-[ext_resource type="Resource" uid="uid://cjkddf3p8qlq1" path="res://resources/items/Boot_1.tres" id="10_b6vvq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_17ebl"]
 texture = ExtResource("4_qc8te")
@@ -117,18 +113,16 @@ tile_set = SubResource("TileSet_ww3q3")
 [node name="SummonSpot" parent="." unique_id=1167084153 instance=ExtResource("5_hu8wq")]
 position = Vector2(48, 112)
 
-[node name="Dropped_Card4" parent="." unique_id=1870751650 instance=ExtResource("6_b6vvq")]
+[node name="BaseCards" type="Node2D" parent="." unique_id=267946850]
+
+[node name="Dropped_Card4" parent="BaseCards" unique_id=1870751650 instance=ExtResource("6_b6vvq")]
 position = Vector2(176, 80)
-item_summoned = ExtResource("7_b87nq")
 
-[node name="Dropped_Card5" parent="." unique_id=436370715 instance=ExtResource("6_b6vvq")]
+[node name="Dropped_Card5" parent="BaseCards" unique_id=436370715 instance=ExtResource("6_b6vvq")]
 position = Vector2(208, 80)
-item_summoned = ExtResource("8_qc8te")
 
-[node name="Dropped_Card6" parent="." unique_id=1303491601 instance=ExtResource("6_b6vvq")]
+[node name="Dropped_Card6" parent="BaseCards" unique_id=1303491601 instance=ExtResource("6_b6vvq")]
 position = Vector2(240, 80)
-item_summoned = ExtResource("9_hu8wq")
 
-[node name="Dropped_Card7" parent="." unique_id=1307933509 instance=ExtResource("6_b6vvq")]
+[node name="Dropped_Card7" parent="BaseCards" unique_id=1307933509 instance=ExtResource("6_b6vvq")]
 position = Vector2(272, 80)
-item_summoned = ExtResource("10_b6vvq")
