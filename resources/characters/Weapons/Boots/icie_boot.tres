@@ -11,10 +11,11 @@
 script = ExtResource("3_a1qy1")
 sprite = ExtResource("4_q8nm3")
 name = "Icie Boot"
-description = "Gain +0.5 HP when healing."
+description = "Ammo-. Gain +0.5 HP when healing."
 weapon_type = 3
 bullet_scene = ExtResource("1_xiaww")
 boost_this = 2
+but_bane_this = 3
 effect = ExtResource("2_1r30u")
 extra_bullet_sfx = ExtResource("4_up5l5")
 metadata/_custom_type_script = "uid://hig2h24o38p0"

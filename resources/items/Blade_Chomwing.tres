@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://m5c1vmdte5ie"]
+
+[ext_resource type="Texture2D" uid="uid://dfe3oh5csoxoq" path="res://assets/cards/Mons/chomwing.png" id="1_i1lvw"]
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="2_u65ra"]
+[ext_resource type="Resource" uid="uid://lrh7o7dgpcey" path="res://resources/characters/Weapons/Blades/Chomwing_Blade.tres" id="3_k8xgp"]
+
+[resource]
+script = ExtResource("2_u65ra")
+mon_sprite = ExtResource("1_i1lvw")
+item_is = 1
+weapon = ExtResource("3_k8xgp")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"

@@ -13,6 +13,7 @@ var friction: float = 0.25
 @export var attack_frames: Array[int]
 @onready var animated_sprite_2d = $AnimationPlayer2D
 @onready var atkUI = get_tree().current_scene.get_node("ATK")
+# @onready var hpUI = get_tree().current_scene.get_node("HP")
 const margin = 12
 var last_direction = Vector2.DOWN
 var screen_size: Vector2
@@ -54,7 +55,8 @@ func reset_ammo(on_start=true):
 		$HurtBox.play_flash(Color.GREEN)
 
 func equip_weapon(this_weapon:Weapon, this_suit:Suit):
-	modifiers(GLOBAL.weapon,-1)
+	if GLOBAL.weapon != this_weapon:
+		modifiers(GLOBAL.weapon,-1)
 	GLOBAL.weapon=this_weapon
 	$Skeleton/Weapon_Back.texture = this_weapon.sprite
 	$Skeleton/Weapon_Front.texture = this_weapon.sprite
@@ -80,7 +82,9 @@ func weapon_attack_pattern(this_weapon:Weapon):
 			shot_pattern = "medium_shot"
 
 func equip_suit(this_suit:Suit,_this_weapon:Weapon):
-	modifiers(GLOBAL.suit,-1)
+	if GLOBAL.suit != this_suit:
+		GLOBAL.modified_health=false
+		modifiers(GLOBAL.suit,-1)
 	if this_suit:
 		$Skeleton/Head_Back.texture = this_suit.helmet
 		$Skeleton/Head_Front.texture = this_suit.helmet
@@ -100,21 +104,28 @@ func reset_stats():
 
 
 func modifiers(this_suit:Variant,increase_by:int=1):
-	set_collision_mask_value(1, true)
-	$SuitEffect.set_script(null)
-	$WeaponEffect.set_script(null)
+	$HurtBox.defense = GLOBAL.defense
+	if this_suit is Suit:
+		if increase_by<0:
+			set_collision_mask_value(1, true)
+		$SuitEffect.set_script(null)
+	if this_suit is Weapon:
+		$WeaponEffect.set_script(null)
 	
 	if this_suit.boost:
 		match this_suit.boost_this:
 			this_suit.boost.speed:
 				max_speed += GLOBAL.max_speed * 0.25 * increase_by
 			this_suit.boost.ammo_saving:
-				ammo_reduce-= 0.15 * increase_by
+				ammo_reduce-= 0.125 * increase_by
 			this_suit.boost.defense:
-				if increase_by>0:
-					is_thick=true
-				else:
-					is_thick=false
+				# $HurtBox.defense = GLOBAL.defense + (0.25 * increase_by)
+				if increase_by < 0:
+					GLOBAL.modified_health=false
+				if !GLOBAL.modified_health:
+					# print("--HENSHIN")
+					$HurtBox.extra_health(1*increase_by)
+					GLOBAL.modified_health=true
 			this_suit.boost.effect:
 				if this_suit.effect:
 					if this_suit is Suit:
@@ -131,20 +142,21 @@ func modifiers(this_suit:Variant,increase_by:int=1):
 			this_suit.bane.speed:
 				max_speed -= GLOBAL.max_speed * 0.25 * increase_by
 			this_suit.bane.ammo_saving:
-				ammo_reduce += 0.3
+				ammo_reduce += 0.125 * increase_by
 			this_suit.bane.defense:
+				# $HurtBox.extra_health(-1*increase_by)
 				$HurtBox.defense = GLOBAL.defense - (0.5 * increase_by) 
 
-func thick():
-	if is_thick:
-		$HurtBox.invincible()
+# func thick():
+# 	if is_thick:
+# 		$HurtBox.invincible()
 
 func _physics_process(delta: float) -> void:
 	if GLOBAL.about_to_henshin==false:
 		walk_sfx()
 		player_movement(delta)
-		if Input.is_action_pressed("attack") || Input.is_action_pressed("shoot"):
-			thick()
+		# if Input.is_action_pressed("attack") || Input.is_action_pressed("shoot"):
+		# 	thick()
 		if Input.is_action_pressed("attack"):
 			attack()
 		if Input.is_action_pressed("shoot"):
@@ -156,34 +168,32 @@ func _physics_process(delta: float) -> void:
 func attack():
 	is_attacking = true
 	if weapon.weapon_type == Weapon.type.gun:
-		atkUI.reduce_by_melee(ammo_reduce*0.5)
+		atkUI.reduce_by_melee(ammo_reduce*1.5)
 	elif weapon.weapon_type == Weapon.type.boot:
-		atkUI.reduce_by_melee(ammo_reduce*0.25)
+		atkUI.reduce_by_melee(ammo_reduce)
 	elif weapon.weapon_type == Weapon.type.blade:
-		atkUI.reduce_by_melee(ammo_reduce*0.15)
-	if atkUI.currentATK < atkUI.min_ammo and weapon.weapon_type == Weapon.type.gun:
-			tired()
-			can_hit = false
-			is_attacking = false
-	else:
-		$HurtBox.cancel_flash()
-		Short_Range_Attack()
-		$AttackAnimationTimer.start()
-		await $AttackAnimationTimer.timeout
-		can_hit = true
-		is_attacking = false
+		atkUI.reduce_by_melee(ammo_reduce*0.5)
+	$HurtBox.cancel_flash()
+	Short_Range_Attack()
+	$AttackAnimationTimer.start()
+	await $AttackAnimationTimer.timeout
+	can_hit = true
+	is_attacking = false
 
 func Short_Range_Attack():
 	is_attacking = true
 	if can_hit:
-		$BulletManager.shoot(position, last_direction, melee_shot_pattern)
+		if atkUI.currentATK >= atkUI.min_ammo:
+			$BulletManager.shoot(position, last_direction, melee_shot_pattern)
+		else:
+			PLAYSFX.slash()
 		can_hit = false
 
 func shoot():
 	if weapon.weapon_type == Weapon.type.boot:
-			atkUI.reduce(ammo_reduce*4)
+			atkUI.reduce(ammo_reduce*3)
 	elif weapon.weapon_type == Weapon.type.gun:
-			atkUI.reduce(ammo_reduce*1.5)
+			atkUI.reduce(ammo_reduce*3)
 	else:
 		atkUI.reduce(ammo_reduce)
 	if atkUI.currentATK >= atkUI.min_ammo:

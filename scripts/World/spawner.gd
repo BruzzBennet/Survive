@@ -17,9 +17,12 @@ var lvl_4_enemies=[
 
 
 var items=[
-	preload("res://scenes/items/coin.tscn"),
 	preload("res://scenes/items/healing_item.tscn"),
-	preload("res://scenes/items/recharge_item.tscn")
+	preload("res://scenes/items/coin.tscn"),
+	preload("res://scenes/items/recharge_item.tscn"),
+	preload("res://scenes/items/coin.tscn"),
+	preload("res://scenes/items/recharge_item.tscn"),
+	preload("res://scenes/items/coin.tscn")
 	]
 
 var spawn_this_player: PackedScene = GLOBAL.player_type

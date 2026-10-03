@@ -91,7 +91,7 @@ func shot_pattern(pos,dir,shoot_pattern,shot_is):
 		"double_shot":
 			double_shot(pos,dir)
 		"area_shot":
-			area_shot(pos)
+			area_shot(pos,0.65)
 		null:
 			simple_shot(pos,dir)
 
@@ -169,12 +169,12 @@ func four_way_shot(pos,_dir,func_to_use):
 	my_func.call(pos,Vector2.DOWN)
 	my_func.call(pos,Vector2.LEFT)
 
-func area_shot(pos):
-	simple_shot(pos, Vector2.UP)
-	simple_shot(pos, Vector2.from_angle(deg_to_rad(45)))
-	simple_shot(pos, Vector2.RIGHT)
-	simple_shot(pos, Vector2.from_angle(deg_to_rad(135)))
-	simple_shot(pos, Vector2.DOWN)
-	simple_shot(pos, Vector2.from_angle(deg_to_rad(225)))
-	simple_shot(pos, Vector2.LEFT)
-	simple_shot(pos, Vector2.from_angle(deg_to_rad(315)))
+func area_shot(pos,dur:=1.0):
+	simple_shot(pos, Vector2.UP,dur)
+	simple_shot(pos, Vector2.from_angle(deg_to_rad(45)),dur)
+	simple_shot(pos, Vector2.RIGHT,dur)
+	simple_shot(pos, Vector2.from_angle(deg_to_rad(135)),dur)
+	simple_shot(pos, Vector2.DOWN,dur)
+	simple_shot(pos, Vector2.from_angle(deg_to_rad(225)),dur)
+	simple_shot(pos, Vector2.LEFT,dur)
+	simple_shot(pos, Vector2.from_angle(deg_to_rad(315)),dur)

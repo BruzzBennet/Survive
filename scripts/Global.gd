@@ -6,6 +6,7 @@ var base_weapon=preload("res://resources/characters/Weapons/weaponless.tres")
 var base_suit=preload("res://resources/characters/MR/Suits/Sergyo.tres")
 var base_health=5.0
 var base_enemy_amount: = 1
+var modified_health=false
 
 var normal: PackedScene = preload("res://scenes/PlayerTypes/base.tscn")
 var weaponless: PackedScene = preload("res://scenes/PlayerTypes/weaponless.tscn")
@@ -25,7 +26,7 @@ var max_speed: float = 200
 var health=base_health
 var melee_damage = 2.0
 var defense = 0
-var ammo = 1.0
+var ammo = 0.5
 var about_to_henshin:=false
 
 func equip_weapon(this_weapon:Weapon):
@@ -46,6 +47,7 @@ func restart():
 	current_level= 1
 	about_to_henshin=false
 	deck = []
+	modified_health=false
 
 var deck = []
 var deck_size:= 5

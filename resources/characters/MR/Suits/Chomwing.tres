@@ -11,6 +11,6 @@ helmet = ExtResource("3_lleen")
 body_palette = ExtResource("1_7w06w")
 name = "Chomwing Suit"
 description = "The user can fly over walls."
-boost_this = 2
+boost_this = 4
 effect = ExtResource("2_raw2s")
 metadata/_custom_type_script = "uid://dk6b8jpr26pj2"

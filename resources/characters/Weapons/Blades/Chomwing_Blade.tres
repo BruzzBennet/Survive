@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://lrh7o7dgpcey"]
+
+[ext_resource type="PackedScene" uid="uid://yrmyr6f8yung" path="res://scenes/bullets/chomwing_bullet.tscn" id="1_omcx4"]
+[ext_resource type="AudioStream" uid="uid://b5vijeuq114j3" path="res://assets/audio/slashshot.mp3" id="2_4kmw2"]
+[ext_resource type="AudioStream" uid="uid://bs6u0275h8oso" path="res://assets/audio/slash.mp3" id="3_1550t"]
+[ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="4_gs6cm"]
+[ext_resource type="Texture2D" uid="uid://c20rh388uydyp" path="res://assets/Weapons/Blade/Chomwing_Blade.png" id="5_4kmw2"]
+
+[resource]
+script = ExtResource("4_gs6cm")
+sprite = ExtResource("5_4kmw2")
+name = "Chomwing Blade"
+description = "Its bullets fly through walls."
+bullet_scene = ExtResource("1_omcx4")
+boost_this = 1
+extra_bullet_sfx = ExtResource("3_1550t")
+metadata/_custom_type_script = "uid://hig2h24o38p0"

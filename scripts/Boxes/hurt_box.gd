@@ -107,16 +107,42 @@ func cancel_flash():
 			if piece is Sprite2D:
 				piece.material.set_shader_parameter("flash_modifier", 0.0)
 
-func heals():
+func heals(amount=0.5):
 	cancel_flash()
 	play_flash(Color.GREEN)
-	var new_hp = health+0.5+extra_heal
+	var new_hp = health+amount+extra_heal
 	hp.set_value(new_hp)
 	if new_hp<=max_health:
 		health=new_hp
 	else:
 		health=max_health
 		SCORE.increaseBy(250)
+
+func set_max_hp_UI(set_hp):
+	hp.edit_max_hp(set_hp)
+
+func set_hp_UI(set_hp):
+	# hp.set_value(set_hp)
+	GLOBAL.health=set_hp
+
+func extra_health(extra_hp:=1.0):
+	# print("-past health: " + str(health))
+	# print("max_health: " + str(max_health))
+	# print("|extra_hp: " + str(extra_hp))
+	var new_max_hp=max_health+extra_hp
+	var new_hp=health+extra_hp
+	# print("|new max hp: " + str(new_max_hp))
+	if new_hp > 0:
+		max_health=new_max_hp
+		hp.edit_max_hp(max_health)
+		heals(extra_hp)
+		# print("||new health: " + str(health))
+	else:
+		max_health=GLOBAL.base_health
+		hp.edit_max_hp(max_health)
+		hp.set_value(0.5)
+		GLOBAL.health=0.5
+		print(str(GLOBAL.health))
 
 func play_flash(color:Color):
 	sprite.material.set_shader_parameter("flash_color", color)

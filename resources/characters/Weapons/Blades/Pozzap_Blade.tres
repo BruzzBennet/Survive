@@ -10,9 +10,10 @@
 script = ExtResource("3_6431t")
 sprite = ExtResource("4_lx66n")
 name = "Pozzap Club"
-description = "Ammo+"
+description = "Ammo+, Reach-"
 bullet_scene = ExtResource("1_lx66n")
 boost_this = 5
+but_bane_this = 2
 bullet_sfx = ExtResource("2_3m877")
 extra_bullet_sfx = ExtResource("3_3m877")
 metadata/_custom_type_script = "uid://hig2h24o38p0"

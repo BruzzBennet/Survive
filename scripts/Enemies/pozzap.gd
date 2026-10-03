@@ -4,10 +4,12 @@ signal died
 signal shoot
 var last_direction = Vector2.RIGHT
 var chasing: bool
+var baby=false
 @onready var pozzap = $EnemyMovement
 
 func _on_timer_timeout() -> void:
-		shoot_bullet()
+		if !baby:
+			shoot_bullet()
 	
 func shoot_bullet():
 	PLAYSFX.shot()
@@ -17,6 +19,12 @@ func choose(array):
 	array.shuffle()
 	return array.front()
 
+func blank():
+	$HurtBox.items_it_can_drop.clear()
+	$HurtBox.score_value=0
+	$FollowBox.set_process(false)
+	baby=true
+	
 
 func _on_hurt_box_area_entered(area) -> void:
 	if area.is_in_group("bullet") or area.is_in_group("slash"):

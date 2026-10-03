@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://b6a5j10xoom4g"]
 
 [ext_resource type="Script" uid="uid://ddkdtc4rexct0" path="res://scripts/Enemies/pozzap.gd" id="1_0nryl"]
+[ext_resource type="PackedScene" uid="uid://bebyjivuy8kc1" path="res://scenes/boxes/followbox.tscn" id="2_8306c"]
 [ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="2_edv5l"]
 [ext_resource type="Texture2D" uid="uid://6wt63q18jrb4" path="res://assets/Enemies/PozzapSheet.png" id="2_qwm0m"]
+[ext_resource type="AudioStream" uid="uid://b88j8ammhw066" path="res://assets/audio/Pozzap.wav" id="3_grlkr"]
 [ext_resource type="PackedScene" uid="uid://ffrii0cvnsbc" path="res://scenes/enemies/enemy_movement.tscn" id="4_njonf"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="5_p51up"]
 [ext_resource type="Script" uid="uid://km7uun1qgqgv" path="res://scripts/Enemies/Manager/PozzapElecShot.gd" id="6_p51up"]
@@ -15,6 +17,9 @@
 [ext_resource type="Resource" uid="uid://cenaegryconho" path="res://resources/items/Boot_Pozzap.tres" id="9_sa7vm"]
 [ext_resource type="Resource" uid="uid://dvctsiu6as6g8" path="res://resources/items/Suit_Pozzap.tres" id="10_8306c"]
 [ext_resource type="Resource" uid="uid://dbh3l8052c48q" path="res://resources/items/Blade_Pozzap.tres" id="11_grlkr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nuh02"]
+radius = 64.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qhhgb"]
 shader = ExtResource("2_edv5l")
@@ -928,6 +933,13 @@ collision_layer = 2
 collision_mask = 11
 motion_mode = 1
 script = ExtResource("1_0nryl")
+
+[node name="FollowBox" parent="." unique_id=665233923 instance=ExtResource("2_8306c")]
+follow_sfx = ExtResource("3_grlkr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FollowBox" unique_id=543556644]
+shape = SubResource("CircleShape2D_nuh02")
+debug_color = Color(1, 1, 0, 0.42000002)
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=540271681]
 material = SubResource("ShaderMaterial_qhhgb")

@@ -115,7 +115,7 @@ position = Vector2(48, 112)
 
 [node name="BaseCards" type="Node2D" parent="." unique_id=267946850]
 
-[node name="Dropped_Card4" parent="BaseCards" unique_id=1870751650 instance=ExtResource("6_b6vvq")]
+[node name="Dropped_Card4" parent="BaseCards" unique_id=2053498774 instance=ExtResource("6_b6vvq")]
 position = Vector2(176, 80)
 
 [node name="Dropped_Card5" parent="BaseCards" unique_id=436370715 instance=ExtResource("6_b6vvq")]
