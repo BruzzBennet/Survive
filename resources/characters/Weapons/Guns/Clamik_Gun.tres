@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://kr1fx3yu8a2d"]
+
+[ext_resource type="PackedScene" uid="uid://e7k5wcox11oq" path="res://scenes/bullets/clamik_bullet.tscn" id="1_37bjf"]
+[ext_resource type="AudioStream" uid="uid://b5vijeuq114j3" path="res://assets/audio/slashshot.mp3" id="2_l331p"]
+[ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="3_icite"]
+[ext_resource type="Texture2D" uid="uid://cou1wvvknd3kc" path="res://assets/Weapons/Guns/Clamik_Gun.png" id="4_37bjf"]
+
+[resource]
+script = ExtResource("3_icite")
+sprite = ExtResource("4_37bjf")
+name = "Clamik Gun"
+description = "Ammo-. Bullets reach a bigger area"
+weapon_type = 1
+bullet_scene = ExtResource("1_37bjf")
+but_bane_this = 3
+metadata/_custom_type_script = "uid://hig2h24o38p0"

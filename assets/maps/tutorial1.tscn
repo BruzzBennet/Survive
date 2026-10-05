@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://djyfobi8to0tr" path="res://assets/Tiles/TilesS.png" id="4_qc8te"]
 [ext_resource type="PackedScene" uid="uid://cgrehgbf0gsnv" path="res://scenes/boxes/summon_spot.tscn" id="5_hu8wq"]
 [ext_resource type="PackedScene" uid="uid://cigy3geh1va3x" path="res://scenes/items/card_item.tscn" id="6_b6vvq"]
+[ext_resource type="PackedScene" uid="uid://bbn06r1cdptgw" path="res://assets/maps/choose_between_3.tscn" id="6_m1774"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_17ebl"]
 texture = ExtResource("4_qc8te")
@@ -113,16 +114,19 @@ tile_set = SubResource("TileSet_ww3q3")
 [node name="SummonSpot" parent="." unique_id=1167084153 instance=ExtResource("5_hu8wq")]
 position = Vector2(48, 112)
 
+[node name="ChooseBetween3" parent="." unique_id=1277225118 instance=ExtResource("6_m1774")]
+position = Vector2(64, 0)
+
+[node name="Dropped_Card5" parent="ChooseBetween3" unique_id=436370715 instance=ExtResource("6_b6vvq")]
+position = Vector2(208, 80)
+
+[node name="Dropped_Card6" parent="ChooseBetween3" unique_id=1303491601 instance=ExtResource("6_b6vvq")]
+position = Vector2(256, 80)
+
+[node name="Dropped_Card7" parent="ChooseBetween3" unique_id=1307933509 instance=ExtResource("6_b6vvq")]
+position = Vector2(304, 80)
+
 [node name="BaseCards" type="Node2D" parent="." unique_id=267946850]
 
 [node name="Dropped_Card4" parent="BaseCards" unique_id=2053498774 instance=ExtResource("6_b6vvq")]
 position = Vector2(176, 80)
-
-[node name="Dropped_Card5" parent="BaseCards" unique_id=436370715 instance=ExtResource("6_b6vvq")]
-position = Vector2(208, 80)
-
-[node name="Dropped_Card6" parent="BaseCards" unique_id=1303491601 instance=ExtResource("6_b6vvq")]
-position = Vector2(240, 80)
-
-[node name="Dropped_Card7" parent="BaseCards" unique_id=1307933509 instance=ExtResource("6_b6vvq")]
-position = Vector2(272, 80)

@@ -50,7 +50,7 @@ func restart():
 	modified_health=false
 
 var deck = []
-var deck_size:= 5
+var deck_size:= 6
 
 func add_card(card:Item):
 	if deck.size() < deck_size:

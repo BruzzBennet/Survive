@@ -47,7 +47,8 @@ func _ready():
 	screen_size = get_viewport_rect().size
 
 func reset_ammo(on_start=true):
-	GLOBAL.weapon.current_ammo=GLOBAL.weapon.max_ammo
+	GLOBAL.weapon.current_ammo+=GLOBAL.weapon.max_ammo/2
+	GLOBAL.weapon.current_ammo=clamp(GLOBAL.weapon.current_ammo,0,GLOBAL.weapon.max_ammo)
 	atkUI.setup(GLOBAL.weapon)
 	if !on_start:
 		atkUI.flash(Color.GREEN)
@@ -106,8 +107,8 @@ func reset_stats():
 func modifiers(this_suit:Variant,increase_by:int=1):
 	$HurtBox.defense = GLOBAL.defense
 	if this_suit is Suit:
-		if increase_by<0:
-			set_collision_mask_value(1, true)
+		# if increase_by<0:
+		set_collision_mask_value(1, true)
 		$SuitEffect.set_script(null)
 	if this_suit is Weapon:
 		$WeaponEffect.set_script(null)

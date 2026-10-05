@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bbn06r1cdptgw"]
+
+[ext_resource type="Script" uid="uid://c10m6n3me37y5" path="res://scripts/Items/item_shop_spawner.gd" id="1_g4tj8"]
+
+[node name="ChooseBetween3" type="Node2D" unique_id=1277225118]
+script = ExtResource("1_g4tj8")

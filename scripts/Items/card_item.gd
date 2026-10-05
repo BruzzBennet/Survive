@@ -7,21 +7,35 @@ func _ready():
 		add_item(item_summoned)
 
 func add_item(item:Item):
-	item.duplicate()
-	match item.item_is:
-			item.item_type.weapon:
-				var card = item.weapon.duplicate()
-				item.weapon = card
-			item.item_type.suit:
-				var card = item.suit.duplicate()
-				item.suit = card
+	# item.duplicate()
+	# match item.item_is:
+	# 		item.item_type.weapon:
+	# 			var card = item.weapon.duplicate()
+	# 			item.weapon = card
+	# 		item.item_type.suit:
+	# 			var card = item.suit.duplicate()
+	# 			item.suit = card
+	if item.item_is == item.item_type.weapon:
+		item.weapon.current_ammo = item.weapon.max_ammo
 	$Node2D.setup(item)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var item = $Node2D.get_item() 
-	if body is Player_Unit:
-		if item and GLOBAL.deck.size() < GLOBAL.deck_size:
+	if body is Player_Unit and item:
+		if GLOBAL.deck.has(item):
+			match item.item_is:
+				item.item_type.weapon:
+					item.weapon.current_ammo = item.weapon.max_ammo
+					if GLOBAL.weapon==item.weapon:
+						get_tree().current_scene.get_node("ATK").setup(item.weapon)
+					PLAYSFX.recover()
+					queue_free()
+				item.item_type.suit:
+					SCORE.actual+=500
+					PLAYSFX.pick_coin()
+					queue_free()
+		elif GLOBAL.deck.size() < GLOBAL.deck_size:
 			if item.item_is == item.item_type.weapon or item.item_is == item.item_type.suit:
 				PLAYSFX.get_card()
-				GLOBAL.add_card(item.duplicate())						
+				GLOBAL.add_card(item)						
 				queue_free()

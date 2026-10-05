@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="3_cllw4"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="4_bakjf"]
 [ext_resource type="Resource" uid="uid://cmrqml5472va0" path="res://resources/items/Suit_Clamik.tres" id="4_ji4b5"]
+[ext_resource type="Resource" uid="uid://c3tajxwwn86wk" path="res://resources/items/Gun_Clamik.tres" id="5_yrcyi"]
+[ext_resource type="Resource" uid="uid://dqqqwn6vmdw70" path="res://resources/items/Blade_Clamik.tres" id="6_r3i1r"]
 [ext_resource type="Script" uid="uid://bvl232bj8b45y" path="res://scripts/Boxes/invincible_box.gd" id="7_bakjf"]
 [ext_resource type="AudioStream" uid="uid://dvcok4a0iw0ed" path="res://assets/audio/parry.mp3" id="8_t1ttg"]
 
@@ -203,7 +205,7 @@ collision_mask = 43
 position = Vector2(20, 0)
 max_health = 2.0
 score_value = 300
-items_it_can_drop = Array[ExtResource("3_cllw4")]([ExtResource("4_ji4b5")])
+items_it_can_drop = Array[ExtResource("3_cllw4")]([ExtResource("4_ji4b5"), ExtResource("5_yrcyi"), ExtResource("6_r3i1r")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1587900473]
 position = Vector2(0, -1)
@@ -238,8 +240,8 @@ shape = SubResource("CapsuleShape2D_4kxel")
 [node name="InvincibleBox" type="Area2D" parent="." unique_id=1350158603]
 position = Vector2(2, 1)
 rotation = 1.5707964
-collision_layer = 10
-collision_mask = 14
+collision_layer = 2
+collision_mask = 8
 script = ExtResource("7_bakjf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InvincibleBox" unique_id=1402611611]

@@ -1,0 +1,211 @@
+[gd_scene format=3 uid="uid://e7k5wcox11oq"]
+
+[ext_resource type="Script" uid="uid://bdx0cpvtgtkt0" path="res://scripts/Attacks/Bullets/bullet.gd" id="1_eeu7r"]
+[ext_resource type="Texture2D" uid="uid://ch0vwennns6y3" path="res://assets/bullets/Clamik_Bullet.png" id="2_eeu7r"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="3_ayeaj"]
+[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="4_t56jy"]
+
+[sub_resource type="Resource" id="Resource_qncy5"]
+script = ExtResource("4_t56jy")
+metadata/_custom_type_script = "uid://doj80p0chh8d7"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eeu7r"]
+radius = 24.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eoqba"]
+size = Vector2(4, 7.5)
+
+[sub_resource type="Animation" id="Animation_qncy5"]
+resource_name = "0"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.5707964, 3.1415927, 4.712389]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1, -9), Vector2(9, 1), Vector2(-1, 9), Vector2(-9, -1)]
+}
+
+[sub_resource type="Animation" id="Animation_ayeaj"]
+resource_name = "1"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1.5707964, 3.1415927, 4.712389, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(9, 1), Vector2(-1, 9), Vector2(-9, -1), Vector2(1, -9)]
+}
+
+[sub_resource type="Animation" id="Animation_t56jy"]
+resource_name = "2"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3.1415927, 4.712389, 0.0, 1.5707964]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-1, 9), Vector2(-9, -1), Vector2(1, -9), Vector2(9, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jushh"]
+resource_name = "3"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4.712389, 0.0, 1.5707964, 3.1415927]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-9, -1), Vector2(1, -9), Vector2(9, 1), Vector2(-1, 9)]
+}
+
+[sub_resource type="Animation" id="Animation_k76ql"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitBox/CollisionShape2D:shape:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(24, 9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(9, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_in4mv"]
+_data = {
+&"0": SubResource("Animation_qncy5"),
+&"1": SubResource("Animation_ayeaj"),
+&"2": SubResource("Animation_t56jy"),
+&"3": SubResource("Animation_jushh"),
+&"RESET": SubResource("Animation_k76ql")
+}
+
+[node name="bullet" type="CharacterBody2D" unique_id=1051852224]
+collision_layer = 32
+script = ExtResource("1_eeu7r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1273843954]
+modulate = Color(1.9655429, 1.9655429, 1.9655429, 1)
+position = Vector2(9, 1)
+texture = ExtResource("2_eeu7r")
+
+[node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("3_ayeaj")]
+collision_layer = 32
+collision_mask = 7
+attack = SubResource("Resource_qncy5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=405795565]
+rotation = 1.5707964
+shape = SubResource("CircleShape2D_eeu7r")
+debug_color = Color(1, 0, 0, 0.42000002)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=534475717]
+position = Vector2(-1, 8)
+rotation = -1.5707964
+shape = SubResource("RectangleShape2D_eoqba")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1424104363]
+libraries/ = SubResource("AnimationLibrary_in4mv")

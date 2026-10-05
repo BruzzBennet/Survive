@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dni0tjjhh3d85"]
+
+[ext_resource type="Texture2D" uid="uid://c5l3s62fram2m" path="res://assets/cards/Mons/pozzap.png" id="1_b56jc"]
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="2_xy3jc"]
+[ext_resource type="Resource" uid="uid://bvonsho572kg7" path="res://resources/characters/Weapons/Guns/Pozzap_Gun.tres" id="3_1fwgs"]
+
+[resource]
+script = ExtResource("2_xy3jc")
+mon_sprite = ExtResource("1_b56jc")
+item_is = 1
+weapon = ExtResource("3_1fwgs")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://3lwoa7tsv1fj" path="res://scenes/items/itemUpDown.tscn" id="4_lxv65"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ovca5"]
-size = Vector2(20, 26)
+size = Vector2(24, 32)
 
 [sub_resource type="Animation" id="Animation_ovca5"]
 resource_name = "Idle"

@@ -52,6 +52,7 @@ func _ready():
 			health=GLOBAL.health
 			max_health=GLOBAL.base_health
 			drops_items=false
+			hp = get_tree().current_scene.get_node("HP")
 	elif takes_damage_from == attack_source.player:
 			set_collision_layer_value(2, true)
 			set_collision_mask_value(4, true)
@@ -67,7 +68,6 @@ func _ready():
 					shared_material = ShaderMaterial.new()
 					shared_material.shader = preload("res://scenes/hurt_shader.gdshader")
 					piece.material = shared_material
-		hp = get_tree().current_scene.get_node("HP")
 	else:
 		sprite = get_parent().get_node("Sprite")
 	if sprite.material:
@@ -118,6 +118,17 @@ func heals(amount=0.5):
 		health=max_health
 		SCORE.increaseBy(250)
 
+func normal_heal(amount=0.5):
+	cancel_flash()
+	play_flash(Color.GREEN)
+	var new_hp = health+amount
+	hp.set_value(new_hp)
+	if new_hp<=max_health:
+		health=new_hp
+	else:
+		health=max_health
+		SCORE.increaseBy(250)
+
 func set_max_hp_UI(set_hp):
 	hp.edit_max_hp(set_hp)
 
@@ -126,17 +137,12 @@ func set_hp_UI(set_hp):
 	GLOBAL.health=set_hp
 
 func extra_health(extra_hp:=1.0):
-	# print("-past health: " + str(health))
-	# print("max_health: " + str(max_health))
-	# print("|extra_hp: " + str(extra_hp))
 	var new_max_hp=max_health+extra_hp
 	var new_hp=health+extra_hp
-	# print("|new max hp: " + str(new_max_hp))
 	if new_hp > 0:
 		max_health=new_max_hp
 		hp.edit_max_hp(max_health)
-		heals(extra_hp)
-		# print("||new health: " + str(health))
+		normal_heal(extra_hp)
 	else:
 		max_health=GLOBAL.base_health
 		hp.edit_max_hp(max_health)
@@ -249,7 +255,7 @@ func dead_enemy(increase_score=true):
 	if increase_score:
 		SCORE.increaseBy(score_value)
 	PLAYSFX.died()
-	var drop_item = randi_range(0,2)
+	var drop_item = randi_range(0,4)
 	if drop_item==1:
 		call_deferred("item_drop")
 		
@@ -259,10 +265,10 @@ func item_drop():
 		var item_to_be_dropped=items_it_can_drop.pick_random()
 		match item_to_be_dropped.item_is:
 			item_to_be_dropped.item_type.weapon:
-				var card = item_to_be_dropped.weapon.duplicate()
+				var card = item_to_be_dropped.weapon
 				item_to_be_dropped.weapon = card
 			item_to_be_dropped.item_type.suit:
-				var card = item_to_be_dropped.suit.duplicate()
+				var card = item_to_be_dropped.suit
 				item_to_be_dropped.suit = card
 		var item_dropped=item_to_be_dropped
 		if item_dropped.item_is != item_dropped.item_type.normal_item:
@@ -288,6 +294,7 @@ func gameover():
 	
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is Healing_Item:
-		await heals()
-		body.queue_free()
+	if takes_damage_from == attack_source.enemy:
+		if body is Healing_Item:
+			await heals()
+			body.queue_free()

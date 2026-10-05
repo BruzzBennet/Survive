@@ -13,7 +13,6 @@ name = "Bomb Club"
 description = "Bullets explode on impact."
 bullet_scene = ExtResource("1_c3s3l")
 boost_this = 1
-but_bane_this = 3
 bullet_sfx = ExtResource("2_mxga4")
 extra_bullet_sfx = ExtResource("2_ewktf")
 metadata/_custom_type_script = "uid://hig2h24o38p0"

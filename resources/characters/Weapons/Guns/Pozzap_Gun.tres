@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://bvonsho572kg7"]
+
+[ext_resource type="PackedScene" uid="uid://c0u3a864ma6ks" path="res://scenes/bullets/pozzap_bullet.tscn" id="1_bmf5a"]
+[ext_resource type="AudioStream" uid="uid://cf2juyju77jvv" path="res://assets/audio/ShotShort.wav" id="2_bmf5a"]
+[ext_resource type="AudioStream" uid="uid://dew0relhlqdg8" path="res://assets/audio/ShotMedium.wav" id="2_sptus"]
+[ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="4_rksod"]
+[ext_resource type="Texture2D" uid="uid://bynukgkie1vkt" path="res://assets/Weapons/Guns/Pozzap_Gun.png" id="5_sptus"]
+
+[resource]
+script = ExtResource("4_rksod")
+sprite = ExtResource("5_sptus")
+name = "Pozzap Gun"
+description = "Ammo+, Reach-"
+weapon_type = 1
+bullet_scene = ExtResource("1_bmf5a")
+boost_this = 5
+but_bane_this = 2
+bullet_sfx = ExtResource("2_bmf5a")
+extra_bullet_sfx = ExtResource("2_sptus")
+metadata/_custom_type_script = "uid://hig2h24o38p0"

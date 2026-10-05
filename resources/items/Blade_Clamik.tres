@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dqqqwn6vmdw70"]
+
+[ext_resource type="Texture2D" uid="uid://l8hg62j8xwrl" path="res://assets/cards/Mons/Clamik.png" id="1_2cryr"]
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="2_4lwrk"]
+[ext_resource type="Resource" uid="uid://bafn1kus10qfe" path="res://resources/characters/Weapons/Blades/Clamik_Blade.tres" id="3_2cryr"]
+
+[resource]
+script = ExtResource("2_4lwrk")
+mon_sprite = ExtResource("1_2cryr")
+item_is = 1
+weapon = ExtResource("3_2cryr")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"
