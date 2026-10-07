@@ -47,7 +47,7 @@ func _ready():
 	screen_size = get_viewport_rect().size
 
 func reset_ammo(on_start=true):
-	GLOBAL.weapon.current_ammo+=GLOBAL.weapon.max_ammo/2
+	GLOBAL.weapon.current_ammo+=GLOBAL.weapon.max_ammo/4
 	GLOBAL.weapon.current_ammo=clamp(GLOBAL.weapon.current_ammo,0,GLOBAL.weapon.max_ammo)
 	atkUI.setup(GLOBAL.weapon)
 	if !on_start:
@@ -71,7 +71,7 @@ func weapon_attack_pattern(this_weapon:Weapon):
 	match this_weapon.weapon_type:
 		Weapon.type.boot:
 			melee_shot_pattern = "short_shot"
-			shot_pattern = "area_shot"
+			shot_pattern = "small_area_shot"
 		Weapon.type.gun:
 			melee_shot_pattern = "simple_shot"
 			shot_pattern = "triple_shot"
@@ -120,13 +120,13 @@ func modifiers(this_suit:Variant,increase_by:int=1):
 			this_suit.boost.ammo_saving:
 				ammo_reduce-= 0.125 * increase_by
 			this_suit.boost.defense:
-				# $HurtBox.defense = GLOBAL.defense + (0.25 * increase_by)
-				if increase_by < 0:
-					GLOBAL.modified_health=false
-				if !GLOBAL.modified_health:
-					# print("--HENSHIN")
-					$HurtBox.extra_health(1*increase_by)
-					GLOBAL.modified_health=true
+				$HurtBox.defense = GLOBAL.defense + (0.25 * increase_by)
+				# if increase_by < 0:
+				# 	GLOBAL.modified_health=false
+				# if !GLOBAL.modified_health:
+				# 	# print("--HENSHIN")
+				# 	$HurtBox.extra_health(1*increase_by)
+				# 	GLOBAL.modified_health=true
 			this_suit.boost.effect:
 				if this_suit.effect:
 					if this_suit is Suit:
@@ -156,12 +156,12 @@ func _physics_process(delta: float) -> void:
 	if GLOBAL.about_to_henshin==false:
 		walk_sfx()
 		player_movement(delta)
-		# if Input.is_action_pressed("attack") || Input.is_action_pressed("shoot"):
-		# 	thick()
 		if Input.is_action_pressed("attack"):
 			attack()
 		if Input.is_action_pressed("shoot"):
 			shoot()
+		# atkUI.regenerate(delta)
+		# healingATK(delta)
 	else:
 		play_animation("Idle_", last_direction)
 
@@ -169,11 +169,11 @@ func _physics_process(delta: float) -> void:
 func attack():
 	is_attacking = true
 	if weapon.weapon_type == Weapon.type.gun:
-		atkUI.reduce_by_melee(ammo_reduce*1.5)
-	elif weapon.weapon_type == Weapon.type.boot:
 		atkUI.reduce_by_melee(ammo_reduce)
-	elif weapon.weapon_type == Weapon.type.blade:
+	elif weapon.weapon_type == Weapon.type.boot:
 		atkUI.reduce_by_melee(ammo_reduce*0.5)
+	elif weapon.weapon_type == Weapon.type.blade or weapon.weapon_type == Weapon.type.none:
+		atkUI.reduce_by_melee(ammo_reduce*0.35)
 	$HurtBox.cancel_flash()
 	Short_Range_Attack()
 	$AttackAnimationTimer.start()
@@ -186,15 +186,19 @@ func Short_Range_Attack():
 	if can_hit:
 		if atkUI.currentATK >= atkUI.min_ammo:
 			$BulletManager.shoot(position, last_direction, melee_shot_pattern)
+		elif weapon.weapon_type == Weapon.type.gun:
+			PLAYSFX.out_of_ammo()
 		else:
 			PLAYSFX.slash()
 		can_hit = false
 
 func shoot():
-	if weapon.weapon_type == Weapon.type.boot:
+	# if weapon.weapon_type == Weapon.type.boot:
+	# 		atkUI.reduce(ammo_reduce*3)
+	if weapon.weapon_type == Weapon.type.gun:
 			atkUI.reduce(ammo_reduce*3)
-	elif weapon.weapon_type == Weapon.type.gun:
-			atkUI.reduce(ammo_reduce*3)
+	elif weapon.weapon_type == Weapon.type.none:
+			atkUI.reduce(ammo_reduce*0.65)
 	else:
 		atkUI.reduce(ammo_reduce)
 	if atkUI.currentATK >= atkUI.min_ammo:
@@ -216,7 +220,7 @@ func Long_Range_Attack():
 		can_shoot = false
 
 func tired():
-	PLAYSFX.out_of_ammo()
+	# PLAYSFX.out_of_ammo()
 	# $HurtBox.is_tired()
 	atkUI.flash(Color.RED)
 

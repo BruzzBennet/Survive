@@ -255,9 +255,9 @@ func dead_enemy(increase_score=true):
 	if increase_score:
 		SCORE.increaseBy(score_value)
 	PLAYSFX.died()
-	var drop_item = randi_range(0,4)
-	if drop_item==1:
-		call_deferred("item_drop")
+	# var drop_item = randi_range(0,9)
+	# if drop_item==1:
+	# 	call_deferred("item_drop")
 		
 
 func item_drop():

@@ -9,5 +9,5 @@ script = ExtResource("3_47nsw")
 helmet = ExtResource("2_kti3w")
 body_palette = ExtResource("1_kti3w")
 name = "MonRanger Suit"
-description = "As any suit, it reduces damage you take by 0.5 points."
+description = "All suits reduce damage by 0.5 points."
 metadata/_custom_type_script = "uid://dk6b8jpr26pj2"

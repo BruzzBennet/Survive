@@ -10,11 +10,11 @@ var item=[
 func _ready():
 	BGM.playOverworldMusic()
 	$PlayerSpawn.spawn_player(true)
-	var index=0
-	for i in $BaseCards.get_children():
-		i.add_item(item[index])
-		index+=1
+	# var index=0
+	# for i in $BaseCards.get_children():
+	# 	i.add_item(item[index])
+	# 	index+=1
 	for i in $ChooseBetween3.get_children():
-		i.add_item(item[index])
+		# i.add_item(item[index])
 		i.get_node("Area2D").body_entered.connect($ChooseBetween3.done)
-		index+=1
+		# index+=1

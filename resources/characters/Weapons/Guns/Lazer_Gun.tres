@@ -10,7 +10,7 @@
 script = ExtResource("2_3kpkr")
 sprite = ExtResource("3_jli0g")
 name = "Gun"
-description = "All attacks are Long-Range, but low damage"
+description = "All attacks are Long-Range. Wastes the Most Ammo."
 weapon_type = 1
 bullet_scene = ExtResource("1_5d8ou")
 bullet_sfx = ExtResource("2_jli0g")

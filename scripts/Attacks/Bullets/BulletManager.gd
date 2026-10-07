@@ -92,6 +92,8 @@ func shot_pattern(pos,dir,shoot_pattern,shot_is):
 			double_shot(pos,dir)
 		"area_shot":
 			area_shot(pos,0.65)
+		"small_area_shot":
+			area_shot(pos,0.35)
 		null:
 			simple_shot(pos,dir)
 

@@ -1,10 +1,12 @@
 extends Resource
 class_name Weapon
 
+var base_depletion_rate = 1.0
+
 @export var sprite: Texture2D
 @export var name: String
 @export var description: String
-var melee_depletion_rate: float = 0.35
+var melee_depletion_rate = base_depletion_rate
 @export var weapon_type: type
 
 enum type {
@@ -17,14 +19,14 @@ enum type {
 
 @export var bullet_scene : PackedScene
 @export var enemies_bullet_pierces: int = 1 
-var max_ammo: float = 50.0
-var current_ammo: float = 50.0
+var max_ammo: float = 100.0
+var current_ammo: float = 100.0
 var min_ammo: float = 1.0
 var bullet_damage: float = 1.0
 var bullet_speed: int = 250
 var bullet_time_on_field: float = 0.4
-var reload_rate: float = 0.0
-var depletion_rate: float = 1.0
+var reload_rate: float = 0
+var depletion_rate = base_depletion_rate
 @export var shot_type: shot_pattern 
 
 enum shot_pattern{

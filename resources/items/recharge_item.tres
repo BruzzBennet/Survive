@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_tprp8")
 name = "Recharger"
-description = "Reload your current weapon's Ammo"
+description = "Reload 1/4th of your current weapon's Ammo"
 item_scene = ExtResource("1_vprq7")
 metadata/_custom_type_script = "uid://c38u5aaaos1gy"

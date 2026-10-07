@@ -27,6 +27,7 @@ var tile_maps =[
 var enemy_difficulty:= 1
 var first_player_starting_point
 var current_level=0
+var max_enemy_amount:= 36
 
 func _ready() -> void:
 	map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
@@ -42,7 +43,7 @@ func portal_opens():
 func next_round():
 	remove_items()
 	GLOBAL.current_level+=1
-	if GLOBAL.starting_enemy_amount<36:
+	if GLOBAL.starting_enemy_amount<max_enemy_amount:
 		# GLOBAL.increase_dificulty +=0.5
 		# if GLOBAL.increase_dificulty >= 1.5:
 		GLOBAL.starting_enemy_amount += 1
@@ -110,11 +111,11 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 		var item = instance.get_node_or_null("Item")
 		if item:
 			var do_or_not= randi_range(0,3)
-			if GLOBAL.starting_enemy_amount>=36:
-				if do_or_not < 3:
+			if GLOBAL.starting_enemy_amount>=max_enemy_amount:
+				if do_or_not == 1:
 					enemy_level= randi_range(1, max_level)
 					item.spawn_enemy(enemy_level)
-				elif !spawned_already.has(item):
+				elif do_or_not == 0 and !spawned_already.has(item):
 					item.spawn_item()
 					spawned_already.append(item)
 			elif do_or_not == 3 && !spawned_already.has(item):

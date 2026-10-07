@@ -54,6 +54,17 @@ func switch_weapon(weapon,body):
 
 func _on_area_2d_body_entered(body) -> void:
 	if body is Player_Unit:
+		# switch_weapon_to_item(body)
+		add_card()
+
+func add_card():
+	if GLOBAL.deck.size() < GLOBAL.deck_size:
+		if item.item_is == item.item_type.weapon or item.item_is == item.item_type.suit:
+			PLAYSFX.get_card()
+			GLOBAL.add_card(item)						
+			queue_free()
+
+func switch_weapon_to_item(body):
 		match item.item_is:
 			item.item_type.weapon:
 				PLAYSFX.equip()
