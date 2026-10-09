@@ -41,10 +41,10 @@ offset_bottom = 320.0
 [node name="Card1" type="Button" parent="Panel" unique_id=484130366]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 150.0
-offset_top = 28.0
-offset_right = 186.0
-offset_bottom = 83.0
+offset_left = 149.0
+offset_top = 60.0
+offset_right = 185.0
+offset_bottom = 115.0
 focus_neighbor_left = NodePath("../Card3")
 focus_neighbor_right = NodePath("../Card2")
 
@@ -55,10 +55,10 @@ position = Vector2(18, 28)
 [node name="Card2" type="Button" parent="Panel" unique_id=595015216]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 190.0
-offset_top = 28.0
-offset_right = 226.0
-offset_bottom = 83.0
+offset_left = 189.0
+offset_top = 60.0
+offset_right = 225.0
+offset_bottom = 115.0
 focus_neighbor_left = NodePath("../Card1")
 focus_neighbor_right = NodePath("../Card3")
 
@@ -69,10 +69,10 @@ position = Vector2(18, 28)
 [node name="Card3" type="Button" parent="Panel" unique_id=789141333]
 layout_mode = 1
 anchors_preset = -1
-offset_left = 230.0
-offset_top = 28.0
-offset_right = 266.0
-offset_bottom = 83.0
+offset_left = 229.0
+offset_top = 60.0
+offset_right = 265.0
+offset_bottom = 115.0
 focus_neighbor_left = NodePath("../Card2")
 focus_neighbor_right = NodePath("../Card1")
 
@@ -83,26 +83,26 @@ position = Vector2(18, 28)
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=2068040730]
 layout_mode = 0
 offset_left = 8.0
-offset_top = 30.0
+offset_top = 62.0
 offset_right = 143.0
-offset_bottom = 81.0
+offset_bottom = 113.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_f1lyw")
 
 [node name="Label" type="Label" parent="." unique_id=1016155828]
 layout_mode = 0
 offset_left = 11.0
-offset_top = 31.0
+offset_top = 63.0
 offset_right = 140.0
-offset_bottom = 78.0
+offset_bottom = 110.0
 label_settings = SubResource("LabelSettings_1iwen")
 autowrap_mode = 3
 
 [node name="PanelContainer2" type="PanelContainer" parent="." unique_id=1068005920]
 layout_mode = 0
 offset_left = 10.0
-offset_top = 9.0
+offset_top = 41.0
 offset_right = 263.0
-offset_bottom = 23.0
+offset_bottom = 55.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1iwen")
 
 [node name="Label2" type="Label" parent="PanelContainer2" unique_id=1351068270]

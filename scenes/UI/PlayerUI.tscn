@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://cpp72lf4ylqo4"]
+
+[ext_resource type="Script" uid="uid://dprpd5ilo6o1n" path="res://scripts/Player/UI/player_ui.gd" id="1_fbln2"]
+[ext_resource type="Shader" uid="uid://cbjrfkuwbn76f" path="res://shaders/atk.gdshader" id="2_fbln2"]
+[ext_resource type="Texture2D" uid="uid://dwwxljqniuq2q" path="res://assets/MR/BodyParts/Helmets/Helmet_MROG.png" id="2_jt14p"]
+[ext_resource type="Texture2D" uid="uid://bupg2o7574s7a" path="res://assets/cards/icons/Boot_W.png" id="4_cviaw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afog6"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_da24e"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jt14p"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbln2"]
+bg_color = Color(0.31521547, 1, 0.18281268, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cviaw"]
+bg_color = Color(0, 0.7227015, 0.8226884, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_au7tn"]
+shader = ExtResource("2_fbln2")
+shader_parameter/value = 1.0
+shader_parameter/segments = 4
+shader_parameter/segment_gap = 0.075
+shader_parameter/inner_radius = 0.30000001425
+shader_parameter/outer_radius = 0.5
+shader_parameter/bar_color = Color(0, 0.8, 0.3, 1)
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader_parameter/edge_softness = 0.05
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
+[node name="UI" type="Control" unique_id=1412859120]
+clip_children = 2
+light_mask = 524288
+visibility_layer = 524288
+z_index = 99
+layout_mode = 3
+anchor_right = 0.047000002
+anchor_bottom = 0.1
+offset_right = -0.08000183
+script = ExtResource("1_fbln2")
+
+[node name="Panel3" type="Panel" parent="." unique_id=1631301882]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 1.0
+offset_right = 134.0
+offset_bottom = 27.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_afog6")
+
+[node name="Panel" type="Panel" parent="." unique_id=1506647990]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 3.0
+offset_right = 132.0
+offset_bottom = 25.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_da24e")
+
+[node name="Panel2" type="Panel" parent="." unique_id=1881200234]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 4.0
+offset_right = 131.0
+offset_bottom = 24.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_afog6")
+
+[node name="HP" type="ProgressBar" parent="." unique_id=1291362246]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 6.0
+offset_right = 139.0
+offset_bottom = 14.0
+scale = Vector2(0.9199988, 1.240001)
+theme_override_styles/background = SubResource("StyleBoxFlat_jt14p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fbln2")
+max_value = 5.0
+show_percentage = false
+
+[node name="Ammo" type="ProgressBar" parent="." unique_id=1456749725]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 17.0
+offset_right = 139.0
+offset_bottom = 21.0
+scale = Vector2(0.9199988, 1.240001)
+theme_override_styles/background = SubResource("StyleBoxFlat_jt14p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cviaw")
+show_percentage = false
+
+[node name="PlayerIcon" type="Sprite2D" parent="." unique_id=2116694426]
+position = Vector2(13, 13)
+scale = Vector2(2, 2)
+texture = ExtResource("2_jt14p")
+hframes = 4
+frame = 1
+
+[node name="ATKBar" type="ColorRect" parent="." unique_id=106199045]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_au7tn")
+layout_mode = 0
+offset_left = -4.0
+offset_top = -3.0
+offset_right = 26.0
+offset_bottom = 27.0
+scale = Vector2(1.2, 1.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1495221148]
+visible = false
+position = Vector2(14, 15)
+texture = ExtResource("4_cviaw")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1521311768]
+visible = false
+layout_mode = 1
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 37.0
+offset_bottom = 32.0
+scale = Vector2(0.5, 0.5)
+text = "ATK"
+horizontal_alignment = 1
+vertical_alignment = 1

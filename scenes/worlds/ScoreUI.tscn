@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://c6i85j2k3ovco"]
+
+[ext_resource type="Script" uid="uid://bdsl852hj016k" path="res://scripts/Trackers/score_label.gd" id="1_kul61"]
+[ext_resource type="Script" uid="uid://cbg018ohlqnw1" path="res://scripts/Trackers/high_score_label.gd" id="2_u43f6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i7141"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_i7141"]
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4mrxx"]
+font_size = 10
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="PanelContainer" type="PanelContainer" unique_id=1312277092]
+light_mask = 8192
+visibility_layer = 8192
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 639.0
+offset_bottom = 39.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_i7141")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1603759146]
+layout_mode = 2
+theme_override_constants/separation = -4
+alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="VBoxContainer" unique_id=1838465236]
+layout_mode = 2
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_i7141")
+horizontal_alignment = 2
+uppercase = true
+script = ExtResource("1_kul61")
+
+[node name="HighScoreLabel" type="Label" parent="VBoxContainer" unique_id=1710950347]
+layout_mode = 2
+text = "High Score: 0"
+label_settings = SubResource("LabelSettings_4mrxx")
+horizontal_alignment = 2
+uppercase = true
+script = ExtResource("2_u43f6")

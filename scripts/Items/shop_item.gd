@@ -14,10 +14,12 @@ func build(this_one_item):
 			description(this_one_item.name,this_one_item.description)
 		this_one_item.item_type.weapon:
 			sprite=this_one_item.weapon.sprite
+			this_one_item.weapon=this_one_item.weapon.duplicate()
 			build_sprite(sprite)
 			description(this_one_item.weapon.name,this_one_item.weapon.description)
 		this_one_item.item_type.suit:
 			sprite=this_one_item.suit.helmet
+			this_one_item.suit=this_one_item.suit.duplicate()
 			build_sprite(sprite)
 			description(this_one_item.suit.name,this_one_item.suit.description)
 

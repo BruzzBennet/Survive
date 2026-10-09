@@ -6,25 +6,13 @@
 [ext_resource type="Script" uid="uid://pks0tfm1bus5" path="res://scripts/World/Resources/world_resource.gd" id="3_ja5x8"]
 [ext_resource type="PackedScene" uid="uid://byswe6q6yfjxy" path="res://scenes/henshin_menu/henshin_menu.tscn" id="4_08rx5"]
 [ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="4_ja5x8"]
-[ext_resource type="Script" uid="uid://bdsl852hj016k" path="res://scripts/Trackers/score_label.gd" id="5_d3y2x"]
-[ext_resource type="Script" uid="uid://cbg018ohlqnw1" path="res://scripts/Trackers/high_score_label.gd" id="6_4ux33"]
 [ext_resource type="PackedScene" uid="uid://d4fsptvwptuf4" path="res://scenes/ctr_shader.tscn" id="7_h1g7i"]
+[ext_resource type="PackedScene" uid="uid://c6i85j2k3ovco" path="res://scenes/worlds/ScoreUI.tscn" id="7_r5xff"]
 
 [sub_resource type="Resource" id="Resource_d3y2x"]
 script = ExtResource("3_ja5x8")
 map_layout = ExtResource("2_08rx5")
 metadata/_custom_type_script = "uid://pks0tfm1bus5"
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i7141"]
-content_margin_left = 10.0
-content_margin_right = 10.0
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_i7141"]
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_4mrxx"]
-outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Environment" id="Environment_4mrxx"]
 background_mode = 3
@@ -55,27 +43,11 @@ offset_top = -23.0
 offset_right = 652.0
 offset_bottom = 330.0
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=40150643]
-light_mask = 8192
-visibility_layer = 8192
+[node name="ScoreUI" parent="." unique_id=1312277092 instance=ExtResource("7_r5xff")]
+offset_left = 0.0
+offset_top = 0.0
 offset_right = 640.0
-offset_bottom = 33.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_i7141")
-
-[node name="ScoreLabel" type="Label" parent="PanelContainer" unique_id=1741771680]
-layout_mode = 2
-text = "Score: 0"
-label_settings = SubResource("LabelSettings_i7141")
-horizontal_alignment = 2
-uppercase = true
-script = ExtResource("5_d3y2x")
-
-[node name="HighScoreLabel" type="Label" parent="PanelContainer" unique_id=1917688951]
-layout_mode = 2
-text = "High Score: 0"
-label_settings = SubResource("LabelSettings_4mrxx")
-uppercase = true
-script = ExtResource("6_4ux33")
+offset_bottom = 32.0
 
 [node name="CTRShader" parent="." unique_id=1374949823 instance=ExtResource("7_h1g7i")]
 

@@ -7,7 +7,7 @@
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcgng"]
-bg_color = Color(0, 1, 0, 1)
+bg_color = Color(0, 0.72156864, 0.8235294, 1)
 
 [node name="CardBase" type="Node2D" unique_id=706061897]
 script = ExtResource("1_cj6du")

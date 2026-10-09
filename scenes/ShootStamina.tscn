@@ -6,9 +6,9 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_au7tn"]
 shader = ExtResource("2_au7tn")
 shader_parameter/value = 1.0
-shader_parameter/segments = 5
+shader_parameter/segments = 4
 shader_parameter/segment_gap = 0.075
-shader_parameter/inner_radius = 0.3
+shader_parameter/inner_radius = 0.350000016625
 shader_parameter/outer_radius = 0.5
 shader_parameter/bar_color = Color(0, 0.8, 0.3, 1)
 shader_parameter/bg_color = Color(0, 0, 0, 1)
@@ -34,7 +34,11 @@ layout_mode = 0
 offset_right = 30.0
 offset_bottom = 30.0
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1495221148]
+position = Vector2(15, 15)
+
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1521311768]
+visible = false
 layout_mode = 1
 offset_left = 7.0
 offset_top = 8.0

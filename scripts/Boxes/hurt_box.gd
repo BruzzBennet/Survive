@@ -28,7 +28,7 @@ var is_hurt: bool = false
 var is_invincible: bool = false
 var health: float
 var enemyCollisions = []
-var hp
+var hpUI
 var yes_or_no_healer = 0
 signal died
 var damage_tile_location=[
@@ -52,7 +52,7 @@ func _ready():
 			health=GLOBAL.health
 			max_health=GLOBAL.base_health
 			drops_items=false
-			hp = get_tree().current_scene.get_node("HP")
+			hpUI = get_tree().current_scene.get_node("UI")
 	elif takes_damage_from == attack_source.player:
 			set_collision_layer_value(2, true)
 			set_collision_mask_value(4, true)
@@ -111,7 +111,7 @@ func heals(amount=0.5):
 	cancel_flash()
 	play_flash(Color.GREEN)
 	var new_hp = health+amount+extra_heal
-	hp.set_value(new_hp)
+	hpUI.set_hp(new_hp)
 	if new_hp<=max_health:
 		health=new_hp
 	else:
@@ -122,7 +122,7 @@ func normal_heal(amount=0.5):
 	cancel_flash()
 	play_flash(Color.GREEN)
 	var new_hp = health+amount
-	hp.set_value(new_hp)
+	hpUI.set_hp(new_hp)
 	if new_hp<=max_health:
 		health=new_hp
 	else:
@@ -130,7 +130,7 @@ func normal_heal(amount=0.5):
 		SCORE.increaseBy(250)
 
 func set_max_hp_UI(set_hp):
-	hp.edit_max_hp(set_hp)
+	hpUI.edit_max_hp(set_hp)
 
 func set_hp_UI(set_hp):
 	# hp.set_value(set_hp)
@@ -141,12 +141,12 @@ func extra_health(extra_hp:=1.0):
 	var new_hp=health+extra_hp
 	if new_hp > 0:
 		max_health=new_max_hp
-		hp.edit_max_hp(max_health)
+		hpUI.edit_max_hp(max_health)
 		normal_heal(extra_hp)
 	else:
 		max_health=GLOBAL.base_health
-		hp.edit_max_hp(max_health)
-		hp.set_value(0.5)
+		hpUI.edit_max_hp(max_health)
+		hpUI.set_hp(0.5)
 		GLOBAL.health=0.5
 		print(str(GLOBAL.health))
 
@@ -232,7 +232,7 @@ func add_death_explosion():
 func hurt_player():
 	cancel_flash()
 	play_flash(Color.RED)
-	hp.set_value(health)
+	hpUI.set_hp(health)
 	var fx = hurt_fx.instantiate()
 	fx.global_position = global_position
 	get_tree().current_scene.add_child(fx)

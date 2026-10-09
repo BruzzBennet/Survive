@@ -27,9 +27,9 @@ var items=[
 
 var spawn_this_player: PackedScene = GLOBAL.player_type
 
-var hp_to_spawn: PackedScene = preload("res://scenes/hp.tscn")
-var stamina_to_spawn: PackedScene = preload("res://scenes/UI/Run_Stamina.tscn")
-var atk_to_spawn: PackedScene = preload("res://scenes/ShootStamina.tscn")
+# var hp_to_spawn: PackedScene = preload("res://scenes/hp.tscn")
+# var stamina_to_spawn: PackedScene = preload("res://scenes/UI/Run_Stamina.tscn")
+# var atk_to_spawn: PackedScene = preload("res://scenes/ShootStamina.tscn")
 var spawn_points = []
 var current_round: float = 1.0
 var rng_map
@@ -71,16 +71,20 @@ func enemy_died(enemy):
 		rng_map.call_deferred("next_round")
 
 func spawn_player(first_time=false):
-	var atk = atk_to_spawn.instantiate()
-	get_tree().current_scene.add_child(atk)
-	atk.setup(GLOBAL.weapon)
-	atk.position = Vector2(270, 2)
+	# var atk = atk_to_spawn.instantiate()
+	# get_tree().current_scene.add_child(atk)
+	# atk.setup(GLOBAL.weapon)
+	# atk.position = Vector2(270, 2)
 
-	var hp = hp_to_spawn.instantiate()
-	get_tree().current_scene.add_child(hp)
-	hp.set_value(GLOBAL.health, false)
-	hp.position = Vector2(305, 2)
-	
+	# var hp = hp_to_spawn.instantiate()
+	# get_tree().current_scene.add_child(hp)
+	# hp.set_value(GLOBAL.health, false)
+	# hp.position = Vector2(305, 2)
+
+	var player_ui = preload("res://scenes/UI/PlayerUI.tscn").instantiate()
+	get_tree().current_scene.add_child(player_ui)
+	player_ui.position=Vector2(10,10)
+
 	var player = spawn_this_player.instantiate()
 	get_tree().current_scene.add_child(player)
 	player.position = global_position

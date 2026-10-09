@@ -12,7 +12,7 @@ var friction: float = 0.25
 @export var footstep_frames: Array[int] = [0, 1]
 @export var attack_frames: Array[int]
 @onready var animated_sprite_2d = $AnimationPlayer2D
-@onready var atkUI = get_tree().current_scene.get_node("ATK")
+@onready var atkUI = get_tree().current_scene.get_node("UI")
 # @onready var hpUI = get_tree().current_scene.get_node("HP")
 const margin = 12
 var last_direction = Vector2.DOWN
@@ -49,9 +49,9 @@ func _ready():
 func reset_ammo(on_start=true):
 	GLOBAL.weapon.current_ammo+=GLOBAL.weapon.max_ammo/4
 	GLOBAL.weapon.current_ammo=clamp(GLOBAL.weapon.current_ammo,0,GLOBAL.weapon.max_ammo)
-	atkUI.setup(GLOBAL.weapon)
+	atkUI.ammo_setup(GLOBAL.weapon)
 	if !on_start:
-		atkUI.flash(Color.GREEN)
+		# atkUI.flash(Color.GREEN)
 		PLAYSFX.recover()
 		$HurtBox.play_flash(Color.GREEN)
 
@@ -64,7 +64,7 @@ func equip_weapon(this_weapon:Weapon, this_suit:Suit):
 	$BulletManager.setup(this_weapon,this_suit)
 	modifiers(this_weapon)
 	weapon_attack_pattern(this_weapon)
-	atkUI.setup(this_weapon)
+	atkUI.ammo_setup(this_weapon)
 
 
 func weapon_attack_pattern(this_weapon:Weapon):
@@ -93,6 +93,7 @@ func equip_suit(this_suit:Suit,_this_weapon:Weapon):
 		GLOBAL.suit=this_suit
 		$Skeleton/Sprite.set_palette(this_suit.body_palette)
 		modifiers(this_suit)
+		atkUI.set_icon(this_suit)
 	else:
 		$Skeleton/Sprite.set_palette(GLOBAL.player_palette) 
 
@@ -169,11 +170,11 @@ func _physics_process(delta: float) -> void:
 func attack():
 	is_attacking = true
 	if weapon.weapon_type == Weapon.type.gun:
-		atkUI.reduce_by_melee(ammo_reduce)
+		atkUI.reduce_ammo(ammo_reduce)
 	elif weapon.weapon_type == Weapon.type.boot:
-		atkUI.reduce_by_melee(ammo_reduce*0.5)
+		atkUI.reduce_ammo(ammo_reduce*0.5)
 	elif weapon.weapon_type == Weapon.type.blade or weapon.weapon_type == Weapon.type.none:
-		atkUI.reduce_by_melee(ammo_reduce*0.35)
+		atkUI.reduce_ammo(ammo_reduce*0.35)
 	$HurtBox.cancel_flash()
 	Short_Range_Attack()
 	$AttackAnimationTimer.start()
@@ -196,11 +197,11 @@ func shoot():
 	# if weapon.weapon_type == Weapon.type.boot:
 	# 		atkUI.reduce(ammo_reduce*3)
 	if weapon.weapon_type == Weapon.type.gun:
-			atkUI.reduce(ammo_reduce*3)
+			atkUI.reduce_ammo(ammo_reduce*3)
 	elif weapon.weapon_type == Weapon.type.none:
-			atkUI.reduce(ammo_reduce*0.65)
+			atkUI.reduce_ammo(ammo_reduce*0.65)
 	else:
-		atkUI.reduce(ammo_reduce)
+		atkUI.reduce_ammo(ammo_reduce)
 	if atkUI.currentATK >= atkUI.min_ammo:
 		$HurtBox.cancel_flash()
 		Long_Range_Attack()
@@ -209,7 +210,7 @@ func shoot():
 		can_shoot = true
 		is_shooting = false
 	else:
-		tired()
+		# tired()
 		can_shoot = false
 		is_shooting = false
 

@@ -29,7 +29,7 @@ func switch() -> void:
 		if GLOBAL.current_level % 5 == 0:
 			change_scene_to=randi_range(0,1)
 		else:
-			change_scene_to=randi_range(0,3)
+			change_scene_to=randi_range(0,5)
 		
 		if change_scene_to == 0:
 			tree.change_scene_to_file("res://scenes/worlds/shop_world.tscn")
