@@ -17,6 +17,8 @@ func spawn_level(level_to_spawn:level):
 	move_child(map_layout,0)
 	$Transition.color = Color.BLACK
 	$Transition/AnimationPlayer.play("Fade_Out")
+	# await $Transition/AnimationPlayer.animation_finished
+	
 
 func _on_death_timer_timeout() -> void:
 	SCORE.check()

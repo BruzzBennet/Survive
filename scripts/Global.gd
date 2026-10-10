@@ -18,7 +18,7 @@ var base_player_type=weaponless
 
 var player_type=base_player_type
 var player_palette: MonRanger_pallete = preload("res://resources/characters/MR/palettes/turquoise.tres")
-var weapon: Weapon = base_weapon
+var weapon: Weapon = base_weapon.duplicate()
 var suit: Suit = base_suit
 var current_level:= 1
 var starting_enemy_amount= base_enemy_amount
@@ -36,7 +36,7 @@ func equip_weapon(this_weapon:Weapon):
 func restart():
 	SCORE.actual=0
 	player_type=base_player_type
-	weapon = base_weapon
+	weapon = base_weapon.duplicate()
 	suit= base_suit
 	starting_enemy_amount= base_enemy_amount
 	increase_dificulty = 0.0

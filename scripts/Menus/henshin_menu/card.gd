@@ -27,13 +27,18 @@ func setup(item:Item):
 	if get_node_or_null("Ammo"):
 		setup_ammo(item)
 
+func hide_ammo():
+	$Ammo.visible=false
+
+func show_ammo():
+	$Ammo.visible=true
 
 func setup_ammo(item:Item):
 	if item.item_is == item.item_type.weapon:
 		var max_ammo=item.weapon.max_ammo
 		var current_ammo=item.weapon.current_ammo
 		var _bar_color=$Ammo.get("theme_override_styles/fill").bg_color
-		$Ammo.visible=true
+		# $Ammo.visible=true
 		$Ammo.max_value=max_ammo
 		$Ammo.value=current_ammo
 		if current_ammo >= (max_ammo*2/5):

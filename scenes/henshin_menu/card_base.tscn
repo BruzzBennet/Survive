@@ -23,6 +23,7 @@ offset = Vector2(-24, -21)
 position = Vector2(0, 15)
 
 [node name="Ammo" type="ProgressBar" parent="." unique_id=2121918318]
+visible = false
 offset_left = -16.0
 offset_top = 28.0
 offset_right = 16.0

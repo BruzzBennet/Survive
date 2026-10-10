@@ -22,9 +22,9 @@ unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=63205776]
+[node name="HenshinMenu" parent="." unique_id=1187232654 instance=ExtResource("3_jt6mf")]
 
-[node name="HenshinMenu" parent="CanvasLayer" unique_id=1187232654 instance=ExtResource("3_jt6mf")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=63205776]
 
 [node name="PauseMenu" parent="CanvasLayer" unique_id=48230163 instance=ExtResource("3_d1ax2")]
 
@@ -37,11 +37,7 @@ offset_top = -23.0
 offset_right = 652.0
 offset_bottom = 330.0
 
-[node name="PanelContainer2" parent="." unique_id=1312277092 instance=ExtResource("6_c6rhq")]
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 640.0
-offset_bottom = 32.0
+[node name="PanelContainer" parent="." unique_id=1312277092 instance=ExtResource("6_c6rhq")]
 
 [node name="CTRShader" parent="." unique_id=1374949823 instance=ExtResource("7_yx2we")]
 

@@ -39,3 +39,4 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 				PLAYSFX.get_card()
 				GLOBAL.add_card(item)						
 				queue_free()
+		get_tree().current_scene.get_node("HenshinMenu").update_deck()

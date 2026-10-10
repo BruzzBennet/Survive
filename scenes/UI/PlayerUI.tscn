@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cpp72lf4ylqo4"]
 
 [ext_resource type="Script" uid="uid://dprpd5ilo6o1n" path="res://scripts/Player/UI/player_ui.gd" id="1_fbln2"]
+[ext_resource type="Shader" uid="uid://b06opbiteg1el" path="res://shaders/ProgressBarFlash.gdshader" id="2_cviaw"]
 [ext_resource type="Shader" uid="uid://cbjrfkuwbn76f" path="res://shaders/atk.gdshader" id="2_fbln2"]
 [ext_resource type="Texture2D" uid="uid://dwwxljqniuq2q" path="res://assets/MR/BodyParts/Helmets/Helmet_MROG.png" id="2_jt14p"]
 [ext_resource type="Texture2D" uid="uid://bupg2o7574s7a" path="res://assets/cards/icons/Boot_W.png" id="4_cviaw"]
@@ -10,6 +11,11 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_da24e"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_afog6"]
+shader = ExtResource("2_cviaw")
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jt14p"]
 bg_color = Color(0, 0, 0, 1)
@@ -69,6 +75,7 @@ offset_bottom = 24.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_afog6")
 
 [node name="HP" type="ProgressBar" parent="." unique_id=1291362246]
+material = SubResource("ShaderMaterial_afog6")
 layout_mode = 0
 offset_left = 19.0
 offset_top = 6.0

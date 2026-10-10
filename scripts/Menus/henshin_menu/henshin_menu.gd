@@ -7,14 +7,14 @@ var base_suit=preload("res://resources/characters/MR/Suits/Sergyo.tres")
 
 func _ready() -> void:
 	update_deck()
-	hide()
-	for child in $Panel.get_children():
+	$Screen.hide()
+	for child in %Panel.get_children():
 		if child is Button:
 			# child.pressed.connect(_play_or_discard.bind(child))
 			child.focus_entered.connect(display_info.bind(child))
 
 func _physics_process(_delta: float):
-	for child in $Panel.get_children():
+	for child in %Panel.get_children():
 		if child is Button and child.has_focus():
 			_play_or_discard(child)
 
@@ -40,6 +40,19 @@ func discard(button: Button):
 		button.get_child(0).visible = false		
 		# close_menu()
 
+func show_ammo(show_it=true):
+	for child in %Panel.get_children():
+		if child is Button:
+			var card = child.get_child(0)
+			if !show_it:
+				card.hide_ammo()
+			else:
+				var item =  card.item_summoned
+				if item and	item.item_is == item.item_type.weapon:
+					print(str(item))
+					card.show_ammo()
+				
+
 func get_player():
 	for child in get_tree().current_scene.get_children():
 		if child is Player_Unit:
@@ -59,9 +72,9 @@ func display_info(button: Button):
 
 func description(item_name:String, desc:String):
 	if item_name=="" && desc=="":
-		$Label.text=""
+		$Screen/Label.text=""
 	else:
-		$Label.text=item_name + ":\n" + desc
+		$Screen/Label.text=item_name + ":\n" + desc
 	
 func _on_any_button_pressed(button: Button) -> void:
 	if button.get_child(0).visible == true:
@@ -98,7 +111,7 @@ func henshin(body):
 	explode(body)
 
 func update_deck():
-	var panel = $Panel
+	var panel = %Panel
 	var index_num=0
 	for child in panel.get_children():
 		if child is Button:
@@ -115,25 +128,29 @@ func _process(_delta):
 	screen()
 
 func screen():
+	update_deck()
 	if Input.is_action_just_pressed("henshin_menu"):
-		update_deck()
 		if was_pressed:
 			open_menu()
 		else:
 			close_menu()
 
 func open_menu():
-	update_deck()
-	$Panel/Card1.grab_focus()
+	# update_deck()
+	show_ammo()
+	%Panel/Card1.grab_focus()
 	GLOBAL.about_to_henshin=true
 	was_pressed=false
-	show()
+	$Screen.show()
 
 func close_menu():
+	show_ammo(false)
+	for i in %Panel.get_children():
+		i.release_focus()
 	GLOBAL.about_to_henshin=false
 	was_pressed=true
 	PLAYSFX.MenuSelect()
-	hide()
+	$Screen.hide()
 
 var shootplayer: PackedScene = preload("res://scenes/PlayerTypes/Shooter.tscn")
 var dashplayer: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")

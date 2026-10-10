@@ -23,7 +23,7 @@ visibility_layer = 8192
 offset_left = -1.0
 offset_top = -1.0
 offset_right = 639.0
-offset_bottom = 39.0
+offset_bottom = 47.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_i7141")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1603759146]
