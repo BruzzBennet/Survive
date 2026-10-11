@@ -28,6 +28,7 @@ var enemy_difficulty:= 1
 var first_player_starting_point
 var current_level=0
 var max_enemy_amount:= 36
+var portal_points = []
 
 func _ready() -> void:
 	map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
@@ -35,10 +36,10 @@ func _ready() -> void:
 	create_map()
 	spawn(1,GLOBAL.starting_enemy_amount,[])
 
-func portal_opens():
+func portal_opens(spawner_point):
 	var portal = preload("res://scenes/boxes/summon_spot.tscn").instantiate()
 	add_child(portal)
-	portal.global_position = first_player_starting_point
+	portal.global_position = spawner_point
 
 func next_round():
 	remove_items()
@@ -50,7 +51,8 @@ func next_round():
 	# 		GLOBAL.increase_dificulty = 0.0
 	# if current_level % 3 == 0:
 	PLAYSFX.portal_opens()
-	portal_opens()	
+	for i in portal_points:
+		portal_opens(i)	
 	# else:
 	# 	spawn(0, GLOBAL.starting_enemy_amount, [])
 
@@ -90,12 +92,15 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 	var max_level = 4
 	for instance in spawn_points:	
 		var spawner = instance.get_node_or_null("Spawner")
-		if players > 0 and times == 0:
-			times +=1
+		if players > 0:
 			spawner.spawn_player()
 			players -= 1
 			spawned_already.append(spawner)
-			first_player_starting_point=spawner.global_position
+			# first_player_starting_point=spawner.global_position
+		if times <= 1  or times >= 8:
+			portal_points.append(spawner.global_position)
+			# print(str(spawner.global_position))
+		times +=1
 		if spawner:
 			var type = randi_range(0,2)
 			if type == 0 && enemy_amount>0 && !spawned_already.has(spawner):

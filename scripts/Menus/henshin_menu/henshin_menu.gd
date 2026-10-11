@@ -49,7 +49,7 @@ func show_ammo(show_it=true):
 			else:
 				var item =  card.item_summoned
 				if item and	item.item_is == item.item_type.weapon:
-					print(str(item))
+					# print(str(item))
 					card.show_ammo()
 				
 
