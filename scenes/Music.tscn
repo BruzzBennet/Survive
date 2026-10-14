@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://sy3b85c5wqrn" path="res://assets/music/(C2) Boss Battle.mp3" id="6_kmgpq"]
 [ext_resource type="AudioStream" uid="uid://b7aknwdcdokso" path="res://assets/music/(C4) Rest Time.mp3" id="7_7s30x"]
 [ext_resource type="AudioStream" uid="uid://csel5eskkefiv" path="res://assets/music/(C0) Overworld.mp3" id="8_kmgpq"]
+[ext_resource type="AudioStream" uid="uid://6ae4g6bxfrhb" path="res://assets/audio/standbyMonRanger.mp3" id="10_n2glq"]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" unique_id=596401791]
 script = ExtResource("1_khwbh")
@@ -42,3 +43,6 @@ stream = ExtResource("7_7s30x")
 [node name="Overworld" type="AudioStreamPlayer2D" parent="." unique_id=147681724]
 stream = ExtResource("8_kmgpq")
 volume_db = -7.0
+
+[node name="StandByTune" type="AudioStreamPlayer2D" parent="." unique_id=907301057]
+stream = ExtResource("10_n2glq")

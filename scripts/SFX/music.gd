@@ -7,7 +7,18 @@ extends AudioStreamPlayer
 @onready var menuTune = $Menu
 @onready var overworldTune = $Overworld
 @onready var restTune = $RestTime
+@onready var standByTune = $StandByTune
 var bgm_used
+var current_bgm
+
+func standBy():
+	current_bgm.stream_paused=true
+	# PLAYSFX.get_card()
+	standByTune.play()
+
+func stop_standBy():
+	standByTune.stop()
+	current_bgm.stream_paused=false
 
 func stopMusic():
 	stage1Tune.stop()
@@ -37,28 +48,35 @@ func playStageMusic():
 
 func playStage1():
 	stopMusic()
+	current_bgm = stage1Tune
 	stage1Tune.play()
 
 func playStage2():
 	stopMusic()
+	current_bgm = stage2Tune
 	stage2Tune.play()
 
 func playStage3():
 	stopMusic()
+	current_bgm = stage3Tune
 	stage3Tune.play()
 		
 func GameOver():
 	stopMusic()
+	current_bgm = gameOverTune
 	gameOverTune.play()
 
 func playMenuMusic():
 	stopMusic()
+	current_bgm = menuTune
 	menuTune.play()
 	
 func playOverworldMusic():
 	stopMusic()
+	current_bgm = overworldTune
 	overworldTune.play()
 
 func ShopTheme():
 	stopMusic()
+	current_bgm = restTune
 	restTune.play()

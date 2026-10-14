@@ -11,6 +11,11 @@ func resume():
 	PLAYSFX.MenuSelect()
 	hide()
 	get_tree().paused=false
+	var henshin_menu=get_tree().current_scene.get_node_or_null("HenshinMenu")
+	if henshin_menu:
+		if henshin_menu.get_node("Screen").visible==true:
+			henshin_menu.open_menu()
+		# 	henshin_menu.get_node("Panel/Card1").grab_focus()
 
 func pause():
 	show()

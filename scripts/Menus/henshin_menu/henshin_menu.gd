@@ -14,9 +14,12 @@ func _ready() -> void:
 			child.focus_entered.connect(display_info.bind(child))
 
 func _physics_process(_delta: float):
-	for child in %Panel.get_children():
-		if child is Button and child.has_focus():
-			_play_or_discard(child)
+	if !get_tree().paused:
+		screen()
+		for child in %Panel.get_children():
+			if child is Button and child.has_focus():
+				_play_or_discard(child)
+	
 
 func _play_or_discard(button:Button):
 	if button.get_child(0).visible == true:	
@@ -124,8 +127,8 @@ func update_deck():
 			card.visible=true
 			card.setup(GLOBAL.deck[index_num-1])
 
-func _process(_delta):
-	screen()
+# func _process(_delta):
+# 	screen()
 
 func screen():
 	update_deck()
@@ -137,6 +140,7 @@ func screen():
 
 func open_menu():
 	# update_deck()
+	BGM.standBy()
 	show_ammo()
 	%Panel/Card1.grab_focus()
 	GLOBAL.about_to_henshin=true
@@ -144,6 +148,7 @@ func open_menu():
 	$Screen.show()
 
 func close_menu():
+	BGM.stop_standBy()
 	show_ammo(false)
 	for i in %Panel.get_children():
 		i.release_focus()

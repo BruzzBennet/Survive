@@ -87,6 +87,8 @@ func equip_suit(this_suit:Suit,_this_weapon:Weapon):
 		GLOBAL.modified_health=false
 		modifiers(GLOBAL.suit,-1)
 	if this_suit:
+		# if weapon.weapon_type == Weapon.type.boot:
+		# 	max_speed += GLOBAL.max_speed * 0.25
 		$Skeleton/Head_Back.texture = this_suit.helmet
 		$Skeleton/Head_Front.texture = this_suit.helmet
 		GLOBAL.player_palette=this_suit.body_palette
@@ -102,7 +104,6 @@ func reset_stats():
 	max_speed=GLOBAL.max_speed
 	$HurtBox.defense = GLOBAL.defense
 	ammo_reduce=GLOBAL.ammo
-	max_speed=GLOBAL.max_speed
 
 
 func modifiers(this_suit:Variant,increase_by:int=1):
@@ -202,6 +203,7 @@ func shoot():
 			atkUI.reduce_ammo(ammo_reduce*0.65)
 	else:
 		atkUI.reduce_ammo(ammo_reduce)
+
 	if atkUI.currentATK >= atkUI.min_ammo:
 		$HurtBox.cancel_flash()
 		Long_Range_Attack()
@@ -211,6 +213,7 @@ func shoot():
 		is_shooting = false
 	else:
 		# tired()
+		attack()
 		can_shoot = false
 		is_shooting = false
 

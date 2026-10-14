@@ -18,6 +18,8 @@ func setup(bullet:Weapon, suit:Suit):
 	time_on_field = weapon.bullet_time_on_field
 	# print("Original Reach:" + str(time_on_field))
 	durability = weapon.enemies_bullet_pierces
+	if bullet.weapon_type == Weapon.type.blade:
+		durability+=1
 	shot_type=weapon.shot_type
 	# modifiers(GLOBAL.weapon,-1)
 	modifiers(bullet)
