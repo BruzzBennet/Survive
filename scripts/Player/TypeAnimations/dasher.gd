@@ -118,9 +118,9 @@ func modifiers(this_suit:Variant,increase_by:int=1):
 	if this_suit.boost:
 		match this_suit.boost_this:
 			this_suit.boost.speed:
-				max_speed += GLOBAL.max_speed * 0.25 * increase_by
+				max_speed = GLOBAL.max_speed + (GLOBAL.max_speed * 0.2 * increase_by)
 			this_suit.boost.ammo_saving:
-				ammo_reduce-= 0.125 * increase_by
+				ammo_reduce= GLOBAL.ammo - 0.125 * increase_by
 			this_suit.boost.defense:
 				$HurtBox.defense = GLOBAL.defense + (0.25 * increase_by)
 				# if increase_by < 0:
@@ -143,12 +143,12 @@ func modifiers(this_suit:Variant,increase_by:int=1):
 	if this_suit.bane:
 		match this_suit.but_bane_this:
 			this_suit.bane.speed:
-				max_speed -= GLOBAL.max_speed * 0.25 * increase_by
+				max_speed = GLOBAL.max_speed - (GLOBAL.max_speed * 0.2 * increase_by)
 			this_suit.bane.ammo_saving:
-				ammo_reduce += 0.125 * increase_by
+				ammo_reduce= GLOBAL.ammo + 0.125 * increase_by
 			this_suit.bane.defense:
 				# $HurtBox.extra_health(-1*increase_by)
-				$HurtBox.defense = GLOBAL.defense - (0.5 * increase_by) 
+				$HurtBox.defense = GLOBAL.defense - (0.25 * increase_by) 
 
 # func thick():
 # 	if is_thick:

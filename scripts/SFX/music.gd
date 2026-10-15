@@ -21,6 +21,7 @@ func stop_standBy():
 	current_bgm.stream_paused=false
 
 func stopMusic():
+	standByTune.stop()
 	stage1Tune.stop()
 	stage2Tune.stop()
 	stage3Tune.stop()

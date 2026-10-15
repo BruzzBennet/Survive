@@ -12,7 +12,7 @@ var lvl_3_enemies=[
 	preload("res://scenes/enemies/clamik.tscn")
 ]
 var lvl_4_enemies=[
-	preload("res://scenes/opozzap.tscn"),
+	preload("res://scenes/opozzap.tscn")
 	]
 
 
@@ -57,6 +57,7 @@ func get_enemies_by_level(lvl:int):
 func spawn_enemy(lvl:int) -> void:
 	var enemy_list=get_enemies_by_level(lvl)
 	var spawn_this_enemy=enemy_list[randi_range(0, enemy_list.size() - 1)]
+	# spawn_this_enemy=preload("res://scenes/opozzap.tscn")
 	var enemy=spawn_this_enemy.instantiate()
 	get_tree().current_scene.add_child(enemy)
 	enemy.global_position = global_position

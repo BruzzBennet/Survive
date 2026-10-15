@@ -9,8 +9,9 @@
 script = ExtResource("3_icite")
 sprite = ExtResource("4_37bjf")
 name = "Clamik Gun"
-description = "Ammo-. Bullets reach a bigger area"
+description = "Pierce+, Speed-. Bullets reach a bigger area"
 weapon_type = 1
 bullet_scene = ExtResource("1_37bjf")
-but_bane_this = 3
+boost_this = 7
+but_bane_this = 1
 metadata/_custom_type_script = "uid://hig2h24o38p0"

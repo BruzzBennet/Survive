@@ -10,8 +10,9 @@
 script = ExtResource("3_vl10v")
 sprite = ExtResource("4_73vab")
 name = "Clamik Club"
-description = "Ammo-. Bullets reach a bigger area"
+description = "Pierce+, Speed-. Bullets reach a bigger area"
 bullet_scene = ExtResource("1_68qnp")
-but_bane_this = 3
+boost_this = 7
+but_bane_this = 1
 extra_bullet_sfx = ExtResource("3_ru13h")
 metadata/_custom_type_script = "uid://hig2h24o38p0"

@@ -11,7 +11,7 @@
 script = ExtResource("5_8wwfb")
 sprite = ExtResource("6_nano4")
 name = "Icie Spear"
-description = "Ammo-. Gain +0.5 HP when healing."
+description = "Reach-. Gain +0.5 HP when healing."
 bullet_scene = ExtResource("1_nano4")
 boost_this = 2
 but_bane_this = 2
