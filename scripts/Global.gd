@@ -5,7 +5,7 @@ var starting_level="res://scenes/worlds/start_world.tscn"
 var base_weapon=preload("res://resources/characters/Weapons/weaponless.tres")
 var base_suit=preload("res://resources/characters/MR/Suits/Sergyo.tres")
 var base_health=5.0
-var base_enemy_amount: = 1
+var base_enemy_amount: = 3
 var modified_health=false
 var base_ammo = 0.65
 

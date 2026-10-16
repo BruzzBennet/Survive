@@ -35,13 +35,13 @@ func modifiers(this_suit:Variant,increase_by:int=1):
 	if this_suit.boost:
 		match this_suit.boost_this:
 				this_suit.boost.bullet_reach:
-					time_on_field=weapon.bullet_time_on_field+(weapon.bullet_time_on_field*0.25)
+					time_on_field=weapon.bullet_time_on_field+(weapon.bullet_time_on_field/3)
 				this_suit.boost.bullet_pierce:
 					pierce+=1
 	if this_suit.bane:
 		match this_suit.but_bane_this:
 				this_suit.bane.bullet_reach:
-					time_on_field=weapon.bullet_time_on_field-(weapon.bullet_time_on_field*0.25)
+					time_on_field=weapon.bullet_time_on_field-(weapon.bullet_time_on_field/3)
 				this_suit.bane.bullet_damage:
 					damage_boost-=(boost_bane*2)
 					bullet_damage+=damage_boost

@@ -26,11 +26,12 @@ var tile_maps =[
 		]
 var enemy_difficulty:= 1
 var first_player_starting_point
-var current_level=0
+var current_level
 var max_enemy_amount:= 36
 var portal_points = []
 
 func _ready() -> void:
+	current_level=GLOBAL.current_level
 	map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
 	$Map.tile_set.get_source(4).texture = map_texture
 	create_map()
@@ -89,27 +90,24 @@ func create_map():
 func spawn(players: int, enemy_amount: int, spawned_already: Array):
 	var times: = 0
 	var enemy_level=0
-	var max_level = 4
+	var max_level = clamp(current_level/4,1,6)
 	for instance in spawn_points:	
 		var spawner = instance.get_node_or_null("Spawner")
-		if players > 0:
-			spawner.spawn_player()
-			players -= 1
-			spawned_already.append(spawner)
-			# first_player_starting_point=spawner.global_position
-		if times <= 1  or times >= 8:
-			portal_points.append(spawner.global_position)
-			# print(str(spawner.global_position))
-		times +=1
 		if spawner:
+			if times == 5:
+				if players > 0:
+					spawner.spawn_player()
+					players -= 1
+					spawned_already.append(spawner)
+				portal_points.append(spawner.global_position)
+			times +=1
 			var type = randi_range(0,2)
 			if type == 0 && enemy_amount>0 && !spawned_already.has(spawner):
-				if enemy_amount>enemy_level:
-					enemy_level= randi_range(1, max_level)
-					if enemy_level>enemy_amount:
-						enemy_level=max_level-enemy_amount
+				enemy_level= randi_range(1, max_level)
+				if enemy_level>enemy_amount:
+					enemy_level=max_level-enemy_amount
 				spawner.spawn_enemy(enemy_level)
-				enemy_amount -= enemy_level
+				enemy_amount -= clamp(floor(enemy_level/3),1,6)
 				spawned_already.append(spawner)
 		else:
 			print("Spawner not found")

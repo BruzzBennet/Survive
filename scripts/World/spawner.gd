@@ -4,14 +4,18 @@ var lvl_1_enemies=[
 	preload("res://scenes/enemies/Icie.tscn")
 	]
 var lvl_2_enemies=[
-	preload("res://scenes/enemies/chomwing.tscn"),
-	preload("res://scenes/enemies/Bombry.tscn")
+	preload("res://scenes/enemies/chomwing.tscn")
 	]
 var lvl_3_enemies=[
-	preload("res://scenes/pozzap.tscn"),
-	preload("res://scenes/enemies/clamik.tscn")
+	preload("res://scenes/enemies/Bombry.tscn")
 ]
 var lvl_4_enemies=[
+	preload("res://scenes/enemies/clamik.tscn")
+	]
+var lvl_5_enemies=[
+	preload("res://scenes/pozzap.tscn")
+	]
+var lvl_6_enemies=[
 	preload("res://scenes/opozzap.tscn")
 	]
 
@@ -52,6 +56,10 @@ func get_enemies_by_level(lvl:int):
 			enemy_list=lvl_3_enemies
 		4:
 			enemy_list=lvl_4_enemies
+		5:
+			enemy_list=lvl_5_enemies
+		6:
+			enemy_list=lvl_6_enemies
 	return enemy_list
 
 func spawn_enemy(lvl:int) -> void:
