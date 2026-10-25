@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dmr4w7kg35c0u"]
 
 [ext_resource type="Script" uid="uid://b2518i8rrlh3u" path="res://scripts/Items/shop_item.gd" id="1_tojgh"]
-[ext_resource type="Resource" uid="uid://esu63s8l24lr" path="res://resources/items/Boot_Icie.tres" id="2_7wwse"]
 [ext_resource type="PackedScene" uid="uid://cxqsoljorqyxk" path="res://scenes/items/mon_spirit.tscn" id="3_7wwse"]
 [ext_resource type="Texture2D" uid="uid://lthgfou14u5y" path="res://assets/Weapons/Blade/Blade.png" id="3_xcwb6"]
 
@@ -59,7 +58,6 @@ font_size = 9
 
 [node name="Item" type="Node2D" unique_id=1644609114]
 script = ExtResource("1_tojgh")
-item = ExtResource("2_7wwse")
 
 [node name="MonSpirit" parent="." unique_id=1029576708 instance=ExtResource("3_7wwse")]
 position = Vector2(-4, -8)

@@ -4,9 +4,9 @@ extends Node2D
 @export var monCard:=false
 
 func _ready() -> void:
-	if monCard:
-		build_w_Mon(item)
-	else:
+	# if monCard:
+	# 	build_w_Mon(item)
+	# else:
 		build(item)
 
 func build_w_Mon(this_one_item: Item):
@@ -48,12 +48,12 @@ func build(this_one_item):
 			$Sprite2D.add_child(this_one_item.item_scene.instantiate())
 			description(this_one_item.name,this_one_item.description)
 		this_one_item.item_type.weapon:
+			this_one_item.weapon=this_one_item.weapon.duplicate()	
 			sprite=this_one_item.weapon.sprite
-			this_one_item.weapon=this_one_item.weapon.duplicate()
 			description(this_one_item.weapon.name,this_one_item.weapon.description)
 		this_one_item.item_type.suit:
+			this_one_item.suit=this_one_item.suit.duplicate()	
 			sprite=this_one_item.suit.helmet
-			this_one_item.suit=this_one_item.suit.duplicate()
 			description(this_one_item.suit.name,this_one_item.suit.description)
 	build_sprite(sprite)
 	if this_one_item.mon_sprite and this_one_item.item_is!=this_one_item.item_type.normal_item:
@@ -97,9 +97,14 @@ func _on_area_2d_body_entered(body) -> void:
 
 func add_card():
 	if GLOBAL.deck.size() < GLOBAL.deck_size:
+		# match item.item_is:
+		# 	item.item_type.weapon:
+		# 		item.weapon=item.weapon.duplicate()
+		# 	item.item_type.suit:
+		# 		item.suit=item.suit.duplicate()
 		if item.item_is == item.item_type.weapon or item.item_is == item.item_type.suit:
 			PLAYSFX.get_card()
-			GLOBAL.add_card(item)						
+			GLOBAL.add_card(item.duplicate())						
 			queue_free()
 
 func switch_weapon_to_item(body):

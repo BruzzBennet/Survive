@@ -272,15 +272,32 @@ func item_drop():
 				item_to_be_dropped.suit = card
 		var item_dropped=item_to_be_dropped
 		if item_dropped.item_is != item_dropped.item_type.normal_item:
-			var card_item_drop=preload("res://scenes/items/Mon_card_item.tscn")
+			var card_item_drop=find_item_to_drop(item_dropped)
+			# card_item_drop=preload("res://scenes/items/Mon_card_item.tscn")
 			var card_drop = card_item_drop.instantiate()
 			card_drop.global_position=global_position
 			card_drop.item=item_dropped
 			# card_drop.add_item(item_dropped)
+			card_drop.build(item_dropped.duplicate())
 			get_tree().current_scene.add_child(card_drop)
 		else:
 			spawn(item_dropped.item_scene)
 
+func find_item_to_drop(item_dropped:Item):
+	var drop
+	match item_dropped.item_is:
+				item_dropped.item_type.weapon:
+					match item_dropped.weapon.weapon_type:
+						Weapon.type.blade:
+							drop=preload("res://scenes/items/blade_item.tscn")
+						Weapon.type.boot:
+							drop=preload("res://scenes/items/boot_item.tscn")
+						Weapon.type.gun:
+							drop=preload("res://scenes/items/gun_item.tscn")
+				item_dropped.item_type.suit:
+					drop=preload("res://scenes/items/suit_item.tscn")
+	return drop
+		
 func spawn(this: Variant):
 	var spawn_this=this.instantiate()
 	spawn_this.global_position=global_position

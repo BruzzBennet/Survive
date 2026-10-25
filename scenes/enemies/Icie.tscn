@@ -703,7 +703,7 @@ debug_color = Color(1, 1, 0, 0.42000002)
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("3_fu0ok")]
 collision_layer = 2
 collision_mask = 8
-items_it_can_drop = Array[ExtResource("7_vjgsm")]([ExtResource("8_450o4"), ExtResource("9_q7fmb"), ExtResource("10_aorp8"), ExtResource("11_f3q5m")])
+items_it_can_drop = Array[ExtResource("7_vjgsm")]([ExtResource("9_q7fmb"), ExtResource("8_450o4"), ExtResource("10_aorp8"), ExtResource("11_f3q5m")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=295741136]
 position = Vector2(0, 1)

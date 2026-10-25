@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://btm5ttaxyomj3"]
 
 [ext_resource type="Script" uid="uid://b2518i8rrlh3u" path="res://scripts/Items/shop_item.gd" id="1_5ofgn"]
-[ext_resource type="Resource" uid="uid://esu63s8l24lr" path="res://resources/items/Boot_Icie.tres" id="2_6s3d1"]
 [ext_resource type="Texture2D" uid="uid://3kybjfo0bofs" path="res://assets/Weapons/Guns/Lazer_Gun.png" id="3_5ofgn"]
 [ext_resource type="PackedScene" uid="uid://cxqsoljorqyxk" path="res://scenes/items/mon_spirit.tscn" id="3_6s3d1"]
 
@@ -59,7 +58,6 @@ font_size = 9
 
 [node name="Item" type="Node2D" unique_id=1644609114]
 script = ExtResource("1_5ofgn")
-item = ExtResource("2_6s3d1")
 
 [node name="MonSpirit" parent="." unique_id=1029576708 instance=ExtResource("3_6s3d1")]
 position = Vector2(-4, -8)
