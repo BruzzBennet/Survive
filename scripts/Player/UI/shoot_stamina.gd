@@ -6,7 +6,6 @@ extends Control
 var maxATK 
 var regeneration_rate 
 var depletion_rate 
-var melee_depletion_rate 
 var startingATK
 var currentATK
 var min_ammo
@@ -19,7 +18,6 @@ func setup(weapon: Weapon):
 	maxATK = weapon.max_ammo
 	regeneration_rate = weapon.reload_rate
 	depletion_rate = weapon.depletion_rate
-	melee_depletion_rate = weapon.melee_depletion_rate
 	startingATK= weapon.current_ammo
 	currentATK= weapon.current_ammo
 	min_ammo = weapon.min_ammo
@@ -80,12 +78,6 @@ func regenerate_more(delta) -> void:
 
 func reduce(times: float = 1):
 	var depletion: float = depletion_rate * times
-	currentATK = max(0, currentATK - depletion)
-	current_weapon.current_ammo = currentATK
-	set_value(currentATK)
-
-func reduce_by_melee(times: float = 1):
-	var depletion: float = melee_depletion_rate * times
 	currentATK = max(0, currentATK - depletion)
 	current_weapon.current_ammo = currentATK
 	set_value(currentATK)

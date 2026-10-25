@@ -1,19 +1,13 @@
 extends Node2D
 
-# var tile_maps =[
-# 			preload("res://assets/Tiles/Tiles.png"),
-# 			preload("res://assets/Tiles/Tiles1.png"),
-# 			preload("res://assets/Tiles/Tiles2.png"),
-# 			preload("res://assets/Tiles/Tiles3.png"),
-# 			preload("res://assets/Tiles/Tiles4.png"),
-# 			preload("res://assets/Tiles/Tiles5.png")
-# 		]
-var item = [
-			preload("res://scenes/items/suit_item.tscn"),
-			preload("res://scenes/items/boot_item.tscn"),
+var items = [
+			# preload("res://scenes/items/suit_item.tscn"),
+			# preload("res://scenes/items/boot_item.tscn"),
 			preload("res://scenes/items/normal_item.tscn"),
-			preload("res://scenes/items/gun_item.tscn"),
-			preload("res://scenes/items/blade_item.tscn")
+			# preload("res://scenes/items/gun_item.tscn"),
+			# preload("res://scenes/items/blade_item.tscn")
+			# preload("res://scenes/items/Mon_card_item.tscn"),
+			# preload("res://scenes/items/Mon_card_item.tscn")
 		]
 var boot = [
 			preload("res://resources/items/Boot_1.tres"),
@@ -50,16 +44,17 @@ var normal_item = [
 			preload("res://resources/items/recharge_item.tres")
 		]
 var map_texture
-
+var equipment
 
 func _ready():
+	equipment = [boot,gun,blade,suit]
 	BGM.ShopTheme()
 	# map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
 	# $Map.tile_set.get_source(4).texture = map_texture
 	$PlayerSpawn.spawn_player()
-	$ChooseBetween3/Suit.add_child(create_item(item))
-	$ChooseBetween3/Weapon.add_child(create_item(item))
-	$ChooseBetween3/Item.add_child(create_item(item))
+	$ChooseBetween3/Suit.add_child(create_item(items))
+	$ChooseBetween3/Weapon.add_child(create_item(items))
+	$ChooseBetween3/Item.add_child(create_item(items))
 	for i in $ChooseBetween3.get_children():
 		# i.add_item(item[index])
 		i.get_child(0).get_node("Area2D").body_entered.connect($ChooseBetween3.done)
@@ -78,4 +73,7 @@ func create_item(this_item: Array):
 			spawned_item.item = gun.pick_random().duplicate()
 		preload("res://scenes/items/blade_item.tscn"):
 			spawned_item.item = blade.pick_random().duplicate()
+		preload("res://scenes/items/Mon_card_item.tscn"):
+			var equipment_list = equipment.pick_random()
+			spawned_item.item = equipment_list.pick_random().duplicate()
 	return spawned_item

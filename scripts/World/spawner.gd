@@ -10,6 +10,7 @@ var lvl_3_enemies=[
 	preload("res://scenes/enemies/Bombry.tscn")
 ]
 var lvl_4_enemies=[
+	preload("res://scenes/enemies/pucklam.tscn"),
 	preload("res://scenes/enemies/clamik.tscn")
 	]
 var lvl_5_enemies=[
@@ -46,27 +47,30 @@ func _ready():
 	
 
 func get_enemies_by_level(lvl:int):
-	var enemy_list
+	var enemy
 	match lvl:
 		1:
-			enemy_list=lvl_1_enemies
+			enemy=preload("res://scenes/enemies/Icie.tscn")
 		2:
-			enemy_list=lvl_2_enemies
+			enemy=preload("res://scenes/enemies/chomwing.tscn")
 		3:
-			enemy_list=lvl_3_enemies
+			enemy=preload("res://scenes/enemies/Bombry.tscn")
 		4:
-			enemy_list=lvl_4_enemies
+			enemy=preload("res://scenes/enemies/clamik.tscn")
 		5:
-			enemy_list=lvl_5_enemies
+			enemy=preload("res://scenes/enemies/pucklam.tscn")
 		6:
-			enemy_list=lvl_6_enemies
-	return enemy_list
+			enemy=preload("res://scenes/pozzap.tscn")
+		7:
+			enemy=preload("res://scenes/opozzap.tscn")
+	return enemy
 
 func spawn_enemy(lvl:int) -> void:
-	var enemy_list=get_enemies_by_level(lvl)
-	var spawn_this_enemy=enemy_list[randi_range(0, enemy_list.size() - 1)]
+	# var enemy_list=get_enemies_by_level(lvl)
+	# var spawn_this_enemy=enemy_list[randi_range(0, enemy_list.size() - 1)]
 	# spawn_this_enemy=preload("res://scenes/opozzap.tscn")
-	var enemy=spawn_this_enemy.instantiate()
+	# var enemy=spawn_this_enemy.instantiate()
+	var enemy=get_enemies_by_level(lvl).instantiate()
 	get_tree().current_scene.add_child(enemy)
 	enemy.global_position = global_position
 	enemies.append(enemy)
@@ -79,17 +83,7 @@ func enemy_died(enemy):
 	if enemies.is_empty():
 		rng_map.call_deferred("next_round")
 
-func spawn_player(first_time=false):
-	# var atk = atk_to_spawn.instantiate()
-	# get_tree().current_scene.add_child(atk)
-	# atk.setup(GLOBAL.weapon)
-	# atk.position = Vector2(270, 2)
-
-	# var hp = hp_to_spawn.instantiate()
-	# get_tree().current_scene.add_child(hp)
-	# hp.set_value(GLOBAL.health, false)
-	# hp.position = Vector2(305, 2)
-
+func spawn_player(_first_time=false):
 	var player_ui = preload("res://scenes/UI/PlayerUI.tscn").instantiate()
 	get_tree().current_scene.add_child(player_ui)
 	player_ui.position=Vector2(10,10)
@@ -97,11 +91,7 @@ func spawn_player(first_time=false):
 	var player = spawn_this_player.instantiate()
 	get_tree().current_scene.add_child(player)
 	player.position = global_position
-	# player.reset_stats()
-	player.equip_weapon(GLOBAL.weapon,GLOBAL.suit)
-	player.equip_suit(GLOBAL.suit,GLOBAL.weapon)
-	if first_time:
-		player.reset_ammo()
+	player.equip(GLOBAL.suit,GLOBAL.weapon)
 
 
 func spawn_item() -> void:

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b2518i8rrlh3u" path="res://scripts/Items/shop_item.gd" id="1_5ofgn"]
 [ext_resource type="Resource" uid="uid://esu63s8l24lr" path="res://resources/items/Boot_Icie.tres" id="2_6s3d1"]
 [ext_resource type="Texture2D" uid="uid://3kybjfo0bofs" path="res://assets/Weapons/Guns/Lazer_Gun.png" id="3_5ofgn"]
+[ext_resource type="PackedScene" uid="uid://cxqsoljorqyxk" path="res://scenes/items/mon_spirit.tscn" id="3_6s3d1"]
 
 [sub_resource type="Animation" id="Animation_pffs2"]
 length = 0.001
@@ -60,8 +61,11 @@ font_size = 9
 script = ExtResource("1_5ofgn")
 item = ExtResource("2_6s3d1")
 
+[node name="MonSpirit" parent="." unique_id=1029576708 instance=ExtResource("3_6s3d1")]
+position = Vector2(-4, -8)
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1474111844]
-position = Vector2(0, -5)
+position = Vector2(4, -5)
 scale = Vector2(2, 2)
 texture = ExtResource("3_5ofgn")
 hframes = 7

@@ -10,9 +10,9 @@
 script = ExtResource("4_67gs8")
 sprite = ExtResource("4_ewktf")
 name = "Bomb Club"
-description = "Bullets explode on impact."
+description = "Ammo-. Bullets explode on impact."
 bullet_scene = ExtResource("1_c3s3l")
-boost_this = 1
-bullet_sfx = ExtResource("2_mxga4")
-extra_bullet_sfx = ExtResource("2_ewktf")
+normal_attack_sfx = ExtResource("2_ewktf")
+special_attack_sfx = ExtResource("2_mxga4")
+ammo_boost = -1
 metadata/_custom_type_script = "uid://hig2h24o38p0"

@@ -5,27 +5,9 @@ class_name Suit
 @export var body_palette: MonRanger_pallete
 @export var name: String
 @export var description: String
-@export var boost_this: boost
-enum boost {
-    none,
-    speed,
-    effect,
-    bullet_reach,
-    ammo_saving,
-    defense,
-    bullet_pierce
-}
-
-@export var but_bane_this: bane
-enum bane {
-    none,
-    speed,
-    bullet_reach,
-    ammo_saving,
-    defense,
-    bullet_damage,
-    melee_damage
-}
-
-
-@export var effect: GDScript 
+@export var speed_boost: int = clamp(0,-1,1)
+@export var defense_boost: int = clamp(0,-1,1)
+@export var ammo_boost: int = clamp(0,-1,1)
+@export var bullet_pierce_boost: int = clamp(0,-1,1)
+@export var bullet_reach_boost: int = clamp(0,-1,1)
+@export var effect_added: GDScript 

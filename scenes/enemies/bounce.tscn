@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bodyf87taxuu6"]
+
+[ext_resource type="Script" uid="uid://cdpjoqtrh8v0t" path="res://scripts/Enemies/bounce.gd" id="1_nfr0w"]
+
+[node name="Bounce" type="Node2D" unique_id=1691143]
+script = ExtResource("1_nfr0w")
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="." unique_id=1665443815]
+volume_db = -15.0

@@ -1,12 +1,9 @@
 extends Resource
 class_name Weapon
 
-var base_depletion_rate = 1.0
-
 @export var sprite: Texture2D
 @export var name: String
 @export var description: String
-var melee_depletion_rate = base_depletion_rate
 @export var weapon_type: type
 
 enum type {
@@ -17,16 +14,6 @@ enum type {
     none
 }
 
-@export var bullet_scene : PackedScene
-@export var enemies_bullet_pierces: int = 1 
-var max_ammo: float = 100.0
-var current_ammo: float = 100.0
-var min_ammo: float = 1.0
-var bullet_damage: float = 1.0
-var bullet_speed: int = 250
-var bullet_time_on_field: float = 0.4
-var reload_rate: float = 0
-var depletion_rate = base_depletion_rate
 @export var shot_type: shot_pattern 
 
 enum shot_pattern{
@@ -36,32 +23,15 @@ enum shot_pattern{
 	triple_shot
 }
 
-@export var boost_this: boost
-enum boost {
-    none,
-    bullet_has_effect,
-    effect,
-    speed,
-    bullet_reach,
-    ammo_saving,
-    defense,
-    bullet_pierce
-}
+@export var bullet_scene : PackedScene
+@export var normal_attack_sfx : AudioStream = preload("res://assets/audio/slash.mp3")
+@export var special_attack_sfx: AudioStream = preload("res://assets/audio/slashshot.mp3")
+@export var speed_boost: int = clamp(0,-1,1)
+@export var defense_boost: int = clamp(0,-1,1)
+@export var ammo_boost: int = clamp(0,-1,1)
+@export var bullet_pierce_boost: int = clamp(0,0,1)
+@export var bullet_reach_boost: int = clamp(0,-1,1)
+@export var effect_added: GDScript 
 
-@export var but_bane_this: bane
-enum bane {
-    none,
-    speed,
-    bullet_reach,
-    ammo_saving,
-    defense,
-    bullet_damage,
-    melee_damage
-}
-
-@export var effect: GDScript 
-
-@export var bullet_sfx : AudioStream = preload("res://assets/audio/slashshot.mp3")
-@export var extra_bullet_sfx : AudioStream = preload("res://assets/audio/slashshot.mp3")
-
-
+var max_ammo: float = 100.0
+var current_ammo: float = 100.0

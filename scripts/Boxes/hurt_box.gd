@@ -255,9 +255,9 @@ func dead_enemy(increase_score=true):
 	if increase_score:
 		SCORE.increaseBy(score_value)
 	PLAYSFX.died()
-	# var drop_item = randi_range(0,9)
-	# if drop_item==1:
-	# 	call_deferred("item_drop")
+	var drop_item = randi_range(0,6)
+	if drop_item==1:
+		call_deferred("item_drop")
 		
 
 func item_drop():
@@ -265,17 +265,18 @@ func item_drop():
 		var item_to_be_dropped=items_it_can_drop.pick_random()
 		match item_to_be_dropped.item_is:
 			item_to_be_dropped.item_type.weapon:
-				var card = item_to_be_dropped.weapon
+				var card = item_to_be_dropped.weapon.duplicate()
 				item_to_be_dropped.weapon = card
 			item_to_be_dropped.item_type.suit:
-				var card = item_to_be_dropped.suit
+				var card = item_to_be_dropped.suit.duplicate()
 				item_to_be_dropped.suit = card
 		var item_dropped=item_to_be_dropped
 		if item_dropped.item_is != item_dropped.item_type.normal_item:
-			var card_item_drop=preload("res://scenes/items/card_item.tscn")
+			var card_item_drop=preload("res://scenes/items/Mon_card_item.tscn")
 			var card_drop = card_item_drop.instantiate()
 			card_drop.global_position=global_position
-			card_drop.add_item(item_dropped)
+			card_drop.item=item_dropped
+			# card_drop.add_item(item_dropped)
 			get_tree().current_scene.add_child(card_drop)
 		else:
 			spawn(item_dropped.item_scene)

@@ -1,44 +1,24 @@
 extends Control
 
-var max_hp
 @onready var hp = $HP
 @onready var ammo = $Ammo
 var flash_tween: Tween
+var current_weapon: Weapon
+var min_ammo:=1.0
+var depletion_rate:=1.0
+var max_hp
 var maxATK 
-var regeneration_rate 
-var depletion_rate 
-var melee_depletion_rate 
 var startingATK
 var currentATK
-var min_ammo
-var current_weapon: Weapon
 var weapon_type
 
 func _ready() -> void:
 	hp.material.set_shader_parameter("flash_modifier", 0.0)
 	max_hp=GLOBAL.base_health
+	hp.max_value=max_hp
 	set_hp(GLOBAL.health,false)
 	set_icon(GLOBAL.suit)
-	ammo_setup(GLOBAL.weapon)
-
-func ammo_setup(weapon: Weapon):
-	current_weapon = weapon
-	maxATK = weapon.max_ammo
-	regeneration_rate = weapon.reload_rate
-	depletion_rate = weapon.depletion_rate
-	melee_depletion_rate = weapon.melee_depletion_rate
-	startingATK= weapon.current_ammo
-	currentATK= weapon.current_ammo
-	min_ammo = weapon.min_ammo
-	weapon_type = weapon.weapon_type
-	set_ammo(startingATK)
-
-func reduce_ammo(times: float = 1):
-	var depletion: float = depletion_rate * times
-	currentATK = max(0, currentATK - depletion)
-	current_weapon.current_ammo = currentATK
-	set_ammo(currentATK)
-
+	ammo_setup(GLOBAL.weapon,false)
 
 func set_hp(new_hp: float, spawned=true):  
 	var old_hp=GLOBAL.health
@@ -54,11 +34,11 @@ func set_hp(new_hp: float, spawned=true):
 		hp_color(Color.RED)
 
 	if new_hp<old_hp:
-		flash(Color.RED)
+		flash(Color.RED,hp)
 	
 	if new_hp>old_hp and spawned:
 		PLAYSFX.heal()
-		flash(Color.GREEN)
+		flash(Color.GREEN,hp)
 
 func hp_color(color: Color):
 	var sb = hp.get_theme_stylebox("fill") as StyleBoxFlat
@@ -67,8 +47,8 @@ func hp_color(color: Color):
 		hp.add_theme_stylebox_override("fill", sb)
 	sb.bg_color = color
 
-func flash(color):
-	var sb = hp.get_theme_stylebox("fill") as StyleBoxFlat
+func flash(color,bar):
+	var sb = bar.get_theme_stylebox("fill") as StyleBoxFlat
 
 	if sb == null:
 		return
@@ -90,8 +70,24 @@ func flash(color):
 		0.3
 	)
 
-func set_ammo(current_ammo):
-	ammo.value=current_ammo
-
 func set_icon(suit:Suit):
 	$PlayerIcon.texture=suit.helmet
+
+func ammo_setup(weapon: Weapon, flash_it=true):
+	current_weapon = weapon
+	weapon_type = weapon.weapon_type
+	maxATK = weapon.max_ammo
+	startingATK= weapon.current_ammo
+	currentATK= weapon.current_ammo
+	set_ammo(startingATK,flash_it)
+
+func reduce_ammo(times: float = 1):
+	var depletion: float = depletion_rate * times
+	currentATK = max(0, currentATK - depletion)
+	current_weapon.current_ammo = currentATK
+	set_ammo(currentATK,false)
+
+func set_ammo(current_ammo,flash_it=true):
+	if flash_it:
+		flash(Color.GREEN,ammo)
+	ammo.value=current_ammo

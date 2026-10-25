@@ -23,6 +23,11 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbln2"]
 bg_color = Color(0.31521547, 1, 0.18281268, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cviaw"]
+shader = ExtResource("2_cviaw")
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cviaw"]
 bg_color = Color(0, 0.7227015, 0.8226884, 1)
 
@@ -88,6 +93,7 @@ max_value = 5.0
 show_percentage = false
 
 [node name="Ammo" type="ProgressBar" parent="." unique_id=1456749725]
+material = SubResource("ShaderMaterial_cviaw")
 layout_mode = 0
 offset_left = 19.0
 offset_top = 17.0

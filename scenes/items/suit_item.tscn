@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2518i8rrlh3u" path="res://scripts/Items/shop_item.gd" id="1_esxyk"]
 [ext_resource type="Resource" uid="uid://cqagoe3l62t02" path="res://resources/items/Suit_Icie.tres" id="2_esxyk"]
+[ext_resource type="PackedScene" uid="uid://cxqsoljorqyxk" path="res://scenes/items/mon_spirit.tscn" id="3_0k3qq"]
 [ext_resource type="Texture2D" uid="uid://rtmlx08v16wn" path="res://assets/Weapons/Boots/Boot_Icie.png" id="3_kd2s5"]
 
 [sub_resource type="Animation" id="Animation_pffs2"]
@@ -60,8 +61,11 @@ font_size = 9
 script = ExtResource("1_esxyk")
 item = ExtResource("2_esxyk")
 
+[node name="MonSpirit" parent="." unique_id=1029576708 instance=ExtResource("3_0k3qq")]
+position = Vector2(-4, -8)
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1474111844]
-position = Vector2(0, -5)
+position = Vector2(4, -5)
 texture = ExtResource("3_kd2s5")
 hframes = 4
 frame = 1

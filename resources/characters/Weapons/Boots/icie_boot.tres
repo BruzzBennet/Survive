@@ -5,7 +5,6 @@
 [ext_resource type="AudioStream" uid="uid://b5vijeuq114j3" path="res://assets/audio/slashshot.mp3" id="2_a1qy1"]
 [ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="3_a1qy1"]
 [ext_resource type="Texture2D" uid="uid://rtmlx08v16wn" path="res://assets/Weapons/Boots/Boot_Icie.png" id="4_q8nm3"]
-[ext_resource type="AudioStream" uid="uid://bs6u0275h8oso" path="res://assets/audio/slash.mp3" id="4_up5l5"]
 
 [resource]
 script = ExtResource("3_a1qy1")
@@ -14,8 +13,6 @@ name = "Icie Boot"
 description = "Reach-. Gain +0.5 HP when healing."
 weapon_type = 3
 bullet_scene = ExtResource("1_xiaww")
-boost_this = 2
-but_bane_this = 2
-effect = ExtResource("2_1r30u")
-extra_bullet_sfx = ExtResource("4_up5l5")
+bullet_reach_boost = -1
+effect_added = ExtResource("2_1r30u")
 metadata/_custom_type_script = "uid://hig2h24o38p0"

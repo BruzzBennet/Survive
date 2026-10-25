@@ -2,58 +2,42 @@ extends Node2D
 
 @export var weapon: Weapon
 var bullet_scene
-var speed
-var durability
-var time_on_field
-var shot_type
-var timeout_value = 0.1
+var speed:= 250
+var durability = 1
+var time_on_field:= 0.4
+var timeout_value: = 0.1
 var bullet_damage:= 1.0
-var pierce: = 1.0
+var pierce: = 1
+var shot_type
+
+func reset_stats():
+	speed= 250
+	durability = 1
+	time_on_field= 0.4
+	timeout_value = 0.1
+	bullet_damage= 1.0
+	pierce = 1
 
 func setup(bullet:Weapon, suit:Suit):
+	reset_stats()
 	weapon=bullet
 	bullet_scene = weapon.bullet_scene
-	bullet_damage = bullet.bullet_damage
-	speed = weapon.bullet_speed
-	time_on_field = weapon.bullet_time_on_field
-	# print("Original Reach:" + str(time_on_field))
-	durability = weapon.enemies_bullet_pierces
+	durability += weapon.bullet_pierce_boost + suit.bullet_pierce_boost
 	if bullet.weapon_type == Weapon.type.blade:
 		durability+=1
-	shot_type=weapon.shot_type
-	# modifiers(GLOBAL.weapon,-1)
-	modifiers(bullet)
-	if suit:
-		# modifiers(GLOBAL.suit,-1)
-		modifiers(suit)
-
-func modifiers(this_suit:Variant,increase_by:int=1):
-	var boost_bane = 0.25*increase_by
-	# var reach_boost=0.0
-	var damage_boost=0.0
-	
-	if this_suit.boost:
-		match this_suit.boost_this:
-				this_suit.boost.bullet_reach:
-					time_on_field=weapon.bullet_time_on_field+(weapon.bullet_time_on_field/3)
-				this_suit.boost.bullet_pierce:
-					pierce+=1
-	if this_suit.bane:
-		match this_suit.but_bane_this:
-				this_suit.bane.bullet_reach:
-					time_on_field=weapon.bullet_time_on_field-(weapon.bullet_time_on_field/3)
-				this_suit.bane.bullet_damage:
-					damage_boost-=(boost_bane*2)
-					bullet_damage+=damage_boost
-
-	# print("Modified Reach: "+str(time_on_field))
+	time_on_field+=(time_on_field/3)*(weapon.bullet_reach_boost+suit.bullet_reach_boost)
 
 func playsfx(shot_pattern_is=null):
 	var sfx = $AudioStreamPlayer2D
-	if shot_pattern_is!="simple_shot" or !shot_pattern_is:
-		sfx.stream=weapon.extra_bullet_sfx
+	var shot_list=["simple_shot","short_shot","medium_shot"]
+	if weapon.weapon_type == Weapon.type.blade:
+		shot_list=["short_shot","medium_shot"]
+	elif weapon.weapon_type == Weapon.type.none:
+		shot_list=["short_shot"]
+	if shot_pattern_is in shot_list or !shot_pattern_is:
+		sfx.stream=weapon.normal_attack_sfx
 	else:
-		sfx.stream=weapon.bullet_sfx
+		sfx.stream=weapon.special_attack_sfx
 	if not sfx.is_playing():
 		sfx.pitch_scale = randf_range(0.9, 1.35)
 		sfx.play()
@@ -62,6 +46,8 @@ func shoot(pos,dir,shot_pattern_is=null):
 	playsfx(shot_pattern_is)
 	var shot_is
 	match shot_type:
+		null:
+			shot_is="simple_shot"
 		weapon.shot_pattern.simple_shot:
 			shot_is="simple_shot"
 		weapon.shot_pattern.continuous_shot_double:
@@ -124,7 +110,6 @@ func simple_shot(pos,dir,dur:=1.0):
 	bullet.direction = dir.normalized()
 	bullet.speed=speed
 	bullet.max_time_on_field = time_on_field*dur
-	# print(str(bullet.max_time_on_field))
 	bullet.max_enemies_pierced = durability
 	bullet.add_to_group("bullets")
 

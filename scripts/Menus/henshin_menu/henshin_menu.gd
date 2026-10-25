@@ -10,7 +10,6 @@ func _ready() -> void:
 	$Screen.hide()
 	for child in %Panel.get_children():
 		if child is Button:
-			# child.pressed.connect(_play_or_discard.bind(child))
 			child.focus_entered.connect(display_info.bind(child))
 
 func _physics_process(_delta: float):
@@ -37,11 +36,10 @@ func discard(button: Button):
 					call_deferred("switch_weapon", base_weapon, body)
 			item.item_type.suit:
 				if GLOBAL.suit == item.suit:
-					body.equip_suit(base_suit,GLOBAL.weapon)
+					body.equip(base_suit,GLOBAL.weapon)
 		GLOBAL.deck.erase(item)
 		PLAYSFX.unequip()
 		button.get_child(0).visible = false		
-		# close_menu()
 
 func show_ammo(show_it=true):
 	for child in %Panel.get_children():
@@ -98,7 +96,7 @@ func equip(button):
 				if GLOBAL.weapon.weapon_type != equipment.weapon_type:
 					call_deferred("switch_weapon", equipment, body)
 				else:
-					body.equip_weapon(equipment,GLOBAL.suit)
+					body.equip(GLOBAL.suit,equipment)
 			item.item_type.suit:
 				if GLOBAL.suit != item.suit:
 					equipment = item.suit
@@ -106,7 +104,7 @@ func equip(button):
 				else:
 					equipment = base_suit
 					PLAYSFX.unequip()
-				body.equip_suit(equipment,GLOBAL.weapon)			
+				body.equip(equipment,GLOBAL.weapon)			
 		close_menu()
 
 func henshin(body):
@@ -126,9 +124,6 @@ func update_deck():
 			var card = panel.get_node("Card"+str(index_num)).get_child(0)
 			card.visible=true
 			card.setup(GLOBAL.deck[index_num-1])
-
-# func _process(_delta):
-# 	screen()
 
 func screen():
 	update_deck()
@@ -163,7 +158,6 @@ var slashplayer: PackedScene = preload("res://scenes/PlayerTypes/Slasher.tscn")
 var weaponless: PackedScene = preload("res://scenes/PlayerTypes/weaponless.tscn")
 
 func switch_weapon(weapon,body):
-	# weapon.current_ammo = weapon.max_ammo
 	var player_scene
 	match weapon.weapon_type:
 		Weapon.type.boot:
@@ -179,8 +173,7 @@ func switch_weapon(weapon,body):
 	get_tree().current_scene.add_child(player)
 	player.position = body.global_position
 	body.queue_free()
-	player.equip_suit(GLOBAL.suit,weapon)
-	player.equip_weapon(weapon,GLOBAL.suit)
+	player.equip(GLOBAL.suit,weapon)
 	GLOBAL.weapon=weapon
 
 func explode(here):

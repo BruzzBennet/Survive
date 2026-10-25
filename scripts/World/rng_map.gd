@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var max_lvl: int = 1
+@export var max_lvl: int = 7
 @export var max_lvl_n = [13,31,17,18]
 var map_grid=[Vector2(0,62), 
 			Vector2(0,190),
@@ -90,7 +90,7 @@ func create_map():
 func spawn(players: int, enemy_amount: int, spawned_already: Array):
 	var times: = 0
 	var enemy_level=0
-	var max_level = clamp(current_level/4,1,6)
+	var max_level = clamp(current_level/4,1,max_lvl)
 	for instance in spawn_points:	
 		var spawner = instance.get_node_or_null("Spawner")
 		if spawner:
@@ -107,7 +107,7 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 				if enemy_level>enemy_amount:
 					enemy_level=max_level-enemy_amount
 				spawner.spawn_enemy(enemy_level)
-				enemy_amount -= clamp(floor(enemy_level/3),1,6)
+				enemy_amount -= clamp(floor(enemy_level/3),1,max_lvl)
 				spawned_already.append(spawner)
 		else:
 			print("Spawner not found")

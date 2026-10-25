@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bw34c428d43uu" path="res://scripts/Player/TypeAnimations/dasher.gd" id="1_m8apo"]
 [ext_resource type="Texture2D" uid="uid://ddps1u5bhw5fe" path="res://assets/Weapons/Boots/Boot_1.png" id="1_vnhk6"]
 [ext_resource type="PackedScene" uid="uid://2e7a6m6g18hl" path="res://scenes/bullet.tscn" id="2_lmgta"]
-[ext_resource type="Resource" uid="uid://dg74d284s0b7e" path="res://resources/characters/Weapons/Boots/1_boot.tres" id="2_t2guo"]
 [ext_resource type="Texture2D" uid="uid://cjlc00tcuntch" path="res://assets/MR/BodyParts/MRDashBase.png" id="3_sjba3"]
 [ext_resource type="Script" uid="uid://bj0e5pun6w7gk" path="res://scripts/Player/shading.gd" id="4_553x6"]
 [ext_resource type="PackedScene" uid="uid://cw6cd3flyltnt" path="res://scenes/boxes/damage_from_poision_tile.tscn" id="4_txggv"]
@@ -4881,7 +4880,6 @@ position = Vector2(-1, 2)
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_m8apo")
-weapon = ExtResource("2_t2guo")
 footstep_frames = Array[int]([0, 1, 2, 3, 5, 7, 9, 11, 13, 15, 17, 19])
 attack_frames = Array[int]([20, 23])
 

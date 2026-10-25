@@ -1,17 +1,20 @@
 extends Node2D
 
 @export var jump_distance = 16.0
-@export var time_to_change_dir:=1.15
+@export var time_to_change_dir:=1.6
+# @export var jumps_at_a_time:=1
 @export var jump_sfx: AudioStream = preload("res://assets/audio/GiantsStepWalk.wav")
 const margin = 12
 var screen_size: Vector2
 var last_direction = Vector2.RIGHT
 var chasing: bool
-var idle_time := 0.0
+var idle_time = time_to_change_dir
 var boost = 1.0
+# var jumps=0
 @onready var animated_sprite_2d = get_parent().get_node("AnimationPlayer")
 @onready var this_enemy = get_parent()
 @onready var sprite = this_enemy.get_node("Sprite")
+# var jumping:=false
 
 func _ready() -> void:
 	add_to_group("enemy")
@@ -26,14 +29,14 @@ func _physics_process(_delta):
 	if !chasing:
 		idle_time += _delta
 		if idle_time >= time_to_change_dir:
-			var new_position=get_last_dir()
-			if can_jump_to(new_position):
-				playsfx()
-				jump(new_position)
-			idle_time = 0.0
-	process_animation(last_direction)
+			var new_position=get_new_position()
+			if !can_jump_to(new_position):	
+				new_position=this_enemy.position
+			jump(new_position)
+			idle_time = 0.0				
+			
 
-func get_last_dir():
+func get_new_position():
 	last_direction = choose([Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN])
 	var new_position = this_enemy.position + last_direction * jump_distance
 	new_position = new_position.clamp(
@@ -58,10 +61,13 @@ func can_jump_to(new_position: Vector2) -> bool:
 	return result.is_empty()
 
 func jump(new_position: Vector2):
+
+	playsfx()
+	process_animation(last_direction)
+
 	# 1. Definir la duración del salto
 	var duration = time_to_change_dir/2
 	var jump_height = 15.0 # Pixeles que se elevará el sprite
-	
 	# 2. Mover el cuerpo lógicamente hacia el destino
 	var tween_movement = create_tween()
 	tween_movement.tween_property(this_enemy, "position", new_position, duration)
@@ -76,6 +82,10 @@ func jump(new_position: Vector2):
 	tween_sprite.tween_property(sprite, "position:y", 0.0, duration / 2)\
 		.set_trans(Tween.TRANS_QUAD)\
 		.set_ease(Tween.EASE_IN)
+
+	await tween_sprite.finished
+	animated_sprite_2d.play("Idle")
+	
 
 func play_animation(dir: Vector2) -> void:
 	var anim_name := "0"
@@ -97,8 +107,10 @@ func play_animation(dir: Vector2) -> void:
 		else:
 			anim_name = "2"
 
-	if animated_sprite_2d.has_animation(anim_name):
-		animated_sprite_2d.play(anim_name)
+	if animated_sprite_2d.has_animation("Jump_"+anim_name):
+		animated_sprite_2d.play("Jump_"+anim_name)
+	else:
+		print("Jump animation not found")
 
 func process_animation(direction) -> void:
 	play_animation(direction)

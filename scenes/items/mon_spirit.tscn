@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cxqsoljorqyxk"]
+
+[ext_resource type="Script" uid="uid://83jxqwu3bnlh" path="res://scripts/Items/mon_spirit_sprite.gd" id="1_6orob"]
+[ext_resource type="PackedScene" uid="uid://3lwoa7tsv1fj" path="res://scenes/items/itemUpDown.tscn" id="2_yqeio"]
+
+[node name="MonSpirit" type="Sprite2D" unique_id=1029576708]
+position = Vector2(-8, -16)
+script = ExtResource("1_6orob")
+
+[node name="ItemUpDown" parent="." unique_id=329888079 instance=ExtResource("2_yqeio")]
+position = Vector2(16, 0)

@@ -1,9 +1,42 @@
 [gd_scene format=3 uid="uid://c0u3a864ma6ks"]
 
-[ext_resource type="Script" uid="uid://bdx0cpvtgtkt0" path="res://scripts/Attacks/Bullets/bullet.gd" id="1_i6nmg"]
 [ext_resource type="Texture2D" uid="uid://b8omkhbpr2qab" path="res://assets/Elecbullet.png" id="2_b64qv"]
 [ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="3_t6pum"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="4_useqv"]
+
+[sub_resource type="GDScript" id="GDScript_w5cax"]
+script/source = "extends CharacterBody2D
+
+var speed: int = 250
+var time_on_field: float = 0.0
+var max_time_on_field: float = 0.4
+var enemies_pierced: int = 0
+var max_enemies_pierced: int = 1
+var direction: Vector2 
+var damage_done:= 1.0
+
+func new_pierce(amount:int):
+	max_enemies_pierced=amount
+
+func _ready():
+	$HitBox.area_entered.connect(_on_area_entered)
+	add_to_group(\"bullet\")
+	$HitBox.attack.damage_done=damage_done
+
+func _on_area_entered(body):
+	if body is HurtBox_Component and body.get_parent().is_in_group(\"enemies\"):
+		enemies_pierced+=1
+	
+func _physics_process(delta):
+	time_on_field += delta
+	velocity = direction * speed
+	move_and_slide()
+	if get_slide_collision_count() > 0 or enemies_pierced>=max_enemies_pierced or time_on_field>=max_time_on_field:
+		queue_free()
+
+func _on_timer_timeout():
+	queue_free()
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7wct"]
 size = Vector2(2, 5)
@@ -414,7 +447,7 @@ _data = {
 [node name="bullet" type="CharacterBody2D" unique_id=1051852224]
 scale = Vector2(2, 2)
 collision_layer = 32
-script = ExtResource("1_i6nmg")
+script = SubResource("GDScript_w5cax")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1273843954]
 modulate = Color(1.9655429, 1.9655429, 1.9655429, 1)

@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cmyy8dcrjhx8f"]
 
 [ext_resource type="Script" uid="uid://bw34c428d43uu" path="res://scripts/Player/TypeAnimations/dasher.gd" id="1_hthvt"]
-[ext_resource type="Resource" uid="uid://b6p0dyo5i7m8n" path="res://resources/characters/Weapons/weaponless.tres" id="2_5hb67"]
 [ext_resource type="PackedScene" uid="uid://2e7a6m6g18hl" path="res://scenes/bullet.tscn" id="4_31gse"]
 [ext_resource type="Texture2D" uid="uid://3kybjfo0bofs" path="res://assets/Weapons/Guns/Lazer_Gun.png" id="5_odyo7"]
 [ext_resource type="Texture2D" uid="uid://dwwxljqniuq2q" path="res://assets/MR/BodyParts/Helmets/Helmet_MROG.png" id="6_y1mgj"]
@@ -2328,7 +2327,6 @@ _data = {
 collision_layer = 8
 collision_mask = 23
 script = ExtResource("1_hthvt")
-weapon = ExtResource("2_5hb67")
 footstep_frames = Array[int]([4, 6, 8, 10, 12, 14, 16, 18])
 
 [node name="BulletManager" parent="." unique_id=1570605682 instance=ExtResource("4_31gse")]

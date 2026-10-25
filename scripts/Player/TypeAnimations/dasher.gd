@@ -23,16 +23,15 @@ var is_dodging = false
 var can_dodge = true
 var can_shoot: bool = true
 var can_hit: bool = true
-var melee_shot_pattern
-var shot_pattern
 var idle_time: = 0.0
 var invincible_time:=0.0
 var start_end: = false
-var ammo_reduce
+var ammo_reduce:=1.0
 var is_thick
+var melee_shot_pattern
+var shot_pattern
 
 func _ready():
-	reset_stats()
 	$HurtBox.invincible(1.0,false)
 	if suit:
 		$Skeleton/Head_Back.texture = suit.helmet
@@ -46,25 +45,38 @@ func _ready():
 
 	screen_size = get_viewport_rect().size
 
-func reset_ammo(on_start=true):
-	GLOBAL.weapon.current_ammo+=GLOBAL.weapon.max_ammo/4
-	GLOBAL.weapon.current_ammo=clamp(GLOBAL.weapon.current_ammo,0,GLOBAL.weapon.max_ammo)
-	atkUI.ammo_setup(GLOBAL.weapon)
-	if !on_start:
-		# atkUI.flash(Color.GREEN)
-		PLAYSFX.recover()
-		$HurtBox.play_flash(Color.GREEN)
 
-func equip_weapon(this_weapon:Weapon, this_suit:Suit):
-	if GLOBAL.weapon != this_weapon:
-		modifiers(GLOBAL.weapon,-1)
+func equip(this_suit:Suit,this_weapon:Weapon):
+	suit=this_suit
+	weapon=this_weapon
+	equip_suit(this_suit)
+	equip_weapon(this_weapon)
+	$BulletManager.setup(this_weapon,this_suit)
+	stats_setup(this_suit,this_weapon)
+
+func stats_setup(this_suit:Suit,this_weapon:Weapon):
+	set_collision_mask_value(1, true)
+	$SuitEffect.set_script(null)
+	$WeaponEffect.set_script(null)
+	if this_suit.effect_added != null:
+		$SuitEffect.set_script(this_suit.effect_added)
+		$SuitEffect.setup()
+	if this_weapon.effect_added != null:
+		$WeaponEffect.set_script(this_weapon.effect_added)
+		$WeaponEffect.setup()
+	max_speed=GLOBAL.max_speed + ((GLOBAL.max_speed * 0.125) * (this_suit.speed_boost+this_weapon.speed_boost))
+	$HurtBox.defense = GLOBAL.defense + (0.25 * (this_suit.defense_boost+this_weapon.defense_boost))
+	var new_ammo = 1.0 - (0.2 * (this_suit.ammo_boost+this_weapon.ammo_boost))
+	ammo_reduce = max(new_ammo,0.1)
+	if this_weapon.weapon_type == Weapon.type.boot:
+		max_speed+=(GLOBAL.max_speed * 0.125)
+
+func equip_weapon(this_weapon:Weapon):
 	GLOBAL.weapon=this_weapon
 	$Skeleton/Weapon_Back.texture = this_weapon.sprite
 	$Skeleton/Weapon_Front.texture = this_weapon.sprite
-	$BulletManager.setup(this_weapon,this_suit)
-	modifiers(this_weapon)
 	weapon_attack_pattern(this_weapon)
-	atkUI.ammo_setup(this_weapon)
+	atkUI.ammo_setup(this_weapon,false)
 
 
 func weapon_attack_pattern(this_weapon:Weapon):
@@ -82,77 +94,16 @@ func weapon_attack_pattern(this_weapon:Weapon):
 			melee_shot_pattern = "short_shot"
 			shot_pattern = "medium_shot"
 
-func equip_suit(this_suit:Suit,_this_weapon:Weapon):
-	if GLOBAL.suit != this_suit:
-		GLOBAL.modified_health=false
-		modifiers(GLOBAL.suit,-1)
+func equip_suit(this_suit:Suit):
 	if this_suit:
-		# if weapon.weapon_type == Weapon.type.boot:
-		# 	max_speed += GLOBAL.max_speed * 0.25
 		$Skeleton/Head_Back.texture = this_suit.helmet
 		$Skeleton/Head_Front.texture = this_suit.helmet
 		GLOBAL.player_palette=this_suit.body_palette
 		GLOBAL.suit=this_suit
 		$Skeleton/Sprite.set_palette(this_suit.body_palette)
-		modifiers(this_suit)
 		atkUI.set_icon(this_suit)
 	else:
 		$Skeleton/Sprite.set_palette(GLOBAL.player_palette) 
-
-func reset_stats():
-	is_thick=false
-	max_speed=GLOBAL.max_speed
-	$HurtBox.defense = GLOBAL.defense
-	ammo_reduce=GLOBAL.ammo
-
-
-func modifiers(this_suit:Variant,increase_by:int=1):
-	$HurtBox.defense = GLOBAL.defense
-	if this_suit is Suit:
-		# if increase_by<0:
-		set_collision_mask_value(1, true)
-		$SuitEffect.set_script(null)
-	if this_suit is Weapon:
-		$WeaponEffect.set_script(null)
-	
-	if this_suit.boost:
-		match this_suit.boost_this:
-			this_suit.boost.speed:
-				max_speed = GLOBAL.max_speed + (GLOBAL.max_speed * 0.2 * increase_by)
-			this_suit.boost.ammo_saving:
-				ammo_reduce= GLOBAL.ammo - 0.125 * increase_by
-			this_suit.boost.defense:
-				$HurtBox.defense = GLOBAL.defense + (0.25 * increase_by)
-				# if increase_by < 0:
-				# 	GLOBAL.modified_health=false
-				# if !GLOBAL.modified_health:
-				# 	# print("--HENSHIN")
-				# 	$HurtBox.extra_health(1*increase_by)
-				# 	GLOBAL.modified_health=true
-			this_suit.boost.effect:
-				if this_suit.effect:
-					if this_suit is Suit:
-						if increase_by>0:
-							$SuitEffect.set_script(this_suit.effect)
-							$SuitEffect.setup()
-					elif this_suit is Weapon:
-						if increase_by>0:
-							$WeaponEffect.set_script(this_suit.effect)
-							$WeaponEffect.setup()
-
-	if this_suit.bane:
-		match this_suit.but_bane_this:
-			this_suit.bane.speed:
-				max_speed = GLOBAL.max_speed - (GLOBAL.max_speed * 0.2 * increase_by)
-			this_suit.bane.ammo_saving:
-				ammo_reduce= GLOBAL.ammo + 0.125 * increase_by
-			this_suit.bane.defense:
-				# $HurtBox.extra_health(-1*increase_by)
-				$HurtBox.defense = GLOBAL.defense - (0.25 * increase_by) 
-
-# func thick():
-# 	if is_thick:
-# 		$HurtBox.invincible()
 
 func _physics_process(delta: float) -> void:
 	if GLOBAL.about_to_henshin==false:
@@ -162,8 +113,6 @@ func _physics_process(delta: float) -> void:
 			attack()
 		if Input.is_action_pressed("shoot"):
 			shoot()
-		# atkUI.regenerate(delta)
-		# healingATK(delta)
 	else:
 		play_animation("Idle_", last_direction)
 
@@ -212,7 +161,6 @@ func shoot():
 		can_shoot = true
 		is_shooting = false
 	else:
-		# tired()
 		attack()
 		can_shoot = false
 		is_shooting = false
@@ -222,11 +170,6 @@ func Long_Range_Attack():
 	if can_shoot:
 		$BulletManager.shoot(position, last_direction, shot_pattern)
 		can_shoot = false
-
-func tired():
-	# PLAYSFX.out_of_ammo()
-	# $HurtBox.is_tired()
-	atkUI.flash(Color.RED)
 
 func dash_fx(angle, pos, dir):
 	var dash_scene = preload("res://scenes/dashparticles.tscn")
@@ -259,23 +202,6 @@ func player_movement(delta):
 	process_animation(direction)
 	move_and_slide()
 
-
-func healingATK(delta):
-	if atkUI.currentATK < atkUI.maxATK:
-		var idle = animated_sprite_2d.current_animation in [
-		"Idle_0",
-		"Idle_1",
-		"Idle_2",
-        "Idle_3"
-		]
-
-		if idle:
-			recovering(delta)
-		else: 
-			if animated_sprite_2d.current_animation != "":
-				idle_time = 0.0
-				PLAYSFX.recover_stop()
-
 func recovering(delta):
 	idle_time += delta
 	if idle_time >=1:
@@ -285,6 +211,14 @@ func recovering(delta):
 	else:
 		$HurtBox.cancel_flash()
 
+func reset_ammo(on_start=true):
+	GLOBAL.weapon.current_ammo+=GLOBAL.weapon.max_ammo/4
+	GLOBAL.weapon.current_ammo=clamp(GLOBAL.weapon.current_ammo,0,GLOBAL.weapon.max_ammo)
+	atkUI.ammo_setup(GLOBAL.weapon)
+	if !on_start:
+		# atkUI.flash(Color.GREEN)
+		PLAYSFX.recover()
+		$HurtBox.play_flash(Color.GREEN)
 
 func process_animation(direction) -> void:
 	if direction != Vector2.ZERO:
@@ -318,5 +252,3 @@ func play_animation(prefix: String, dir: Vector2) -> void:
 func walk_sfx():
 	if $Skeleton/Sprite.frame in footstep_frames:
 		PLAYSFX.walk()
-	# if $Skeleton/Sprite.frame in attack_frames:
-	# 	PLAYSFX.slash()

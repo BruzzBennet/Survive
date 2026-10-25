@@ -7,7 +7,16 @@ func _on_area_entered(body):
 	if body is HurtBox_Component: 
 		body.damage(attack)
 	if body is InvincibleBox_Component:
-		body.blocked()
+		PLAYSFX.parried()
+		if get_parent().is_in_group("bullets"):
+			get_parent().queue_free()
+		# body.blocked()
+		parried()
+
+func parried():
+	var fx = preload("res://scenes/hurtParticles.tscn").instantiate()
+	fx.global_position = global_position
+	get_tree().current_scene.add_child(fx)
 
 func _ready() -> void:
 	if attack:

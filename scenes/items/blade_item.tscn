@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b2518i8rrlh3u" path="res://scripts/Items/shop_item.gd" id="1_tojgh"]
 [ext_resource type="Resource" uid="uid://esu63s8l24lr" path="res://resources/items/Boot_Icie.tres" id="2_7wwse"]
+[ext_resource type="PackedScene" uid="uid://cxqsoljorqyxk" path="res://scenes/items/mon_spirit.tscn" id="3_7wwse"]
 [ext_resource type="Texture2D" uid="uid://lthgfou14u5y" path="res://assets/Weapons/Blade/Blade.png" id="3_xcwb6"]
 
 [sub_resource type="Animation" id="Animation_pffs2"]
@@ -60,8 +61,11 @@ font_size = 9
 script = ExtResource("1_tojgh")
 item = ExtResource("2_7wwse")
 
+[node name="MonSpirit" parent="." unique_id=1029576708 instance=ExtResource("3_7wwse")]
+position = Vector2(-4, -8)
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1474111844]
-position = Vector2(0, -11)
+position = Vector2(4, -11)
 scale = Vector2(2, 2)
 texture = ExtResource("3_xcwb6")
 hframes = 6

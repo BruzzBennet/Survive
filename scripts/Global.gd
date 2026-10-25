@@ -4,7 +4,8 @@ var starting_level="res://scenes/worlds/start_world.tscn"
 
 var base_weapon=preload("res://resources/characters/Weapons/weaponless.tres")
 var base_suit=preload("res://resources/characters/MR/Suits/Sergyo.tres")
-var base_health=5.0
+var first_suit=preload("res://resources/items/Suit_MR.tres")
+var base_health=6.0
 var base_enemy_amount: = 3
 var modified_health=false
 var base_ammo = 0.65
@@ -30,6 +31,13 @@ var defense = 0
 var ammo = base_ammo
 var about_to_henshin:=false
 
+var deck = [first_suit]
+var deck_size:= 3
+
+func add_card(card:Item):
+	if deck.size() < deck_size:
+		deck.append(card)
+
 func equip_weapon(this_weapon:Weapon):
 	weapon=this_weapon
 
@@ -47,12 +55,5 @@ func restart():
 	ammo = base_ammo
 	current_level= 1
 	about_to_henshin=false
-	deck = []
+	deck = [first_suit]
 	modified_health=false
-
-var deck = []
-var deck_size:= 3
-
-func add_card(card:Item):
-	if deck.size() < deck_size:
-		deck.append(card)
