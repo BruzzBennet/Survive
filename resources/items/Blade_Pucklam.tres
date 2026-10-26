@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://qbhafnecgps2"]
+
+[ext_resource type="Texture2D" uid="uid://35py80wnqaso" path="res://assets/Enemies/Plucklam.png" id="1_vfiyh"]
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="2_82wqw"]
+[ext_resource type="Resource" uid="uid://d13e4flnxd0dp" path="res://resources/characters/Weapons/Blades/Pluckam_Blade.tres" id="3_vfiyh"]
+
+[resource]
+script = ExtResource("2_82wqw")
+mon_sprite = ExtResource("1_vfiyh")
+item_is = 1
+weapon = ExtResource("3_vfiyh")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"

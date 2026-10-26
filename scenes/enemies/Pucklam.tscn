@@ -5,8 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://dw85y3fj4kjyt" path="res://assets/Enemies/PlucklamSheet.png" id="2_g7ww7"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="3_hr2tv"]
 [ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="4_6fhpp"]
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="6_3xg70"]
 [ext_resource type="PackedScene" uid="uid://bodyf87taxuu6" path="res://scenes/enemies/bounce.tscn" id="6_g7ww7"]
 [ext_resource type="AudioStream" uid="uid://bemloeykhd5mm" path="res://assets/audio/GiantsStepWalk.wav" id="7_4qj83"]
+[ext_resource type="Resource" uid="uid://yf65rofu86ni" path="res://resources/items/Suit_Pucklam.tres" id="7_6vudb"]
+[ext_resource type="Resource" uid="uid://b3jm0paqr1okp" path="res://resources/items/Gun_Pucklam.tres" id="8_gn058"]
+[ext_resource type="Resource" uid="uid://qbhafnecgps2" path="res://resources/items/Blade_Pucklam.tres" id="9_bur7y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hr2tv"]
 shader = ExtResource("1_8wljp")
@@ -286,6 +290,7 @@ debug_color = Color(1, 0, 0, 0.42000002)
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("4_6fhpp")]
 max_health = 1.0
 score_value = 100
+items_it_can_drop = Array[ExtResource("6_3xg70")]([ExtResource("7_6vudb"), ExtResource("8_gn058"), ExtResource("9_bur7y")])
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="HurtBox" unique_id=1576969130]
 position = Vector2(10, 5)

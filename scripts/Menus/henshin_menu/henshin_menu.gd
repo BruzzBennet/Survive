@@ -87,6 +87,7 @@ func equip(button):
 		var equipment
 		match item.item_is:
 			item.item_type.weapon:
+				GLOBAL.weapon_item=item
 				if GLOBAL.weapon != item.weapon:
 					equipment = item.weapon
 					henshin(body)
@@ -179,6 +180,7 @@ func switch_weapon(weapon,body):
 func explode(here):
 	var consume: PackedScene = preload("res://scenes/DiedExplosion.tscn")
 	var fx = consume.instantiate()
-	fx.global_position = here.global_position
-	get_tree().current_scene.add_child(fx)
+	if here:
+		fx.global_position = here.global_position
+		get_tree().current_scene.add_child(fx)
 	# queue_free()

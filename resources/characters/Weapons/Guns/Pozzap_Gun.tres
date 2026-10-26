@@ -10,11 +10,10 @@
 script = ExtResource("4_rksod")
 sprite = ExtResource("5_sptus")
 name = "Pozzap Gun"
-description = "Ammo+, Reach-"
+description = "Ammo+"
 weapon_type = 1
 bullet_scene = ExtResource("1_bmf5a")
 normal_attack_sfx = ExtResource("2_bmf5a")
 special_attack_sfx = ExtResource("4_bmf5a")
 ammo_boost = 1
-bullet_reach_boost = -1
 metadata/_custom_type_script = "uid://hig2h24o38p0"

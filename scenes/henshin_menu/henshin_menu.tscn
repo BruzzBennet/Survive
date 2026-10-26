@@ -40,27 +40,27 @@ offset_bottom = 320.0
 
 [node name="PanelContainer" type="PanelContainer" parent="Screen" unique_id=2068040730]
 layout_mode = 0
-offset_left = 287.0
+offset_left = 270.99997
 offset_top = 5.000004
-offset_right = 422.0
+offset_right = 405.99997
 offset_bottom = 56.0
 scale = Vector2(1.5199994, 0.71999997)
 theme_override_styles/panel = SubResource("StyleBoxFlat_f1lyw")
 
 [node name="Label" type="Label" parent="Screen" unique_id=1016155828]
 layout_mode = 0
-offset_left = 286.00003
+offset_left = 270.0
 offset_top = 5.999996
-offset_right = 494.00003
+offset_right = 478.0
 offset_bottom = 41.999996
 label_settings = SubResource("LabelSettings_1iwen")
 autowrap_mode = 3
 
 [node name="PanelContainer2" type="PanelContainer" parent="Screen" unique_id=1068005920]
 layout_mode = 0
-offset_left = 289.0
+offset_left = 272.99997
 offset_top = 47.0
-offset_right = 489.0
+offset_right = 473.0
 offset_bottom = 60.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1iwen")
 
@@ -72,7 +72,7 @@ autowrap_mode = 3
 
 [node name="Panel" type="Node2D" parent="." unique_id=373129143]
 unique_name_in_owner = true
-position = Vector2(163, 5)
+position = Vector2(147, 5)
 
 [node name="Card1" type="Button" parent="Panel" unique_id=484130366]
 anchors_preset = -1

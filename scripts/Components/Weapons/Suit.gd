@@ -11,3 +11,4 @@ class_name Suit
 @export var bullet_pierce_boost: int = clamp(0,-1,1)
 @export var bullet_reach_boost: int = clamp(0,-1,1)
 @export var effect_added: GDScript 
+var broken:=false

@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://b4oqy0jaqvx3v"]
+
+[ext_resource type="PackedScene" uid="uid://e7k5wcox11oq" path="res://scenes/bullets/clamik_bullet.tscn" id="1_y6ie3"]
+[ext_resource type="AudioStream" uid="uid://bs6u0275h8oso" path="res://assets/audio/slash.mp3" id="2_42kto"]
+[ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="3_8pk6f"]
+[ext_resource type="AudioStream" uid="uid://b5vijeuq114j3" path="res://assets/audio/slashshot.mp3" id="4_mci8x"]
+[ext_resource type="Texture2D" uid="uid://bu0tsdj37eks2" path="res://assets/Weapons/Guns/Pucklam_Gun.png" id="5_y6ie3"]
+
+[resource]
+script = ExtResource("3_8pk6f")
+sprite = ExtResource("5_y6ie3")
+name = "Pluckam Gun"
+description = "Reach+, Pierce+, Ammo-"
+weapon_type = 1
+bullet_scene = ExtResource("1_y6ie3")
+ammo_boost = -1
+bullet_pierce_boost = 1
+bullet_reach_boost = 1
+metadata/_custom_type_script = "uid://hig2h24o38p0"

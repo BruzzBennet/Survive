@@ -13,7 +13,6 @@ var friction: float = 0.25
 @export var attack_frames: Array[int]
 @onready var animated_sprite_2d = $AnimationPlayer2D
 @onready var atkUI = get_tree().current_scene.get_node("UI")
-# @onready var hpUI = get_tree().current_scene.get_node("HP")
 const margin = 12
 var last_direction = Vector2.DOWN
 var screen_size: Vector2
@@ -27,11 +26,13 @@ var idle_time: = 0.0
 var invincible_time:=0.0
 var start_end: = false
 var ammo_reduce:=1.0
-var is_thick
+var broken:=false
 var melee_shot_pattern
 var shot_pattern
+signal weapon_broken
 
 func _ready():
+	broken=false
 	$HurtBox.invincible(1.0,false)
 	if suit:
 		$Skeleton/Head_Back.texture = suit.helmet
@@ -106,6 +107,11 @@ func equip_suit(this_suit:Suit):
 		$Skeleton/Sprite.set_palette(GLOBAL.player_palette) 
 
 func _physics_process(delta: float) -> void:
+	if atkUI.currentATK < atkUI.min_ammo and weapon.weapon_type != Weapon.type.none:
+		broken = true
+		broken_weapon()
+	if is_not_attacking() and broken:
+		remove_weapon()
 	if GLOBAL.about_to_henshin==false:
 		walk_sfx()
 		player_movement(delta)
@@ -123,7 +129,9 @@ func attack():
 		atkUI.reduce_ammo(ammo_reduce)
 	elif weapon.weapon_type == Weapon.type.boot:
 		atkUI.reduce_ammo(ammo_reduce*0.5)
-	elif weapon.weapon_type == Weapon.type.blade or weapon.weapon_type == Weapon.type.none:
+	elif weapon.weapon_type == Weapon.type.blade:
+		atkUI.reduce_ammo(ammo_reduce*0.35)
+	elif weapon.weapon_type == Weapon.type.none:
 		atkUI.reduce_ammo(ammo_reduce*0.35)
 	$HurtBox.cancel_flash()
 	Short_Range_Attack()
@@ -137,18 +145,18 @@ func Short_Range_Attack():
 	if can_hit:
 		if atkUI.currentATK >= atkUI.min_ammo:
 			$BulletManager.shoot(position, last_direction, melee_shot_pattern)
-		elif weapon.weapon_type == Weapon.type.gun:
-			PLAYSFX.out_of_ammo()
+		# elif weapon.weapon_type == Weapon.type.gun:
+		# 	PLAYSFX.out_of_ammo()
 		else:
-			PLAYSFX.slash()
+			PLAYSFX.slash()			
 		can_hit = false
 
 func shoot():
 	# if weapon.weapon_type == Weapon.type.boot:
 	# 		atkUI.reduce(ammo_reduce*3)
 	if weapon.weapon_type == Weapon.type.gun:
-			atkUI.reduce_ammo(ammo_reduce*3)
-	elif weapon.weapon_type == Weapon.type.none:
+			atkUI.reduce_ammo(ammo_reduce*2)
+	elif weapon.weapon_type in [Weapon.type.none]:
 			atkUI.reduce_ammo(ammo_reduce*0.65)
 	else:
 		atkUI.reduce_ammo(ammo_reduce)
@@ -160,6 +168,8 @@ func shoot():
 		await $AttackAnimationTimer.timeout
 		can_shoot = true
 		is_shooting = false
+	# elif weapon.weapon_type != Weapon.type.none:
+	# 	broken_weapon()
 	else:
 		attack()
 		can_shoot = false
@@ -170,6 +180,30 @@ func Long_Range_Attack():
 	if can_shoot:
 		$BulletManager.shoot(position, last_direction, shot_pattern)
 		can_shoot = false
+
+func broken_weapon():
+	GLOBAL.deck.erase(GLOBAL.weapon_item)
+	var fx = preload("res://scenes/hurtParticles.tscn").instantiate()
+	fx.global_position = global_position
+	get_tree().current_scene.add_child(fx)
+	PLAYSFX.crunchyMash()
+	PLAYSFX.unequip()
+	get_tree().current_scene.get_node("HenshinMenu").update_deck()
+	equip(GLOBAL.suit,GLOBAL.base_weapon)
+	
+func remove_weapon():
+		GLOBAL.player_type=GLOBAL.weaponless
+		var player= GLOBAL.player_type.instantiate()
+		get_tree().current_scene.add_child(player)
+		player.position = global_position
+		player.equip(GLOBAL.suit,GLOBAL.base_weapon)
+		# broken=false
+		reset_broken.call_deferred()
+		weapon_broken.emit()
+		queue_free()
+
+func reset_broken():
+	broken = false
 
 func dash_fx(angle, pos, dir):
 	var dash_scene = preload("res://scenes/dashparticles.tscn")
@@ -233,6 +267,20 @@ func process_animation(direction) -> void:
 		else:
 			play_animation("Idle_", last_direction)
 
+func is_not_attacking():
+	if is_idle() or is_walking():
+		return true
+	return false
+
+func is_idle():
+	if animated_sprite_2d.current_animation in ["Idle_0","Idle_1","Idle_2","Idle_3"]:
+		return true
+	return false
+
+func is_walking():
+	if animated_sprite_2d.current_animation in ["Walk_0","Walk_1","Walk_2","Walk_3"]:
+		return true
+	return false
 
 func play_animation(prefix: String, dir: Vector2) -> void:
 	var anim_name := ""

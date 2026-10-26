@@ -11,7 +11,7 @@ var modified_health=false
 var base_ammo = 0.65
 
 var normal: PackedScene = preload("res://scenes/PlayerTypes/base.tscn")
-var weaponless: PackedScene = preload("res://scenes/PlayerTypes/weaponless.tscn")
+var weaponless: PackedScene = load("res://scenes/PlayerTypes/weaponless.tscn")
 var shooter: PackedScene = preload("res://scenes/PlayerTypes/Shooter.tscn")
 var dasher: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
 var slasher: PackedScene = preload("res://scenes/PlayerTypes/Slasher.tscn")
@@ -30,6 +30,7 @@ var melee_damage = 2.0
 var defense = 0
 var ammo = base_ammo
 var about_to_henshin:=false
+var weapon_item
 
 var deck = [first_suit]
 var deck_size:= 3

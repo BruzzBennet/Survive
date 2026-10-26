@@ -25,7 +25,7 @@ func setup(bullet:Weapon, suit:Suit):
 	durability += weapon.bullet_pierce_boost + suit.bullet_pierce_boost
 	if bullet.weapon_type == Weapon.type.blade:
 		durability+=1
-	time_on_field+=(time_on_field/3)*(weapon.bullet_reach_boost+suit.bullet_reach_boost)
+	time_on_field+=(time_on_field/4)*(weapon.bullet_reach_boost+suit.bullet_reach_boost)
 
 func playsfx(shot_pattern_is=null):
 	var sfx = $AudioStreamPlayer2D
@@ -68,6 +68,10 @@ func shot_pattern(pos,dir,shoot_pattern,shot_is):
 			four_way_shot(pos,dir,shot_is)
 		"triple_shot":
 			triple_shot(pos,dir)
+		"triple_shot_short":
+			triple_shot(pos,dir,0.35)
+		"triple_shot_medium":
+			triple_shot(pos,dir,0.65)
 		"c_shot_triple":
 			continuous_shot_triple(pos,dir)
 		"c_shot_double":
@@ -127,10 +131,10 @@ func double_shot(pos,dir):
 	simple_shot(pos,dir.rotated(deg_to_rad(45)))
 	simple_shot(pos,dir.rotated(deg_to_rad(-45)))
 
-func triple_shot(pos,dir):
-	simple_shot(pos,dir)
-	simple_shot(pos,dir.rotated(deg_to_rad(45)))
-	simple_shot(pos,dir.rotated(deg_to_rad(-45)))
+func triple_shot(pos,dir,dur:=1.0):
+	simple_shot(pos,dir,dur)
+	simple_shot(pos,dir.rotated(deg_to_rad(45)),dur)
+	simple_shot(pos,dir.rotated(deg_to_rad(-45)),dur)
 
 func circle_shot(pos,dir,func_to_use):
 	var shot_directions

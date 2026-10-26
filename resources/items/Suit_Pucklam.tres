@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://yf65rofu86ni"]
+
+[ext_resource type="Texture2D" uid="uid://35py80wnqaso" path="res://assets/Enemies/Plucklam.png" id="1_i7dq0"]
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="2_ixb34"]
+[ext_resource type="Resource" uid="uid://bhmigw4ssedd6" path="res://resources/characters/MR/Suits/Pucklam.tres" id="3_1rww0"]
+
+[resource]
+script = ExtResource("2_ixb34")
+mon_sprite = ExtResource("1_i7dq0")
+item_is = 2
+suit = ExtResource("3_1rww0")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"

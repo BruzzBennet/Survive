@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Suit" format=3 uid="uid://bhmigw4ssedd6"]
+
+[ext_resource type="Texture2D" uid="uid://bnttclx0cnmjm" path="res://assets/palettes/MonRanger/palette_dark_dark.png" id="1_hxqu0"]
+[ext_resource type="Texture2D" uid="uid://bvh3jmse02gcb" path="res://assets/MR/BodyParts/Helmets/Helmet_Pucklam.png" id="2_hxqu0"]
+[ext_resource type="Script" uid="uid://bnfmd7c1yne3u" path="res://resources/characters/palettes/palette_resource.gd" id="2_vd65m"]
+[ext_resource type="Script" uid="uid://dk6b8jpr26pj2" path="res://scripts/Components/Weapons/Suit.gd" id="3_vd65m"]
+
+[sub_resource type="Resource" id="Resource_6kwnl"]
+script = ExtResource("2_vd65m")
+palette = ExtResource("1_hxqu0")
+metadata/_custom_type_script = "uid://bnfmd7c1yne3u"
+
+[resource]
+script = ExtResource("3_vd65m")
+helmet = ExtResource("2_hxqu0")
+body_palette = SubResource("Resource_6kwnl")
+name = "Pucklam Suit"
+description = "Reach+, Pierce+, Ammo-"
+ammo_boost = -1
+bullet_pierce_boost = 1
+bullet_reach_boost = 1
+metadata/_custom_type_script = "uid://dk6b8jpr26pj2"

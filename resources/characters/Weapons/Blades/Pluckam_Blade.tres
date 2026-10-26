@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://d13e4flnxd0dp"]
+
+[ext_resource type="PackedScene" uid="uid://e7k5wcox11oq" path="res://scenes/bullets/clamik_bullet.tscn" id="1_qh1l0"]
+[ext_resource type="AudioStream" uid="uid://bs6u0275h8oso" path="res://assets/audio/slash.mp3" id="2_xx4rx"]
+[ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="3_qstrf"]
+[ext_resource type="AudioStream" uid="uid://b5vijeuq114j3" path="res://assets/audio/slashshot.mp3" id="4_jt7sm"]
+[ext_resource type="Texture2D" uid="uid://d3fr727htt61s" path="res://assets/Weapons/Blade/Pucklam_Blade.png" id="5_52srg"]
+
+[resource]
+script = ExtResource("3_qstrf")
+sprite = ExtResource("5_52srg")
+name = "Pluckam Club"
+description = "Reach+, Ammo-"
+bullet_scene = ExtResource("1_qh1l0")
+ammo_boost = -1
+bullet_reach_boost = 1
+metadata/_custom_type_script = "uid://hig2h24o38p0"
