@@ -12,12 +12,11 @@ func _on_area_2d_body_entered(_body: Node2D) -> void:
 
 
 func switch() -> void:
+	if not is_inside_tree():
+		return
 
 	var current_level = GLOBAL.current_level
 	var tree := get_tree()
-
-	if tree == null:
-		return
 
 	GLOBAL.current_level += 1
 

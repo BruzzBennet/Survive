@@ -9,7 +9,8 @@ func _ready() -> void:
 	add_to_group("enemy")
 
 func summon_pozzap():
-	$sfx.play()
+	if GLOBAL.sfx_on:
+		$sfx.play()
 	var pozzap=pozzap_to_summon.instantiate()
 	get_tree().current_scene.add_child(pozzap)
 	pozzap.global_position = global_position +  Vector2.RIGHT * 25

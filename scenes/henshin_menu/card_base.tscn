@@ -20,7 +20,7 @@ position = Vector2(24, 12)
 offset = Vector2(-24, -21)
 
 [node name="Type" type="Sprite2D" parent="." unique_id=1602442849]
-position = Vector2(0, 15)
+position = Vector2(0, 13)
 
 [node name="Ammo" type="ProgressBar" parent="." unique_id=2121918318]
 visible = false

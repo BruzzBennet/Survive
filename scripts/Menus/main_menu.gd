@@ -3,11 +3,19 @@ extends Node2D
 var was_pressed := false
 
 func _ready():
-	$ButtonManager/VBoxContainer/Start.grab_focus()
+	if GLOBAL.music_on:
+		%Music.text="Music: ON" 
+	else:
+		%Music.text="Music: OFF"
+	if GLOBAL.sfx_on:
+		%SFX.text="SFX: ON" 
+	else:
+		%SFX.text="SFX: OFF"
+	$Panel/VBoxContainer/Start.grab_focus()
 
 func _on_start_pressed() -> void:
 	was_pressed=true
-	$ButtonManager/VBoxContainer/Start.release_focus()
+	$Panel/VBoxContainer/Start.release_focus()
 	$Transition.show()
 	$Transition/AnimationPlayer.play("Fade_In")
 	$Song.stop()
@@ -16,11 +24,6 @@ func _on_start_pressed() -> void:
 	BGM.playStageMusic()
 	get_tree().change_scene_to_file(GLOBAL.starting_level)
 
-func _on_options_pressed() -> void:
-	was_pressed=true
-	pass # Replace with function body.
-
-
 func _on_quit_pressed() -> void:
 	was_pressed=true
 	get_tree().quit()
@@ -28,15 +31,17 @@ func _on_quit_pressed() -> void:
 func _on_fade_timer_timeout() -> void:
 	pass
 
-func playMenuMove():
-	if !was_pressed:
-		PLAYSFX.MenuMove()		
+func _on_music_pressed() -> void:
+	if GLOBAL.music_on:
+		%Music.text="Music: OFF" 
+	else:
+		%Music.text="Music: ON"
+	GLOBAL.mute_music()
 
-func _on_start_focus_exited() -> void:
-	playMenuMove()
 
-func _on_options_focus_exited() -> void:
-	playMenuMove()
-
-func _on_quit_focus_exited() -> void:
-	playMenuMove()
+func _on_sfx_pressed() -> void:
+	if GLOBAL.sfx_on:
+		%SFX.text="SFX: OFF" 
+	else:
+		%SFX.text="SFX: ON"
+	GLOBAL.mute_sfx()

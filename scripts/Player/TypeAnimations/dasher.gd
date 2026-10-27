@@ -108,6 +108,7 @@ func equip_suit(this_suit:Suit):
 
 func _physics_process(delta: float) -> void:
 	if atkUI.currentATK < atkUI.min_ammo and weapon.weapon_type != Weapon.type.none:
+		weapon_broken.emit()
 		broken = true
 		broken_weapon()
 	if is_not_attacking() and broken:
@@ -183,6 +184,7 @@ func Long_Range_Attack():
 
 func broken_weapon():
 	GLOBAL.deck.erase(GLOBAL.weapon_item)
+	get_tree().current_scene.get_node("UI").set_weapon()
 	var fx = preload("res://scenes/hurtParticles.tscn").instantiate()
 	fx.global_position = global_position
 	get_tree().current_scene.add_child(fx)
@@ -199,7 +201,6 @@ func remove_weapon():
 		player.equip(GLOBAL.suit,GLOBAL.base_weapon)
 		# broken=false
 		reset_broken.call_deferred()
-		weapon_broken.emit()
 		queue_free()
 
 func reset_broken():

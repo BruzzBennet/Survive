@@ -4,13 +4,32 @@
 [ext_resource type="Shader" uid="uid://b06opbiteg1el" path="res://shaders/ProgressBarFlash.gdshader" id="2_cviaw"]
 [ext_resource type="Shader" uid="uid://cbjrfkuwbn76f" path="res://shaders/atk.gdshader" id="2_fbln2"]
 [ext_resource type="Texture2D" uid="uid://dwwxljqniuq2q" path="res://assets/MR/BodyParts/Helmets/Helmet_MROG.png" id="2_jt14p"]
+[ext_resource type="PackedScene" uid="uid://csbksfn8wegm7" path="res://scenes/henshin_menu/card_base.tscn" id="3_afog6"]
 [ext_resource type="Texture2D" uid="uid://bupg2o7574s7a" path="res://assets/cards/icons/Boot_W.png" id="4_cviaw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvtit"]
+bg_color = Color(0.7607843, 0.7607843, 0.7607843, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.7372549, 0.7372549, 0.7372549, 1)
+corner_radius_top_left = 5
+corner_radius_bottom_right = 5
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afog6"]
 bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_da24e"]
-bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.972549, 0.972549, 0.972549, 1)
+corner_radius_top_left = 5
+corner_radius_bottom_right = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_afog6"]
 shader = ExtResource("2_cviaw")
@@ -30,6 +49,17 @@ shader_parameter/flash_color = Color(1, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cviaw"]
 bg_color = Color(0, 0.7227015, 0.8226884, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_da24e"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_right = 2
+border_color = Color(0.972549, 0.972549, 0.972549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5kdx"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_right = 2
+border_color = Color(0.972549, 0.972549, 0.972549, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_au7tn"]
 shader = ExtResource("2_fbln2")
@@ -57,36 +87,28 @@ script = ExtResource("1_fbln2")
 
 [node name="Panel3" type="Panel" parent="." unique_id=1631301882]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 1.0
-offset_right = 134.0
-offset_bottom = 27.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_afog6")
+offset_left = 3.0
+offset_top = -1.0
+offset_right = 101.0
+offset_bottom = 55.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nvtit")
 
-[node name="Panel" type="Panel" parent="." unique_id=1506647990]
+[node name="Panel6" type="Panel" parent="." unique_id=1928003629]
 layout_mode = 0
-offset_left = 12.0
-offset_top = 3.0
-offset_right = 132.0
-offset_bottom = 25.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_da24e")
-
-[node name="Panel2" type="Panel" parent="." unique_id=1881200234]
-layout_mode = 0
-offset_left = 13.0
-offset_top = 4.0
-offset_right = 131.0
-offset_bottom = 24.0
+offset_left = 3.0
+offset_top = -1.0
+offset_right = 101.0
+offset_bottom = 55.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_afog6")
 
 [node name="HP" type="ProgressBar" parent="." unique_id=1291362246]
 material = SubResource("ShaderMaterial_afog6")
 layout_mode = 0
-offset_left = 19.0
-offset_top = 6.0
-offset_right = 139.0
-offset_bottom = 14.0
-scale = Vector2(0.9199988, 1.240001)
+offset_left = 79.0
+offset_top = 51.0
+offset_right = 127.0
+offset_bottom = 59.0
+rotation = -1.5707964
 theme_override_styles/background = SubResource("StyleBoxFlat_jt14p")
 theme_override_styles/fill = SubResource("StyleBoxFlat_fbln2")
 max_value = 5.0
@@ -95,16 +117,41 @@ show_percentage = false
 [node name="Ammo" type="ProgressBar" parent="." unique_id=1456749725]
 material = SubResource("ShaderMaterial_cviaw")
 layout_mode = 0
-offset_left = 19.0
-offset_top = 17.0
-offset_right = 139.0
-offset_bottom = 21.0
-scale = Vector2(0.9199988, 1.240001)
+offset_left = 93.0
+offset_top = 51.0
+offset_right = 141.0
+offset_bottom = 55.0
+rotation = -1.5707964
 theme_override_styles/background = SubResource("StyleBoxFlat_jt14p")
 theme_override_styles/fill = SubResource("StyleBoxFlat_cviaw")
 show_percentage = false
 
+[node name="CardBase" parent="." unique_id=706061897 instance=ExtResource("3_afog6")]
+visible = false
+position = Vector2(22, 27)
+
+[node name="CardBase2" parent="." unique_id=284580957 instance=ExtResource("3_afog6")]
+visible = false
+position = Vector2(58, 27)
+
+[node name="Panel4" type="Panel" parent="." unique_id=1144266166]
+layout_mode = 0
+offset_left = 39.0
+offset_top = -1.0
+offset_right = 77.0
+offset_bottom = 55.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_da24e")
+
+[node name="Panel5" type="Panel" parent="." unique_id=2011303122]
+layout_mode = 0
+offset_left = 55.0
+offset_top = -1.0
+offset_right = 91.0
+offset_bottom = 55.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u5kdx")
+
 [node name="PlayerIcon" type="Sprite2D" parent="." unique_id=2116694426]
+visible = false
 position = Vector2(13, 13)
 scale = Vector2(2, 2)
 texture = ExtResource("2_jt14p")

@@ -58,7 +58,7 @@ bus = &"SFX"
 unique_name_in_owner = true
 position = Vector2(-1, 3)
 stream = ExtResource("6_5fnny")
-bus = &"UI SFX"
+bus = &"SFX"
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=851815124]
 unique_name_in_owner = true
@@ -71,17 +71,18 @@ bus = &"SFX"
 unique_name_in_owner = true
 stream = ExtResource("8_2yeu1")
 volume_db = -5.0
-bus = &"UI SFX"
+bus = &"SFX"
 
 [node name="MenuSelect" type="AudioStreamPlayer2D" parent="." unique_id=6014951]
 unique_name_in_owner = true
 stream = ExtResource("9_ctjgy")
-bus = &"UI SFX"
+bus = &"SFX"
 
 [node name="EnemySpawnSFX" type="AudioStreamPlayer2D" parent="." unique_id=2133149791]
 unique_name_in_owner = true
 stream = ExtResource("10_ctjgy")
 volume_db = 2.5
+bus = &"SFX"
 
 [node name="SlashShotSFX" type="AudioStreamPlayer2D" parent="." unique_id=1523253866]
 unique_name_in_owner = true
@@ -117,36 +118,46 @@ bus = &"SFX"
 
 [node name="EmptyAmmo" type="AudioStreamPlayer2D" parent="." unique_id=1088871791]
 stream = ExtResource("19_e3sun")
+bus = &"SFX"
 
 [node name="Recover" type="AudioStreamPlayer2D" parent="." unique_id=513680026]
 stream = ExtResource("20_josl6")
 volume_db = 1.5
+bus = &"SFX"
 
 [node name="Alert" type="AudioStreamPlayer2D" parent="." unique_id=130881046]
 stream = ExtResource("21_c0j23")
 volume_db = -15.0
 pitch_scale = 1.35
+bus = &"SFX"
 
 [node name="Heal" type="AudioStreamPlayer2D" parent="." unique_id=1893224763]
 stream = ExtResource("20_josl6")
 volume_db = 1.5
 pitch_scale = 1.5
+bus = &"SFX"
 
 [node name="Equip" type="AudioStreamPlayer2D" parent="." unique_id=13305324]
 stream = ExtResource("22_dgm6k")
+bus = &"SFX"
 
 [node name="CrunchyMash" type="AudioStreamPlayer2D" parent="." unique_id=1365517175]
 stream = ExtResource("23_ngslh")
+bus = &"SFX"
 
 [node name="PortalOpens" type="AudioStreamPlayer2D" parent="." unique_id=2018122995]
 stream = ExtResource("24_b6f54")
 volume_db = 3.5
+bus = &"SFX"
 
 [node name="Coin" type="AudioStreamPlayer2D" parent="." unique_id=1397326816]
 stream = ExtResource("25_obbcd")
+bus = &"SFX"
 
 [node name="Unequip" type="AudioStreamPlayer2D" parent="." unique_id=1623698076]
 stream = ExtResource("26_mte22")
+bus = &"SFX"
 
 [node name="GetCard" type="AudioStreamPlayer2D" parent="." unique_id=59050012]
 stream = ExtResource("27_dgm6k")
+bus = &"SFX"

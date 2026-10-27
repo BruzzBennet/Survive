@@ -31,6 +31,28 @@ var defense = 0
 var ammo = base_ammo
 var about_to_henshin:=false
 var weapon_item
+var suit_item
+var music_on:=true
+var sfx_on:=true
+
+
+func mute_music():
+	var bus_index = AudioServer.get_bus_index("Music")
+	if GLOBAL.music_on:
+		AudioServer.set_bus_mute(bus_index, true)
+		GLOBAL.music_on=false
+	else:
+		AudioServer.set_bus_mute(bus_index, false)
+		GLOBAL.music_on=true
+
+func mute_sfx():
+	var bus_index = AudioServer.get_bus_index("SFX")
+	if GLOBAL.sfx_on:
+		AudioServer.set_bus_mute(bus_index, true)
+		GLOBAL.sfx_on=false
+	else:
+		AudioServer.set_bus_mute(bus_index, false)
+		GLOBAL.sfx_on=true
 
 var deck = [first_suit]
 var deck_size:= 3
@@ -58,3 +80,5 @@ func restart():
 	about_to_henshin=false
 	deck = [first_suit]
 	modified_health=false
+	weapon_item=null
+	suit_item=null

@@ -3,6 +3,14 @@ extends Control
 var was_pressed := false
 
 func _ready():
+	if GLOBAL.music_on:
+		%Music.text="Music: ON" 
+	else:
+		%Music.text="Music: OFF"
+	if GLOBAL.sfx_on:
+		%SFX.text="SFX: ON" 
+	else:
+		%SFX.text="SFX: OFF"
 	get_tree().paused=false
 	hide()
 
@@ -52,22 +60,22 @@ func playMenuMove():
 	if !was_pressed:
 		PLAYSFX.MenuMove()
 
-func _on_continue_focus_exited() -> void:
-	playMenuMove()
-
-
-func _on_options_focus_exited() -> void:
-	playMenuMove()
-
-
-func _on_restart_focus_exited() -> void:
-	playMenuMove()
-
-func _on_quit_game_focus_exited() -> void:
-	playMenuMove()
-
-
 func _on_quit_pressed() -> void:
 	get_tree().paused = false
 	BGM.stopMusic()
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+
+
+func _on_music_pressed() -> void:
+	if GLOBAL.music_on:
+		%Music.text="Music: OFF" 
+	else:
+		%Music.text="Music: ON"
+	GLOBAL.mute_music()
+
+func _on_sfx_pressed() -> void:
+	if GLOBAL.sfx_on:
+		%SFX.text="SFX: OFF" 
+	else:
+		%SFX.text="SFX: ON"
+	GLOBAL.mute_sfx()

@@ -22,7 +22,8 @@ func _physics_process(delta):
 func playsfx():
 	var sfx = $sfx
 	if sfx:
+		sfx.bus = "SFX"
 		sfx.stream=bounce_sfx
-	if not sfx.is_playing():
-		sfx.pitch_scale = randf_range(0.9, 1.35)
-		sfx.play()
+		if not sfx.is_playing() and GLOBAL.sfx_on:
+			sfx.pitch_scale = randf_range(0.9, 1.35)
+			sfx.play()

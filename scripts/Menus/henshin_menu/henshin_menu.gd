@@ -4,6 +4,8 @@ var was_pressed := true
 var current_focused_button = null
 var base_weapon=preload("res://resources/characters/Weapons/weaponless.tres")
 var base_suit=preload("res://resources/characters/MR/Suits/Sergyo.tres")
+var ui
+var player
 
 func _ready() -> void:
 	update_deck()
@@ -30,12 +32,17 @@ func _play_or_discard(button:Button):
 func discard(button: Button):
 		var body = get_player()
 		var item =  button.get_child(0).item_summoned
+		ui=get_tree().current_scene.get_node("UI")
 		match item.item_is:
 			item.item_type.weapon:
+				# ui.set_weapon(item)
 				if GLOBAL.weapon == item.weapon:
+					ui.set_weapon()
 					call_deferred("switch_weapon", base_weapon, body)
 			item.item_type.suit:
+				# ui.set_suit(item)
 				if GLOBAL.suit == item.suit:
+					ui.set_suit()
 					body.equip(base_suit,GLOBAL.weapon)
 		GLOBAL.deck.erase(item)
 		PLAYSFX.unequip()
@@ -81,17 +88,22 @@ func _on_any_button_pressed(button: Button) -> void:
 	if button.get_child(0).visible == true:
 		equip(button)
 
+
+
 func equip(button):
 		var body = get_player()
 		var item =  button.get_child(0).item_summoned
 		var equipment
+		ui=get_tree().current_scene.get_node("UI")
 		match item.item_is:
 			item.item_type.weapon:
+				ui.set_weapon(item)
 				GLOBAL.weapon_item=item
 				if GLOBAL.weapon != item.weapon:
 					equipment = item.weapon
 					henshin(body)
 				else:
+					ui.set_weapon()
 					equipment=base_weapon
 					PLAYSFX.unequip()
 				if GLOBAL.weapon.weapon_type != equipment.weapon_type:
@@ -99,10 +111,12 @@ func equip(button):
 				else:
 					body.equip(GLOBAL.suit,equipment)
 			item.item_type.suit:
+				ui.set_suit(item)
 				if GLOBAL.suit != item.suit:
 					equipment = item.suit
 					henshin(body)
 				else:
+					ui.set_suit()
 					equipment = base_suit
 					PLAYSFX.unequip()
 				body.equip(equipment,GLOBAL.weapon)			

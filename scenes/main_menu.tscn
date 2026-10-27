@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://d4fsptvwptuf4" path="res://scenes/ctr_shader.tscn" id="3_bqqt6"]
 [ext_resource type="Texture2D" uid="uid://dgure16j48d54" path="res://assets/MainMenu/MonRangerS.png" id="6_oa1go"]
 [ext_resource type="Texture2D" uid="uid://bg38b72j8en1p" path="res://assets/MainMenu/MonRangerLogoS1.png" id="6_rtw2f"]
+[ext_resource type="PackedScene" uid="uid://dstfd2nwh8man" path="res://scenes/menus/button_move.tscn" id="6_tbmy8"]
+[ext_resource type="Theme" uid="uid://c5l88nmuugvdc" path="res://Button_themes.tres" id="7_5dd4i"]
+[ext_resource type="FontFile" uid="uid://bcw8ds3wtqx7e" path="res://assets/fonts/hero-italic.ttf" id="7_jk1qb"]
 
 [sub_resource type="Animation" id="Animation_oa1go"]
 resource_name = "Idle"
@@ -35,7 +38,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 3.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(376.00003, 158.00002), Vector2(264.00003, 159)]
+"values": [Vector2(376, 215), Vector2(264, 225)]
 }
 
 [sub_resource type="Animation" id="Animation_tbmy8"]
@@ -71,6 +74,45 @@ _data = {
 &"RESET": SubResource("Animation_tbmy8")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dd4i"]
+bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lgwnu"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flqon"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jk1qb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcqid"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ajci"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7b55j"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gw5y6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5pajh"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7ex8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8gd2"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hstxw"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8egab"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [node name="MainMenu" type="Node2D" unique_id=863299943]
 script = ExtResource("1_l6cm7")
 
@@ -78,6 +120,7 @@ script = ExtResource("1_l6cm7")
 stream = ExtResource("2_oa1go")
 volume_db = -10.0
 autoplay = true
+bus = &"Music"
 
 [node name="MonRangerbg" type="Sprite2D" parent="." unique_id=1508478148]
 position = Vector2(264.00003, 158.00002)
@@ -96,13 +139,17 @@ texture = ExtResource("6_oa1go")
 libraries/ = SubResource("AnimationLibrary_jk1qb")
 autoplay = &"Idle"
 
-[node name="ButtonManager" type="Control" parent="." unique_id=781544773]
+[node name="ButtonMove" parent="." unique_id=378590368 instance=ExtResource("6_tbmy8")]
+has_vbox = true
+
+[node name="Panel" type="Control" parent="." unique_id=781544773]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
 offset_right = 640.0
 offset_bottom = 320.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ButtonManager" unique_id=1736847011]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1736847011]
 layout_mode = 0
 offset_left = 147.375
 offset_top = 116.375
@@ -110,22 +157,62 @@ offset_right = 297.375
 offset_bottom = 266.375
 alignment = 1
 
-[node name="Start" type="Button" parent="ButtonManager/VBoxContainer" unique_id=1580976897]
+[node name="Start" type="Button" parent="Panel/VBoxContainer" unique_id=1580976897]
 layout_mode = 2
 focus_neighbor_top = NodePath("../Quit")
-focus_neighbor_bottom = NodePath("../Options")
+focus_neighbor_bottom = NodePath("../Music")
+theme = ExtResource("7_5dd4i")
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_focus_color = Color(0.89411765, 0.3019608, 0.25882354, 1)
+theme_override_colors/font_pressed_color = Color(0.8939713, 0.30321276, 0.2586837, 1)
+theme_override_fonts/font = ExtResource("7_jk1qb")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_5dd4i")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lgwnu")
+theme_override_styles/focus = SubResource("StyleBoxFlat_flqon")
 text = "Start Game"
 
-[node name="Options" type="Button" parent="ButtonManager/VBoxContainer" unique_id=862923371]
+[node name="Music" type="Button" parent="Panel/VBoxContainer" unique_id=862923371]
+unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../Start")
-focus_neighbor_bottom = NodePath("../Quit")
-text = "Options"
+focus_neighbor_bottom = NodePath("../SFX")
+theme_override_colors/font_focus_color = Color(0.89411765, 0.3019608, 0.25882354, 1)
+theme_override_colors/font_pressed_color = Color(0.89411765, 0.3019608, 0.25882354, 1)
+theme_override_fonts/font = ExtResource("7_jk1qb")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_jk1qb")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rcqid")
+theme_override_styles/focus = SubResource("StyleBoxFlat_1ajci")
+text = "Music: ON"
 
-[node name="Quit" type="Button" parent="ButtonManager/VBoxContainer" unique_id=917714894]
+[node name="SFX" type="Button" parent="Panel/VBoxContainer" unique_id=80952456]
+unique_name_in_owner = true
 layout_mode = 2
-focus_neighbor_top = NodePath("../Options")
+focus_neighbor_top = NodePath("../Music")
+focus_neighbor_bottom = NodePath("../Quit")
+theme_override_colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+theme_override_colors/font_focus_color = Color(0.89411765, 0.3019608, 0.25882354, 1)
+theme_override_colors/font_pressed_color = Color(0.89411765, 0.3019608, 0.25882354, 1)
+theme_override_fonts/font = ExtResource("7_jk1qb")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_7b55j")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gw5y6")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5pajh")
+theme_override_styles/focus = SubResource("StyleBoxFlat_j7ex8")
+text = "SFX: ON"
+
+[node name="Quit" type="Button" parent="Panel/VBoxContainer" unique_id=917714894]
+layout_mode = 2
+focus_neighbor_top = NodePath("../SFX")
 focus_neighbor_bottom = NodePath("../Start")
+theme_override_colors/font_focus_color = Color(0.89411765, 0.3019608, 0.25882354, 1)
+theme_override_colors/font_pressed_color = Color(0.89411765, 0.3019608, 0.25882354, 1)
+theme_override_fonts/font = ExtResource("7_jk1qb")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_a8gd2")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hstxw")
+theme_override_styles/focus = SubResource("StyleBoxFlat_8egab")
 text = "Quit Game"
 
 [node name="Transition" parent="." unique_id=2142637533 instance=ExtResource("2_ekxnf")]
@@ -137,10 +224,8 @@ unique_name_in_owner = true
 
 [node name="CTRShader" parent="." unique_id=1374949823 instance=ExtResource("3_bqqt6")]
 
-[connection signal="focus_exited" from="ButtonManager/VBoxContainer/Start" to="." method="_on_start_focus_exited"]
-[connection signal="pressed" from="ButtonManager/VBoxContainer/Start" to="." method="_on_start_pressed"]
-[connection signal="focus_exited" from="ButtonManager/VBoxContainer/Options" to="." method="_on_options_focus_exited"]
-[connection signal="pressed" from="ButtonManager/VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="focus_exited" from="ButtonManager/VBoxContainer/Quit" to="." method="_on_quit_focus_exited"]
-[connection signal="pressed" from="ButtonManager/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Music" to="." method="_on_music_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/SFX" to="." method="_on_sfx_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="timeout" from="Transition/Fade_Timer" to="." method="_on_fade_timer_timeout"]

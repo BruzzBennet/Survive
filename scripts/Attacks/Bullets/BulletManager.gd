@@ -22,13 +22,15 @@ func setup(bullet:Weapon, suit:Suit):
 	reset_stats()
 	weapon=bullet
 	bullet_scene = weapon.bullet_scene
-	durability += weapon.bullet_pierce_boost + suit.bullet_pierce_boost
+	var new_durability = durability + weapon.bullet_pierce_boost + suit.bullet_pierce_boost
+	durability = max(new_durability,1)
 	if bullet.weapon_type == Weapon.type.blade:
 		durability+=1
 	time_on_field+=(time_on_field/4)*(weapon.bullet_reach_boost+suit.bullet_reach_boost)
 
 func playsfx(shot_pattern_is=null):
 	var sfx = $AudioStreamPlayer2D
+	sfx.bus = "SFX"
 	var shot_list=["simple_shot","short_shot","medium_shot"]
 	if weapon.weapon_type == Weapon.type.blade:
 		shot_list=["short_shot","medium_shot"]
@@ -38,7 +40,7 @@ func playsfx(shot_pattern_is=null):
 		sfx.stream=weapon.normal_attack_sfx
 	else:
 		sfx.stream=weapon.special_attack_sfx
-	if not sfx.is_playing():
+	if not sfx.is_playing() and GLOBAL.sfx_on:
 		sfx.pitch_scale = randf_range(0.9, 1.35)
 		sfx.play()
 

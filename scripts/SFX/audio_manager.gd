@@ -1,117 +1,90 @@
 extends Node
 
-@onready var shot_sfx = $ShotSFX
-@onready var hurt_sfx = $HurtSFX
-@onready var died_sfx = $DiedSFX
-@onready var parried_sfx = $ParriedSFX
-@onready var enemy_spawn_sfx = $EnemySpawnSFX
-@onready var menu_move_sfx = get_node_or_null("MenuMove")
-@onready var menu_select_sfx = get_node_or_null("MenuSelect")
-@onready var start_tune_sfx = get_node_or_null("StartTune")
-@onready var slash_sfx = $SlashSFX
-@onready var slash_shot_sfx = $SlashShotSFX
-@onready var player_hurt_sfx = $PlayerHurtSFX
-@onready var walk_sfx = $WalkSFX
-@onready var dash_sfx = $DashSFX
-@onready var empty_gun = $EmptyAmmo
-@onready var recover_sfx = $Recover
-@onready var alert_sfx = $Alert
-@onready var heal_sfx = $Heal
-@onready var equip_sfx = $Equip
-@onready var crunchyMash_sfx = $CrunchyMash
-@onready var portal_sfx = $PortalOpens
-@onready var unequip_sfx = $Unequip
-@onready var get_card_sfx = $GetCard
-
-func shot():
-	if not shot_sfx.is_playing():
-		shot_sfx.play_sound()
-
-func hurt():
-	if not hurt_sfx.is_playing():
-		hurt_sfx.play()
-
-func player_hurt():
-	# if not player_hurt_sfx.is_playing():
-		player_hurt_sfx.play()
-
-func died():
-	#if not died_sfx.is_playing():
-		died_sfx.play()
-
-func parried():
-	if not parried_sfx.is_playing():
-		parried_sfx.play()
-
-func slash():
-	# if not slash_sfx.is_playing():
-		slash_sfx.play()
-
-func slash_shot():
-	slash_shot_sfx.play()
-
-func walk():
-	walk_sfx.play()
-
-func dash():
-	dash_sfx.play()
-
-func enemySpawn():
-	if not enemy_spawn_sfx.is_playing():
-		enemy_spawn_sfx.play()
-
-func MenuMove():
-	menu_move_sfx.play()
-
-func MenuSelect():
-#	if not menu_select_sfx.is_playing():
-		menu_select_sfx.play()
-
-func start_tune():
-	if start_tune_sfx and !start_tune_sfx.is_playing():
-		start_tune_sfx.play()
-
-func out_of_ammo():
-	empty_gun.play()
-
-func recover():
-	if not recover_sfx.is_playing():
-		# print("why?")
-		recover_sfx.play()
-
-func recover_stop():
-	recover_sfx.stop()
+func play_varied_sfx(node:String,from_here:float,to_here:float):
+	var this_node = get_node(node)
+	if not this_node.is_playing() and GLOBAL.sfx_on:
+		this_node.pitch_scale = randf_range(from_here, to_here)
+		this_node.play()
 
 func alert():
-	if not alert_sfx.is_playing():
-		# alert_sfx.randomize()
-		alert_sfx.pitch_scale = randf_range(0.9, 1.35)
-		alert_sfx.play()
-
-func heal():
-	# if not alert_sfx.is_playing():
-		heal_sfx.play()
-
-func equip():
-	equip_sfx.play()
-
-func crunchyMash():
-	if not crunchyMash_sfx.is_playing():
-		crunchyMash_sfx.play()
-
-func portal_opens():
-	# if not crunchyMash_sfx.is_playing():
-		portal_sfx.play()
-
-func pick_coin():
-	$Coin.play()
+	play_varied_sfx("Alert",0.9,1.35)
 
 func unequip():
-	if not unequip_sfx.is_playing():
-		# alert_sfx.randomize()
-		unequip_sfx.pitch_scale = randf_range(0.9, 1.35)
-		unequip_sfx.play()
+	play_varied_sfx("Unequip",0.9,1.35)
+
+func play_this_sfx(node:String):
+	var this_node = get_node(node)
+	if not this_node.is_playing() and GLOBAL.sfx_on:
+		this_node.play()
+
+func shot():
+	play_this_sfx("ShotSFX")
+
+func player_hurt():
+	play_this_sfx("PlayerHurtSFX")
+
+func parried():
+	play_this_sfx("ParriedSFX")
+
+func dash():
+	play_this_sfx("DashSFX")
+
+func enemySpawn():
+	play_this_sfx("EnemySpawnSFX")
+
+func MenuSelect():
+	play_this_sfx("MenuSelect")
+
+func start_tune():
+	play_this_sfx("StartTune")
+
+func out_of_ammo():
+	play_this_sfx("EmptyAmmo")
+
+func portal_opens():
+	play_this_sfx("PortalOpens")
+
+func recover():
+	play_this_sfx("Recover")
+
+func recover_stop():
+	$Recover.stop()
+
+func play_this_sfx_unlimited(node:String):
+	var this_node = get_node(node)
+	if GLOBAL.sfx_on:
+		this_node.play()
+
+func died():
+	play_this_sfx_unlimited("DiedSFX")
+
+func hurt():
+	play_this_sfx_unlimited("HurtSFX")
+
+func slash():
+	play_this_sfx_unlimited("SlashSFX")
+
+func slash_shot():
+	play_this_sfx_unlimited("SlashShotSFX")
+
+func walk():
+	play_this_sfx_unlimited("WalkSFX")
+
+func MenuMove():
+	play_this_sfx_unlimited("MenuMove")
+
+func heal():
+	play_this_sfx_unlimited("Heal")
+
+func equip():
+	play_this_sfx_unlimited("Equip")
+
+func crunchyMash():
+	play_this_sfx_unlimited("CrunchyMash")
 
 func get_card():
-	# if not get_card_sfx.is_playing():
-	get_card_sfx.play()
+	play_this_sfx_unlimited("GetCard")
+
+func pick_coin():
+	play_this_sfx_unlimited("Coin")
+

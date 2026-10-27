@@ -12,4 +12,4 @@ func setup():
 			parent.weapon_broken.connect(on_weapon_broken)
 
 func on_weapon_broken():
-	hurt_box.call_deferred("heals",0.25)
+	hurt_box.call_deferred("heals",0.5)

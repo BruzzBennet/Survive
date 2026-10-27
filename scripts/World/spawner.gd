@@ -32,9 +32,6 @@ var items=[
 
 var spawn_this_player: PackedScene = GLOBAL.player_type
 
-# var hp_to_spawn: PackedScene = preload("res://scenes/hp.tscn")
-# var stamina_to_spawn: PackedScene = preload("res://scenes/UI/Run_Stamina.tscn")
-# var atk_to_spawn: PackedScene = preload("res://scenes/ShootStamina.tscn")
 var spawn_points = []
 var current_round: float = 1.0
 var rng_map
@@ -86,7 +83,7 @@ func enemy_died(enemy):
 func spawn_player(_first_time=false):
 	var player_ui = preload("res://scenes/UI/PlayerUI.tscn").instantiate()
 	get_tree().current_scene.add_child(player_ui)
-	player_ui.position=Vector2(10,10)
+	player_ui.position=Vector2(6,6)
 
 	var player = spawn_this_player.instantiate()
 	get_tree().current_scene.add_child(player)

@@ -17,8 +17,32 @@ func _ready() -> void:
 	max_hp=GLOBAL.base_health
 	hp.max_value=max_hp
 	set_hp(GLOBAL.health,false)
-	set_icon(GLOBAL.suit)
+	set_equipment(GLOBAL.suit_item,GLOBAL.weapon_item)
+	# set_icon(GLOBAL.suit)
 	ammo_setup(GLOBAL.weapon,false)
+
+func set_equipment(suit:Item,weapon:Item):
+	set_suit(suit)
+	set_weapon(weapon)
+
+func set_suit(item:Item=null):
+	if item:
+		$CardBase.visible=true
+		$CardBase.setup(item)
+		GLOBAL.suit_item=item
+	else:
+		print("no item!")
+		$CardBase.visible=false
+		GLOBAL.suit_item=null
+	
+func set_weapon(item:Item=null):
+	if item:
+		$CardBase2.visible=true
+		$CardBase2.setup(item)
+		GLOBAL.weapon_item=item
+	else:
+		$CardBase2.visible=false
+		GLOBAL.weapon_item=item
 
 func set_hp(new_hp: float, spawned=true):  
 	var old_hp=GLOBAL.health

@@ -123,7 +123,8 @@ func choose(array):
 func playsfx():
 	var sfx = $AudioStreamPlayer2D
 	if jump_sfx:
+		sfx.bus = "SFX"
 		sfx.stream=jump_sfx
-	if not sfx.is_playing():
-		sfx.pitch_scale = randf_range(0.9, 1.35)
-		sfx.play()
+		if not sfx.is_playing() and GLOBAL.sfx_on:
+			sfx.pitch_scale = randf_range(0.9, 1.35)
+			sfx.play()

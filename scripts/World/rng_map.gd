@@ -27,7 +27,7 @@ var tile_maps =[
 var enemy_difficulty:= 1
 var first_player_starting_point
 var current_level
-var max_enemy_amount:= 36
+var max_enemy_amount:= 24
 var portal_points = []
 
 func _ready() -> void:

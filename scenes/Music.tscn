@@ -30,19 +30,25 @@ bus = &"Music"
 
 [node name="GameOver" type="AudioStreamPlayer2D" parent="." unique_id=1161924845]
 stream = ExtResource("4_op8hu")
+bus = &"Music"
 
 [node name="Menu" type="AudioStreamPlayer2D" parent="." unique_id=2053443764]
 stream = ExtResource("5_y04fo")
+bus = &"Music"
 
 [node name="BossBattle" type="AudioStreamPlayer2D" parent="." unique_id=331501879]
 stream = ExtResource("6_kmgpq")
+bus = &"Music"
 
 [node name="RestTime" type="AudioStreamPlayer2D" parent="." unique_id=2096437584]
 stream = ExtResource("7_7s30x")
+bus = &"Music"
 
 [node name="Overworld" type="AudioStreamPlayer2D" parent="." unique_id=147681724]
 stream = ExtResource("8_kmgpq")
 volume_db = -7.0
+bus = &"Music"
 
 [node name="StandByTune" type="AudioStreamPlayer2D" parent="." unique_id=907301057]
 stream = ExtResource("10_n2glq")
+bus = &"Music"

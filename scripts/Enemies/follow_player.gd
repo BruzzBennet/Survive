@@ -7,8 +7,10 @@ extends Area2D
 func _on_body_entered(body) -> void:
 	if body is Player_Unit:
 		if follow_sfx:
+			sfx_player.bus="SFX"
 			sfx_player.stream = follow_sfx
-			sfx_player.play()
+			if GLOBAL.sfx_on:
+				sfx_player.play()
 		this_enemy.last_direction = (
 body.global_position - this_enemy.global_position
 		).normalized()
