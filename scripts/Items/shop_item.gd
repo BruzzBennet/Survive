@@ -4,9 +4,9 @@ extends Node2D
 @export var monCard:=false
 
 func _ready() -> void:
-	# if monCard:
-	# 	build_w_Mon(item)
-	# else:
+	if monCard:
+		build_w_Mon(item)
+	else:
 		build(item)
 
 func build_w_Mon(this_one_item: Item):
