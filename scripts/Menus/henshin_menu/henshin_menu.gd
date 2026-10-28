@@ -5,7 +5,6 @@ var current_focused_button = null
 var base_weapon=preload("res://resources/characters/Weapons/weaponless.tres")
 var base_suit=preload("res://resources/characters/MR/Suits/Sergyo.tres")
 var ui
-var player
 
 func _ready() -> void:
 	update_deck()
@@ -193,11 +192,11 @@ func switch_weapon(weapon,body):
 		Weapon.type.none:
 			player_scene=weaponless
 	GLOBAL.player_type=player_scene
-	var player = player_scene.instantiate()
-	get_tree().current_scene.add_child(player)
-	player.position = body.global_position
+	var this_player = player_scene.instantiate()
+	get_tree().current_scene.add_child(this_player)
+	this_player.position = body.global_position
 	body.queue_free()
-	player.equip(GLOBAL.suit,weapon)
+	this_player.equip(GLOBAL.suit,weapon)
 	GLOBAL.weapon=weapon
 
 func explode(here):

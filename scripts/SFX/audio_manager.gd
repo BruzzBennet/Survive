@@ -12,13 +12,13 @@ func alert():
 func unequip():
 	play_varied_sfx("Unequip",0.9,1.35)
 
+func shot():
+	play_varied_sfx("ShotSFX",0.5,1.5)
+
 func play_this_sfx(node:String):
 	var this_node = get_node(node)
 	if not this_node.is_playing() and GLOBAL.sfx_on:
 		this_node.play()
-
-func shot():
-	play_this_sfx("ShotSFX")
 
 func player_hurt():
 	play_this_sfx("PlayerHurtSFX")
@@ -61,15 +61,6 @@ func died():
 func hurt():
 	play_this_sfx_unlimited("HurtSFX")
 
-func slash():
-	play_this_sfx_unlimited("SlashSFX")
-
-func slash_shot():
-	play_this_sfx_unlimited("SlashShotSFX")
-
-func walk():
-	play_this_sfx_unlimited("WalkSFX")
-
 func MenuMove():
 	play_this_sfx_unlimited("MenuMove")
 
@@ -88,3 +79,17 @@ func get_card():
 func pick_coin():
 	play_this_sfx_unlimited("Coin")
 
+func play_this_sfx_unlimited_varied(node:String,from_here=0.9, to_here=1.35):
+	var this_node = get_node(node)
+	if GLOBAL.sfx_on:
+		this_node.pitch_scale = randf_range(from_here, to_here)
+		this_node.play()
+
+func slash():
+	play_this_sfx_unlimited_varied("SlashSFX")
+
+func slash_shot():
+	play_this_sfx_unlimited_varied("SlashShotSFX")
+
+func walk():
+	play_this_sfx_unlimited_varied("WalkSFX",0.9,1.1)

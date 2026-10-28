@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cbm5p77rj4k0a" path="res://scripts/SFX/audio_manager.gd" id="1_bb6gu"]
 [ext_resource type="AudioStream" uid="uid://dvcok4a0iw0ed" path="res://assets/audio/parry.mp3" id="2_qw17c"]
 [ext_resource type="AudioStream" uid="uid://cf2juyju77jvv" path="res://assets/audio/ShotShort.wav" id="3_qw17c"]
-[ext_resource type="Script" uid="uid://d3skjo1344msy" path="res://scripts/Enemies/Attacks/SFX/shot_sfx.gd" id="4_qw17c"]
 [ext_resource type="AudioStream" uid="uid://43cr1wox4syq" path="res://assets/audio/Explosion(notmadebyme).wav" id="4_snamx"]
 [ext_resource type="AudioStream" uid="uid://bmvjjtf3u01cd" path="res://assets/audio/Hurt(notmadebyme).wav" id="5_2yeu1"]
 [ext_resource type="AudioStream" uid="uid://dsd6ihfl2vkm6" path="res://assets/music/(A1) Start.mp3" id="6_5fnny"]
@@ -11,12 +10,9 @@
 [ext_resource type="AudioStream" uid="uid://csjg3qkfap6ld" path="res://assets/audio/MenuButtonSelect.wav" id="9_ctjgy"]
 [ext_resource type="AudioStream" uid="uid://bkjf1a5jo1a8g" path="res://assets/audio/SpawnEnemy1.wav" id="10_ctjgy"]
 [ext_resource type="AudioStream" uid="uid://b5vijeuq114j3" path="res://assets/audio/slashshot.mp3" id="11_1443v"]
-[ext_resource type="Script" uid="uid://yydqhu2ap6c7" path="res://scripts/Player/SFX/slashshot_sfx.gd" id="12_e3sun"]
 [ext_resource type="AudioStream" uid="uid://bs6u0275h8oso" path="res://assets/audio/slash.mp3" id="13_josl6"]
-[ext_resource type="Script" uid="uid://b5167xfyt3bcq" path="res://scripts/Player/SFX/slash_sfx.gd" id="14_c0j23"]
 [ext_resource type="AudioStream" uid="uid://b4hsf1ept0xr0" path="res://assets/audio/hurt2.wav" id="15_cks26"]
 [ext_resource type="AudioStream" uid="uid://wmdklot6o1v8" path="res://assets/audio/walkondirt.mp3" id="16_ngslh"]
-[ext_resource type="Script" uid="uid://bj8svuepxrurl" path="res://scripts/Player/SFX/walk_sfx.gd" id="17_b6f54"]
 [ext_resource type="AudioStream" uid="uid://b51px7epioyyn" path="res://assets/audio/Dash.mp3" id="18_obbcd"]
 [ext_resource type="AudioStream" uid="uid://ckoxwcvsj1unu" path="res://assets/audio/emptygun.mp3" id="19_e3sun"]
 [ext_resource type="AudioStream" uid="uid://bo1ci00jim1aj" path="res://assets/audio/PowerUpTaken.wav" id="20_josl6"]
@@ -33,86 +29,69 @@ process_mode = 3
 script = ExtResource("1_bb6gu")
 
 [node name="ParriedSFX" type="AudioStreamPlayer2D" parent="." unique_id=1199704381]
-unique_name_in_owner = true
 position = Vector2(-1, 3)
 stream = ExtResource("2_qw17c")
 volume_db = -4.0
 bus = &"SFX"
 
 [node name="ShotSFX" type="AudioStreamPlayer2D" parent="." unique_id=475808184]
-unique_name_in_owner = true
 position = Vector2(0, 1)
 stream = ExtResource("3_qw17c")
 volume_db = 1.0
 bus = &"SFX"
-script = ExtResource("4_qw17c")
 
 [node name="DiedSFX" type="AudioStreamPlayer2D" parent="." unique_id=1254758794]
-unique_name_in_owner = true
 position = Vector2(0, 1)
 stream = ExtResource("4_snamx")
 volume_db = -7.0
 bus = &"SFX"
 
 [node name="StartTune" type="AudioStreamPlayer2D" parent="." unique_id=935809275]
-unique_name_in_owner = true
 position = Vector2(-1, 3)
 stream = ExtResource("6_5fnny")
 bus = &"SFX"
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=851815124]
-unique_name_in_owner = true
 position = Vector2(-1, 3)
 stream = ExtResource("5_2yeu1")
 volume_db = -5.0
 bus = &"SFX"
 
 [node name="MenuMove" type="AudioStreamPlayer2D" parent="." unique_id=2000714770]
-unique_name_in_owner = true
 stream = ExtResource("8_2yeu1")
 volume_db = -5.0
 bus = &"SFX"
 
 [node name="MenuSelect" type="AudioStreamPlayer2D" parent="." unique_id=6014951]
-unique_name_in_owner = true
 stream = ExtResource("9_ctjgy")
 bus = &"SFX"
 
 [node name="EnemySpawnSFX" type="AudioStreamPlayer2D" parent="." unique_id=2133149791]
-unique_name_in_owner = true
 stream = ExtResource("10_ctjgy")
 volume_db = 2.5
 bus = &"SFX"
 
 [node name="SlashShotSFX" type="AudioStreamPlayer2D" parent="." unique_id=1523253866]
-unique_name_in_owner = true
 stream = ExtResource("11_1443v")
 volume_db = -5.0
 bus = &"SFX"
-script = ExtResource("12_e3sun")
 
 [node name="SlashSFX" type="AudioStreamPlayer2D" parent="." unique_id=767364959]
-unique_name_in_owner = true
 stream = ExtResource("13_josl6")
 volume_db = -7.0
 bus = &"SFX"
-script = ExtResource("14_c0j23")
 
 [node name="PlayerHurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=1561160883]
-unique_name_in_owner = true
 stream = ExtResource("15_cks26")
 volume_db = -5.0
 bus = &"SFX"
 
 [node name="WalkSFX" type="AudioStreamPlayer2D" parent="." unique_id=925630765]
-unique_name_in_owner = true
 stream = ExtResource("16_ngslh")
 volume_db = -10.0
 bus = &"SFX"
-script = ExtResource("17_b6f54")
 
 [node name="DashSFX" type="AudioStreamPlayer2D" parent="." unique_id=1127411580]
-unique_name_in_owner = true
 stream = ExtResource("18_obbcd")
 bus = &"SFX"
 
