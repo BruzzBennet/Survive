@@ -29,5 +29,5 @@ func playsfx():
 	if sfx:
 		sfx.bus = "SFX"
 		sfx.stream=select_sfx
-		if GLOBAL.sfx_on:
+		if GLOBAL.sfx_on and is_inside_tree():
 			sfx.play()

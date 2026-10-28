@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://dwwxljqniuq2q" path="res://assets/MR/BodyParts/Helmets/Helmet_MROG.png" id="2_jt14p"]
 [ext_resource type="PackedScene" uid="uid://csbksfn8wegm7" path="res://scenes/henshin_menu/card_base.tscn" id="3_afog6"]
 [ext_resource type="Texture2D" uid="uid://bupg2o7574s7a" path="res://assets/cards/icons/Boot_W.png" id="4_cviaw"]
+[ext_resource type="Texture2D" uid="uid://cqgnfy4xackhr" path="res://assets/cards/icons/Arm_W.png" id="7_ay8ja"]
+[ext_resource type="Texture2D" uid="uid://bnvj74cj18nl1" path="res://assets/cards/icons/Blade_W.png" id="8_wp0j6"]
+[ext_resource type="Texture2D" uid="uid://bjooe2cuktdrs" path="res://assets/cards/icons/Gun_W.png" id="9_vv1d3"]
+[ext_resource type="Texture2D" uid="uid://dcjuy08jl0hma" path="res://assets/cards/icons/suit.png" id="10_s8umn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvtit"]
 bg_color = Color(0.7607843, 0.7607843, 0.7607843, 1)
@@ -15,21 +19,25 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0.7372549, 0.7372549, 0.7372549, 1)
 corner_radius_top_left = 5
-corner_radius_bottom_right = 5
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 5
 expand_margin_left = 1.0
 expand_margin_top = 1.0
 expand_margin_right = 1.0
 expand_margin_bottom = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afog6"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0.065777026, 0.051149674, 0.078752615, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.972549, 0.972549, 0.972549, 1)
 corner_radius_top_left = 5
-corner_radius_bottom_right = 5
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_afog6"]
 shader = ExtResource("2_cviaw")
@@ -52,9 +60,17 @@ bg_color = Color(0, 0.7227015, 0.8226884, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_da24e"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_left = 2
 border_width_right = 2
 border_color = Color(0.972549, 0.972549, 0.972549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ay8ja"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.972549, 0.972549, 0.972549, 1)
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5kdx"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -89,7 +105,7 @@ script = ExtResource("1_fbln2")
 layout_mode = 0
 offset_left = 3.0
 offset_top = -1.0
-offset_right = 101.0
+offset_right = 102.0
 offset_bottom = 55.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_nvtit")
 
@@ -97,16 +113,16 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_nvtit")
 layout_mode = 0
 offset_left = 3.0
 offset_top = -1.0
-offset_right = 101.0
+offset_right = 102.0
 offset_bottom = 55.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_afog6")
 
 [node name="HP" type="ProgressBar" parent="." unique_id=1291362246]
 material = SubResource("ShaderMaterial_afog6")
 layout_mode = 0
-offset_left = 79.0
+offset_left = 80.0
 offset_top = 51.0
-offset_right = 127.0
+offset_right = 128.0
 offset_bottom = 59.0
 rotation = -1.5707964
 theme_override_styles/background = SubResource("StyleBoxFlat_jt14p")
@@ -117,14 +133,74 @@ show_percentage = false
 [node name="Ammo" type="ProgressBar" parent="." unique_id=1456749725]
 material = SubResource("ShaderMaterial_cviaw")
 layout_mode = 0
-offset_left = 93.0
+offset_left = 94.0
 offset_top = 51.0
-offset_right = 141.0
+offset_right = 142.0
 offset_bottom = 55.0
 rotation = -1.5707964
 theme_override_styles/background = SubResource("StyleBoxFlat_jt14p")
 theme_override_styles/fill = SubResource("StyleBoxFlat_cviaw")
 show_percentage = false
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1622889538]
+
+[node name="Suit" type="Sprite2D" parent="Node2D" unique_id=700973204]
+position = Vector2(22, 25)
+scale = Vector2(2, 2)
+texture = ExtResource("10_s8umn")
+
+[node name="ArmW" type="Sprite2D" parent="Node2D" unique_id=575403464]
+clip_children = 1
+position = Vector2(66, 35)
+scale = Vector2(0.9782721, 0.9782721)
+texture = ExtResource("7_ay8ja")
+
+[node name="ColorRect" type="ColorRect" parent="Node2D/ArmW" unique_id=1660960882]
+offset_left = -62.0
+offset_top = -27.0
+offset_right = -22.0
+offset_bottom = 13.0
+scale = Vector2(1.8000003, 1.3599997)
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="BladeW" type="Sprite2D" parent="Node2D" unique_id=1593252495]
+clip_children = 1
+position = Vector2(50, 18)
+texture = ExtResource("8_wp0j6")
+
+[node name="ColorRect2" type="ColorRect" parent="Node2D/BladeW" unique_id=1881113469]
+offset_left = -54.0
+offset_top = -11.0
+offset_right = -14.0
+offset_bottom = 29.0
+scale = Vector2(1.8000003, 1.3599997)
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="BootW" type="Sprite2D" parent="Node2D" unique_id=382314904]
+clip_children = 1
+position = Vector2(66, 18)
+texture = ExtResource("4_cviaw")
+
+[node name="ColorRect3" type="ColorRect" parent="Node2D/BootW" unique_id=1615340346]
+offset_left = -60.0
+offset_top = -25.999998
+offset_right = -20.0
+offset_bottom = 14.000002
+scale = Vector2(1.8000003, 1.3599997)
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="GunW" type="Sprite2D" parent="Node2D" unique_id=472143525]
+clip_children = 2
+position = Vector2(50, 35)
+texture = ExtResource("9_vv1d3")
+
+[node name="ColorRect4" type="ColorRect" parent="Node2D/GunW" unique_id=1885075057]
+offset_left = -53.0
+offset_top = -43.0
+offset_right = -13.0
+offset_bottom = -3.0
+scale = Vector2(1.8000003, 1.3599997)
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 
 [node name="CardBase" parent="." unique_id=706061897 instance=ExtResource("3_afog6")]
 visible = false
@@ -136,17 +212,25 @@ position = Vector2(58, 27)
 
 [node name="Panel4" type="Panel" parent="." unique_id=1144266166]
 layout_mode = 0
+offset_left = 40.0
+offset_top = -1.0
+offset_right = 78.0
+offset_bottom = 55.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_da24e")
+
+[node name="Panel7" type="Panel" parent="." unique_id=101332493]
+layout_mode = 0
 offset_left = 39.0
 offset_top = -1.0
 offset_right = 77.0
 offset_bottom = 55.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_da24e")
+theme_override_styles/panel = SubResource("StyleBoxFlat_ay8ja")
 
 [node name="Panel5" type="Panel" parent="." unique_id=2011303122]
 layout_mode = 0
-offset_left = 55.0
+offset_left = 56.0
 offset_top = -1.0
-offset_right = 91.0
+offset_right = 92.0
 offset_bottom = 55.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_u5kdx")
 

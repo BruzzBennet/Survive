@@ -31,7 +31,6 @@ func set_suit(item:Item=null):
 		$CardBase.setup(item)
 		GLOBAL.suit_item=item
 	else:
-		print("no item!")
 		$CardBase.visible=false
 		GLOBAL.suit_item=null
 	

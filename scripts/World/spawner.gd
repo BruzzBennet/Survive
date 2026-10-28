@@ -53,9 +53,9 @@ func get_enemies_by_level(lvl:int):
 		3:
 			enemy=preload("res://scenes/enemies/Bombry.tscn")
 		4:
-			enemy=preload("res://scenes/enemies/clamik.tscn")
-		5:
 			enemy=preload("res://scenes/enemies/pucklam.tscn")
+		5:
+			enemy=preload("res://scenes/enemies/clamik.tscn")
 		6:
 			enemy=preload("res://scenes/pozzap.tscn")
 		7:

@@ -13,6 +13,8 @@ func _ready() -> void:
 	for child in %Panel.get_children():
 		if child is Button:
 			child.focus_entered.connect(display_info.bind(child))
+			child.focus_entered.connect(take_card.bind(child))
+			child.focus_exited.connect(take_card.bind(child,false))
 
 func _physics_process(_delta: float):
 	if !get_tree().paused:
@@ -21,6 +23,13 @@ func _physics_process(_delta: float):
 			if child is Button and child.has_focus():
 				_play_or_discard(child)
 	
+func take_card(button:Button,up=true):
+	var card =  button.get_child(0)
+	var dist = 6
+	if up:
+		card.position.y = card.position.y-dist
+	else:
+		card.position.y =card.position.y+dist
 
 func _play_or_discard(button:Button):
 	if button.get_child(0).visible == true:	
