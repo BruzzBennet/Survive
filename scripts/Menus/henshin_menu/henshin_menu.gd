@@ -5,12 +5,15 @@ var current_focused_button = null
 var base_weapon=preload("res://resources/characters/Weapons/weaponless.tres")
 var base_suit=preload("res://resources/characters/MR/Suits/Sergyo.tres")
 var ui
+var located_in
 
 func _ready() -> void:
+	ui=get_tree().current_scene.get_node("HenshinMenu/UI")
 	update_deck()
 	$Screen.hide()
 	for child in %Panel.get_children():
 		if child is Button:
+			located_in=child.get_child(0).position.y
 			child.focus_entered.connect(display_info.bind(child))
 			child.focus_entered.connect(take_card.bind(child))
 			child.focus_exited.connect(take_card.bind(child,false))
@@ -26,9 +29,17 @@ func take_card(button:Button,up=true):
 	var card =  button.get_child(0)
 	var dist = 6
 	if up:
-		card.position.y = card.position.y-dist
+		tween_it(card,located_in-dist)
+		# card.position.y = card.position.y-dist
 	else:
-		card.position.y =card.position.y+dist
+		tween_it(card,located_in)
+		# card.position.y=card.position.y+dist
+
+func tween_it(node:Node,dist:int):
+	var tween = create_tween()
+	tween.tween_property(node, "position:y", dist, 0.25)\
+		.set_trans(Tween.TRANS_CUBIC)\
+		.set_ease(Tween.EASE_OUT)
 
 func _play_or_discard(button:Button):
 	if button.get_child(0).visible == true:	
@@ -40,7 +51,6 @@ func _play_or_discard(button:Button):
 func discard(button: Button):
 		var body = get_player()
 		var item =  button.get_child(0).item_summoned
-		ui=get_tree().current_scene.get_node("UI")
 		match item.item_is:
 			item.item_type.weapon:
 				# ui.set_weapon(item)
@@ -52,9 +62,42 @@ func discard(button: Button):
 				if GLOBAL.suit == item.suit:
 					ui.set_suit()
 					body.equip(base_suit,GLOBAL.weapon)
+		drop_card(item)
 		GLOBAL.deck.erase(item)
 		PLAYSFX.unequip()
 		button.get_child(0).visible = false		
+
+
+func drop_card(item_dropped:Item):
+	var card_item_drop=preload("res://scenes/items/Mon_card_item.tscn")
+	var card_drop = card_item_drop.instantiate()
+	card_drop.global_position=get_player().global_position
+	var dist_1 = randi_range(1,30)
+	var dist_x=plus_or_minus()
+	var pos_x=card_drop.global_position.x+(dist_1*dist_x)
+	var pos_y=card_drop.global_position.y+(45)
+	var new_position=Vector2(pos_x,pos_y)
+	card_drop.item=item_dropped
+	card_drop.global_position=new_position
+	get_tree().current_scene.add_child(card_drop)
+	tween_drop(card_drop,new_position)
+	card_drop.get_node("PanelContainer").visible=false	
+
+func tween_drop(node:Node,dist:Vector2):
+	var duration=0.25
+	var tween_movement = create_tween()
+	var sprite=node.get_node("CardNode")
+	tween_movement.tween_property(sprite, "global_position", dist, duration)\
+		.set_trans(Tween.TRANS_QUAD)\
+		.set_ease(Tween.EASE_OUT)
+		
+	
+
+func plus_or_minus():
+	var dist = randi_range(0,1)
+	if dist==0:
+		dist=-1
+	return dist
 
 func show_ammo(show_it=true):
 	for child in %Panel.get_children():
@@ -96,13 +139,41 @@ func _on_any_button_pressed(button: Button) -> void:
 	if button.get_child(0).visible == true:
 		equip(button)
 
-
+func equip_switch(button):
+	var body = get_player()
+	var item =  button.get_child(0).item_summoned
+	var equipment
+	var past_suit=GLOBAL.suit_item
+	var past_weapon=GLOBAL.weapon_item
+	match item.item_is:
+		item.item_type.weapon:
+			ui.set_weapon(item)
+			equipment = item.weapon
+			henshin(body)
+			if GLOBAL.weapon.weapon_type != equipment.weapon_type:
+				call_deferred("switch_weapon", equipment, body)
+			else:
+				body.equip(GLOBAL.suit,equipment)
+		item.item_type.suit:
+			ui.set_suit(item)
+			henshin(body)
+			body.equip(item.suit,GLOBAL.weapon)
+	GLOBAL.deck.erase(item)
+	match item.item_is:
+		item.item_type.weapon:
+			GLOBAL.weapon_item=item
+			if past_weapon and past_weapon!=GLOBAL.base_weapon:
+				GLOBAL.add_card(past_weapon)
+		item.item_type.suit:
+			GLOBAL.suit_item=item
+			if past_suit and past_suit!=GLOBAL.base_suit:
+				GLOBAL.add_card(past_suit)
+	close_menu()
 
 func equip(button):
 		var body = get_player()
 		var item =  button.get_child(0).item_summoned
 		var equipment
-		ui=get_tree().current_scene.get_node("UI")
 		match item.item_is:
 			item.item_type.weapon:
 				ui.set_weapon(item)
@@ -127,7 +198,7 @@ func equip(button):
 					ui.set_suit()
 					equipment = base_suit
 					PLAYSFX.unequip()
-				body.equip(equipment,GLOBAL.weapon)			
+				body.equip(equipment,GLOBAL.weapon)	
 		close_menu()
 
 func henshin(body):

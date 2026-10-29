@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://csbksfn8wegm7" path="res://scenes/henshin_menu/card_base.tscn" id="2_1iwen"]
 [ext_resource type="PackedScene" uid="uid://dstfd2nwh8man" path="res://scenes/menus/button_move.tscn" id="3_7dkp0"]
 [ext_resource type="StyleBox" uid="uid://b4s4g0bbtyh4h" path="res://card_blank.tres" id="3_jkji6"]
+[ext_resource type="PackedScene" uid="uid://cpp72lf4ylqo4" path="res://scenes/UI/PlayerUI.tscn" id="3_ribii"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dkp0"]
 bg_color = Color(0.972549, 0.972549, 0.972549, 1)
@@ -77,6 +78,14 @@ offset_right = 225.0
 offset_bottom = 52.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_7dkp0")
 
+[node name="UI" parent="." unique_id=1412859120 instance=ExtResource("3_ribii")]
+z_index = 1
+layout_mode = 1
+offset_left = 6.0
+offset_top = 5.0
+offset_right = 5.919998
+offset_bottom = 5.0
+
 [node name="Screen" type="Panel" parent="." unique_id=90116705]
 layout_mode = 0
 offset_right = 640.0
@@ -109,8 +118,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_1iwen")
 
 [node name="Label2" type="Label" parent="Screen/PanelContainer2" unique_id=1351068270]
 layout_mode = 2
-text = "Equip / Unequip: Z / J / Enter   -   Discard: X / K"
+text = "Equip / Unequip: Z / J / Enter   -   Drop: X / K"
 label_settings = SubResource("LabelSettings_1iwen")
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Panel" type="Node2D" parent="." unique_id=373129143]

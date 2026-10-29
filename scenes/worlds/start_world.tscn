@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://bwosepcfa4sck" path="res://assets/maps/tutorial1.tscn" id="2_08rx5"]
 [ext_resource type="PackedScene" uid="uid://c8slwdh6xqobl" path="res://scenes/pause_menu.tscn" id="3_08rx5"]
 [ext_resource type="Script" uid="uid://pks0tfm1bus5" path="res://scripts/World/Resources/world_resource.gd" id="3_ja5x8"]
-[ext_resource type="PackedScene" uid="uid://byswe6q6yfjxy" path="res://scenes/henshin_menu/henshin_menu.tscn" id="4_08rx5"]
 [ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="4_ja5x8"]
 [ext_resource type="PackedScene" uid="uid://d4fsptvwptuf4" path="res://scenes/ctr_shader.tscn" id="7_h1g7i"]
 [ext_resource type="PackedScene" uid="uid://c6i85j2k3ovco" path="res://scenes/worlds/ScoreUI.tscn" id="7_r5xff"]
@@ -27,8 +26,6 @@ this_level = SubResource("Resource_d3y2x")
 unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
-
-[node name="HenshinMenu" parent="." unique_id=1187232654 instance=ExtResource("4_08rx5")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=63205776]
 

@@ -2,10 +2,13 @@ extends Node2D
 
 @export var item: Item
 @export var monCard:=false
+@export var duplicated:=false
 
 func _ready() -> void:
 	if monCard:
 		build_w_Mon(item)
+		if duplicated:
+			new_item(item)
 	else:
 		build(item)
 
@@ -14,12 +17,19 @@ func build_w_Mon(this_one_item: Item):
 			$MonSpirit.build_Mon(this_one_item)
 	match this_one_item.item_is:	
 		this_one_item.item_type.weapon:			
-			this_one_item.weapon=this_one_item.weapon.duplicate()			
+			this_one_item.weapon=this_one_item.weapon			
 			description(this_one_item.weapon.name,this_one_item.weapon.description)
 		this_one_item.item_type.suit:
-			this_one_item.suit=this_one_item.suit.duplicate()
+			this_one_item.suit=this_one_item.suit
 			description(this_one_item.suit.name,this_one_item.suit.description)
 	item_icon_is(this_one_item)
+
+func new_item(this_one_item: Item):
+	match this_one_item.item_is:	
+		this_one_item.item_type.weapon:			
+			this_one_item.weapon=this_one_item.weapon.duplicate()			
+		this_one_item.item_type.suit:
+			this_one_item.suit=this_one_item.suit.duplicate()
 
 func item_icon_is(this_one_item: Item):
 	var item_type: String

@@ -52,7 +52,7 @@ func _ready():
 			health=GLOBAL.health
 			max_health=GLOBAL.base_health
 			drops_items=false
-			hpUI = get_tree().current_scene.get_node("UI")
+			hpUI = get_tree().current_scene.get_node("HenshinMenu/UI")
 	elif takes_damage_from == attack_source.player:
 			set_collision_layer_value(2, true)
 			set_collision_mask_value(4, true)

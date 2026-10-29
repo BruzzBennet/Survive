@@ -28,8 +28,8 @@ func set_equipment(suit:Item,weapon:Item):
 func set_suit(item:Item=null):
 	if item:
 		$CardBase.visible=true
-		$CardBase.setup(item)
 		GLOBAL.suit_item=item
+		$CardBase.setup(GLOBAL.suit_item)
 	else:
 		$CardBase.visible=false
 		GLOBAL.suit_item=null
@@ -37,11 +37,11 @@ func set_suit(item:Item=null):
 func set_weapon(item:Item=null):
 	if item:
 		$CardBase2.visible=true
-		$CardBase2.setup(item)
 		GLOBAL.weapon_item=item
+		$CardBase2.setup(GLOBAL.weapon_item)
 	else:
 		$CardBase2.visible=false
-		GLOBAL.weapon_item=item
+		GLOBAL.weapon_item=null
 
 func set_hp(new_hp: float, spawned=true):  
 	var old_hp=GLOBAL.health
@@ -100,6 +100,7 @@ func ammo_setup(weapon: Weapon, flash_it=true):
 	current_weapon = weapon
 	weapon_type = weapon.weapon_type
 	maxATK = weapon.max_ammo
+	$Ammo.max_value=maxATK
 	startingATK= weapon.current_ammo
 	currentATK= weapon.current_ammo
 	set_ammo(startingATK,flash_it)

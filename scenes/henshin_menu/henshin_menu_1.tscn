@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://bdxqt3f4yb7jf"]
+
+[ext_resource type="Script" uid="uid://bw0hwyggy5ci7" path="res://scripts/Menus/henshin_menu/henshin_menu.gd" id="1_ukajl"]
+[ext_resource type="PackedScene" uid="uid://dstfd2nwh8man" path="res://scenes/menus/button_move.tscn" id="2_l071u"]
+[ext_resource type="StyleBox" uid="uid://b4s4g0bbtyh4h" path="res://card_blank.tres" id="3_05bh6"]
+[ext_resource type="PackedScene" uid="uid://csbksfn8wegm7" path="res://scenes/henshin_menu/card_base.tscn" id="4_3nvs2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dkp0"]
+bg_color = Color(0.972549, 0.972549, 0.972549, 1)
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.6262097, 0.6262097, 0.6262097, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1lyw"]
+bg_color = Color(0.025840001, 0.025840001, 0.025840001, 0.95000005)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.735357, 0.735357, 0.735357, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_1iwen"]
+line_spacing = 0.0
+font_size = 11
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1iwen"]
+bg_color = Color(0, 0, 0, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.735357, 0.735357, 0.735357, 1)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkji6"]
+bg_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.735357, 0.735357, 0.735357, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="HenshinMenu" type="Control" unique_id=1187232654]
+process_mode = 3
+z_index = 98
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ukajl")
+
+[node name="ButtonMove" parent="." unique_id=378590368 instance=ExtResource("2_l071u")]
+
+[node name="Panel2" type="Panel" parent="." unique_id=2895132]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 12.0
+offset_right = 153.0
+offset_bottom = 52.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7dkp0")
+
+[node name="Screen" type="Panel" parent="." unique_id=90116705]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 320.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Screen" unique_id=2068040730]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 6.0
+offset_right = 411.0
+offset_bottom = 57.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1lyw")
+
+[node name="Label" type="Label" parent="Screen" unique_id=1016155828]
+layout_mode = 0
+offset_left = 161.0
+offset_top = 7.0
+offset_right = 410.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_1iwen")
+autowrap_mode = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="Screen" unique_id=1068005920]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 59.0
+offset_right = 408.0
+offset_bottom = 77.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1iwen")
+
+[node name="Label2" type="Label" parent="Screen/PanelContainer2" unique_id=1351068270]
+layout_mode = 2
+text = "Equip / Unequip: Z / J / Enter   -   Discard: X / K"
+label_settings = SubResource("LabelSettings_1iwen")
+autowrap_mode = 3
+
+[node name="Panel" type="Node2D" parent="." unique_id=373129143]
+unique_name_in_owner = true
+position = Vector2(113, 5)
+
+[node name="Panel" type="Panel" parent="Panel" unique_id=1313282875]
+offset_left = -1.0
+offset_right = 37.0
+offset_bottom = 56.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jkji6")
+
+[node name="Card1" type="Button" parent="Panel" unique_id=484130366]
+anchors_preset = -1
+offset_right = 36.0
+offset_bottom = 55.0
+theme_override_styles/normal = ExtResource("3_05bh6")
+theme_override_styles/pressed = ExtResource("3_05bh6")
+theme_override_styles/focus = ExtResource("3_05bh6")
+
+[node name="CardBase" parent="Panel/Card1" unique_id=706061897 instance=ExtResource("4_3nvs2")]
+visible = false
+position = Vector2(18, 28)

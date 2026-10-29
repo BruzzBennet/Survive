@@ -12,7 +12,7 @@ var friction: float = 0.25
 @export var footstep_frames: Array[int] = [0, 1]
 @export var attack_frames: Array[int]
 @onready var animated_sprite_2d = $AnimationPlayer2D
-@onready var atkUI = get_tree().current_scene.get_node("UI")
+@onready var atkUI = get_tree().current_scene.get_node("HenshinMenu/UI")
 const margin = 12
 var last_direction = Vector2.DOWN
 var screen_size: Vector2
@@ -102,7 +102,6 @@ func equip_suit(this_suit:Suit):
 		GLOBAL.player_palette=this_suit.body_palette
 		GLOBAL.suit=this_suit
 		$Skeleton/Sprite.set_palette(this_suit.body_palette)
-		atkUI.set_icon(this_suit)
 	else:
 		$Skeleton/Sprite.set_palette(GLOBAL.player_palette) 
 
@@ -184,7 +183,7 @@ func Long_Range_Attack():
 
 func broken_weapon():
 	GLOBAL.deck.erase(GLOBAL.weapon_item)
-	get_tree().current_scene.get_node("UI").set_weapon()
+	atkUI.set_weapon()
 	var fx = preload("res://scenes/hurtParticles.tscn").instantiate()
 	fx.global_position = global_position
 	get_tree().current_scene.add_child(fx)

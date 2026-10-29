@@ -1,11 +1,19 @@
 extends Node2D
 
+@export var weapon:=false
 
 func done(_body):
-	# if GLOBAL.deck.size() < GLOBAL.deck_size:
-		for i in get_children():
-			explode(i)
-		queue_free()
+	if !weapon:
+		do_it()
+	else:
+		if GLOBAL.deck.size()<=GLOBAL.deck_size and GLOBAL.suit_item!=null:
+			do_it()
+		
+
+func do_it():
+	for i in get_children():
+		explode(i)
+	queue_free()
 
 func explode(here):
 	var consume: PackedScene = preload("res://scenes/DiedExplosion.tscn")

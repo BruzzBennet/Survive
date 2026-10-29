@@ -7,9 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://cgrehgbf0gsnv" path="res://scenes/boxes/summon_spot.tscn" id="5_hu8wq"]
 [ext_resource type="PackedScene" uid="uid://bbn06r1cdptgw" path="res://assets/maps/choose_between_3.tscn" id="6_m1774"]
 [ext_resource type="PackedScene" uid="uid://d3ttm1t3l0su0" path="res://scenes/items/Mon_card_item.tscn" id="7_qc8te"]
-[ext_resource type="Resource" uid="uid://mn58qfdpvbbh" path="res://resources/items/Blade_1.tres" id="8_hu8wq"]
-[ext_resource type="Resource" uid="uid://nlchrse8qc2f" path="res://resources/items/Gun_Lazer.tres" id="9_b6vvq"]
-[ext_resource type="Resource" uid="uid://cjkddf3p8qlq1" path="res://resources/items/Boot_1.tres" id="10_b87nq"]
+[ext_resource type="Texture2D" uid="uid://dqw0etqnmrkme" path="res://assets/cards/Mons/MR_Big_Helmet.png" id="8_b6vvq"]
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="9_b87nq"]
+[ext_resource type="Resource" uid="uid://chqpciolosqo8" path="res://resources/characters/Weapons/Blades/1_Blade.tres" id="10_ipuf0"]
+[ext_resource type="Resource" uid="uid://diqat8ll4su0h" path="res://resources/characters/Weapons/Guns/Lazer_Gun.tres" id="11_n3ruv"]
+[ext_resource type="Resource" uid="uid://dg74d284s0b7e" path="res://resources/characters/Weapons/Boots/1_boot.tres" id="12_cqkck"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_17ebl"]
 texture = ExtResource("4_qc8te")
@@ -101,6 +103,30 @@ physics_layer_1/collision_layer = 3
 physics_layer_1/collision_mask = 3
 sources/4 = SubResource("TileSetAtlasSource_17ebl")
 
+[sub_resource type="Resource" id="Resource_s0br0"]
+resource_local_to_scene = true
+script = ExtResource("9_b87nq")
+mon_sprite = ExtResource("8_b6vvq")
+item_is = 1
+weapon = ExtResource("10_ipuf0")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"
+
+[sub_resource type="Resource" id="Resource_b4dqo"]
+resource_local_to_scene = true
+script = ExtResource("9_b87nq")
+mon_sprite = ExtResource("8_b6vvq")
+item_is = 1
+weapon = ExtResource("11_n3ruv")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"
+
+[sub_resource type="Resource" id="Resource_j157i"]
+resource_local_to_scene = true
+script = ExtResource("9_b87nq")
+mon_sprite = ExtResource("8_b6vvq")
+item_is = 1
+weapon = ExtResource("12_cqkck")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"
+
 [node name="tutorial_map" type="Node2D" unique_id=247519015]
 position = Vector2(-1, 0)
 script = ExtResource("1_m1774")
@@ -122,12 +148,15 @@ position = Vector2(190, 0)
 
 [node name="Item4" parent="ChooseBetween3" unique_id=1644609114 instance=ExtResource("7_qc8te")]
 position = Vector2(210, 89)
-item = ExtResource("8_hu8wq")
+item = SubResource("Resource_s0br0")
+duplicated = true
 
 [node name="Item5" parent="ChooseBetween3" unique_id=581361532 instance=ExtResource("7_qc8te")]
 position = Vector2(306, 89)
-item = ExtResource("9_b6vvq")
+item = SubResource("Resource_b4dqo")
+duplicated = true
 
 [node name="Item6" parent="ChooseBetween3" unique_id=1307653803 instance=ExtResource("7_qc8te")]
 position = Vector2(402, 89)
-item = ExtResource("10_b87nq")
+item = SubResource("Resource_j157i")
+duplicated = true
