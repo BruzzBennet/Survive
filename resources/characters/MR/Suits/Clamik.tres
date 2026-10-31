@@ -9,7 +9,6 @@ script = ExtResource("3_i843w")
 helmet = ExtResource("2_r5m23")
 body_palette = ExtResource("1_bvy7o")
 name = "Clamik Suit"
-description = "Defense +, Speed-."
 speed_boost = -1
 defense_boost = 1
 metadata/_custom_type_script = "uid://dk6b8jpr26pj2"

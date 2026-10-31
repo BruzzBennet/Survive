@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Stat_Boost" format=3 uid="uid://bcfei4mv37k7m"]
+
+[ext_resource type="Texture2D" uid="uid://dqw0etqnmrkme" path="res://assets/cards/Mons/MR_Big_Helmet.png" id="1_jrauw"]
+[ext_resource type="Script" uid="uid://84qpp678qnu4" path="res://scripts/Components/stat_boost.gd" id="2_f2d35"]
+
+[resource]
+script = ExtResource("2_f2d35")
+mon_sprite = ExtResource("1_jrauw")
+bullet_pierce_boost = 1
+metadata/_custom_type_script = "uid://84qpp678qnu4"

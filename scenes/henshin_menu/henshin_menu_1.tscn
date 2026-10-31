@@ -86,16 +86,16 @@ offset_bottom = 320.0
 layout_mode = 0
 offset_left = 160.0
 offset_top = 6.0
-offset_right = 411.0
+offset_right = 485.0
 offset_bottom = 57.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_f1lyw")
 
 [node name="Label" type="Label" parent="Screen" unique_id=1016155828]
 layout_mode = 0
-offset_left = 161.0
-offset_top = 7.0
-offset_right = 410.0
-offset_bottom = 23.0
+offset_left = 163.0
+offset_top = 8.0
+offset_right = 483.0
+offset_bottom = 24.0
 label_settings = SubResource("LabelSettings_1iwen")
 autowrap_mode = 3
 
@@ -103,7 +103,7 @@ autowrap_mode = 3
 layout_mode = 0
 offset_left = 163.0
 offset_top = 59.0
-offset_right = 408.0
+offset_right = 482.0
 offset_bottom = 77.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1iwen")
 
@@ -111,6 +111,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_1iwen")
 layout_mode = 2
 text = "Equip / Unequip: Z / J / Enter   -   Discard: X / K"
 label_settings = SubResource("LabelSettings_1iwen")
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Panel" type="Node2D" parent="." unique_id=373129143]
@@ -134,3 +135,8 @@ theme_override_styles/focus = ExtResource("3_05bh6")
 [node name="CardBase" parent="Panel/Card1" unique_id=706061897 instance=ExtResource("4_3nvs2")]
 visible = false
 position = Vector2(18, 28)
+
+[node name="Control" type="Control" parent="." unique_id=156223061]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

@@ -57,15 +57,11 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[node name="HenshinMenu" type="Control" unique_id=1187232654]
+[node name="HenshinMenu" type="Control" unique_id=1324167544]
 process_mode = 3
 z_index = 98
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 script = ExtResource("1_f1lyw")
 
 [node name="ButtonMove" parent="." unique_id=378590368 instance=ExtResource("3_7dkp0")]
@@ -96,7 +92,7 @@ layout_mode = 0
 offset_left = 230.0
 offset_top = 6.0
 offset_right = 481.0
-offset_bottom = 57.0
+offset_bottom = 71.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_f1lyw")
 
 [node name="Label" type="Label" parent="Screen" unique_id=1016155828]
@@ -111,9 +107,9 @@ autowrap_mode = 3
 [node name="PanelContainer2" type="PanelContainer" parent="Screen" unique_id=1068005920]
 layout_mode = 0
 offset_left = 233.0
-offset_top = 59.0
+offset_top = 73.0
 offset_right = 478.0
-offset_bottom = 77.0
+offset_bottom = 91.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1iwen")
 
 [node name="Label2" type="Label" parent="Screen/PanelContainer2" unique_id=1351068270]

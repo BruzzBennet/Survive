@@ -10,7 +10,6 @@
 script = ExtResource("3_6431t")
 sprite = ExtResource("4_lx66n")
 name = "Pozzap Club"
-description = "Reach+, Pierce-"
 bullet_scene = ExtResource("1_lx66n")
 normal_attack_sfx = ExtResource("3_3m877")
 special_attack_sfx = ExtResource("2_3m877")

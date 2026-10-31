@@ -11,7 +11,7 @@
 script = ExtResource("5_8wwfb")
 sprite = ExtResource("6_nano4")
 name = "Icie Spear"
-description = "Ammo-. Gain a bit of health when it breaks."
+description = "Gain a bit of health when it breaks."
 bullet_scene = ExtResource("1_nano4")
 ammo_boost = -1
 effect_added = ExtResource("3_8ajhy")

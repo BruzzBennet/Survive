@@ -1,0 +1,333 @@
+[gd_scene format=3 uid="uid://dixbd5ujgycmn"]
+
+[ext_resource type="Script" uid="uid://bk47bbo2fgtae" path="res://scripts/Player/UI/player_ui_2.gd" id="1_pphp1"]
+[ext_resource type="PackedScene" uid="uid://dstfd2nwh8man" path="res://scenes/menus/button_move.tscn" id="2_w4df5"]
+[ext_resource type="Shader" uid="uid://b06opbiteg1el" path="res://shaders/ProgressBarFlash.gdshader" id="3_xmxw7"]
+[ext_resource type="Texture2D" uid="uid://dcjuy08jl0hma" path="res://assets/cards/icons/suit.png" id="4_se62q"]
+[ext_resource type="Texture2D" uid="uid://cqgnfy4xackhr" path="res://assets/cards/icons/Arm_W.png" id="5_wr0iy"]
+[ext_resource type="Texture2D" uid="uid://bnvj74cj18nl1" path="res://assets/cards/icons/Blade_W.png" id="6_t1ss1"]
+[ext_resource type="Texture2D" uid="uid://bupg2o7574s7a" path="res://assets/cards/icons/Boot_W.png" id="7_qur80"]
+[ext_resource type="Texture2D" uid="uid://bjooe2cuktdrs" path="res://assets/cards/icons/Gun_W.png" id="8_qfn1e"]
+[ext_resource type="StyleBox" uid="uid://b4s4g0bbtyh4h" path="res://card_blank.tres" id="9_3y21a"]
+[ext_resource type="PackedScene" uid="uid://csbksfn8wegm7" path="res://scenes/henshin_menu/card_base.tscn" id="10_fyis3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_snyeu"]
+bg_color = Color(0.972549, 0.972549, 0.972549, 1)
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.6262097, 0.6262097, 0.6262097, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kfc0i"]
+bg_color = Color(0.025840001, 0.025840001, 0.025840001, 0.95000005)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.735357, 0.735357, 0.735357, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_6epkv"]
+line_spacing = 0.0
+font_size = 11
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myexy"]
+bg_color = Color(0, 0, 0, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.735357, 0.735357, 0.735357, 1)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvtit"]
+bg_color = Color(0.06666667, 0.050980393, 0.078431375, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.7372549, 0.7372549, 0.7372549, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 5
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_afog6"]
+shader = ExtResource("3_xmxw7")
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jt14p"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbln2"]
+bg_color = Color(0.31521547, 1, 0.18281268, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cviaw"]
+shader = ExtResource("3_xmxw7")
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cviaw"]
+bg_color = Color(0, 0.7227015, 0.8226884, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afog6"]
+bg_color = Color(0.06666667, 0.050980393, 0.078431375, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.972549, 0.972549, 0.972549, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_da24e"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_right = 2
+border_color = Color(0.972549, 0.972549, 0.972549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ay8ja"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.972549, 0.972549, 0.972549, 1)
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5kdx"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_right = 2
+border_color = Color(0.972549, 0.972549, 0.972549, 1)
+
+[node name="HenshinMenu" type="Node2D" unique_id=1827421428]
+clip_children = 2
+light_mask = 524288
+visibility_layer = 524288
+z_index = 99
+script = ExtResource("1_pphp1")
+
+[node name="UI" type="Control" parent="." unique_id=2003357705]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ButtonMove" parent="UI" unique_id=378590368 instance=ExtResource("2_w4df5")]
+
+[node name="Panel2" type="Panel" parent="UI" unique_id=597319608]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 12.0
+offset_right = 113.0
+offset_bottom = 52.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_snyeu")
+
+[node name="Screen" type="Panel" parent="UI" unique_id=1066571560]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 320.0
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/Screen" unique_id=1968986921]
+layout_mode = 0
+offset_left = 121.0
+offset_top = 6.0
+offset_right = 372.0
+offset_bottom = 57.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kfc0i")
+
+[node name="Label" type="Label" parent="UI/Screen" unique_id=560422573]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 7.0
+offset_right = 371.0
+offset_bottom = 23.0
+label_settings = SubResource("LabelSettings_6epkv")
+autowrap_mode = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="UI/Screen" unique_id=766511160]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 59.0
+offset_right = 369.0
+offset_bottom = 77.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_myexy")
+
+[node name="Label2" type="Label" parent="UI/Screen/PanelContainer2" unique_id=1205882284]
+layout_mode = 2
+text = "Equip / Unequip: Z / J / Enter   -   Discard: X / K"
+label_settings = SubResource("LabelSettings_6epkv")
+autowrap_mode = 3
+
+[node name="Panel3" type="Panel" parent="UI" unique_id=1631301882]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 108.0
+offset_bottom = 61.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nvtit")
+
+[node name="HP" type="ProgressBar" parent="UI" unique_id=1291362246]
+material = SubResource("ShaderMaterial_afog6")
+layout_mode = 0
+offset_left = 86.0
+offset_top = 57.0
+offset_right = 134.0
+offset_bottom = 65.0
+rotation = -1.5707964
+theme_override_styles/background = SubResource("StyleBoxFlat_jt14p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fbln2")
+max_value = 5.0
+show_percentage = false
+
+[node name="Ammo" type="ProgressBar" parent="UI" unique_id=1456749725]
+material = SubResource("ShaderMaterial_cviaw")
+layout_mode = 0
+offset_left = 100.0
+offset_top = 57.0
+offset_right = 148.0
+offset_bottom = 61.0
+rotation = -1.5707964
+theme_override_styles/background = SubResource("StyleBoxFlat_jt14p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cviaw")
+show_percentage = false
+
+[node name="Node2D" type="Node2D" parent="UI" unique_id=1622889538]
+position = Vector2(6, 6)
+
+[node name="Suit" type="Sprite2D" parent="UI/Node2D" unique_id=700973204]
+position = Vector2(22, 25)
+scale = Vector2(2, 2)
+texture = ExtResource("4_se62q")
+
+[node name="ArmW" type="Sprite2D" parent="UI/Node2D" unique_id=575403464]
+clip_children = 1
+position = Vector2(66, 35)
+scale = Vector2(0.9782721, 0.9782721)
+texture = ExtResource("5_wr0iy")
+
+[node name="ColorRect" type="ColorRect" parent="UI/Node2D/ArmW" unique_id=1660960882]
+offset_left = -62.0
+offset_top = -27.0
+offset_right = -22.0
+offset_bottom = 13.0
+scale = Vector2(1.8000003, 1.3599997)
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="BladeW" type="Sprite2D" parent="UI/Node2D" unique_id=1593252495]
+clip_children = 1
+position = Vector2(50, 18)
+texture = ExtResource("6_t1ss1")
+
+[node name="ColorRect2" type="ColorRect" parent="UI/Node2D/BladeW" unique_id=1881113469]
+offset_left = -54.0
+offset_top = -11.0
+offset_right = -14.0
+offset_bottom = 29.0
+scale = Vector2(1.8000003, 1.3599997)
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="BootW" type="Sprite2D" parent="UI/Node2D" unique_id=382314904]
+clip_children = 1
+position = Vector2(66, 18)
+texture = ExtResource("7_qur80")
+
+[node name="ColorRect3" type="ColorRect" parent="UI/Node2D/BootW" unique_id=1615340346]
+offset_left = -60.0
+offset_top = -25.999998
+offset_right = -20.0
+offset_bottom = 14.000002
+scale = Vector2(1.8000003, 1.3599997)
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="GunW" type="Sprite2D" parent="UI/Node2D" unique_id=472143525]
+clip_children = 2
+position = Vector2(50, 35)
+texture = ExtResource("8_qfn1e")
+
+[node name="ColorRect4" type="ColorRect" parent="UI/Node2D/GunW" unique_id=1885075057]
+offset_left = -53.0
+offset_top = -43.0
+offset_right = -13.0
+offset_bottom = -3.0
+scale = Vector2(1.8000003, 1.3599997)
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="Panel" type="Node2D" parent="UI" unique_id=2030730791]
+unique_name_in_owner = true
+position = Vector2(113, 5)
+
+[node name="Card1" type="Button" parent="UI/Panel" unique_id=1674227375]
+anchors_preset = -1
+offset_left = -103.0
+offset_right = -67.0
+offset_bottom = 55.0
+theme_override_styles/normal = ExtResource("9_3y21a")
+theme_override_styles/pressed = ExtResource("9_3y21a")
+theme_override_styles/focus = ExtResource("9_3y21a")
+
+[node name="CardBase" parent="UI/Panel/Card1" unique_id=706061897 instance=ExtResource("10_fyis3")]
+visible = false
+position = Vector2(18, 28)
+
+[node name="Card2" type="Button" parent="UI/Panel" unique_id=412748286]
+anchors_preset = -1
+offset_left = -67.0
+offset_right = -31.0
+offset_bottom = 55.0
+theme_override_styles/normal = ExtResource("9_3y21a")
+theme_override_styles/pressed = ExtResource("9_3y21a")
+theme_override_styles/focus = ExtResource("9_3y21a")
+
+[node name="CardBase2" parent="UI/Panel/Card2" unique_id=403660028 instance=ExtResource("10_fyis3")]
+visible = false
+position = Vector2(18, 28)
+
+[node name="Panel8" type="Panel" parent="UI" unique_id=998324827]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 5.0
+offset_right = 108.0
+offset_bottom = 61.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_afog6")
+
+[node name="Panel4" type="Panel" parent="UI" unique_id=1144266166]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 5.0
+offset_right = 84.0
+offset_bottom = 61.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_da24e")
+
+[node name="Panel7" type="Panel" parent="UI" unique_id=101332493]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 5.0
+offset_right = 83.0
+offset_bottom = 61.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ay8ja")
+
+[node name="Panel5" type="Panel" parent="UI" unique_id=2011303122]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 5.0
+offset_right = 98.0
+offset_bottom = 61.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u5kdx")

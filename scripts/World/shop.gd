@@ -4,11 +4,20 @@ var items = [
 			# preload("res://scenes/items/suit_item.tscn"),
 			# preload("res://scenes/items/boot_item.tscn"),
 			preload("res://scenes/items/normal_item.tscn"),
+			preload("res://scenes/items/boost_item.tscn")
 			# preload("res://scenes/items/gun_item.tscn"),
 			# preload("res://scenes/items/blade_item.tscn")
 			# preload("res://scenes/items/Mon_card_item.tscn"),
 			# preload("res://scenes/items/Mon_card_item.tscn")
 		]
+var stat_boosts = [
+	preload("res://resources/stat_boosts/ammo.tres"),
+	preload("res://resources/stat_boosts/defense.tres"),
+	preload("res://resources/stat_boosts/pierce.tres"),
+	preload("res://resources/stat_boosts/reach.tres"),
+	preload("res://resources/stat_boosts/speed.tres")
+]
+
 var boot = [
 			preload("res://resources/items/Boot_1.tres"),
 			preload("res://resources/items/Boot_Chomwing.tres"),
@@ -76,4 +85,9 @@ func create_item(this_item: Array):
 		preload("res://scenes/items/Mon_card_item.tscn"):
 			var equipment_list = equipment.pick_random()
 			spawned_item.item = equipment_list.pick_random().duplicate()
+		preload("res://scenes/items/boost_item.tscn"):
+			# var will_boost_suit = randi_range(0,1)
+			# if will_boost_suit == 1:
+			# 	spawned_item.weapon=false
+			spawned_item.item=stat_boosts.pick_random().duplicate()
 	return spawned_item

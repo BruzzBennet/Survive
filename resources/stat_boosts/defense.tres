@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Stat_Boost" format=3 uid="uid://b04dvfjetn4fs"]
+
+[ext_resource type="Texture2D" uid="uid://dqw0etqnmrkme" path="res://assets/cards/Mons/MR_Big_Helmet.png" id="1_pqacj"]
+[ext_resource type="Script" uid="uid://84qpp678qnu4" path="res://scripts/Components/stat_boost.gd" id="2_jco4s"]
+
+[resource]
+script = ExtResource("2_jco4s")
+mon_sprite = ExtResource("1_pqacj")
+defense_boost = 1
+metadata/_custom_type_script = "uid://84qpp678qnu4"

@@ -10,7 +10,7 @@
 script = ExtResource("3_vl10v")
 sprite = ExtResource("4_73vab")
 name = "Clamik Club"
-description = "Pierce+, Speed-. Bullets reach a bigger area"
+description = "Bullets reach a bigger area"
 bullet_scene = ExtResource("1_68qnp")
 normal_attack_sfx = ExtResource("3_ru13h")
 speed_boost = -1

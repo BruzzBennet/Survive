@@ -11,6 +11,8 @@
 [ext_resource type="Resource" uid="uid://yf65rofu86ni" path="res://resources/items/Suit_Pucklam.tres" id="7_6vudb"]
 [ext_resource type="Resource" uid="uid://b3jm0paqr1okp" path="res://resources/items/Gun_Pucklam.tres" id="8_gn058"]
 [ext_resource type="Resource" uid="uid://qbhafnecgps2" path="res://resources/items/Blade_Pucklam.tres" id="9_bur7y"]
+[ext_resource type="Texture2D" uid="uid://35py80wnqaso" path="res://assets/Enemies/Plucklam.png" id="10_gn058"]
+[ext_resource type="Script" uid="uid://84qpp678qnu4" path="res://scripts/Components/stat_boost.gd" id="11_bur7y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hr2tv"]
 shader = ExtResource("1_8wljp")
@@ -28,6 +30,32 @@ metadata/_custom_type_script = "uid://doj80p0chh8d7"
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aiqlv"]
 radius = 12.0
 height = 42.0
+
+[sub_resource type="Resource" id="Resource_jpipi"]
+script = ExtResource("11_bur7y")
+mon_sprite = ExtResource("10_gn058")
+bullet_pierce_boost = 1
+metadata/_custom_type_script = "uid://84qpp678qnu4"
+
+[sub_resource type="Resource" id="Resource_dp6hn"]
+script = ExtResource("6_3xg70")
+mon_sprite = ExtResource("10_gn058")
+item_is = 3
+stat_boost = SubResource("Resource_jpipi")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"
+
+[sub_resource type="Resource" id="Resource_77vwv"]
+script = ExtResource("11_bur7y")
+mon_sprite = ExtResource("10_gn058")
+speed_boost = 1
+metadata/_custom_type_script = "uid://84qpp678qnu4"
+
+[sub_resource type="Resource" id="Resource_4hhbs"]
+script = ExtResource("6_3xg70")
+mon_sprite = ExtResource("10_gn058")
+item_is = 3
+stat_boost = SubResource("Resource_77vwv")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v813w"]
 radius = 13.0
@@ -290,7 +318,7 @@ debug_color = Color(1, 0, 0, 0.42000002)
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("4_6fhpp")]
 max_health = 1.0
 score_value = 100
-items_it_can_drop = Array[ExtResource("6_3xg70")]([ExtResource("7_6vudb"), ExtResource("8_gn058"), ExtResource("9_bur7y")])
+items_it_can_drop = Array[ExtResource("6_3xg70")]([ExtResource("7_6vudb"), ExtResource("8_gn058"), ExtResource("9_bur7y"), SubResource("Resource_dp6hn"), SubResource("Resource_4hhbs")])
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="HurtBox" unique_id=1576969130]
 position = Vector2(10, 5)

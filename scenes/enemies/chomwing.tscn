@@ -13,6 +13,8 @@
 [ext_resource type="AudioStream" uid="uid://dux2y88mw0k6e" path="res://assets/audio/bib.wav" id="8_6uv0u"]
 [ext_resource type="Resource" uid="uid://cm62tiaa87qic" path="res://resources/items/Suit_Chomwing.tres" id="8_p00xj"]
 [ext_resource type="Resource" uid="uid://m5c1vmdte5ie" path="res://resources/items/Blade_Chomwing.tres" id="9_k4wci"]
+[ext_resource type="Texture2D" uid="uid://dfe3oh5csoxoq" path="res://assets/cards/Mons/chomwing.png" id="10_p00xj"]
+[ext_resource type="Script" uid="uid://84qpp678qnu4" path="res://scripts/Components/stat_boost.gd" id="11_6eesj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ec30e"]
 shader = ExtResource("2_jsaom")
@@ -763,6 +765,32 @@ _data = {
 &"RESET": SubResource("Animation_q2ogp")
 }
 
+[sub_resource type="Resource" id="Resource_r6aag"]
+script = ExtResource("11_6eesj")
+mon_sprite = ExtResource("10_p00xj")
+bullet_reach_boost = 1
+metadata/_custom_type_script = "uid://84qpp678qnu4"
+
+[sub_resource type="Resource" id="Resource_egjyj"]
+script = ExtResource("5_q2ogp")
+mon_sprite = ExtResource("10_p00xj")
+item_is = 3
+stat_boost = SubResource("Resource_r6aag")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"
+
+[sub_resource type="Resource" id="Resource_8yker"]
+script = ExtResource("11_6eesj")
+mon_sprite = ExtResource("10_p00xj")
+speed_boost = 1
+metadata/_custom_type_script = "uid://84qpp678qnu4"
+
+[sub_resource type="Resource" id="Resource_6orlv"]
+script = ExtResource("5_q2ogp")
+mon_sprite = ExtResource("10_p00xj")
+item_is = 3
+stat_boost = SubResource("Resource_8yker")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2mpat"]
 radius = 12.0
 
@@ -803,7 +831,7 @@ time_to_change_dir = 3.0
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("2_88rwa")]
 collision_layer = 2
 collision_mask = 8
-items_it_can_drop = Array[ExtResource("5_q2ogp")]([ExtResource("6_k4wci"), ExtResource("7_2mpat"), ExtResource("8_p00xj"), ExtResource("9_k4wci")])
+items_it_can_drop = Array[ExtResource("5_q2ogp")]([ExtResource("6_k4wci"), ExtResource("7_2mpat"), ExtResource("8_p00xj"), ExtResource("9_k4wci"), SubResource("Resource_egjyj"), SubResource("Resource_6orlv")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=829194139]
 position = Vector2(0, -1)

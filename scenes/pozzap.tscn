@@ -18,6 +18,8 @@
 [ext_resource type="Resource" uid="uid://dvctsiu6as6g8" path="res://resources/items/Suit_Pozzap.tres" id="10_8306c"]
 [ext_resource type="Resource" uid="uid://dbh3l8052c48q" path="res://resources/items/Blade_Pozzap.tres" id="11_grlkr"]
 [ext_resource type="Resource" uid="uid://dni0tjjhh3d85" path="res://resources/items/Gun_Pozzap.tres" id="14_grlkr"]
+[ext_resource type="Texture2D" uid="uid://c5l3s62fram2m" path="res://assets/cards/Mons/pozzap.png" id="15_wtd3e"]
+[ext_resource type="Script" uid="uid://84qpp678qnu4" path="res://scripts/Components/stat_boost.gd" id="16_ykqq3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nuh02"]
 radius = 64.0
@@ -35,6 +37,19 @@ metadata/_custom_type_script = "uid://doj80p0chh8d7"
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p51up"]
 radius = 7.0
 height = 18.0
+
+[sub_resource type="Resource" id="Resource_oq811"]
+script = ExtResource("16_ykqq3")
+mon_sprite = ExtResource("15_wtd3e")
+ammo_boost = 1
+metadata/_custom_type_script = "uid://84qpp678qnu4"
+
+[sub_resource type="Resource" id="Resource_sj8t3"]
+script = ExtResource("8_pdacj")
+mon_sprite = ExtResource("15_wtd3e")
+item_is = 3
+stat_boost = SubResource("Resource_oq811")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0nryl"]
 radius = 6.0
@@ -964,7 +979,7 @@ debug_color = Color(1, 0, 0, 0.25)
 collision_layer = 2
 collision_mask = 8
 score_value = 100
-items_it_can_drop = Array[ExtResource("8_pdacj")]([ExtResource("9_sa7vm"), ExtResource("10_8306c"), ExtResource("11_grlkr"), ExtResource("14_grlkr")])
+items_it_can_drop = Array[ExtResource("8_pdacj")]([ExtResource("9_sa7vm"), ExtResource("10_8306c"), ExtResource("11_grlkr"), ExtResource("14_grlkr"), SubResource("Resource_sj8t3")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=273972341]
 position = Vector2(0, -1)

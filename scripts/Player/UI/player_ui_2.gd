@@ -17,6 +17,7 @@ var maxATK
 var startingATK
 var currentATK
 var weapon_type
+var deck
 
 func _ready() -> void:
 	hp.material.set_shader_parameter("flash_modifier", 0.0)
@@ -25,7 +26,6 @@ func _ready() -> void:
 	set_hp(GLOBAL.health,false)
 	set_equipment(GLOBAL.suit_item,GLOBAL.weapon_item)
 	ammo_setup(GLOBAL.weapon,false)
-	update_deck()
 	$Screen.hide()
 	for child in %Panel.get_children():
 		if child is Button:
@@ -35,6 +35,7 @@ func _ready() -> void:
 			child.focus_exited.connect(take_card.bind(child,false))
 
 func _physics_process(_delta: float):
+	update_deck()
 	if !get_tree().paused:
 		screen()
 		for child in %Panel.get_children():
@@ -157,17 +158,16 @@ func _play_or_discard(button:Button):
 func discard(button: Button):
 		var body = get_player()
 		var item =  button.get_child(0).item_summoned
-		ui=get_tree().current_scene.get_node("UI")
 		match item.item_is:
 			item.item_type.weapon:
 				# ui.set_weapon(item)
 				if GLOBAL.weapon == item.weapon:
-					ui.set_weapon()
+					set_weapon()
 					call_deferred("switch_weapon", base_weapon, body)
 			item.item_type.suit:
 				# ui.set_suit(item)
 				if GLOBAL.suit == item.suit:
-					ui.set_suit()
+					set_suit()
 					body.equip(base_suit,GLOBAL.weapon)
 		drop_card(item)
 		GLOBAL.deck.erase(item)
@@ -178,11 +178,32 @@ func drop_card(item_dropped:Item):
 	var card_item_drop=preload("res://scenes/items/Mon_card_item.tscn")
 	var card_drop = card_item_drop.instantiate()
 	card_drop.global_position=get_player().global_position
-	card_drop.position.x+=25
-	card_drop.position.y+=25
+	var dist_1 = randi_range(1,30)
+	var dist_x=plus_or_minus()
+	var pos_x=card_drop.global_position.x+(dist_1*dist_x)
+	var pos_y=card_drop.global_position.y+(45)
+	var new_position=Vector2(pos_x,pos_y)
 	card_drop.item=item_dropped
+	card_drop.global_position=new_position
 	get_tree().current_scene.add_child(card_drop)
-	card_drop.get_node("PanelContainer").visible=false		
+	tween_drop(card_drop,new_position)
+	card_drop.get_node("PanelContainer").visible=false	
+
+func tween_drop(node:Node,dist:Vector2):
+	var duration=0.25
+	var tween_movement = create_tween()
+	var sprite=node.get_node("CardNode")
+	tween_movement.tween_property(sprite, "global_position", dist, duration)\
+		.set_trans(Tween.TRANS_QUAD)\
+		.set_ease(Tween.EASE_OUT)
+		
+	
+
+func plus_or_minus():
+	var dist = randi_range(0,1)
+	if dist==0:
+		dist=-1
+	return dist	
 
 func show_ammo(show_it=true):
 	for child in %Panel.get_children():
@@ -273,32 +294,34 @@ func henshin(body):
 	PLAYSFX.equip()
 	explode(body)
 
-func update_deck():
+func update_deck(extra_deck:=true):
 	var panel = %Panel
 	var index_num=0
 	for child in panel.get_children():
 		if child is Button:
 			child.get_child(0).visible = false
 
-	if GLOBAL.deck.size() > 0:
-		for i in GLOBAL.deck:
-			index_num+=1
-			var card = panel.get_node("Card"+str(index_num+2)).get_child(0)
-			card.visible=true
-			card.setup(GLOBAL.deck[index_num-1])
+	if extra_deck:
+		if GLOBAL.deck.size() > 0:
+			for i in GLOBAL.deck:
+				index_num+=1
+				var card = panel.get_node("Card"+str(index_num+2)).get_child(0)
+				card.visible=true
+				card.setup(GLOBAL.deck[index_num-1])
 
 	if GLOBAL.suit_item:
-		$Panel/Card1/CardBase.visible=true
+		panel.get_node("Card1/CardBase").visible=true
 	else:
-		$Panel/Card1/CardBase.visible=false
+		panel.get_node("Card1/CardBase").visible=false
 
 	if GLOBAL.weapon_item:
-		$Panel/Card2/CardBase2.visible=true
+		panel.get_node("Card2/CardBase2").visible=true
 	else:
-		$Panel/Card2/CardBase2.visible=false
+		panel.get_node("Card2/CardBase2").visible=false
+
+	deck=GLOBAL.deck
 
 func screen():
-	update_deck()
 	if Input.is_action_just_pressed("henshin_menu"):
 		if was_pressed:
 			open_menu()

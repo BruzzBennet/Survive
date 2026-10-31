@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func build_w_Mon(this_one_item: Item):
 	if this_one_item.mon_sprite:
-			$MonSpirit.build_Mon(this_one_item)
+			$MonSpirit.build_Mon(this_one_item.mon_sprite)
 	match this_one_item.item_is:	
 		this_one_item.item_type.weapon:			
 			this_one_item.weapon=this_one_item.weapon			

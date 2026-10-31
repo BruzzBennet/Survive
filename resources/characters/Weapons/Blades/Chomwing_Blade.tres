@@ -10,7 +10,7 @@
 script = ExtResource("4_gs6cm")
 sprite = ExtResource("5_4kmw2")
 name = "Chomwing Blade"
-description = "Ammo-. Its bullets fly through walls."
+description = "Its bullets fly through walls."
 bullet_scene = ExtResource("1_omcx4")
 ammo_boost = -1
 metadata/_custom_type_script = "uid://hig2h24o38p0"

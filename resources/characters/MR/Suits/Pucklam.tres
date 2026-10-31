@@ -15,7 +15,6 @@ script = ExtResource("3_vd65m")
 helmet = ExtResource("2_hxqu0")
 body_palette = SubResource("Resource_6kwnl")
 name = "Pucklam Suit"
-description = "Reach+, Pierce+, Ammo-"
 ammo_boost = -1
 bullet_pierce_boost = 1
 bullet_reach_boost = 1

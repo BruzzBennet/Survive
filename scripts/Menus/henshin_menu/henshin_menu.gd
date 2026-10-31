@@ -120,14 +120,40 @@ func get_player():
 func display_info(button: Button):
 	if button.get_child(0).visible == true:
 		var item =  button.get_child(0).item_summoned
-		match item.item_is:
-			item.item_type.weapon:
-				description(item.weapon.name,item.weapon.description)
-			item.item_type.suit:
-				description(item.suit.name,item.suit.description)
+		stat_info(item)
 	else:
 		description("","")
-		
+
+func stat_info(item:Item):
+		match item.item_is:
+			item.item_type.weapon:
+				description(item.weapon.name,stat_shwocase(item.weapon)+item.weapon.description)
+			item.item_type.suit:
+				description(item.suit.name,stat_shwocase(item.suit)+item.suit.description)
+
+func stat_shwocase(equipment):
+	var desc=""
+	if equipment is Suit or equipment is Weapon:
+		if equipment.speed_boost!=0:
+			desc+="Speed " + ifplus(equipment.speed_boost) + ". "
+		if equipment.defense_boost!=0:
+			desc+="Defense " + ifplus(equipment.defense_boost) + ". "
+		if equipment.ammo_boost!=0:
+			desc+="Ammo " + ifplus(equipment.ammo_boost) + ". "
+		if equipment.bullet_pierce_boost!=0:
+			desc+="Pierce " + ifplus(equipment.bullet_pierce_boost) + ". "
+		if equipment.bullet_reach_boost!=0:
+			desc+="Bullet Reach " + ifplus(equipment.bullet_reach_boost) + ". "
+	# if desc == "":
+		return desc
+	# else:
+	# 	return desc + "\n"
+
+func ifplus(value:int):
+	if value>0:
+		return "+" + str(value)
+	else:
+		return str(value)
 
 func description(item_name:String, desc:String):
 	if item_name=="" && desc=="":

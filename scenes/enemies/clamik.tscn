@@ -11,7 +11,21 @@
 [ext_resource type="Resource" uid="uid://c3tajxwwn86wk" path="res://resources/items/Gun_Clamik.tres" id="5_yrcyi"]
 [ext_resource type="Resource" uid="uid://dqqqwn6vmdw70" path="res://resources/items/Blade_Clamik.tres" id="6_r3i1r"]
 [ext_resource type="Script" uid="uid://bvl232bj8b45y" path="res://scripts/Boxes/invincible_box.gd" id="7_bakjf"]
+[ext_resource type="Texture2D" uid="uid://l8hg62j8xwrl" path="res://assets/cards/Mons/Clamik.png" id="7_xna7c"]
+[ext_resource type="Script" uid="uid://84qpp678qnu4" path="res://scripts/Components/stat_boost.gd" id="8_0jx1l"]
 [ext_resource type="AudioStream" uid="uid://dvcok4a0iw0ed" path="res://assets/audio/parry.mp3" id="8_t1ttg"]
+
+[sub_resource type="Resource" id="Resource_5la54"]
+script = ExtResource("8_0jx1l")
+defense_boost = 1
+metadata/_custom_type_script = "uid://84qpp678qnu4"
+
+[sub_resource type="Resource" id="Resource_q46cr"]
+script = ExtResource("3_cllw4")
+mon_sprite = ExtResource("7_xna7c")
+item_is = 3
+stat_boost = SubResource("Resource_5la54")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t1ttg"]
 radius = 7.0
@@ -589,7 +603,7 @@ collision_mask = 43
 position = Vector2(20, 0)
 max_health = 2.0
 score_value = 300
-items_it_can_drop = Array[ExtResource("3_cllw4")]([ExtResource("4_ji4b5"), ExtResource("5_yrcyi"), ExtResource("6_r3i1r")])
+items_it_can_drop = Array[ExtResource("3_cllw4")]([ExtResource("4_ji4b5"), ExtResource("5_yrcyi"), ExtResource("6_r3i1r"), SubResource("Resource_q46cr")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1587900473]
 position = Vector2(0, -1)

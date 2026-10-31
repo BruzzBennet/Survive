@@ -10,7 +10,6 @@
 script = ExtResource("3_qstrf")
 sprite = ExtResource("5_52srg")
 name = "Pluckam Club"
-description = "Reach+, Ammo-"
 bullet_scene = ExtResource("1_qh1l0")
 ammo_boost = -1
 bullet_reach_boost = 1

@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://b8a6d04cfwppw"]
+
+[ext_resource type="Script" uid="uid://bx36uweu0gxc2" path="res://scripts/Items/stat_boost_item.gd" id="1_ubo25"]
+[ext_resource type="PackedScene" uid="uid://cxqsoljorqyxk" path="res://scenes/items/mon_spirit.tscn" id="2_6vkjr"]
+[ext_resource type="Resource" uid="uid://yjq0er43561r" path="res://resources/stat_boosts/speed.tres" id="2_11uyr"]
+[ext_resource type="FontFile" uid="uid://bcw8ds3wtqx7e" path="res://assets/fonts/hero-italic.ttf" id="3_ubo25"]
+[ext_resource type="PackedScene" uid="uid://3lwoa7tsv1fj" path="res://scenes/items/itemUpDown.tscn" id="4_rrexm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6vkjr"]
+font = ExtResource("3_ubo25")
+font_size = 13
+outline_size = 2
+outline_color = Color(0.14509805, 0.14509805, 0.14509805, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esxyk"]
+size = Vector2(35, 35)
+
+[node name="Item" type="Node2D" unique_id=1644609114]
+position = Vector2(1, 31)
+script = ExtResource("1_ubo25")
+item = ExtResource("2_11uyr")
+
+[node name="MonSpirit" parent="." unique_id=1029576708 instance=ExtResource("2_6vkjr")]
+position = Vector2(0, -25)
+
+[node name="Label" type="Label" parent="." unique_id=1629156146]
+offset_left = -59.0
+offset_top = -32.0
+offset_right = 61.0
+offset_bottom = 16.0
+label_settings = SubResource("LabelSettings_6vkjr")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ItemUpDown" parent="Label" unique_id=329888079 instance=ExtResource("4_rrexm")]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1082529366]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=853203299]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_esxyk")
+debug_color = Color(0, 1, 0.70000815, 0.42000002)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

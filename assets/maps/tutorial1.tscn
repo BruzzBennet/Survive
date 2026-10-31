@@ -103,7 +103,7 @@ physics_layer_1/collision_layer = 3
 physics_layer_1/collision_mask = 3
 sources/4 = SubResource("TileSetAtlasSource_17ebl")
 
-[sub_resource type="Resource" id="Resource_s0br0"]
+[sub_resource type="Resource" id="Resource_b6vvq"]
 resource_local_to_scene = true
 script = ExtResource("9_b87nq")
 mon_sprite = ExtResource("8_b6vvq")
@@ -111,7 +111,7 @@ item_is = 1
 weapon = ExtResource("10_ipuf0")
 metadata/_custom_type_script = "uid://c38u5aaaos1gy"
 
-[sub_resource type="Resource" id="Resource_b4dqo"]
+[sub_resource type="Resource" id="Resource_b87nq"]
 resource_local_to_scene = true
 script = ExtResource("9_b87nq")
 mon_sprite = ExtResource("8_b6vvq")
@@ -119,7 +119,7 @@ item_is = 1
 weapon = ExtResource("11_n3ruv")
 metadata/_custom_type_script = "uid://c38u5aaaos1gy"
 
-[sub_resource type="Resource" id="Resource_j157i"]
+[sub_resource type="Resource" id="Resource_ipuf0"]
 resource_local_to_scene = true
 script = ExtResource("9_b87nq")
 mon_sprite = ExtResource("8_b6vvq")
@@ -148,15 +148,15 @@ position = Vector2(190, 0)
 
 [node name="Item4" parent="ChooseBetween3" unique_id=1644609114 instance=ExtResource("7_qc8te")]
 position = Vector2(210, 89)
-item = SubResource("Resource_s0br0")
+item = SubResource("Resource_b6vvq")
 duplicated = true
 
 [node name="Item5" parent="ChooseBetween3" unique_id=581361532 instance=ExtResource("7_qc8te")]
 position = Vector2(306, 89)
-item = SubResource("Resource_b4dqo")
+item = SubResource("Resource_b87nq")
 duplicated = true
 
 [node name="Item6" parent="ChooseBetween3" unique_id=1307653803 instance=ExtResource("7_qc8te")]
 position = Vector2(402, 89)
-item = SubResource("Resource_j157i")
+item = SubResource("Resource_ipuf0")
 duplicated = true

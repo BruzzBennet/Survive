@@ -268,17 +268,21 @@ func item_drop():
 				item_to_be_dropped.weapon = item_to_be_dropped.weapon.duplicate()
 			item_to_be_dropped.item_type.suit:
 				item_to_be_dropped.suit = item_to_be_dropped.suit.duplicate()
-		var item_dropped=item_to_be_dropped.duplicate()
+		var item_dropped=item_to_be_dropped.duplicate()	
 		if item_dropped.item_is != item_dropped.item_type.normal_item:
 			# var card_item_drop=find_item_to_drop(item_dropped)
 			var card_item_drop=preload("res://scenes/items/Mon_card_item.tscn")
+			if item_dropped.item_is == item_dropped.item_type.stat_boost:
+				card_item_drop=preload("res://scenes/items/boost_item.tscn")
+				item_dropped= item_to_be_dropped.stat_boost.duplicate()
 			var card_drop = card_item_drop.instantiate()
 			card_drop.global_position=global_position
 			card_drop.item=item_dropped
 			# card_drop.add_item(item_dropped)
 			# card_drop.build(item_dropped)
 			get_tree().current_scene.add_child(card_drop)
-			card_drop.get_node("PanelContainer").visible=false
+			if card_drop.get_node_or_null("PanelContainer"):
+				card_drop.get_node("PanelContainer").visible=false
 		else:
 			spawn(item_dropped.item_scene)
 

@@ -3,11 +3,12 @@ extends Node2D
 @export var weapon:=false
 
 func done(_body):
-	if !weapon:
+	# if !weapon:
+	# 	print("!weapon")
+	# 	do_it()
+	# elif GLOBAL.deck.size()<GLOBAL.deck_size:
+	# 	print("no weapon")
 		do_it()
-	else:
-		if GLOBAL.deck.size()<=GLOBAL.deck_size and GLOBAL.suit_item!=null:
-			do_it()
 		
 
 func do_it():

@@ -8,8 +8,10 @@ class_name Item
 enum item_type{
 	normal_item,
 	weapon,
-	suit
+	suit,
+	stat_boost
 }
 @export var weapon: Weapon
 @export var suit: Suit
 @export var item_scene: PackedScene
+@export var stat_boost: Stat_Boost

@@ -78,7 +78,7 @@ func spawn_enemy(lvl:int) -> void:
 func enemy_died(enemy):
 	enemies.erase(enemy)
 	if enemies.is_empty():
-		rng_map.call_deferred("next_round")
+		rng_map.call_deferred("next_level")
 
 func spawn_player(_first_time=false):
 	var player_ui = preload("res://scenes/henshin_menu/henshin_menu.tscn").instantiate()

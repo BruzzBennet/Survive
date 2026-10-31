@@ -128,20 +128,18 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_right = 2
 border_color = Color(0.972549, 0.972549, 0.972549, 1)
 
-[node name="UI" type="Control" unique_id=1412859120]
+[node name="HenshinMenu" type="Node2D" unique_id=1810024070]
 clip_children = 2
 light_mask = 524288
 visibility_layer = 524288
 z_index = 99
+
+[node name="UI" type="Control" parent="." unique_id=1302822564]
 layout_mode = 3
-anchor_right = 0.047000002
-anchor_bottom = 0.1
-offset_right = -0.08000183
+anchors_preset = 0
 script = ExtResource("1_x1wcr")
 
-[node name="ButtonMove" parent="." unique_id=378590368 instance=ExtResource("2_x1wcr")]
-
-[node name="Panel2" type="Panel" parent="." unique_id=597319608]
+[node name="Panel2" type="Panel" parent="UI" unique_id=597319608]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 12.0
@@ -149,12 +147,12 @@ offset_right = 153.0
 offset_bottom = 52.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_snyeu")
 
-[node name="Screen" type="Panel" parent="." unique_id=1066571560]
+[node name="Screen" type="Panel" parent="UI" unique_id=1066571560]
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 320.0
 
-[node name="PanelContainer" type="PanelContainer" parent="Screen" unique_id=1968986921]
+[node name="PanelContainer" type="PanelContainer" parent="UI/Screen" unique_id=1968986921]
 layout_mode = 0
 offset_left = 160.0
 offset_top = 6.0
@@ -162,7 +160,7 @@ offset_right = 411.0
 offset_bottom = 57.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_kfc0i")
 
-[node name="Label" type="Label" parent="Screen" unique_id=560422573]
+[node name="Label" type="Label" parent="UI/Screen" unique_id=560422573]
 layout_mode = 0
 offset_left = 161.0
 offset_top = 7.0
@@ -171,7 +169,7 @@ offset_bottom = 23.0
 label_settings = SubResource("LabelSettings_6epkv")
 autowrap_mode = 3
 
-[node name="PanelContainer2" type="PanelContainer" parent="Screen" unique_id=766511160]
+[node name="PanelContainer2" type="PanelContainer" parent="UI/Screen" unique_id=766511160]
 layout_mode = 0
 offset_left = 163.0
 offset_top = 59.0
@@ -179,13 +177,13 @@ offset_right = 408.0
 offset_bottom = 77.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_myexy")
 
-[node name="Label2" type="Label" parent="Screen/PanelContainer2" unique_id=1205882284]
+[node name="Label2" type="Label" parent="UI/Screen/PanelContainer2" unique_id=1205882284]
 layout_mode = 2
 text = "Equip / Unequip: Z / J / Enter   -   Discard: X / K"
 label_settings = SubResource("LabelSettings_6epkv")
 autowrap_mode = 3
 
-[node name="Panel3" type="Panel" parent="." unique_id=1631301882]
+[node name="Panel3" type="Panel" parent="UI" unique_id=1631301882]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 5.0
@@ -193,7 +191,7 @@ offset_right = 108.0
 offset_bottom = 61.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_nvtit")
 
-[node name="HP" type="ProgressBar" parent="." unique_id=1291362246]
+[node name="HP" type="ProgressBar" parent="UI" unique_id=1291362246]
 material = SubResource("ShaderMaterial_afog6")
 layout_mode = 0
 offset_left = 86.0
@@ -206,7 +204,9 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_fbln2")
 max_value = 5.0
 show_percentage = false
 
-[node name="Ammo" type="ProgressBar" parent="." unique_id=1456749725]
+[node name="ButtonMove" parent="UI" unique_id=378590368 instance=ExtResource("2_x1wcr")]
+
+[node name="Ammo" type="ProgressBar" parent="UI" unique_id=1456749725]
 material = SubResource("ShaderMaterial_cviaw")
 layout_mode = 0
 offset_left = 100.0
@@ -218,21 +218,21 @@ theme_override_styles/background = SubResource("StyleBoxFlat_jt14p")
 theme_override_styles/fill = SubResource("StyleBoxFlat_cviaw")
 show_percentage = false
 
-[node name="Node2D" type="Node2D" parent="." unique_id=1622889538]
+[node name="Node2D" type="Node2D" parent="UI" unique_id=1622889538]
 position = Vector2(6, 6)
 
-[node name="Suit" type="Sprite2D" parent="Node2D" unique_id=700973204]
+[node name="Suit" type="Sprite2D" parent="UI/Node2D" unique_id=700973204]
 position = Vector2(22, 25)
 scale = Vector2(2, 2)
 texture = ExtResource("3_snyeu")
 
-[node name="ArmW" type="Sprite2D" parent="Node2D" unique_id=575403464]
+[node name="ArmW" type="Sprite2D" parent="UI/Node2D" unique_id=575403464]
 clip_children = 1
 position = Vector2(66, 35)
 scale = Vector2(0.9782721, 0.9782721)
 texture = ExtResource("4_kfc0i")
 
-[node name="ColorRect" type="ColorRect" parent="Node2D/ArmW" unique_id=1660960882]
+[node name="ColorRect" type="ColorRect" parent="UI/Node2D/ArmW" unique_id=1660960882]
 offset_left = -62.0
 offset_top = -27.0
 offset_right = -22.0
@@ -240,12 +240,12 @@ offset_bottom = 13.0
 scale = Vector2(1.8000003, 1.3599997)
 color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 
-[node name="BladeW" type="Sprite2D" parent="Node2D" unique_id=1593252495]
+[node name="BladeW" type="Sprite2D" parent="UI/Node2D" unique_id=1593252495]
 clip_children = 1
 position = Vector2(50, 18)
 texture = ExtResource("5_6epkv")
 
-[node name="ColorRect2" type="ColorRect" parent="Node2D/BladeW" unique_id=1881113469]
+[node name="ColorRect2" type="ColorRect" parent="UI/Node2D/BladeW" unique_id=1881113469]
 offset_left = -54.0
 offset_top = -11.0
 offset_right = -14.0
@@ -253,12 +253,12 @@ offset_bottom = 29.0
 scale = Vector2(1.8000003, 1.3599997)
 color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 
-[node name="BootW" type="Sprite2D" parent="Node2D" unique_id=382314904]
+[node name="BootW" type="Sprite2D" parent="UI/Node2D" unique_id=382314904]
 clip_children = 1
 position = Vector2(66, 18)
 texture = ExtResource("6_myexy")
 
-[node name="ColorRect3" type="ColorRect" parent="Node2D/BootW" unique_id=1615340346]
+[node name="ColorRect3" type="ColorRect" parent="UI/Node2D/BootW" unique_id=1615340346]
 offset_left = -60.0
 offset_top = -25.999998
 offset_right = -20.0
@@ -266,12 +266,12 @@ offset_bottom = 14.000002
 scale = Vector2(1.8000003, 1.3599997)
 color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 
-[node name="GunW" type="Sprite2D" parent="Node2D" unique_id=472143525]
+[node name="GunW" type="Sprite2D" parent="UI/Node2D" unique_id=472143525]
 clip_children = 2
 position = Vector2(50, 35)
 texture = ExtResource("7_l5clf")
 
-[node name="ColorRect4" type="ColorRect" parent="Node2D/GunW" unique_id=1885075057]
+[node name="ColorRect4" type="ColorRect" parent="UI/Node2D/GunW" unique_id=1885075057]
 offset_left = -53.0
 offset_top = -43.0
 offset_right = -13.0
@@ -279,17 +279,17 @@ offset_bottom = -3.0
 scale = Vector2(1.8000003, 1.3599997)
 color = Color(0.24313726, 0.20784314, 0.27450982, 1)
 
-[node name="Panel" type="Node2D" parent="." unique_id=2030730791]
+[node name="Panel" type="Node2D" parent="UI" unique_id=2030730791]
 unique_name_in_owner = true
 position = Vector2(113, 5)
 
-[node name="Panel" type="Panel" parent="Panel" unique_id=1671295726]
+[node name="Panel" type="Panel" parent="UI/Panel" unique_id=1671295726]
 offset_left = -1.0
 offset_right = 37.0
 offset_bottom = 56.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_l5clf")
 
-[node name="Card1" type="Button" parent="Panel" unique_id=1674227375]
+[node name="Card1" type="Button" parent="UI/Panel" unique_id=1674227375]
 anchors_preset = -1
 offset_left = -103.0
 offset_right = -67.0
@@ -299,11 +299,11 @@ theme_override_styles/normal = ExtResource("4_ic301")
 theme_override_styles/pressed = ExtResource("4_ic301")
 theme_override_styles/focus = ExtResource("4_ic301")
 
-[node name="CardBase" parent="Panel/Card1" unique_id=706061897 instance=ExtResource("8_g35pj")]
+[node name="CardBase" parent="UI/Panel/Card1" unique_id=706061897 instance=ExtResource("8_g35pj")]
 visible = false
 position = Vector2(18, 28)
 
-[node name="Card2" type="Button" parent="Panel" unique_id=412748286]
+[node name="Card2" type="Button" parent="UI/Panel" unique_id=412748286]
 anchors_preset = -1
 offset_left = -67.0
 offset_right = -31.0
@@ -312,11 +312,11 @@ theme_override_styles/normal = ExtResource("4_ic301")
 theme_override_styles/pressed = ExtResource("4_ic301")
 theme_override_styles/focus = ExtResource("4_ic301")
 
-[node name="CardBase2" parent="Panel/Card2" unique_id=403660028 instance=ExtResource("8_g35pj")]
+[node name="CardBase2" parent="UI/Panel/Card2" unique_id=403660028 instance=ExtResource("8_g35pj")]
 visible = false
 position = Vector2(18, 28)
 
-[node name="Card3" type="Button" parent="Panel" unique_id=1612372063]
+[node name="Card3" type="Button" parent="UI/Panel" unique_id=1612372063]
 anchors_preset = -1
 offset_right = 36.0
 offset_bottom = 55.0
@@ -325,11 +325,11 @@ theme_override_styles/normal = ExtResource("4_ic301")
 theme_override_styles/pressed = ExtResource("4_ic301")
 theme_override_styles/focus = ExtResource("4_ic301")
 
-[node name="CardBase2" parent="Panel/Card3" unique_id=284580957 instance=ExtResource("8_g35pj")]
+[node name="CardBase2" parent="UI/Panel/Card3" unique_id=284580957 instance=ExtResource("8_g35pj")]
 visible = false
 position = Vector2(18, 28)
 
-[node name="Panel8" type="Panel" parent="." unique_id=998324827]
+[node name="Panel8" type="Panel" parent="UI" unique_id=998324827]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 5.0
@@ -337,7 +337,7 @@ offset_right = 108.0
 offset_bottom = 61.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_afog6")
 
-[node name="Panel4" type="Panel" parent="." unique_id=1144266166]
+[node name="Panel4" type="Panel" parent="UI" unique_id=1144266166]
 layout_mode = 0
 offset_left = 46.0
 offset_top = 5.0
@@ -345,7 +345,7 @@ offset_right = 84.0
 offset_bottom = 61.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_da24e")
 
-[node name="Panel7" type="Panel" parent="." unique_id=101332493]
+[node name="Panel7" type="Panel" parent="UI" unique_id=101332493]
 layout_mode = 0
 offset_left = 45.0
 offset_top = 5.0
@@ -353,7 +353,7 @@ offset_right = 83.0
 offset_bottom = 61.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ay8ja")
 
-[node name="Panel5" type="Panel" parent="." unique_id=2011303122]
+[node name="Panel5" type="Panel" parent="UI" unique_id=2011303122]
 layout_mode = 0
 offset_left = 62.0
 offset_top = 5.0

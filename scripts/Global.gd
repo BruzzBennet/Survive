@@ -6,7 +6,7 @@ var base_weapon=preload("res://resources/characters/Weapons/weaponless.tres")
 var base_suit=preload("res://resources/characters/MR/Suits/Sergyo.tres")
 var first_suit=preload("res://resources/items/Suit_MR.tres")
 var base_health=6.0
-var base_enemy_amount: = 3
+var base_enemy_amount: = 7
 var modified_health=false
 var base_ammo = 0.65
 
@@ -21,7 +21,7 @@ var player_type=base_player_type
 var player_palette: MonRanger_pallete = preload("res://resources/characters/MR/palettes/turquoise.tres")
 var weapon: Weapon = base_weapon.duplicate()
 var suit: Suit = base_suit
-var current_level:= 1
+var current_level:= 0
 var starting_enemy_amount= base_enemy_amount
 var increase_dificulty: float = 0.0
 var max_speed: float = 200
@@ -76,7 +76,7 @@ func restart():
 	melee_damage = 2.0
 	defense = 0
 	ammo = base_ammo
-	current_level= 1
+	current_level= 0
 	about_to_henshin=false
 	deck = [first_suit]
 	modified_health=false

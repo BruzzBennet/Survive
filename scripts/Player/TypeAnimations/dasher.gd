@@ -66,7 +66,7 @@ func stats_setup(this_suit:Suit,this_weapon:Weapon):
 		$WeaponEffect.set_script(this_weapon.effect_added)
 		$WeaponEffect.setup()
 	max_speed=GLOBAL.max_speed + ((GLOBAL.max_speed * 0.125) * (this_suit.speed_boost+this_weapon.speed_boost))
-	$HurtBox.defense = GLOBAL.defense + (0.25 * (this_suit.defense_boost+this_weapon.defense_boost))
+	$HurtBox.defense = GLOBAL.defense + (0.125 * (this_suit.defense_boost+this_weapon.defense_boost))
 	var new_ammo = 1.0 - (0.2 * (this_suit.ammo_boost+this_weapon.ammo_boost))
 	ammo_reduce = max(new_ammo,0.1)
 	if this_weapon.weapon_type == Weapon.type.boot:
