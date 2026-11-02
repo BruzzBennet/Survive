@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://vbnjtoj23lao"]
+
+[ext_resource type="Script" uid="uid://cjcptxrn3p4mc" path="res://scripts/Components/effects/spin.gd" id="1_4td6m"]
+
+[node name="Spin" type="Node2D" unique_id=459349332]
+script = ExtResource("1_4td6m")

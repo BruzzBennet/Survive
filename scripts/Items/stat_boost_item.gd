@@ -9,10 +9,10 @@ func _ready() -> void:
 func build(boost:Stat_Boost):
 	if boost.mon_sprite:
 		$MonSpirit.build_Mon(boost.mon_sprite)
-	var item_is = "Current Weapon:"
+	var item_is = "to Weapon"
 	if !weapon:
-		item_is="Current Suit:"
-	$Label.text=item_is + "\n" + stat_shwocase(boost)
+		item_is="to Suit"
+	$Label.text= stat_shwocase(boost) + item_is
 	
 func stat_shwocase(equipment:Stat_Boost):
 	var desc=""
@@ -27,6 +27,8 @@ func stat_shwocase(equipment:Stat_Boost):
 			desc+="Pierce " + ifplus(equipment.bullet_pierce_boost) + "\n"
 		if equipment.bullet_reach_boost!=0:
 			desc+="Bullet Reach " + ifplus(equipment.bullet_reach_boost) + "\n"
+		if equipment.bullet_speed_boost!=0:
+			desc+="Bullet Speed " + ifplus(equipment.bullet_speed_boost) + "\n"
 		return desc
 
 func ifplus(value:int):
@@ -38,7 +40,7 @@ func ifplus(value:int):
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var boost_this
 	var stat_boost=item
-	if body is Player_Unit:
+	if body is Player_Unit and GLOBAL.weapon!=GLOBAL.base_weapon:
 		if weapon:
 			boost_this=body.weapon
 		else:

@@ -44,19 +44,6 @@ item_is = 3
 stat_boost = SubResource("Resource_jpipi")
 metadata/_custom_type_script = "uid://c38u5aaaos1gy"
 
-[sub_resource type="Resource" id="Resource_77vwv"]
-script = ExtResource("11_bur7y")
-mon_sprite = ExtResource("10_gn058")
-speed_boost = 1
-metadata/_custom_type_script = "uid://84qpp678qnu4"
-
-[sub_resource type="Resource" id="Resource_4hhbs"]
-script = ExtResource("6_3xg70")
-mon_sprite = ExtResource("10_gn058")
-item_is = 3
-stat_boost = SubResource("Resource_77vwv")
-metadata/_custom_type_script = "uid://c38u5aaaos1gy"
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v813w"]
 radius = 13.0
 height = 46.0
@@ -318,7 +305,7 @@ debug_color = Color(1, 0, 0, 0.42000002)
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("4_6fhpp")]
 max_health = 1.0
 score_value = 100
-items_it_can_drop = Array[ExtResource("6_3xg70")]([ExtResource("7_6vudb"), ExtResource("8_gn058"), ExtResource("9_bur7y"), SubResource("Resource_dp6hn"), SubResource("Resource_4hhbs")])
+items_it_can_drop = Array[ExtResource("6_3xg70")]([ExtResource("7_6vudb"), ExtResource("8_gn058"), ExtResource("9_bur7y"), SubResource("Resource_dp6hn")])
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="HurtBox" unique_id=1576969130]
 position = Vector2(10, 5)

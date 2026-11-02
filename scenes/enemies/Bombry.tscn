@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://84qpp678qnu4" path="res://scripts/Components/stat_boost.gd" id="15_lgeaq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eb7jf"]
-radius = 96.0
+radius = 112.0
 
 [sub_resource type="Resource" id="Resource_ros7y"]
 script = ExtResource("5_0kfug")
@@ -142,19 +142,6 @@ item_is = 3
 stat_boost = SubResource("Resource_pqtu3")
 metadata/_custom_type_script = "uid://c38u5aaaos1gy"
 
-[sub_resource type="Resource" id="Resource_7sas7"]
-script = ExtResource("15_lgeaq")
-mon_sprite = ExtResource("14_aejcd")
-speed_boost = 1
-metadata/_custom_type_script = "uid://84qpp678qnu4"
-
-[sub_resource type="Resource" id="Resource_f2h25"]
-script = ExtResource("9_i0e0g")
-mon_sprite = ExtResource("14_aejcd")
-item_is = 3
-stat_boost = SubResource("Resource_7sas7")
-metadata/_custom_type_script = "uid://c38u5aaaos1gy"
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_b6yx7"]
 radius = 7.0
 
@@ -198,7 +185,7 @@ libraries/ = SubResource("AnimationLibrary_pqtu3")
 collision_layer = 2
 collision_mask = 8
 score_value = 100
-items_it_can_drop = Array[ExtResource("9_i0e0g")]([ExtResource("10_q7afn"), ExtResource("11_aejcd"), ExtResource("12_lgeaq"), ExtResource("13_pqtu3"), SubResource("Resource_b6yx7"), SubResource("Resource_f2h25")])
+items_it_can_drop = Array[ExtResource("9_i0e0g")]([ExtResource("10_q7afn"), ExtResource("11_aejcd"), ExtResource("12_lgeaq"), ExtResource("13_pqtu3"), SubResource("Resource_b6yx7")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=924731486]
 position = Vector2(0, 1)

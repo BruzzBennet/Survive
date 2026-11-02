@@ -2,14 +2,15 @@
 
 [ext_resource type="Script" uid="uid://bx36uweu0gxc2" path="res://scripts/Items/stat_boost_item.gd" id="1_ubo25"]
 [ext_resource type="PackedScene" uid="uid://cxqsoljorqyxk" path="res://scenes/items/mon_spirit.tscn" id="2_6vkjr"]
-[ext_resource type="Resource" uid="uid://yjq0er43561r" path="res://resources/stat_boosts/speed.tres" id="2_11uyr"]
+[ext_resource type="Resource" uid="uid://djcigdkff1h2j" path="res://resources/stat_boosts/power.tres" id="2_11uyr"]
 [ext_resource type="FontFile" uid="uid://bcw8ds3wtqx7e" path="res://assets/fonts/hero-italic.ttf" id="3_ubo25"]
 [ext_resource type="PackedScene" uid="uid://3lwoa7tsv1fj" path="res://scenes/items/itemUpDown.tscn" id="4_rrexm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6vkjr"]
+line_spacing = 0.0
 font = ExtResource("3_ubo25")
 font_size = 13
-outline_size = 2
+outline_size = 5
 outline_color = Color(0.14509805, 0.14509805, 0.14509805, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_esxyk"]

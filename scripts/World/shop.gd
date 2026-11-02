@@ -15,7 +15,8 @@ var stat_boosts = [
 	preload("res://resources/stat_boosts/defense.tres"),
 	preload("res://resources/stat_boosts/pierce.tres"),
 	preload("res://resources/stat_boosts/reach.tres"),
-	preload("res://resources/stat_boosts/speed.tres")
+	preload("res://resources/stat_boosts/power.tres")
+	# preload("res://resources/stat_boosts/speed.tres")
 ]
 
 var boot = [

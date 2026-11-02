@@ -47,6 +47,9 @@ func portal_opens():
 func recover():
 	play_this_sfx("Recover")
 
+func upgrade():
+	play_this_sfx("Upgrade")
+
 func recover_stop():
 	$Recover.stop()
 

@@ -10,5 +10,9 @@ class_name Suit
 @export var ammo_boost: int = clamp(0,-1,1)
 @export var bullet_pierce_boost: int = clamp(0,-1,1)
 @export var bullet_reach_boost: int = clamp(0,-1,1)
+@export var bullet_speed_boost: int = clamp(0,-1,1)
 @export var effect_added: GDScript 
 var broken:=false
+
+var max_ammo: float = 100.0
+var current_ammo: float = 100.0

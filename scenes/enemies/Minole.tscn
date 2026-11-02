@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://x666as3n2foy"]
+
+[ext_resource type="Script" uid="uid://bxq5krfknir3p" path="res://scripts/Enemies/bombry.gd" id="1_lbxlw"]
+[ext_resource type="PackedScene" uid="uid://ffrii0cvnsbc" path="res://scenes/enemies/enemy_movement.tscn" id="2_lbxlw"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="4_e41bs"]
+[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="5_0q6se"]
+[ext_resource type="Texture2D" uid="uid://bf66b31d1kv1x" path="res://assets/Enemies/Minole-Sheet.png" id="5_m5an7"]
+[ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="6_nyxej"]
+[ext_resource type="PackedScene" uid="uid://bebyjivuy8kc1" path="res://scenes/boxes/followbox.tscn" id="6_qo6uu"]
+[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="8_wlgnr"]
+[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="9_n0wpl"]
+[ext_resource type="Resource" uid="uid://dbqq03a30b587" path="res://resources/items/Gun_Bombry.tres" id="10_ruw25"]
+[ext_resource type="Resource" uid="uid://c3fqsy8yu0i2o" path="res://resources/items/Boot_Bombry.tres" id="11_p15it"]
+[ext_resource type="Resource" uid="uid://bqtx48kbeccts" path="res://resources/items/Suit_Bombry.tres" id="12_lrhdq"]
+[ext_resource type="Resource" uid="uid://24keyjcrskmc" path="res://resources/items/Blade_Bombry.tres" id="13_853td"]
+[ext_resource type="Texture2D" uid="uid://dt4ckpfmu8xwt" path="res://assets/cards/Mons/bombry.png" id="14_57dcd"]
+[ext_resource type="Script" uid="uid://84qpp678qnu4" path="res://scripts/Components/stat_boost.gd" id="15_3b1wy"]
+
+[sub_resource type="Resource" id="Resource_ros7y"]
+script = ExtResource("5_0q6se")
+damage_done = 1.0
+source = 1
+metadata/_custom_type_script = "uid://doj80p0chh8d7"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_df0fb"]
+radius = 18.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ros7y"]
+shader = ExtResource("6_nyxej")
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qo6uu"]
+atlas = ExtResource("5_m5an7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbxlw"]
+atlas = ExtResource("5_m5an7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6q7pa"]
+atlas = ExtResource("5_m5an7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icqg8"]
+atlas = ExtResource("5_m5an7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e41bs"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_qo6uu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbxlw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6q7pa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icqg8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lbxlw"]
+radius = 64.0
+
+[sub_resource type="Resource" id="Resource_pqtu3"]
+script = ExtResource("15_3b1wy")
+mon_sprite = ExtResource("14_57dcd")
+bullet_pierce_boost = 1
+metadata/_custom_type_script = "uid://84qpp678qnu4"
+
+[sub_resource type="Resource" id="Resource_b6yx7"]
+script = ExtResource("9_n0wpl")
+mon_sprite = ExtResource("14_57dcd")
+item_is = 3
+stat_boost = SubResource("Resource_pqtu3")
+metadata/_custom_type_script = "uid://c38u5aaaos1gy"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b6yx7"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6q7pa"]
+radius = 6.708204
+
+[node name="Minole" type="CharacterBody2D" unique_id=1335751659]
+collision_layer = 2
+collision_mask = 11
+motion_mode = 1
+script = ExtResource("1_lbxlw")
+
+[node name="EnemyMovement" parent="." unique_id=1062153470 instance=ExtResource("2_lbxlw")]
+speed = 50.0
+time_to_change_dir = 1.0
+choppy = true
+
+[node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("4_e41bs")]
+position = Vector2(0, -2)
+attack = SubResource("Resource_ros7y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1676579324]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_df0fb")
+debug_color = Color(1, 0, 0, 0.42000002)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1143118217]
+material = SubResource("ShaderMaterial_ros7y")
+sprite_frames = SubResource("SpriteFrames_e41bs")
+autoplay = "default"
+frame_progress = 0.8732954
+
+[node name="FollowBox" parent="." unique_id=665233923 instance=ExtResource("6_qo6uu")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FollowBox" unique_id=2142842465]
+shape = SubResource("CircleShape2D_lbxlw")
+debug_color = Color(1, 1, 0, 0.42000002)
+
+[node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("8_wlgnr")]
+collision_layer = 2
+collision_mask = 8
+score_value = 100
+items_it_can_drop = Array[ExtResource("9_n0wpl")]([ExtResource("10_ruw25"), ExtResource("11_p15it"), ExtResource("12_lrhdq"), ExtResource("13_853td"), SubResource("Resource_b6yx7")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=924731486]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_b6yx7")
+debug_color = Color(0, 0.60038817, 0, 0.42000002)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=957752898]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_6q7pa")
+
+[connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

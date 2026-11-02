@@ -144,6 +144,8 @@ func stat_shwocase(equipment):
 			desc+="Pierce " + ifplus(equipment.bullet_pierce_boost) + ". "
 		if equipment.bullet_reach_boost!=0:
 			desc+="Bullet Reach " + ifplus(equipment.bullet_reach_boost) + ". "
+		if equipment.bullet_speed_boost!=0:
+			desc+="Bullet Speed " + ifplus(equipment.bullet_reach_boost) + ". "
 	# if desc == "":
 		return desc
 	# else:

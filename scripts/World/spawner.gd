@@ -47,18 +47,20 @@ func get_enemies_by_level(lvl:int):
 	var enemy
 	match lvl:
 		1:
-			enemy=preload("res://scenes/enemies/Icie.tscn")
+			enemy=preload("res://scenes/enemies/icie.tscn")
 		2:
 			enemy=preload("res://scenes/enemies/chomwing.tscn")
 		3:
-			enemy=preload("res://scenes/enemies/Bombry.tscn")
+			enemy=preload("res://scenes/enemies/Minole.tscn")
 		4:
 			enemy=preload("res://scenes/enemies/pucklam.tscn")
 		5:
-			enemy=preload("res://scenes/enemies/clamik.tscn")
-		6:
 			enemy=preload("res://scenes/pozzap.tscn")
+		6:
+			enemy=preload("res://scenes/enemies/Bombry.tscn")
 		7:
+			enemy=preload("res://scenes/enemies/clamik.tscn")
+		8:
 			enemy=preload("res://scenes/opozzap.tscn")
 	return enemy
 
@@ -68,6 +70,15 @@ func spawn_enemy(lvl:int) -> void:
 	# spawn_this_enemy=preload("res://scenes/opozzap.tscn")
 	# var enemy=spawn_this_enemy.instantiate()
 	var enemy=get_enemies_by_level(lvl).instantiate()
+	get_tree().current_scene.add_child(enemy)
+	enemy.global_position = global_position
+	enemies.append(enemy)
+	enemy.add_to_group("enemies")
+	var hitbox = enemy.get_node("HurtBox")
+	hitbox.died.connect(enemy_died.bind(enemy))
+
+func spawn_minole():
+	var enemy=preload("res://scenes/enemies/Minole.tscn").instantiate()
 	get_tree().current_scene.add_child(enemy)
 	enemy.global_position = global_position
 	enemies.append(enemy)

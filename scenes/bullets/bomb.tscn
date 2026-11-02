@@ -1,15 +1,72 @@
 [gd_scene format=3 uid="uid://bmujv15gka2i"]
 
-[ext_resource type="Script" uid="uid://6rhx8j5u4qa5" path="res://scripts/Attacks/Bullets/bomb.gd" id="1_mopht"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="2_ffnc2"]
 [ext_resource type="Texture2D" uid="uid://c3ee4te2p1fki" path="res://assets/bullets/BombBullet.png" id="2_lpuq3"]
+[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="3_bnhdt"]
+[ext_resource type="PackedScene" uid="uid://2r00oc1ln8bw" path="res://scenes/effects/explode.tscn" id="3_ffnc2"]
+
+[sub_resource type="GDScript" id="GDScript_ffnc2"]
+script/source = "extends CharacterBody2D
+
+var speed: float = 250.0
+var time_on_field: float = 0.0
+var max_time_on_field: float = 0.4
+var enemies_pierced: int = 0
+var max_enemies_pierced: int = 1
+var direction: Vector2 
+var damage_done:= 1.0
+var reach
+var reach_check
+var player
+signal limit_reached
+
+func new_pierce(amount:int):
+	max_enemies_pierced=amount
+
+func new_speed(amount:float):
+	speed=amount
+
+func new_time(amount:float):
+	max_time_on_field=amount
+
+func set_player(node:Node2D):
+	player=node
+
+func _ready():
+	reach=speed*max_time_on_field
+	$HitBox.area_entered.connect(_on_area_entered)
+	add_to_group(\"bullet\")
+	$HitBox.attack.damage_done=damage_done
+
+func _on_area_entered(body):
+	if body is HurtBox_Component and body.get_parent().is_in_group(\"enemies\"):
+		enemies_pierced+=1
+	
+func _physics_process(delta):
+	time_on_field += delta
+	velocity = direction * speed
+	reach_check=speed*time_on_field
+	# print(str(reach_check))
+	move_and_slide()
+	if get_slide_collision_count() > 0 \\
+	or enemies_pierced>=max_enemies_pierced \\
+	# or time_on_field>=max_time_on_field\\
+	or reach<=reach_check:
+		limit_reached.emit()
+		queue_free()
+
+"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ffnc2"]
 radius = 5.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=272047002]
+[sub_resource type="Resource" id="Resource_67nwr"]
+script = ExtResource("3_bnhdt")
+metadata/_custom_type_script = "uid://doj80p0chh8d7"
+
+[node name="bullet" type="CharacterBody2D" unique_id=272047002]
 collision_layer = 32
-collision_mask = 7
-script = ExtResource("1_mopht")
+script = SubResource("GDScript_ffnc2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1876856369]
 texture = ExtResource("2_lpuq3")
@@ -18,14 +75,12 @@ texture = ExtResource("2_lpuq3")
 position = Vector2(0, 6)
 shape = SubResource("CircleShape2D_ffnc2")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1479261002]
-collision_layer = 8
-collision_mask = 7
+[node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("2_ffnc2")]
+attack = SubResource("Resource_67nwr")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1796659932]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1796659932]
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_ffnc2")
 debug_color = Color(1, 0, 0, 0.42000002)
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="Explode" parent="." unique_id=1533437041 instance=ExtResource("3_ffnc2")]

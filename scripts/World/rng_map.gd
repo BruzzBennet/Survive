@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var max_lvl: int = 7
+@export var max_lvl: int = 8
 @export var max_lvl_n = [13,31,17,18]
 var map_grid=[Vector2(0,62), 
 			Vector2(0,190),
@@ -98,7 +98,7 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 	var times: = 0
 	var enemy_level=0
 	var max_level
-	var max_current_level=roundi(current_level/4)
+	var max_current_level=round(current_level/3)
 	for instance in spawn_points:	
 		var spawner = instance.get_node_or_null("Spawner")
 		if spawner:
@@ -113,24 +113,24 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 			if type == 0 && enemy_amount>0 && !spawned_already.has(spawner):
 				max_level=clamp(max_current_level,1,max_lvl)
 				enemy_level= randi_range(1, max_level)
-				# print(str(enemy_level))
-				# if enemy_level>enemy_amount:
-				# 	enemy_level=max_level-enemy_amount
 				spawner.spawn_enemy(enemy_level)
 				enemy_amount -=1
-				# enemy_amount -= clamp(floor(enemy_level/3),1,max_lvl)
 				spawned_already.append(spawner)
 		else:
 			print("Spawner not found")
 		var item = instance.get_node_or_null("Item")
 		if item:
 			var do_or_not= randi_range(0,3)
-			if GLOBAL.starting_enemy_amount>=max_enemy_amount:
+			if GLOBAL.starting_enemy_amount>=max_enemy_amount and !spawned_already.has(item):
 				if do_or_not == 1:
 					max_level=clamp(max_current_level,1,max_lvl)
 					enemy_level= randi_range(1, max_level)
 					item.spawn_enemy(enemy_level)
-				elif do_or_not == 0 and !spawned_already.has(item):
+					spawned_already.append(spawner)
+				if do_or_not ==2:
+					item.spawn_minole()
+					spawned_already.append(spawner)			
+				elif do_or_not == 0 :
 					item.spawn_item()
 					spawned_already.append(item)
 			elif do_or_not == 3 && !spawned_already.has(item):

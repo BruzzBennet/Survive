@@ -2,21 +2,23 @@ extends Node2D
 
 @export var weapon: Weapon
 var bullet_scene
-var speed:= 250
+var base_speed:=250.0
+var speed=base_speed
 var durability = 1
-var time_on_field:= 0.4
+var time_on_field: float = 0.4
 var timeout_value: = 0.1
 var bullet_damage:= 1.0
-var pierce: = 1
 var shot_type
 
 func reset_stats():
-	speed= 250
+	speed= base_speed
 	durability = 1
 	time_on_field= 0.4
 	timeout_value = 0.1
 	bullet_damage= 1.0
-	pierce = 1
+
+func get_player():
+	return get_parent()
 
 func setup(bullet:Weapon, suit:Suit):
 	reset_stats()
@@ -24,9 +26,13 @@ func setup(bullet:Weapon, suit:Suit):
 	bullet_scene = weapon.bullet_scene
 	var new_durability = durability + weapon.bullet_pierce_boost + suit.bullet_pierce_boost
 	durability = max(new_durability,1)
-	if bullet.weapon_type == Weapon.type.blade:
-		durability+=1
 	time_on_field+=(time_on_field/4)*(weapon.bullet_reach_boost+suit.bullet_reach_boost)
+	speed+=(base_speed/4)*(weapon.bullet_speed_boost+suit.bullet_speed_boost)
+	match bullet.weapon_type:
+		Weapon.type.blade:
+			durability+=1
+		Weapon.type.gun:
+			speed+=base_speed/4
 
 func playsfx(shot_pattern_is=null):
 	var sfx = $AudioStreamPlayer2D
@@ -97,7 +103,10 @@ func no_shot():
 func simple_shot(pos,dir,dur:=1.0):
 	var anim_name
 	var bullet=bullet_scene.instantiate()
-	bullet.new_pierce(pierce)
+	bullet.new_pierce(durability)
+	bullet.new_time(time_on_field*dur)
+	bullet.new_speed(speed)
+	bullet.set_player(get_player())
 	bullet.damage_done=bullet_damage
 	add_child(bullet)
 	bullet.global_position = pos + dir * 10
@@ -114,9 +123,6 @@ func simple_shot(pos,dir,dur:=1.0):
 	if bullet.get_node_or_null("AnimationPlayer"):
 		bullet.get_node("AnimationPlayer").play(anim_name)
 	bullet.direction = dir.normalized()
-	bullet.speed=speed
-	bullet.max_time_on_field = time_on_field*dur
-	bullet.max_enemies_pierced = durability
 	bullet.add_to_group("bullets")
 
 func continuous_shot_double(pos,dir):

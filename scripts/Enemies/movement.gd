@@ -2,36 +2,74 @@ extends Node2D
 
 @export var speed = 70.0
 @export var time_to_change_dir:=1.6
+@export var diagonal:=false
+@export var choppy:=false
 const margin = 12
 var screen_size: Vector2
-var last_direction = Vector2.RIGHT
+var last_direction
 var chasing: bool
 var idle_time := 0.0
 var boost = 1.0
-@onready var animated_sprite_2d = get_parent().get_node("AnimationPlayer")
+var animated_sprite_2d 
 @onready var this_enemy = get_parent()
 
 func _ready() -> void:
+	animated_sprite_2d = get_parent().get_node_or_null("AnimationPlayer")
+	if diagonal:
+		last_direction = choose([
+			Vector2(1, 1),
+			Vector2(-1, 1),
+			Vector2(1, -1),
+			Vector2(-1, -1)
+		]).normalized()
+	else:
+		last_direction = choose([
+			Vector2.RIGHT,
+			Vector2.UP,
+			Vector2.LEFT,
+			Vector2.DOWN
+		])
 	add_to_group("enemy")
 	screen_size = get_viewport_rect().size
 	chasing = false
 
 func _physics_process(_delta):
-	move()
+	if !choppy:
+		move()
+	elif chasing:
+		move()
 	check_margins()
 	this_enemy.position = this_enemy.position.clamp(Vector2(margin, 40), Vector2(screen_size.x - margin, screen_size.y - margin))
 	if !chasing:
 		idle_time += _delta
 		if idle_time >= time_to_change_dir:
-			last_direction = choose([Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN])
+			if diagonal:
+				last_direction = choose([
+					Vector2(1, 1),
+					Vector2(-1, 1),
+					Vector2(1, -1),
+					Vector2(-1, -1)
+				]).normalized()
+			else:
+				last_direction = choose([
+					Vector2.RIGHT,
+					Vector2.UP,
+					Vector2.LEFT,
+					Vector2.DOWN
+				])
+			if choppy:
+				move()
 			idle_time = 0.0
-	process_animation(last_direction)
+	if animated_sprite_2d:
+		process_animation(last_direction)
 
 func move():
 	if chasing:
 		boost = 1.5
 	else:
 		boost = 1.0
+	if diagonal:
+		last_direction= last_direction.normalized()
 	this_enemy.velocity = last_direction * speed * boost
 	this_enemy.move_and_slide()
 	if this_enemy.get_slide_collision_count() > 0:
@@ -62,17 +100,22 @@ func check_margins():
 			change_direction_after_wall()
 
 func change_direction_after_wall():
+	if diagonal:
+		last_direction.x *= -1
+		last_direction.y *= -1
 
-	if last_direction.x != 0:
-		last_direction = choose([
-			Vector2.UP,
-			Vector2.DOWN
-		])
 	else:
-		last_direction = choose([
-			Vector2.LEFT,
-			Vector2.RIGHT
-		])
+
+		if last_direction.x != 0:
+			last_direction = choose([
+				Vector2.UP,
+				Vector2.DOWN
+			])
+		else:
+			last_direction = choose([
+				Vector2.LEFT,
+				Vector2.RIGHT
+			])
 
 func play_animation(dir: Vector2) -> void:
 	var anim_name := "0"
@@ -93,7 +136,6 @@ func play_animation(dir: Vector2) -> void:
 			anim_name = "0"
 		else:
 			anim_name = "2"
-
 	animated_sprite_2d.play(anim_name)
 
 func process_animation(direction) -> void:

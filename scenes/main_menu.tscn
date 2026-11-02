@@ -5,8 +5,8 @@
 [ext_resource type="AudioStream" uid="uid://dm0ceqj6opueb" path="res://assets/audio/(A2) StartMenu.mp3" id="2_oa1go"]
 [ext_resource type="Texture2D" uid="uid://d3f3st34istlf" path="res://assets/MainMenu/MonRangerbg.png" id="2_rtw2f"]
 [ext_resource type="PackedScene" uid="uid://d4fsptvwptuf4" path="res://scenes/ctr_shader.tscn" id="3_bqqt6"]
-[ext_resource type="Texture2D" uid="uid://dgure16j48d54" path="res://assets/MainMenu/MonRangerS.png" id="6_oa1go"]
-[ext_resource type="Texture2D" uid="uid://bg38b72j8en1p" path="res://assets/MainMenu/MonRangerLogoS1.png" id="6_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://clr6rw3e858ow" path="res://assets/MainMenu/MonRangerLogo.png" id="4_5dd4i"]
+[ext_resource type="Texture2D" uid="uid://hsaj8oa3y1jl" path="res://assets/MainMenu/MonRanger.png" id="5_lgwnu"]
 [ext_resource type="PackedScene" uid="uid://dstfd2nwh8man" path="res://scenes/menus/button_move.tscn" id="6_tbmy8"]
 [ext_resource type="Theme" uid="uid://c5l88nmuugvdc" path="res://Button_themes.tres" id="7_5dd4i"]
 [ext_resource type="FontFile" uid="uid://bcw8ds3wtqx7e" path="res://assets/fonts/hero-italic.ttf" id="7_jk1qb"]
@@ -137,11 +137,13 @@ color = Color(0, 0, 0, 0.3)
 
 [node name="MonRangerLogoS1" type="Sprite2D" parent="." unique_id=1975867259]
 position = Vector2(230, 76)
-texture = ExtResource("6_rtw2f")
+scale = Vector2(0.225, 0.225)
+texture = ExtResource("4_5dd4i")
 
 [node name="MonRangerS" type="Sprite2D" parent="." unique_id=181612438]
 position = Vector2(485, 200)
-texture = ExtResource("6_oa1go")
+scale = Vector2(0.225, 0.225)
+texture = ExtResource("5_lgwnu")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=200994261]
 libraries/ = SubResource("AnimationLibrary_jk1qb")

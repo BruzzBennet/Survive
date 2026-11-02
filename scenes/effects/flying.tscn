@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cmfufr60vjxw0"]
+
+[ext_resource type="Script" uid="uid://csr5lhw4amh0d" path="res://scripts/Components/effects/float.gd" id="1_i3e6l"]
+
+[node name="Flying" type="Node2D" unique_id=178092305]
+script = ExtResource("1_i3e6l")

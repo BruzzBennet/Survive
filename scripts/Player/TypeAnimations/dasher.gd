@@ -66,9 +66,9 @@ func stats_setup(this_suit:Suit,this_weapon:Weapon):
 		$WeaponEffect.set_script(this_weapon.effect_added)
 		$WeaponEffect.setup()
 	max_speed=GLOBAL.max_speed + ((GLOBAL.max_speed * 0.125) * (this_suit.speed_boost+this_weapon.speed_boost))
-	$HurtBox.defense = GLOBAL.defense + (0.125 * (this_suit.defense_boost+this_weapon.defense_boost))
-	var new_ammo = 1.0 - (0.2 * (this_suit.ammo_boost+this_weapon.ammo_boost))
-	ammo_reduce = max(new_ammo,0.1)
+	$HurtBox.defense = GLOBAL.defense + (0.175 * (this_suit.defense_boost+this_weapon.defense_boost))
+	var new_ammo = 1.0 - (0.25 * (this_suit.ammo_boost+this_weapon.ammo_boost))
+	ammo_reduce = max(new_ammo,0.05)
 	if this_weapon.weapon_type == Weapon.type.boot:
 		max_speed+=(GLOBAL.max_speed * 0.125)
 
@@ -86,7 +86,7 @@ func weapon_attack_pattern(this_weapon:Weapon):
 			melee_shot_pattern = "short_shot"
 			shot_pattern = "small_area_shot"
 		Weapon.type.gun:
-			melee_shot_pattern = "simple_shot"
+			melee_shot_pattern = "medium_shot"
 			shot_pattern = "triple_shot"
 		Weapon.type.blade:
 			melee_shot_pattern = "short_shot"
@@ -125,14 +125,15 @@ func _physics_process(delta: float) -> void:
 
 func attack():
 	is_attacking = true
-	if weapon.weapon_type == Weapon.type.gun:
-		atkUI.reduce_ammo(ammo_reduce)
-	elif weapon.weapon_type == Weapon.type.boot:
-		atkUI.reduce_ammo(ammo_reduce*0.5)
-	elif weapon.weapon_type == Weapon.type.blade:
-		atkUI.reduce_ammo(ammo_reduce*0.35)
-	elif weapon.weapon_type == Weapon.type.none:
-		atkUI.reduce_ammo(ammo_reduce*0.35)
+	match weapon.weapon_type:
+		Weapon.type.gun:
+			atkUI.reduce_ammo(ammo_reduce*0.5)
+		Weapon.type.boot:
+			atkUI.reduce_ammo(ammo_reduce*0.5)
+		Weapon.type.blade:
+			atkUI.reduce_ammo(ammo_reduce*0.35)
+		Weapon.type.none:
+			atkUI.reduce_ammo(ammo_reduce*0.35)
 	$HurtBox.cancel_flash()
 	Short_Range_Attack()
 	$AttackAnimationTimer.start()
@@ -191,9 +192,9 @@ func broken_weapon():
 	PLAYSFX.unequip()
 	get_tree().current_scene.get_node("HenshinMenu").update_deck()
 	equip(GLOBAL.suit,GLOBAL.base_weapon)
+	GLOBAL.player_type=GLOBAL.weaponless
 	
 func remove_weapon():
-		GLOBAL.player_type=GLOBAL.weaponless
 		var player= GLOBAL.player_type.instantiate()
 		get_tree().current_scene.add_child(player)
 		player.position = global_position
