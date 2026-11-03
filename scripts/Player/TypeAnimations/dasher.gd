@@ -77,7 +77,7 @@ func equip_weapon(this_weapon:Weapon):
 	$Skeleton/Weapon_Back.texture = this_weapon.sprite
 	$Skeleton/Weapon_Front.texture = this_weapon.sprite
 	weapon_attack_pattern(this_weapon)
-	atkUI.ammo_setup(this_weapon,false)
+	atkUI.ammo_setup(this_weapon)
 
 
 func weapon_attack_pattern(this_weapon:Weapon):
@@ -106,12 +106,8 @@ func equip_suit(this_suit:Suit):
 		$Skeleton/Sprite.set_palette(GLOBAL.player_palette) 
 
 func _physics_process(delta: float) -> void:
-	if atkUI.currentATK < atkUI.min_ammo and weapon.weapon_type != Weapon.type.none:
-		weapon_broken.emit()
-		broken = true
-		broken_weapon()
-	if is_not_attacking() and broken:
-		remove_weapon()
+	check_weapon_durability()
+	check_suit_durability()
 	if GLOBAL.about_to_henshin==false:
 		walk_sfx()
 		player_movement(delta)
@@ -122,6 +118,54 @@ func _physics_process(delta: float) -> void:
 	else:
 		play_animation("Idle_", last_direction)
 
+func check_weapon_durability():
+	if atkUI.currentATK < atkUI.min_ammo and weapon.weapon_type != Weapon.type.none:
+		weapon_broken.emit()
+		broken = true
+		broken_weapon()
+	if is_not_attacking() and broken:
+		remove_weapon()
+
+func check_suit_durability():
+	if atkUI.currentSuitHP < atkUI.min_suit_hp and suit != GLOBAL.base_suit:
+		broken_suit()
+
+func broken_suit():
+	GLOBAL.deck.erase(GLOBAL.suit_item)
+	atkUI.set_suit()
+	explode_fx()
+	PLAYSFX.crunchyMash()
+	PLAYSFX.unequip()
+	get_tree().current_scene.get_node("HenshinMenu").update_deck()
+	equip(GLOBAL.base_suit,GLOBAL.weapon)
+	
+
+func explode_fx():
+	var fx = preload("res://scenes/hurtParticles.tscn").instantiate()
+	fx.global_position = global_position
+	get_tree().current_scene.add_child(fx)
+
+func broken_weapon():
+	GLOBAL.deck.erase(GLOBAL.weapon_item)
+	atkUI.set_weapon()
+	explode_fx()
+	PLAYSFX.crunchyMash()
+	PLAYSFX.unequip()
+	get_tree().current_scene.get_node("HenshinMenu").update_deck()
+	equip(GLOBAL.suit,GLOBAL.base_weapon)
+	GLOBAL.player_type=GLOBAL.weaponless
+	
+func remove_weapon():
+		var player= GLOBAL.player_type.instantiate()
+		get_tree().current_scene.add_child(player)
+		player.position = global_position
+		player.equip(GLOBAL.suit,GLOBAL.base_weapon)
+		# broken=false
+		reset_broken.call_deferred()
+		queue_free()
+
+func reset_broken():
+	broken = false
 
 func attack():
 	is_attacking = true
@@ -181,30 +225,6 @@ func Long_Range_Attack():
 	if can_shoot:
 		$BulletManager.shoot(position, last_direction, shot_pattern)
 		can_shoot = false
-
-func broken_weapon():
-	GLOBAL.deck.erase(GLOBAL.weapon_item)
-	atkUI.set_weapon()
-	var fx = preload("res://scenes/hurtParticles.tscn").instantiate()
-	fx.global_position = global_position
-	get_tree().current_scene.add_child(fx)
-	PLAYSFX.crunchyMash()
-	PLAYSFX.unequip()
-	get_tree().current_scene.get_node("HenshinMenu").update_deck()
-	equip(GLOBAL.suit,GLOBAL.base_weapon)
-	GLOBAL.player_type=GLOBAL.weaponless
-	
-func remove_weapon():
-		var player= GLOBAL.player_type.instantiate()
-		get_tree().current_scene.add_child(player)
-		player.position = global_position
-		player.equip(GLOBAL.suit,GLOBAL.base_weapon)
-		# broken=false
-		reset_broken.call_deferred()
-		queue_free()
-
-func reset_broken():
-	broken = false
 
 func dash_fx(angle, pos, dir):
 	var dash_scene = preload("res://scenes/dashparticles.tscn")

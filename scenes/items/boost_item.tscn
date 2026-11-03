@@ -9,7 +9,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_6vkjr"]
 line_spacing = 0.0
 font = ExtResource("3_ubo25")
-font_size = 13
+font_size = 12
 outline_size = 5
 outline_color = Color(0.14509805, 0.14509805, 0.14509805, 1)
 

@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource("2_f2d35")
 mon_sprite = ExtResource("1_jrauw")
-bullet_pierce_boost = 1
+bullet_power_boost = 1
 metadata/_custom_type_script = "uid://84qpp678qnu4"

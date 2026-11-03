@@ -59,6 +59,8 @@ func _ready():
 			set_collision_mask_value(5, true)
 			set_collision_mask_value(6, true)
 			health = max_health
+			if GLOBAL.current_level>=50:
+				health+=1.0
 			drops_items=true
 
 	if takes_damage_from == attack_source.enemy:
@@ -111,9 +113,10 @@ func heals(amount=0.5):
 	cancel_flash()
 	play_flash(Color.GREEN)
 	var new_hp = health+amount+extra_heal
+	new_hp-=health
 	hpUI.set_hp(new_hp)
 	if new_hp<=max_health:
-		health=new_hp
+		health+=new_hp
 	else:
 		health=max_health
 		SCORE.increaseBy(250)
@@ -122,9 +125,10 @@ func normal_heal(amount=0.5):
 	cancel_flash()
 	play_flash(Color.GREEN)
 	var new_hp = health+amount
+	new_hp-=health
 	hpUI.set_hp(new_hp)
 	if new_hp<=max_health:
-		health=new_hp
+		health+=new_hp
 	else:
 		health=max_health
 		SCORE.increaseBy(250)
@@ -186,8 +190,8 @@ func knockback(attack: Variant):
 func damage(attack: Attack) -> void:
 	if !is_hurt and !is_invincible:
 		if takes_damage_from == attack.source:
+			var damage_done=attack.damage_done - defense
 			
-			health -= (attack.damage_done - defense)
 			if gets_stunned:
 				hit_stun()	
 			if receives_knockback:
@@ -196,9 +200,12 @@ func damage(attack: Attack) -> void:
 			match takes_damage_from:
 				attack_source.player:
 					hurt_enemy()
+					health -= damage_done
 				attack_source.enemy:
-					hurt_player()
-
+					if GLOBAL.suit==GLOBAL.base_suit:
+						health -= damage_done
+					hurt_player(damage_done)
+					
 			if dead:
 				return
 			if health <= 0:
@@ -215,7 +222,7 @@ func player_touched_poison():
 			health -= (1 - defense)
 			if gets_stunned:
 				hit_stun()	
-			hurt_player()
+			hurt_player(1 - defense)
 			if dead:
 				return
 			if health <= 0:
@@ -229,10 +236,10 @@ func add_death_explosion():
 	fx.global_position = global_position
 	get_tree().current_scene.add_child(fx)
 
-func hurt_player():
+func hurt_player(damage_taken:float):
 	cancel_flash()
 	play_flash(Color.RED)
-	hpUI.set_hp(health)
+	hpUI.set_hp(damage_taken*-1)
 	var fx = hurt_fx.instantiate()
 	fx.global_position = global_position
 	get_tree().current_scene.add_child(fx)
@@ -270,17 +277,26 @@ func item_drop():
 				item_to_be_dropped.suit = item_to_be_dropped.suit.duplicate()
 		var item_dropped=item_to_be_dropped.duplicate()	
 		if item_dropped.item_is != item_dropped.item_type.normal_item:
-			# var card_item_drop=find_item_to_drop(item_dropped)
-			var card_item_drop=preload("res://scenes/items/Mon_card_item.tscn")
-			if item_dropped.item_is == item_dropped.item_type.stat_boost:
-				card_item_drop=preload("res://scenes/items/boost_item.tscn")
-				item_dropped= item_to_be_dropped.stat_boost.duplicate()
-			var card_drop = card_item_drop.instantiate()
+			var card=preload("res://scenes/items/Mon_card_item.tscn")
+			var this_item
+			match item_dropped.item_is:
+				item_dropped.item_type.weapon:
+					item_to_be_dropped.weapon = item_to_be_dropped.weapon.duplicate()
+					this_item=item_dropped
+				item_dropped.item_type.suit:
+					item_to_be_dropped.suit = item_to_be_dropped.suit.duplicate()
+					this_item=item_dropped
+				item_dropped.item_type.stat_boost:
+					card=preload("res://scenes/items/boost_item.tscn")
+					this_item = item_to_be_dropped.stat_boost.duplicate()
+			var card_drop = card.instantiate()
 			card_drop.global_position=global_position
-			card_drop.item=item_dropped
-			# card_drop.add_item(item_dropped)
-			# card_drop.build(item_dropped)
+			card_drop.item=this_item
 			get_tree().current_scene.add_child(card_drop)
+			if item_dropped.item_is == item_dropped.item_type.stat_boost:
+				var will_be_suit_boost = randi_range(0,1)
+				if will_be_suit_boost==1:
+					card_drop.weapon=false
 			if card_drop.get_node_or_null("PanelContainer"):
 				card_drop.get_node("PanelContainer").visible=false
 		else:

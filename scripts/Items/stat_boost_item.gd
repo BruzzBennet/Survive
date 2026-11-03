@@ -23,12 +23,10 @@ func stat_shwocase(equipment:Stat_Boost):
 			desc+="Defense " + ifplus(equipment.defense_boost) + "\n"
 		if equipment.ammo_boost!=0:
 			desc+="Ammo " + ifplus(equipment.ammo_boost) + "\n"
-		if equipment.bullet_pierce_boost!=0:
-			desc+="Pierce " + ifplus(equipment.bullet_pierce_boost) + "\n"
+		if equipment.bullet_power_boost!=0:
+			desc+="Bullet Power " + ifplus(equipment.bullet_power_boost) + "\n"
 		if equipment.bullet_reach_boost!=0:
 			desc+="Bullet Reach " + ifplus(equipment.bullet_reach_boost) + "\n"
-		if equipment.bullet_speed_boost!=0:
-			desc+="Bullet Speed " + ifplus(equipment.bullet_speed_boost) + "\n"
 		return desc
 
 func ifplus(value:int):
@@ -40,7 +38,7 @@ func ifplus(value:int):
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var boost_this
 	var stat_boost=item
-	if body is Player_Unit and GLOBAL.weapon!=GLOBAL.base_weapon:
+	if body is Player_Unit and GLOBAL.weapon!=GLOBAL.base_weapon and GLOBAL.suit!=GLOBAL.base_suit:
 		if weapon:
 			boost_this=body.weapon
 		else:
@@ -51,8 +49,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			boost_this.defense_boost+=stat_boost.defense_boost
 		if stat_boost.ammo_boost!=0:
 			boost_this.ammo_boost+=stat_boost.ammo_boost
-		if stat_boost.bullet_pierce_boost!=0:
-			boost_this.bullet_pierce_boost+=stat_boost.bullet_pierce_boost
+		if stat_boost.bullet_power_boost!=0:
+			boost_this.bullet_power_boost+=stat_boost.bullet_power_boost
 		if stat_boost.bullet_reach_boost!=0:
 			boost_this.bullet_reach_boost+=stat_boost.bullet_reach_boost
 		if weapon:

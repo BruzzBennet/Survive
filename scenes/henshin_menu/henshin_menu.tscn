@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://csbksfn8wegm7" path="res://scenes/henshin_menu/card_base.tscn" id="2_1iwen"]
 [ext_resource type="PackedScene" uid="uid://dstfd2nwh8man" path="res://scenes/menus/button_move.tscn" id="3_7dkp0"]
 [ext_resource type="StyleBox" uid="uid://b4s4g0bbtyh4h" path="res://card_blank.tres" id="3_jkji6"]
-[ext_resource type="PackedScene" uid="uid://cpp72lf4ylqo4" path="res://scenes/UI/PlayerUI.tscn" id="3_ribii"]
+[ext_resource type="PackedScene" uid="uid://didohybkwclsk" path="res://scenes/UI/PlayerUI_3Bars.tscn" id="3_ribii"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dkp0"]
 bg_color = Color(0.972549, 0.972549, 0.972549, 1)
@@ -70,17 +70,16 @@ script = ExtResource("1_f1lyw")
 layout_mode = 0
 offset_left = 5.0
 offset_top = 12.0
-offset_right = 225.0
+offset_right = 237.0
 offset_bottom = 52.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_7dkp0")
 
 [node name="UI" parent="." unique_id=1412859120 instance=ExtResource("3_ribii")]
-z_index = 1
 layout_mode = 1
-offset_left = 6.0
-offset_top = 5.0
-offset_right = 5.919998
-offset_bottom = 5.0
+offset_left = 7.0
+offset_top = 6.0
+offset_right = 7.0
+offset_bottom = 6.0
 
 [node name="Screen" type="Panel" parent="." unique_id=90116705]
 layout_mode = 0
@@ -89,26 +88,26 @@ offset_bottom = 320.0
 
 [node name="PanelContainer" type="PanelContainer" parent="Screen" unique_id=2068040730]
 layout_mode = 0
-offset_left = 230.0
+offset_left = 247.0
 offset_top = 6.0
-offset_right = 481.0
+offset_right = 498.0
 offset_bottom = 71.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_f1lyw")
 
 [node name="Label" type="Label" parent="Screen" unique_id=1016155828]
 layout_mode = 0
-offset_left = 231.0
+offset_left = 248.0
 offset_top = 7.0
-offset_right = 480.0
+offset_right = 497.0
 offset_bottom = 23.0
 label_settings = SubResource("LabelSettings_1iwen")
 autowrap_mode = 3
 
 [node name="PanelContainer2" type="PanelContainer" parent="Screen" unique_id=1068005920]
 layout_mode = 0
-offset_left = 233.0
+offset_left = 250.0
 offset_top = 73.0
-offset_right = 478.0
+offset_right = 495.0
 offset_bottom = 91.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1iwen")
 
@@ -121,7 +120,7 @@ autowrap_mode = 3
 
 [node name="Panel" type="Node2D" parent="." unique_id=373129143]
 unique_name_in_owner = true
-position = Vector2(113, 5)
+position = Vector2(124, 5)
 
 [node name="Panel" type="Panel" parent="Panel" unique_id=1313282875]
 offset_left = -1.0

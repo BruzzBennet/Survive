@@ -24,10 +24,10 @@ func setup(bullet:Weapon, suit:Suit):
 	reset_stats()
 	weapon=bullet
 	bullet_scene = weapon.bullet_scene
-	var new_durability = durability + weapon.bullet_pierce_boost + suit.bullet_pierce_boost
+	var new_durability = durability + weapon.bullet_power_boost + suit.bullet_power_boost
 	durability = max(new_durability,1)
 	time_on_field+=(time_on_field/4)*(weapon.bullet_reach_boost+suit.bullet_reach_boost)
-	speed+=(base_speed/4)*(weapon.bullet_speed_boost+suit.bullet_speed_boost)
+	speed+=(base_speed/4)*(weapon.bullet_power_boost+suit.bullet_power_boost)
 	match bullet.weapon_type:
 		Weapon.type.blade:
 			durability+=1

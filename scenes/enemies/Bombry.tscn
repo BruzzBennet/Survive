@@ -132,7 +132,7 @@ _data = {
 [sub_resource type="Resource" id="Resource_pqtu3"]
 script = ExtResource("15_lgeaq")
 mon_sprite = ExtResource("14_aejcd")
-bullet_pierce_boost = 1
+bullet_power_boost = 1
 metadata/_custom_type_script = "uid://84qpp678qnu4"
 
 [sub_resource type="Resource" id="Resource_b6yx7"]

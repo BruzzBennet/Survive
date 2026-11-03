@@ -106,8 +106,8 @@ func show_ammo(show_it=true):
 			if !show_it:
 				card.hide_ammo()
 			else:
-				var item =  card.item_summoned
-				if item and	item.item_is == item.item_type.weapon:
+				# var item =  card.item_summoned
+				# if item and	item.item_is == item.item_type.weapon:
 					# print(str(item))
 					card.show_ammo()
 				
@@ -140,12 +140,10 @@ func stat_shwocase(equipment):
 			desc+="Defense " + ifplus(equipment.defense_boost) + ". "
 		if equipment.ammo_boost!=0:
 			desc+="Ammo " + ifplus(equipment.ammo_boost) + ". "
-		if equipment.bullet_pierce_boost!=0:
-			desc+="Pierce " + ifplus(equipment.bullet_pierce_boost) + ". "
+		if equipment.bullet_power_boost!=0:
+			desc+="Buller Power " + ifplus(equipment.bullet_power_boost) + ". "
 		if equipment.bullet_reach_boost!=0:
 			desc+="Bullet Reach " + ifplus(equipment.bullet_reach_boost) + ". "
-		if equipment.bullet_speed_boost!=0:
-			desc+="Bullet Speed " + ifplus(equipment.bullet_reach_boost) + ". "
 	# if desc == "":
 		return desc
 	# else:
@@ -222,10 +220,12 @@ func equip(button):
 				if GLOBAL.suit != item.suit:
 					equipment = item.suit
 					henshin(body)
+					ui.suit_ammo_setup(item.suit,false)
 				else:
 					ui.set_suit()
 					equipment = base_suit
 					PLAYSFX.unequip()
+					ui.suit_ammo_setup(GLOBAL.base_suit,false)
 				body.equip(equipment,GLOBAL.weapon)	
 		close_menu()
 

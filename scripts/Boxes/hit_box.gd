@@ -27,3 +27,5 @@ func _ready() -> void:
 		elif attack.source == attack.attack_source.enemy:
 			set_collision_layer_value(2, true)
 			set_collision_mask_value(4, true)
+			if GLOBAL.current_level>=50:
+				attack.damage_done+=0.5

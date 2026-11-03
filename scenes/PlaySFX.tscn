@@ -50,7 +50,7 @@ bus = &"SFX"
 [node name="StartTune" type="AudioStreamPlayer2D" parent="." unique_id=935809275]
 position = Vector2(-1, 3)
 stream = ExtResource("6_5fnny")
-bus = &"SFX"
+bus = &"Music"
 
 [node name="HurtSFX" type="AudioStreamPlayer2D" parent="." unique_id=851815124]
 position = Vector2(-1, 3)

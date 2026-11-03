@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://bfgfhovp683gx"]
-
-[ext_resource type="Script" uid="uid://bdx0cpvtgtkt0" path="res://scripts/Attacks/Bullets/bullet.gd" id="1_37kl0"]
-
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=515474166]
-script = ExtResource("1_37kl0")

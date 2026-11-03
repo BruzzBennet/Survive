@@ -1,0 +1,289 @@
+[gd_scene format=3 uid="uid://didohybkwclsk"]
+
+[ext_resource type="Script" uid="uid://dprpd5ilo6o1n" path="res://scripts/Player/UI/player_ui.gd" id="1_dg35x"]
+[ext_resource type="Shader" uid="uid://b06opbiteg1el" path="res://shaders/ProgressBarFlash.gdshader" id="2_32lw8"]
+[ext_resource type="Texture2D" uid="uid://dcjuy08jl0hma" path="res://assets/cards/icons/suit.png" id="3_wejmm"]
+[ext_resource type="Texture2D" uid="uid://cqgnfy4xackhr" path="res://assets/cards/icons/Arm_W.png" id="4_xpg7k"]
+[ext_resource type="Texture2D" uid="uid://bnvj74cj18nl1" path="res://assets/cards/icons/Blade_W.png" id="5_27767"]
+[ext_resource type="Texture2D" uid="uid://bupg2o7574s7a" path="res://assets/cards/icons/Boot_W.png" id="6_wpart"]
+[ext_resource type="Texture2D" uid="uid://bjooe2cuktdrs" path="res://assets/cards/icons/Gun_W.png" id="7_6ximr"]
+[ext_resource type="PackedScene" uid="uid://csbksfn8wegm7" path="res://scenes/henshin_menu/card_base.tscn" id="8_di683"]
+[ext_resource type="Texture2D" uid="uid://dwwxljqniuq2q" path="res://assets/MR/BodyParts/Helmets/Helmet_MROG.png" id="9_7ap21"]
+[ext_resource type="Shader" uid="uid://cbjrfkuwbn76f" path="res://shaders/atk.gdshader" id="10_32wbi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvtit"]
+bg_color = Color(0.7607843, 0.7607843, 0.7607843, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.7372549, 0.7372549, 0.7372549, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afog6"]
+bg_color = Color(0.065777026, 0.051149674, 0.078752615, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.972549, 0.972549, 0.972549, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dg35x"]
+shader = ExtResource("2_32lw8")
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jt14p"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32lw8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_afog6"]
+shader = ExtResource("2_32lw8")
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dg35x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cviaw"]
+shader = ExtResource("2_32lw8")
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cviaw"]
+bg_color = Color(0, 0.72156864, 0.8235294, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_da24e"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_right = 2
+border_color = Color(0.972549, 0.972549, 0.972549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ay8ja"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.972549, 0.972549, 0.972549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5kdx"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_right = 2
+border_color = Color(0.972549, 0.972549, 0.972549, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_au7tn"]
+shader = ExtResource("10_32wbi")
+shader_parameter/value = 1.0
+shader_parameter/segments = 4
+shader_parameter/segment_gap = 0.075
+shader_parameter/inner_radius = 0.30000001425
+shader_parameter/outer_radius = 0.5
+shader_parameter/bar_color = Color(0, 0.8, 0.3, 1)
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader_parameter/edge_softness = 0.05
+shader_parameter/flash_modifier = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
+[node name="UI" type="Control" unique_id=1412859120]
+clip_children = 2
+light_mask = 524288
+visibility_layer = 524288
+layout_mode = 3
+anchor_right = 0.047000002
+anchor_bottom = 0.1
+offset_right = -0.08000183
+script = ExtResource("1_dg35x")
+
+[node name="Panel3" type="Panel" parent="." unique_id=1631301882]
+layout_mode = 0
+offset_left = 3.0
+offset_top = -1.0
+offset_right = 109.0
+offset_bottom = 55.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nvtit")
+
+[node name="Panel6" type="Panel" parent="." unique_id=1928003629]
+layout_mode = 0
+offset_left = 3.0
+offset_top = -1.0
+offset_right = 109.0
+offset_bottom = 55.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_afog6")
+
+[node name="Suit_Ammo" type="ProgressBar" parent="." unique_id=1117288043]
+material = SubResource("ShaderMaterial_dg35x")
+layout_mode = 0
+offset_left = 43.0
+offset_top = 51.0
+offset_right = 91.0
+offset_bottom = 55.0
+rotation = -1.5707964
+theme_override_styles/background = SubResource("StyleBoxFlat_jt14p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_32lw8")
+show_percentage = false
+
+[node name="HP" type="ProgressBar" parent="." unique_id=1291362246]
+material = SubResource("ShaderMaterial_afog6")
+layout_mode = 0
+offset_left = 53.0
+offset_top = 51.0
+offset_right = 101.0
+offset_bottom = 57.0
+rotation = -1.5707964
+theme_override_styles/background = SubResource("StyleBoxFlat_jt14p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dg35x")
+max_value = 5.0
+show_percentage = false
+
+[node name="Ammo" type="ProgressBar" parent="." unique_id=1456749725]
+material = SubResource("ShaderMaterial_cviaw")
+layout_mode = 0
+offset_left = 65.0
+offset_top = 51.0
+offset_right = 113.0
+offset_bottom = 55.0
+rotation = -1.5707964
+theme_override_styles/background = SubResource("StyleBoxFlat_jt14p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cviaw")
+show_percentage = false
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1622889538]
+
+[node name="Suit" type="Sprite2D" parent="Node2D" unique_id=700973204]
+position = Vector2(22, 25)
+scale = Vector2(2, 2)
+texture = ExtResource("3_wejmm")
+
+[node name="ArmW" type="Sprite2D" parent="Node2D" unique_id=575403464]
+clip_children = 1
+position = Vector2(98, 36)
+scale = Vector2(0.9782721, 0.9782721)
+texture = ExtResource("4_xpg7k")
+
+[node name="ColorRect" type="ColorRect" parent="Node2D/ArmW" unique_id=1660960882]
+offset_left = -62.0
+offset_top = -27.0
+offset_right = -22.0
+offset_bottom = 13.0
+scale = Vector2(1.8000003, 1.3599997)
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="BladeW" type="Sprite2D" parent="Node2D" unique_id=1593252495]
+clip_children = 1
+position = Vector2(82, 19)
+texture = ExtResource("5_27767")
+
+[node name="ColorRect2" type="ColorRect" parent="Node2D/BladeW" unique_id=1881113469]
+offset_left = -54.0
+offset_top = -11.0
+offset_right = -14.0
+offset_bottom = 29.0
+scale = Vector2(1.8000003, 1.3599997)
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="BootW" type="Sprite2D" parent="Node2D" unique_id=382314904]
+clip_children = 1
+position = Vector2(98, 19)
+texture = ExtResource("6_wpart")
+
+[node name="ColorRect3" type="ColorRect" parent="Node2D/BootW" unique_id=1615340346]
+offset_left = -60.0
+offset_top = -25.999998
+offset_right = -20.0
+offset_bottom = 14.000002
+scale = Vector2(1.8000003, 1.3599997)
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="GunW" type="Sprite2D" parent="Node2D" unique_id=472143525]
+clip_children = 2
+position = Vector2(82, 36)
+texture = ExtResource("7_6ximr")
+
+[node name="ColorRect4" type="ColorRect" parent="Node2D/GunW" unique_id=1885075057]
+offset_left = -53.0
+offset_top = -43.0
+offset_right = -13.0
+offset_bottom = -3.0
+scale = Vector2(1.8000003, 1.3599997)
+color = Color(0.24313726, 0.20784314, 0.27450982, 1)
+
+[node name="CardBase" parent="." unique_id=706061897 instance=ExtResource("8_di683")]
+visible = false
+position = Vector2(22, 27)
+
+[node name="CardBase2" parent="." unique_id=284580957 instance=ExtResource("8_di683")]
+visible = false
+position = Vector2(90, 27)
+
+[node name="Panel4" type="Panel" parent="." unique_id=1144266166]
+layout_mode = 0
+offset_left = 13.0
+offset_top = -1.0
+offset_right = 51.0
+offset_bottom = 55.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_da24e")
+
+[node name="Panel7" type="Panel" parent="." unique_id=101332493]
+layout_mode = 0
+offset_left = 39.0
+offset_top = -1.0
+offset_right = 73.0
+offset_bottom = 55.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ay8ja")
+
+[node name="Panel5" type="Panel" parent="." unique_id=2011303122]
+layout_mode = 0
+offset_left = 27.0
+offset_top = -1.0
+offset_right = 63.0
+offset_bottom = 55.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_u5kdx")
+
+[node name="PlayerIcon" type="Sprite2D" parent="." unique_id=2116694426]
+visible = false
+position = Vector2(13, 13)
+scale = Vector2(2, 2)
+texture = ExtResource("9_7ap21")
+hframes = 4
+frame = 1
+
+[node name="ATKBar" type="ColorRect" parent="." unique_id=106199045]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_au7tn")
+layout_mode = 0
+offset_left = -4.0
+offset_top = -3.0
+offset_right = 26.0
+offset_bottom = 27.0
+scale = Vector2(1.2, 1.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1495221148]
+visible = false
+position = Vector2(14, 15)
+texture = ExtResource("6_wpart")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1521311768]
+visible = false
+layout_mode = 1
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 37.0
+offset_bottom = 32.0
+scale = Vector2(0.5, 0.5)
+text = "ATK"
+horizontal_alignment = 1
+vertical_alignment = 1

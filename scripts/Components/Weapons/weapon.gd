@@ -29,9 +29,8 @@ enum shot_pattern{
 @export var speed_boost: int = clamp(0,-1,1)
 @export var defense_boost: int = clamp(0,-1,1)
 @export var ammo_boost: int = clamp(0,-1,1)
-@export var bullet_pierce_boost: int = clamp(0,0,1)
+@export var bullet_power_boost: int = clamp(0,0,1)
 @export var bullet_reach_boost: int = clamp(0,-1,1)
-@export var bullet_speed_boost: int = clamp(0,-1,1)
 @export var effect_added: GDScript 
 
 var max_ammo: float = 100.0

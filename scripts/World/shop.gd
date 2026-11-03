@@ -13,7 +13,7 @@ var items = [
 var stat_boosts = [
 	preload("res://resources/stat_boosts/ammo.tres"),
 	preload("res://resources/stat_boosts/defense.tres"),
-	preload("res://resources/stat_boosts/pierce.tres"),
+	# preload("res://resources/stat_boosts/pierce.tres"),
 	preload("res://resources/stat_boosts/reach.tres"),
 	preload("res://resources/stat_boosts/power.tres")
 	# preload("res://resources/stat_boosts/speed.tres")
@@ -91,4 +91,7 @@ func create_item(this_item: Array):
 			# if will_boost_suit == 1:
 			# 	spawned_item.weapon=false
 			spawned_item.item=stat_boosts.pick_random().duplicate()
+			var will_be_suit_boost = randi_range(0,1)
+			if will_be_suit_boost==1:
+				spawned_item.weapon=false
 	return spawned_item
