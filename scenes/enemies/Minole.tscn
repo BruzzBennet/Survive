@@ -8,13 +8,7 @@
 [ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="6_nyxej"]
 [ext_resource type="PackedScene" uid="uid://bebyjivuy8kc1" path="res://scenes/boxes/followbox.tscn" id="6_qo6uu"]
 [ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="8_wlgnr"]
-[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="9_n0wpl"]
-[ext_resource type="Resource" uid="uid://dbqq03a30b587" path="res://resources/items/Gun_Bombry.tres" id="10_ruw25"]
-[ext_resource type="Resource" uid="uid://c3fqsy8yu0i2o" path="res://resources/items/Boot_Bombry.tres" id="11_p15it"]
-[ext_resource type="Resource" uid="uid://bqtx48kbeccts" path="res://resources/items/Suit_Bombry.tres" id="12_lrhdq"]
-[ext_resource type="Resource" uid="uid://24keyjcrskmc" path="res://resources/items/Blade_Bombry.tres" id="13_853td"]
-[ext_resource type="Texture2D" uid="uid://dt4ckpfmu8xwt" path="res://assets/cards/Mons/bombry.png" id="14_57dcd"]
-[ext_resource type="Script" uid="uid://84qpp678qnu4" path="res://scripts/Components/stat_boost.gd" id="15_3b1wy"]
+[ext_resource type="Resource" uid="uid://cxr2a1jsq7hc5" path="res://resources/Mons/minole.tres" id="9_ev7nd"]
 
 [sub_resource type="Resource" id="Resource_ros7y"]
 script = ExtResource("5_0q6se")
@@ -69,19 +63,6 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_lbxlw"]
 radius = 64.0
 
-[sub_resource type="Resource" id="Resource_pqtu3"]
-script = ExtResource("15_3b1wy")
-mon_sprite = ExtResource("14_57dcd")
-bullet_power_boost = 1
-metadata/_custom_type_script = "uid://84qpp678qnu4"
-
-[sub_resource type="Resource" id="Resource_b6yx7"]
-script = ExtResource("9_n0wpl")
-mon_sprite = ExtResource("14_57dcd")
-item_is = 3
-stat_boost = SubResource("Resource_pqtu3")
-metadata/_custom_type_script = "uid://c38u5aaaos1gy"
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_b6yx7"]
 radius = 7.0
 
@@ -124,7 +105,7 @@ debug_color = Color(1, 1, 0, 0.42000002)
 collision_layer = 2
 collision_mask = 8
 score_value = 100
-items_it_can_drop = Array[ExtResource("9_n0wpl")]([ExtResource("10_ruw25"), ExtResource("11_p15it"), ExtResource("12_lrhdq"), ExtResource("13_853td"), SubResource("Resource_b6yx7")])
+drops = ExtResource("9_ev7nd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=924731486]
 position = Vector2(0, 1)

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://b5h1tt01frljp"]
+
+[ext_resource type="Texture2D" uid="uid://c54xvyi3k25pw" path="res://assets/Weapons/Blade/Icie_Blade.png" id="1_mvh47"]
+[ext_resource type="Resource" uid="uid://decanu1a0hm3i" path="res://resources/characters/MR/palettes/silver.tres" id="2_hsflm"]
+[ext_resource type="Texture2D" uid="uid://rtmlx08v16wn" path="res://assets/Weapons/Boots/Boot_Icie.png" id="3_cytpf"]
+[ext_resource type="PackedScene" uid="uid://dcclv4wy77u2a" path="res://scenes/bullets/slash_bullet.tscn" id="4_famnr"]
+[ext_resource type="Texture2D" uid="uid://bkj4tucybt55q" path="res://assets/MR/BodyParts/Helmets/Helmet_Icie.png" id="5_pje5w"]
+[ext_resource type="Texture2D" uid="uid://cleh4jl3qnv3s" path="res://assets/cards/Mons/icie.png" id="6_o7stp"]
+[ext_resource type="AudioStream" uid="uid://bs6u0275h8oso" path="res://assets/audio/slash.mp3" id="7_dxqlf"]
+[ext_resource type="Script" uid="uid://d4dsworwk7sp" path="res://scripts/Components/Weapons/Equipment.gd" id="8_27d47"]
+[ext_resource type="AudioStream" uid="uid://b5vijeuq114j3" path="res://assets/audio/slashshot.mp3" id="9_m3a6j"]
+[ext_resource type="Resource" uid="uid://buty32ef34ml7" path="res://resources/stat_boosts/icie.tres" id="10_mvh47"]
+
+[resource]
+script = ExtResource("8_27d47")
+mon_sprite = ExtResource("6_o7stp")
+mon_name = "Icie"
+helmet = ExtResource("5_pje5w")
+body_palette = ExtResource("2_hsflm")
+blade_sprite = ExtResource("1_mvh47")
+boot_sprite = ExtResource("3_cytpf")
+bullet_scene = ExtResource("4_famnr")
+stat_boost = ExtResource("10_mvh47")
+metadata/_custom_type_script = "uid://d4dsworwk7sp"

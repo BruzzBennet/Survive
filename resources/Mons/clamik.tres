@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://c7n2s3lok0gao"]
+
+[ext_resource type="Texture2D" uid="uid://di42raarn7g2q" path="res://assets/Weapons/Blade/Clamik_Club.png" id="1_7u7v1"]
+[ext_resource type="Resource" uid="uid://r6y04rseflhk" path="res://resources/characters/MR/palettes/blue.tres" id="2_ludv3"]
+[ext_resource type="PackedScene" uid="uid://e7k5wcox11oq" path="res://scenes/bullets/clamik_bullet.tscn" id="3_cbbpt"]
+[ext_resource type="Texture2D" uid="uid://cou1wvvknd3kc" path="res://assets/Weapons/Guns/Clamik_Gun.png" id="4_ykp8k"]
+[ext_resource type="Texture2D" uid="uid://dutg1bfd3qpk3" path="res://assets/MR/BodyParts/Helmets/Helmet_Clamik.png" id="5_vfmci"]
+[ext_resource type="Texture2D" uid="uid://l8hg62j8xwrl" path="res://assets/cards/Mons/Clamik.png" id="6_w2b41"]
+[ext_resource type="AudioStream" uid="uid://c8auegmv7t80r" path="res://assets/audio/nullpunch.wav" id="7_r47qc"]
+[ext_resource type="Script" uid="uid://d4dsworwk7sp" path="res://scripts/Components/Weapons/Equipment.gd" id="8_tv5k6"]
+[ext_resource type="Resource" uid="uid://c4kk3ahf2ejsa" path="res://resources/stat_boosts/clamik.tres" id="9_4f0dr"]
+
+[resource]
+script = ExtResource("8_tv5k6")
+mon_sprite = ExtResource("6_w2b41")
+mon_name = "Clamik"
+helmet = ExtResource("5_vfmci")
+body_palette = ExtResource("2_ludv3")
+blade_sprite = ExtResource("1_7u7v1")
+gun_sprite = ExtResource("4_ykp8k")
+equipment_description = "Bullets have a bigger area"
+bullet_scene = ExtResource("3_cbbpt")
+normal_attack_sfx = ExtResource("7_r47qc")
+special_attack_sfx = ExtResource("7_r47qc")
+stat_boost = ExtResource("9_4f0dr")
+metadata/_custom_type_script = "uid://d4dsworwk7sp"

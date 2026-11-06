@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d1f5mv123yrhj"]
 
-[ext_resource type="Script" uid="uid://bw34c428d43uu" path="res://scripts/Player/TypeAnimations/dasher.gd" id="1_m8apo"]
+[ext_resource type="Script" uid="uid://cax0jfx0imua8" path="res://scripts/Player/player.gd" id="1_t2guo"]
 [ext_resource type="Texture2D" uid="uid://ddps1u5bhw5fe" path="res://assets/Weapons/Boots/Boot_1.png" id="1_vnhk6"]
 [ext_resource type="PackedScene" uid="uid://2e7a6m6g18hl" path="res://scenes/bullet.tscn" id="2_lmgta"]
 [ext_resource type="Texture2D" uid="uid://cjlc00tcuntch" path="res://assets/MR/BodyParts/MRDashBase.png" id="3_sjba3"]
@@ -4879,9 +4879,9 @@ height = 36.0
 position = Vector2(-1, 2)
 collision_layer = 8
 collision_mask = 3
-script = ExtResource("1_m8apo")
-footstep_frames = Array[int]([0, 1, 2, 3, 5, 7, 9, 11, 13, 15, 17, 19])
-attack_frames = Array[int]([20, 23])
+script = ExtResource("1_t2guo")
+weapon_is = 3
+footstep_frames = Array[int]([4, 6, 8, 10, 12, 14, 16, 18, 20, 22])
 
 [node name="BulletManager" parent="." unique_id=1570605682 instance=ExtResource("2_lmgta")]
 weapon = null

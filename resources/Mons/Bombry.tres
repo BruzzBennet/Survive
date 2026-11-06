@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://cgwhn5cya2tx8"]
+
+[ext_resource type="Texture2D" uid="uid://dfir532sxa8u3" path="res://assets/Weapons/Blade/Bomb_Blade.png" id="1_pv4lq"]
+[ext_resource type="Resource" uid="uid://cgmafrinwcw2i" path="res://resources/characters/MR/palettes/black.tres" id="2_dau66"]
+[ext_resource type="Texture2D" uid="uid://0ide1vxpeieh" path="res://assets/Weapons/Boots/Boot_Bombry.png" id="3_r612a"]
+[ext_resource type="PackedScene" uid="uid://bmujv15gka2i" path="res://scenes/bullets/bomb.tscn" id="4_b73a1"]
+[ext_resource type="PackedScene" uid="uid://2r00oc1ln8bw" path="res://scenes/effects/explode.tscn" id="5_dau66"]
+[ext_resource type="Texture2D" uid="uid://dvvd8dubjrsh7" path="res://assets/Weapons/Guns/Bomb_Gun.png" id="5_s61rv"]
+[ext_resource type="Texture2D" uid="uid://bs2y1ckx71emi" path="res://assets/MR/BodyParts/Helmets/Helmet_Bombry.png" id="6_cxhgs"]
+[ext_resource type="Texture2D" uid="uid://dt4ckpfmu8xwt" path="res://assets/cards/Mons/bombry.png" id="7_da83c"]
+[ext_resource type="AudioStream" uid="uid://cwy0bt2iirh15" path="res://assets/audio/bomb_throw.wav" id="8_nop8l"]
+[ext_resource type="Script" uid="uid://d4dsworwk7sp" path="res://scripts/Components/Weapons/Equipment.gd" id="9_80w1i"]
+[ext_resource type="Resource" uid="uid://dxl5488wkoglb" path="res://resources/stat_boosts/bombry.tres" id="11_r612a"]
+
+[resource]
+script = ExtResource("9_80w1i")
+mon_sprite = ExtResource("7_da83c")
+mon_name = "Bombry"
+helmet = ExtResource("6_cxhgs")
+body_palette = ExtResource("2_dau66")
+blade_sprite = ExtResource("1_pv4lq")
+gun_sprite = ExtResource("5_s61rv")
+boot_sprite = ExtResource("3_r612a")
+equipment_description = "Bullets explode on touch"
+bullet_scene = ExtResource("4_b73a1")
+normal_attack_sfx = ExtResource("8_nop8l")
+special_attack_sfx = ExtResource("8_nop8l")
+stat_boost = ExtResource("11_r612a")
+effect_added = ExtResource("5_dau66")
+metadata/_custom_type_script = "uid://d4dsworwk7sp"

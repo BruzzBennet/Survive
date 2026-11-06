@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://byarywc4oub5o"]
+
+[ext_resource type="Resource" uid="uid://cgmafrinwcw2i" path="res://resources/characters/MR/palettes/black.tres" id="1_cje87"]
+[ext_resource type="PackedScene" uid="uid://dcclv4wy77u2a" path="res://scenes/bullets/slash_bullet.tscn" id="2_cu4v3"]
+[ext_resource type="Texture2D" uid="uid://cdvna1lu7nk8l" path="res://assets/MR/BodyParts/Helmets/Helmet_Sergyo.png" id="3_jodva"]
+[ext_resource type="AudioStream" uid="uid://bs6u0275h8oso" path="res://assets/audio/slash.mp3" id="4_ccilu"]
+[ext_resource type="Script" uid="uid://d4dsworwk7sp" path="res://scripts/Components/Weapons/Equipment.gd" id="5_3kexq"]
+[ext_resource type="AudioStream" uid="uid://b5vijeuq114j3" path="res://assets/audio/slashshot.mp3" id="6_bmvuv"]
+[ext_resource type="Script" uid="uid://84qpp678qnu4" path="res://scripts/Components/stat_boost.gd" id="7_ddjx2"]
+
+[sub_resource type="Resource" id="Resource_fu3nm"]
+script = ExtResource("7_ddjx2")
+metadata/_custom_type_script = "uid://84qpp678qnu4"
+
+[resource]
+script = ExtResource("5_3kexq")
+helmet = ExtResource("3_jodva")
+body_palette = ExtResource("1_cje87")
+bullet_scene = ExtResource("2_cu4v3")
+stat_boost = SubResource("Resource_fu3nm")
+metadata/_custom_type_script = "uid://d4dsworwk7sp"

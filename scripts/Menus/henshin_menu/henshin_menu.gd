@@ -44,9 +44,11 @@ func tween_it(node:Node,dist:int):
 func _play_or_discard(button:Button):
 	if button.get_child(0).visible == true:	
 		if Input.is_action_just_pressed("ui_accept"):
-			equip(button)
+			equip_suit(button)
+			close_menu()
 		elif Input.is_action_just_pressed("shoot"):
-			discard(button)
+			equip_weapon(button)
+			close_menu()
 
 func discard(button: Button):
 		var body = get_player()
@@ -124,30 +126,31 @@ func display_info(button: Button):
 	else:
 		description("","")
 
-func stat_info(item:Item):
-		match item.item_is:
-			item.item_type.weapon:
-				description(item.weapon.name,stat_shwocase(item.weapon)+item.weapon.description)
-			item.item_type.suit:
-				description(item.suit.name,stat_shwocase(item.suit)+item.suit.description)
+func stat_info(item:Equipment):
+	description(item.mon_name,stat_shwocase(item.stat_boost)+item.equipment_description)
+		# match item.item_is:
+		# 	item.item_type.weapon:
+				# description(item.weapon.name,stat_shwocase(item.weapon)+item.weapon.description)
+			# item.item_type.suit:
+			# 	description(item.suit.name,stat_shwocase(item.suit)+item.suit.description)
 
-func stat_shwocase(equipment):
-	var desc=""
-	if equipment is Suit or equipment is Weapon:
-		if equipment.speed_boost!=0:
-			desc+="Speed " + ifplus(equipment.speed_boost) + ". "
-		if equipment.defense_boost!=0:
-			desc+="Defense " + ifplus(equipment.defense_boost) + ". "
-		if equipment.ammo_boost!=0:
-			desc+="Ammo " + ifplus(equipment.ammo_boost) + ". "
+func stat_shwocase(equipment:Stat_Boost):
+		var desc=""
+	# if equipment is Suit or equipment is Weapon:
+		if equipment.bullet_speed_boost!=0:
+			desc+="Bullet Speed " + ifplus(equipment.bullet_speed_boost) + ". "
+		if equipment.stamina_boost!=0:
+			desc+="Stamina " + ifplus(equipment.stamina_boost) + ". "
 		if equipment.bullet_power_boost!=0:
 			desc+="Buller Power " + ifplus(equipment.bullet_power_boost) + ". "
 		if equipment.bullet_reach_boost!=0:
 			desc+="Bullet Reach " + ifplus(equipment.bullet_reach_boost) + ". "
-	# if desc == "":
-		return desc
-	# else:
-	# 	return desc + "\n"
+		if equipment.stamina_recover_boost!=0:
+			desc+="Recover  " + ifplus(equipment.stamina_recover_boost) + ". "
+		if desc == "":
+			return desc
+		else:
+			return desc + "\n"
 
 func ifplus(value:int):
 	if value>0:
@@ -228,6 +231,40 @@ func equip(button):
 					ui.suit_ammo_setup(GLOBAL.base_suit,false)
 				body.equip(equipment,GLOBAL.weapon)	
 		close_menu()
+
+func equip_suit(button):
+	var body = get_player()
+	var item =  button.get_child(0).item_summoned
+	var equipment
+	ui.set_suit(item)
+	if GLOBAL.suit != item:
+		equipment = item
+		henshin(body)
+		ui.suit_ammo_setup(item,false)
+	else:
+		ui.set_suit()
+		equipment = GLOBAL.base_suit
+		PLAYSFX.unequip()
+		ui.suit_ammo_setup(GLOBAL.base_suit,false)
+	body.equip(equipment,GLOBAL.weapon)	
+
+func equip_weapon(button):
+	var body = get_player()
+	var item =  button.get_child(0).item_summoned
+	var equipment
+	ui.set_weapon(item)
+	GLOBAL.weapon_item=item
+	if GLOBAL.weapon != item.weapon:
+		equipment = item.weapon
+		henshin(body)
+	else:
+		ui.set_weapon()
+		equipment=base_weapon
+		PLAYSFX.unequip()
+		if GLOBAL.weapon.weapon_type != equipment.weapon_type:
+			call_deferred("switch_weapon", equipment, body)
+		else:
+			body.equip(GLOBAL.suit,equipment)
 
 func henshin(body):
 	PLAYSFX.equip()

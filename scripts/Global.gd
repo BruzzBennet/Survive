@@ -2,15 +2,15 @@ extends Node
 
 var starting_level="res://scenes/worlds/start_world.tscn"
 
-var base_weapon=preload("res://resources/characters/Weapons/weaponless.tres")
-var base_suit=preload("res://resources/characters/MR/Suits/Sergyo.tres")
-var first_suit=preload("res://resources/items/Suit_MR.tres")
-var base_health=1.125
+var base_Mon=preload("res://resources/Mons/clamik.tres")
+var base_Mon1=preload("res://resources/Mons/minole.tres")
+
+var base_weapon=load("res://resources/Mons/sergyo.tres")
+var base_suit=load("res://resources/Mons/sergyo.tres")
+var base_health=100
 var base_enemy_amount: = 7
-var modified_health=false
 var base_ammo = 0.65
 
-var normal: PackedScene = preload("res://scenes/PlayerTypes/base.tscn")
 var weaponless: PackedScene = load("res://scenes/PlayerTypes/weaponless.tscn")
 var shooter: PackedScene = preload("res://scenes/PlayerTypes/Shooter.tscn")
 var dasher: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
@@ -18,16 +18,15 @@ var slasher: PackedScene = preload("res://scenes/PlayerTypes/Slasher.tscn")
 var base_player_type=weaponless
 
 var player_type=base_player_type
-var player_palette: MonRanger_pallete = preload("res://resources/characters/MR/palettes/turquoise.tres")
-var weapon: Weapon = base_weapon.duplicate()
-var suit: Suit = base_suit
+var weapon: Equipment = base_weapon.duplicate()
+var suit: Equipment = base_suit
 var current_level:= 0
 var starting_enemy_amount= base_enemy_amount
 var increase_dificulty: float = 0.0
 var max_speed: float = 200
 var health=base_health
 var melee_damage = 2.0
-var defense = 0
+var defense = 3
 var ammo = base_ammo
 var about_to_henshin:=false
 var weapon_item
@@ -54,15 +53,12 @@ func mute_sfx():
 		AudioServer.set_bus_mute(bus_index, false)
 		GLOBAL.sfx_on=true
 
-var deck = []
+var deck = [base_Mon.duplicate(),base_Mon1.duplicate()]
 var deck_size:= 3
 
-func add_card(card:Item):
+func add_card(card:Equipment):
 	if deck.size() < deck_size:
 		deck.append(card)
-
-func equip_weapon(this_weapon:Weapon):
-	weapon=this_weapon
 
 func restart():
 	SCORE.actual=0
@@ -74,11 +70,10 @@ func restart():
 	max_speed = 185
 	health=base_health
 	melee_damage = 2.0
-	defense = 0
+	defense = 3
 	ammo = base_ammo
 	current_level= 0
 	about_to_henshin=false
 	deck = []
-	modified_health=false
 	weapon_item=null
 	suit_item=null

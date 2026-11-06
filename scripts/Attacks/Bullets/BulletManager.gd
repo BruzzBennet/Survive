@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var weapon: Weapon
+@export var weapon: Equipment
 var bullet_scene
 var base_speed:=250.0
 var speed=base_speed
@@ -9,6 +9,9 @@ var time_on_field: float = 0.4
 var timeout_value: = 0.1
 var bullet_damage:= 1.0
 var shot_type
+var weapon_type
+var weapon_effect
+var suit_effect
 
 func reset_stats():
 	speed= base_speed
@@ -20,28 +23,36 @@ func reset_stats():
 func get_player():
 	return get_parent()
 
-func setup(bullet:Weapon, suit:Suit):
+func setup(bullet:Equipment, suit:Equipment,weapon_is:String):
 	reset_stats()
 	weapon=bullet
-	bullet_scene = weapon.bullet_scene
-	var new_durability = durability + weapon.bullet_power_boost + suit.bullet_power_boost
+	weapon_type=weapon_is
+	var suit_boost=suit.stat_boost
+	var weapon_boost=bullet.stat_boost
+	var new_durability = durability + weapon_boost.bullet_power_boost + suit_boost.bullet_power_boost
 	durability = max(new_durability,1)
-	time_on_field+=(time_on_field/4)*(weapon.bullet_reach_boost+suit.bullet_reach_boost)
-	speed+=(base_speed/4)*(weapon.bullet_power_boost+suit.bullet_power_boost)
-	match bullet.weapon_type:
-		Weapon.type.blade:
+	time_on_field+=(time_on_field/4)*(weapon_boost.bullet_reach_boost+suit_boost.bullet_reach_boost)
+	speed+=(base_speed/4)*(weapon_boost.bullet_speed_boost+suit_boost.bullet_speed_boost)
+	match weapon_type:
+		"blade":
 			durability+=1
-		Weapon.type.gun:
+		"gun":
 			speed+=base_speed/4
+	bullet_scene = weapon.bullet_scene
+	weapon_effect=weapon.effect_added
+	suit_effect=suit.effect_added
+	
+	
 
 func playsfx(shot_pattern_is=null):
 	var sfx = $AudioStreamPlayer2D
 	sfx.bus = "SFX"
 	var shot_list=["simple_shot","short_shot","medium_shot"]
-	if weapon.weapon_type == Weapon.type.blade:
-		shot_list=["short_shot","medium_shot"]
-	elif weapon.weapon_type == Weapon.type.none:
-		shot_list=["short_shot"]
+	match weapon_type:
+		"blade":
+			shot_list=["short_shot","medium_shot"]
+		"none":
+			shot_list=["short_shot"]
 	if shot_pattern_is in shot_list or !shot_pattern_is:
 		sfx.stream=weapon.normal_attack_sfx
 	else:
@@ -124,6 +135,14 @@ func simple_shot(pos,dir,dur:=1.0):
 		bullet.get_node("AnimationPlayer").play(anim_name)
 	bullet.direction = dir.normalized()
 	bullet.add_to_group("bullets")
+	if weapon_effect:
+		var effect=weapon_effect.instantiate()
+		bullet.add_child(effect)
+		# effect.owner=bullet
+	if suit_effect:
+		var effect=suit_effect.instantiate()
+		bullet.add_child(effect)
+		# effect.owner=bullet
 
 func continuous_shot_double(pos,dir):
 	simple_shot(pos,dir)

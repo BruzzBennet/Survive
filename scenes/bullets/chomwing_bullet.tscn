@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://c3xv3rjicutpn" path="res://assets/bullets/Chomwing_bullet.png" id="2_qf8ue"]
 [ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="3_0546c"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="4_ah5l5"]
-[ext_resource type="PackedScene" uid="uid://cmfufr60vjxw0" path="res://scenes/effects/flying.tscn" id="4_qf8ue"]
 
 [sub_resource type="GDScript" id="GDScript_ybeja"]
 script/source = "extends CharacterBody2D
@@ -536,5 +535,3 @@ shape = SubResource("RectangleShape2D_eoqba")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1424104363]
 libraries/ = SubResource("AnimationLibrary_in4mv")
-
-[node name="Flying" parent="." unique_id=178092305 instance=ExtResource("4_qf8ue")]

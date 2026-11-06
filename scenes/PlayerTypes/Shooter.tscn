@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://b0jjvyy2alvs7"]
 
-[ext_resource type="Script" uid="uid://bw34c428d43uu" path="res://scripts/Player/TypeAnimations/dasher.gd" id="1_cnsif"]
-[ext_resource type="Resource" uid="uid://diqat8ll4su0h" path="res://resources/characters/Weapons/Guns/Lazer_Gun.tres" id="2_knag2"]
+[ext_resource type="Script" uid="uid://cax0jfx0imua8" path="res://scripts/Player/player.gd" id="1_cxmm0"]
 [ext_resource type="PackedScene" uid="uid://2e7a6m6g18hl" path="res://scenes/bullet.tscn" id="2_nbmp8"]
 [ext_resource type="Texture2D" uid="uid://3kybjfo0bofs" path="res://assets/Weapons/Guns/Lazer_Gun.png" id="3_knag2"]
 [ext_resource type="Texture2D" uid="uid://dwwxljqniuq2q" path="res://assets/MR/BodyParts/Helmets/Helmet_MROG.png" id="4_cxmm0"]
@@ -3216,9 +3215,9 @@ _data = {
 [node name="Player" type="CharacterBody2D" unique_id=1921538405]
 collision_layer = 8
 collision_mask = 7
-script = ExtResource("1_cnsif")
-weapon = ExtResource("2_knag2")
-footstep_frames = Array[int]([4, 6, 8, 10, 12, 14, 16, 18, 24, 26, 28, 30, 32, 34, 36, 38])
+script = ExtResource("1_cxmm0")
+weapon_is = 1
+footstep_frames = Array[int]([4, 6, 8, 10, 12, 14, 16, 18, 24, 26, 28, 32, 34, 36, 38])
 
 [node name="BulletManager" parent="." unique_id=1570605682 instance=ExtResource("2_nbmp8")]
 weapon = null
@@ -3238,7 +3237,6 @@ visible = false
 position = Vector2(0.5, -4)
 texture = ExtResource("4_cxmm0")
 hframes = 4
-frame = 3
 
 [node name="Sprite" type="Sprite2D" parent="Skeleton" unique_id=237782570]
 material = SubResource("ShaderMaterial_go3n0")
@@ -3311,6 +3309,6 @@ collision_mask = 6
 attack = ExtResource("14_vllqc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1088671527]
-position = Vector2(-9, -12)
+position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_boual")
 debug_color = Color(1, 0, 0, 0.42000002)

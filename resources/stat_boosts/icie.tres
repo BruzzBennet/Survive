@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Stat_Boost" format=3 uid="uid://buty32ef34ml7"]
+
+[ext_resource type="Script" uid="uid://84qpp678qnu4" path="res://scripts/Components/stat_boost.gd" id="1_q3otp"]
+
+[resource]
+script = ExtResource("1_q3otp")
+bullet_power_boost = 1
+stamina_recover_boost = 1
+metadata/_custom_type_script = "uid://84qpp678qnu4"

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
-var speed: float = 250.0
+var base_speed: = 250.0
+var speed=base_speed
 var time_on_field: float = 0.0
 var max_time_on_field: float = 0.4
 var enemies_pierced: int = 0
@@ -25,7 +26,7 @@ func set_player(node:Node2D):
 	player=node
 
 func _ready():
-	reach=speed*max_time_on_field
+	reach=base_speed*max_time_on_field
 	$HitBox.area_entered.connect(_on_area_entered)
 	add_to_group("bullet")
 	$HitBox.attack.damage_done=damage_done

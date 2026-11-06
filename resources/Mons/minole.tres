@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://cxr2a1jsq7hc5"]
+
+[ext_resource type="Texture2D" uid="uid://dfir532sxa8u3" path="res://assets/Weapons/Blade/Bomb_Blade.png" id="1_gocdq"]
+[ext_resource type="Resource" uid="uid://cgmafrinwcw2i" path="res://resources/characters/MR/palettes/black.tres" id="2_0ybuk"]
+[ext_resource type="Texture2D" uid="uid://0ide1vxpeieh" path="res://assets/Weapons/Boots/Boot_Bombry.png" id="3_n2cex"]
+[ext_resource type="PackedScene" uid="uid://bmujv15gka2i" path="res://scenes/bullets/bomb.tscn" id="4_wfwil"]
+[ext_resource type="PackedScene" uid="uid://2r00oc1ln8bw" path="res://scenes/effects/explode.tscn" id="5_yg3e2"]
+[ext_resource type="Texture2D" uid="uid://dvvd8dubjrsh7" path="res://assets/Weapons/Guns/Bomb_Gun.png" id="6_8yh6x"]
+[ext_resource type="Texture2D" uid="uid://cuo8ln1wiwbxb" path="res://assets/MR/BodyParts/Helmets/Helmet_Minole.png" id="7_gocdq"]
+[ext_resource type="Texture2D" uid="uid://cm5o5ir5q7x77" path="res://assets/Enemies/Minole.png" id="8_0ybuk"]
+[ext_resource type="AudioStream" uid="uid://cwy0bt2iirh15" path="res://assets/audio/bomb_throw.wav" id="9_ln1yt"]
+[ext_resource type="Script" uid="uid://d4dsworwk7sp" path="res://scripts/Components/Weapons/Equipment.gd" id="10_wqjgf"]
+[ext_resource type="Resource" uid="uid://nt0fyoilkhyg" path="res://resources/stat_boosts/minole.tres" id="11_n2cex"]
+
+[resource]
+script = ExtResource("10_wqjgf")
+mon_sprite = ExtResource("8_0ybuk")
+mon_name = "Minole"
+helmet = ExtResource("7_gocdq")
+body_palette = ExtResource("2_0ybuk")
+blade_sprite = ExtResource("1_gocdq")
+gun_sprite = ExtResource("6_8yh6x")
+boot_sprite = ExtResource("3_n2cex")
+equipment_description = "Bullets explode on touch"
+bullet_scene = ExtResource("4_wfwil")
+normal_attack_sfx = ExtResource("9_ln1yt")
+special_attack_sfx = ExtResource("9_ln1yt")
+stat_boost = ExtResource("11_n2cex")
+effect_added = ExtResource("5_yg3e2")
+metadata/_custom_type_script = "uid://d4dsworwk7sp"

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://bqhr7dwmaef55"]
+
+[ext_resource type="Texture2D" uid="uid://c20rh388uydyp" path="res://assets/Weapons/Blade/Chomwing_Blade.png" id="1_n0gc3"]
+[ext_resource type="Resource" uid="uid://decanu1a0hm3i" path="res://resources/characters/MR/palettes/silver.tres" id="2_ib7r8"]
+[ext_resource type="Texture2D" uid="uid://d21j5nvg6bhx1" path="res://assets/Weapons/Boots/Boot_Chomwing.png" id="3_rh0nw"]
+[ext_resource type="PackedScene" uid="uid://yrmyr6f8yung" path="res://scenes/bullets/chomwing_bullet.tscn" id="4_5s231"]
+[ext_resource type="PackedScene" uid="uid://cmfufr60vjxw0" path="res://scenes/effects/flying.tscn" id="5_4nh4j"]
+[ext_resource type="Texture2D" uid="uid://c8gwyr374ixrk" path="res://assets/Weapons/Guns/Chomwing_Gun.png" id="6_kbdcv"]
+[ext_resource type="Texture2D" uid="uid://cistp1mr0o283" path="res://assets/MR/BodyParts/Helmets/Helmet_Chomwing.png" id="7_8xddi"]
+[ext_resource type="Texture2D" uid="uid://dfe3oh5csoxoq" path="res://assets/cards/Mons/chomwing.png" id="8_mpkn1"]
+[ext_resource type="AudioStream" uid="uid://bs6u0275h8oso" path="res://assets/audio/slash.mp3" id="9_hh8ej"]
+[ext_resource type="Script" uid="uid://d4dsworwk7sp" path="res://scripts/Components/Weapons/Equipment.gd" id="10_t4jv4"]
+[ext_resource type="AudioStream" uid="uid://b5vijeuq114j3" path="res://assets/audio/slashshot.mp3" id="11_c7bmj"]
+[ext_resource type="Resource" uid="uid://cwprr5jrxrixv" path="res://resources/stat_boosts/chomwing.tres" id="12_iq5l0"]
+
+[resource]
+script = ExtResource("10_t4jv4")
+mon_sprite = ExtResource("8_mpkn1")
+mon_name = "Chomwing"
+helmet = ExtResource("7_8xddi")
+body_palette = ExtResource("2_ib7r8")
+blade_sprite = ExtResource("1_n0gc3")
+gun_sprite = ExtResource("6_kbdcv")
+boot_sprite = ExtResource("3_rh0nw")
+equipment_description = "Bullets fly through walls"
+bullet_scene = ExtResource("4_5s231")
+stat_boost = ExtResource("12_iq5l0")
+effect_added = ExtResource("5_4nh4j")
+metadata/_custom_type_script = "uid://d4dsworwk7sp"

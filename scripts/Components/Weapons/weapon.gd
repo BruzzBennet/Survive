@@ -26,11 +26,7 @@ enum shot_pattern{
 @export var bullet_scene : PackedScene
 @export var normal_attack_sfx : AudioStream = preload("res://assets/audio/slash.mp3")
 @export var special_attack_sfx: AudioStream = preload("res://assets/audio/slashshot.mp3")
-@export var speed_boost: int = clamp(0,-1,1)
-@export var defense_boost: int = clamp(0,-1,1)
-@export var ammo_boost: int = clamp(0,-1,1)
-@export var bullet_power_boost: int = clamp(0,0,1)
-@export var bullet_reach_boost: int = clamp(0,-1,1)
+@export var stat_boost: Stat_Boost
 @export var effect_added: GDScript 
 
 var max_ammo: float = 100.0

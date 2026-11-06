@@ -4,8 +4,8 @@ extends Control
 @onready var ammo = $Ammo
 var suit_ammo
 var flash_tween: Tween
-var current_weapon: Weapon
-var current_suit: Suit
+var current_weapon: Equipment
+var current_suit: Equipment
 var min_ammo:=1.0
 var depletion_rate:=1.0
 var max_hp
@@ -16,7 +16,7 @@ var currentATK
 var startingSuitHP
 var currentSuitHP:=0.2
 var min_suit_hp:=0.1
-var weapon_type
+# var weapon_type
 var original_color=Color(0.0,0.5,0.65,1.0)
 
 func _ready() -> void:
@@ -30,11 +30,11 @@ func _ready() -> void:
 	if suit_ammo:
 		suit_ammo_setup(GLOBAL.suit,false)
 
-func set_equipment(suit:Item,weapon:Item):
+func set_equipment(suit:Equipment,weapon:Equipment):
 	set_suit(suit)
 	set_weapon(weapon)
 
-func set_suit(item:Item=null):
+func set_suit(item:Equipment=null):
 	if item:
 		$CardBase.visible=true
 		GLOBAL.suit_item=item
@@ -43,7 +43,7 @@ func set_suit(item:Item=null):
 		$CardBase.visible=false
 		GLOBAL.suit_item=null
 	
-func set_weapon(item:Item=null):
+func set_weapon(item:Equipment=null):
 	if item:
 		$CardBase2.visible=true
 		GLOBAL.weapon_item=item
@@ -70,9 +70,9 @@ func set_health(add: float,spawned=true):
 
 func bar_color(bar,old_value:float,new_value:float,spawned=true,color:Color=Color.GREEN,damage=true):
 	var new_color
-	if bar.value >= bar.max_value*3/5:
+	if bar.value >= bar.max_value*6/10:
 		new_color=color
-	elif bar.value >= bar.max_value*1/4:
+	elif bar.value >= bar.max_value*3/10:
 		new_color=Color.YELLOW
 	else:
 		new_color=Color.RED
@@ -112,9 +112,9 @@ func flash(color,bar,past_color=original_color):
 func set_icon(suit:Suit):
 	$PlayerIcon.texture=suit.helmet
 
-func ammo_setup(weapon: Weapon,spawned=true):
+func ammo_setup(weapon: Equipment,spawned=true):
 	current_weapon = weapon
-	weapon_type = weapon.weapon_type
+	# weapon_type = weapon.weapon_type
 	maxATK = weapon.max_ammo
 	ammo.max_value=maxATK
 	startingATK= weapon.current_ammo
@@ -132,7 +132,7 @@ func reduce_ammo(times: float = 1):
 func set_ammo(current_ammo):
 	ammo.value=current_ammo
 
-func suit_ammo_setup(weapon: Suit, flash_it=true):
+func suit_ammo_setup(weapon: Equipment, flash_it=true):
 	suit_ammo=get_node_or_null("Suit_Ammo")
 	if suit_ammo:
 		current_suit = weapon

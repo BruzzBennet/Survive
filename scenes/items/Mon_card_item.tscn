@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://d3ttm1t3l0su0"]
 
-[ext_resource type="Script" uid="uid://b2518i8rrlh3u" path="res://scripts/Items/shop_item.gd" id="1_jc55g"]
+[ext_resource type="Script" uid="uid://cv54hxtb8ehe2" path="res://scripts/Items/mon_card_item.gd" id="1_1i1ji"]
 [ext_resource type="PackedScene" uid="uid://cxqsoljorqyxk" path="res://scenes/items/mon_spirit.tscn" id="2_ctc1s"]
 [ext_resource type="Texture2D" uid="uid://dvxsn55ra6y28" path="res://assets/cards/dropped_card.png" id="4_b7hu1"]
+[ext_resource type="Texture2D" uid="uid://npfvmcmbc37y" path="res://assets/cards/icons/MonJoy.png" id="5_biqaa"]
 [ext_resource type="PackedScene" uid="uid://3lwoa7tsv1fj" path="res://scenes/items/itemUpDown.tscn" id="5_m6sjq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajq8o"]
@@ -83,8 +84,7 @@ _data = {
 }
 
 [node name="Item" type="Node2D" unique_id=1644609114]
-script = ExtResource("1_jc55g")
-monCard = true
+script = ExtResource("1_1i1ji")
 
 [node name="MonSpirit" parent="." unique_id=1029576708 instance=ExtResource("2_ctc1s")]
 position = Vector2(-4, -14)
@@ -97,10 +97,12 @@ texture = ExtResource("4_b7hu1")
 hframes = 2
 
 [node name="Type" type="Sprite2D" parent="CardNode" unique_id=1574967400]
+texture = ExtResource("5_biqaa")
 
 [node name="ItemUpDown2" parent="CardNode" unique_id=299360922 instance=ExtResource("5_m6sjq")]
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1104734786]
+visible = false
 offset_left = -45.0
 offset_top = 8.0
 offset_right = 45.0

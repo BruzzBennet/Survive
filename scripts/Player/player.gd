@@ -6,11 +6,20 @@ var accel: float = 50
 var friction: float = 0.25
 # var dodge_speed: = 1.0
 # var dodge_min: float = 5.0
-@export var suit: Suit
-@export var weapon: Weapon
+@export var weapon_is: type
+
+enum type {
+	blade,
+	gun,
+	arm,
+	boot,
+	none
+}
+var weapon_type
+@export var suit: Equipment
+@export var weapon: Equipment
 @export var palette: MonRanger_pallete
-@export var footstep_frames: Array[int] = [0, 1]
-@export var attack_frames: Array[int]
+@export var footstep_frames: Array[int] = [4,6,8,10,12,14,16,18]
 @onready var animated_sprite_2d = $AnimationPlayer2D
 @onready var atkUI = get_tree().current_scene.get_node("HenshinMenu/UI")
 const margin = 12
@@ -34,72 +43,63 @@ signal weapon_broken
 func _ready():
 	broken=false
 	$HurtBox.invincible(1.0,false)
-	if suit:
-		$Skeleton/Head_Back.texture = suit.helmet
-		$Skeleton/Head_Front.texture = suit.helmet
-		$Skeleton/Sprite.set_palette(suit.body_palette)
-	else:
-		$Skeleton/Head_Back.texture = null
-		$Skeleton/Head_Front.texture = null
-		if palette:
-			$Skeleton/Sprite.set_palette(palette)
-
 	screen_size = get_viewport_rect().size
 
 
-func equip(this_suit:Suit,this_weapon:Weapon):
+func equip(this_suit:Equipment,this_weapon:Equipment):
 	suit=this_suit
 	weapon=this_weapon
 	equip_suit(this_suit)
 	equip_weapon(this_weapon)
-	$BulletManager.setup(this_weapon,this_suit)
+	$BulletManager.setup(this_weapon,this_suit,weapon_type)
 	stats_setup(this_suit,this_weapon)
 
-func stats_setup(this_suit:Suit,this_weapon:Weapon):
-	set_collision_mask_value(1, true)
-	$SuitEffect.set_script(null)
-	$WeaponEffect.set_script(null)
-	if this_suit.effect_added != null:
-		$SuitEffect.set_script(this_suit.effect_added)
-		$SuitEffect.setup()
-	if this_weapon.effect_added != null:
-		$WeaponEffect.set_script(this_weapon.effect_added)
-		$WeaponEffect.setup()
-	max_speed=GLOBAL.max_speed + ((GLOBAL.max_speed * 0.125) * (this_suit.speed_boost+this_weapon.speed_boost))
-	$HurtBox.defense = GLOBAL.defense + (0.175 * (this_suit.defense_boost+this_weapon.defense_boost))
-	var new_ammo = 1.0 - (0.25 * (this_suit.ammo_boost+this_weapon.ammo_boost))
+func stats_setup(this_suit:Equipment,this_weapon:Equipment):
+	var suit_boost=this_suit.stat_boost
+	var weapon_boost=this_weapon.stat_boost
+	max_speed=GLOBAL.max_speed + ((GLOBAL.max_speed * 0.125) * (suit_boost.bullet_speed_boost+weapon_boost.bullet_speed_boost))
+	$HurtBox.defense = GLOBAL.defense + suit_boost.stamina_boost+weapon_boost.stamina_boost
+	var new_ammo = 1.0 - (0.25 * (suit_boost.stamina_boost+weapon_boost.stamina_boost))
 	ammo_reduce = max(new_ammo,0.05)
-	if this_weapon.weapon_type == Weapon.type.boot:
+	if weapon_is == type.boot:
 		max_speed+=(GLOBAL.max_speed * 0.125)
 
-func equip_weapon(this_weapon:Weapon):
+func equip_weapon(this_weapon:Equipment):
 	GLOBAL.weapon=this_weapon
-	$Skeleton/Weapon_Back.texture = this_weapon.sprite
-	$Skeleton/Weapon_Front.texture = this_weapon.sprite
-	weapon_attack_pattern(this_weapon)
+	weapon_setup(this_weapon)
 	atkUI.ammo_setup(this_weapon)
 
 
-func weapon_attack_pattern(this_weapon:Weapon):
-	match this_weapon.weapon_type:
-		Weapon.type.boot:
+func weapon_setup(this_weapon:Equipment):
+	var weapon_sprite = null
+	match weapon_is:
+		type.boot:
 			melee_shot_pattern = "short_shot"
 			shot_pattern = "small_area_shot"
-		Weapon.type.gun:
+			weapon_sprite=this_weapon.boot_sprite
+			weapon_type="boot"
+		type.gun:
 			melee_shot_pattern = "medium_shot"
 			shot_pattern = "triple_shot"
-		Weapon.type.blade:
+			weapon_sprite=this_weapon.gun_sprite
+			weapon_type="gun"
+		type.blade:
 			melee_shot_pattern = "short_shot"
 			shot_pattern = "simple_shot"
-		Weapon.type.none:
+			weapon_sprite=this_weapon.blade_sprite
+			weapon_type="blade"
+		type.none:
 			melee_shot_pattern = "short_shot"
 			shot_pattern = "medium_shot"
+			weapon_type="none"
+	$Skeleton/Weapon_Back.texture = weapon_sprite
+	$Skeleton/Weapon_Front.texture = weapon_sprite
 
-func equip_suit(this_suit:Suit):
+func equip_suit(this_suit:Equipment):
 	if this_suit:
 		$Skeleton/Head_Back.texture = this_suit.helmet
 		$Skeleton/Head_Front.texture = this_suit.helmet
-		GLOBAL.player_palette=this_suit.body_palette
+		# GLOBAL.player_palette=this_suit.body_palette
 		GLOBAL.suit=this_suit
 		$Skeleton/Sprite.set_palette(this_suit.body_palette)
 	else:
@@ -169,14 +169,14 @@ func reset_broken():
 
 func attack():
 	is_attacking = true
-	match weapon.weapon_type:
-		Weapon.type.gun:
+	match weapon_is:
+		type.gun:
 			atkUI.reduce_ammo(ammo_reduce*0.5)
-		Weapon.type.boot:
+		type.boot:
 			atkUI.reduce_ammo(ammo_reduce*0.5)
-		Weapon.type.blade:
+		type.blade:
 			atkUI.reduce_ammo(ammo_reduce*0.35)
-		Weapon.type.none:
+		type.none:
 			atkUI.reduce_ammo(ammo_reduce*0.35)
 	$HurtBox.cancel_flash()
 	Short_Range_Attack()
@@ -199,9 +199,9 @@ func Short_Range_Attack():
 func shoot():
 	# if weapon.weapon_type == Weapon.type.boot:
 	# 		atkUI.reduce(ammo_reduce*3)
-	if weapon.weapon_type == Weapon.type.gun:
+	if weapon_is == type.gun:
 			atkUI.reduce_ammo(ammo_reduce*2)
-	elif weapon.weapon_type in [Weapon.type.none]:
+	elif weapon_is in [type.none]:
 			atkUI.reduce_ammo(ammo_reduce*0.65)
 	else:
 		atkUI.reduce_ammo(ammo_reduce)

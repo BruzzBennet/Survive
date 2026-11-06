@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://b8ptv4rbu8ocx"]
 
-[ext_resource type="Script" uid="uid://bw34c428d43uu" path="res://scripts/Player/TypeAnimations/dasher.gd" id="1_jptdl"]
+[ext_resource type="Script" uid="uid://cax0jfx0imua8" path="res://scripts/Player/player.gd" id="1_qll5q"]
 [ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="1_wak01"]
 [ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="2_jptdl"]
-[ext_resource type="Resource" uid="uid://dpna40n7xfpkk" path="res://resources/characters/Weapons/Blades/Bomb_Blade.tres" id="2_t48au"]
 [ext_resource type="Texture2D" uid="uid://lthgfou14u5y" path="res://assets/Weapons/Blade/Blade.png" id="3_oig8y"]
 [ext_resource type="Texture2D" uid="uid://dwwxljqniuq2q" path="res://assets/MR/BodyParts/Helmets/Helmet_MROG.png" id="4_qll5q"]
 [ext_resource type="Shader" uid="uid://bivbni0u3mi5d" path="res://shaders/palette_changer_and_hurt.gdshader" id="5_t48au"]
@@ -3771,9 +3770,8 @@ _data = {
 [node name="Player" type="CharacterBody2D" unique_id=1106704411]
 collision_layer = 8
 collision_mask = 7
-script = ExtResource("1_jptdl")
-weapon = ExtResource("2_t48au")
-footstep_frames = Array[int]([4, 6, 8, 10, 12, 14, 16, 18, 32, 34, 36, 38, 40, 42, 44, 46])
+script = ExtResource("1_qll5q")
+footstep_frames = Array[int]([4, 6, 8, 10, 12, 14, 16, 18, 32, 34, 36, 38, 40, 42, 45, 47])
 
 [node name="BulletManager" parent="." unique_id=1570605682 instance=ExtResource("11_26nik")]
 weapon = null
@@ -3818,7 +3816,6 @@ hframes = 6
 position = Vector2(-0.5, -5)
 texture = ExtResource("4_qll5q")
 hframes = 4
-frame = 3
 
 [node name="Sprite" type="Sprite2D" parent="Skeleton" unique_id=859598706]
 material = SubResource("ShaderMaterial_56elm")

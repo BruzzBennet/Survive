@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://cwy0bt2iirh15" path="res://assets/audio/bomb_throw.wav" id="2_8r2ux"]
 [ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="2_spsox"]
 [ext_resource type="Texture2D" uid="uid://0ide1vxpeieh" path="res://assets/Weapons/Boots/Boot_Bombry.png" id="3_8r2ux"]
+[ext_resource type="Resource" uid="uid://dxl5488wkoglb" path="res://resources/stat_boosts/bombry.tres" id="6_1qq32"]
 
 [resource]
 script = ExtResource("2_spsox")
@@ -14,5 +15,5 @@ description = "Bullets explode on touch."
 weapon_type = 3
 bullet_scene = ExtResource("1_x76n4")
 special_attack_sfx = ExtResource("2_8r2ux")
-ammo_boost = -1
+stat_boost = ExtResource("6_1qq32")
 metadata/_custom_type_script = "uid://hig2h24o38p0"

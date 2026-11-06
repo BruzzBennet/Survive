@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://cxfqgcicsjycu"]
+
+[ext_resource type="Texture2D" uid="uid://d3fr727htt61s" path="res://assets/Weapons/Blade/Pucklam_Blade.png" id="1_d2jq3"]
+[ext_resource type="Resource" uid="uid://c5plftuvha1cv" path="res://resources/characters/palettes/MR.tres" id="2_ci7f2"]
+[ext_resource type="PackedScene" uid="uid://e7k5wcox11oq" path="res://scenes/bullets/clamik_bullet.tscn" id="3_dm0rm"]
+[ext_resource type="Texture2D" uid="uid://bu0tsdj37eks2" path="res://assets/Weapons/Guns/Pucklam_Gun.png" id="4_rxst6"]
+[ext_resource type="Texture2D" uid="uid://bvh3jmse02gcb" path="res://assets/MR/BodyParts/Helmets/Helmet_Pucklam.png" id="5_03oso"]
+[ext_resource type="Texture2D" uid="uid://35py80wnqaso" path="res://assets/Enemies/Plucklam.png" id="6_64dtm"]
+[ext_resource type="AudioStream" uid="uid://c8auegmv7t80r" path="res://assets/audio/nullpunch.wav" id="7_vjo46"]
+[ext_resource type="Script" uid="uid://d4dsworwk7sp" path="res://scripts/Components/Weapons/Equipment.gd" id="8_swxhu"]
+[ext_resource type="Resource" uid="uid://b31ym7ihwondr" path="res://resources/stat_boosts/pucklam.tres" id="9_dan8i"]
+
+[resource]
+script = ExtResource("8_swxhu")
+mon_sprite = ExtResource("6_64dtm")
+mon_name = "Pucklam"
+helmet = ExtResource("5_03oso")
+body_palette = ExtResource("2_ci7f2")
+blade_sprite = ExtResource("1_d2jq3")
+gun_sprite = ExtResource("4_rxst6")
+equipment_description = "Bullets have a bigger area"
+bullet_scene = ExtResource("3_dm0rm")
+normal_attack_sfx = ExtResource("7_vjo46")
+special_attack_sfx = ExtResource("7_vjo46")
+stat_boost = ExtResource("9_dan8i")
+metadata/_custom_type_script = "uid://d4dsworwk7sp"

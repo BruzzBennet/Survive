@@ -9,7 +9,7 @@ var located_in
 @onready var hp = $HP
 @onready var ammo = $Ammo
 var flash_tween: Tween
-var current_weapon: Weapon
+var current_weapon: Equipment
 var min_ammo:=1.0
 var depletion_rate:=1.0
 var max_hp
@@ -42,11 +42,11 @@ func _physics_process(_delta: float):
 			if child is Button and child.has_focus():
 				_play_or_discard(child)
 
-func set_equipment(suit:Item,weapon:Item):
+func set_equipment(suit:Equipment,weapon:Equipment):
 	set_suit(suit)
 	set_weapon(weapon)
 
-func set_suit(item:Item=null):
+func set_suit(item:Equipment=null):
 	if item:
 		# $Panel/Card1/CardBase.visible=true
 		GLOBAL.suit_item=item
@@ -55,7 +55,7 @@ func set_suit(item:Item=null):
 		# $Panel/Card1/CardBase.visible=false
 		GLOBAL.suit_item=null
 	
-func set_weapon(item:Item=null):
+func set_weapon(item:Equipment=null):
 	if item:
 		# $Panel/Card2/CardBase2.visible=true
 		GLOBAL.weapon_item=item
@@ -114,7 +114,7 @@ func flash(color,bar):
 		0.3
 	)
 
-func ammo_setup(weapon: Weapon, flash_it=true):
+func ammo_setup(weapon: Equipment, flash_it=true):
 	current_weapon = weapon
 	weapon_type = weapon.weapon_type
 	maxATK = weapon.max_ammo
@@ -280,7 +280,7 @@ func equip(button):
 	clear_item_from_deck(item,past_suit,past_weapon)
 	close_menu()
 
-func clear_item_from_deck(item:Item,past_suit:Item,past_weapon:Item):
+func clear_item_from_deck(item:Item,past_suit:Equipment,past_weapon:Equipment):
 	GLOBAL.deck.erase(item)
 	match item.item_is:
 		item.item_type.weapon:

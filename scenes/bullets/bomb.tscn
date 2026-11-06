@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="2_ffnc2"]
 [ext_resource type="Texture2D" uid="uid://c3ee4te2p1fki" path="res://assets/bullets/BombBullet.png" id="2_lpuq3"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="3_bnhdt"]
-[ext_resource type="PackedScene" uid="uid://2r00oc1ln8bw" path="res://scenes/effects/explode.tscn" id="3_ffnc2"]
 
 [sub_resource type="GDScript" id="GDScript_ffnc2"]
 script/source = "extends CharacterBody2D
@@ -82,5 +81,3 @@ attack = SubResource("Resource_67nwr")
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_ffnc2")
 debug_color = Color(1, 0, 0, 0.42000002)
-
-[node name="Explode" parent="." unique_id=1533437041 instance=ExtResource("3_ffnc2")]

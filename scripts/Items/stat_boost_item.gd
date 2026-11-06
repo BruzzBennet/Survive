@@ -7,8 +7,8 @@ func _ready() -> void:
 	build(item)
 
 func build(boost:Stat_Boost):
-	if boost.mon_sprite:
-		$MonSpirit.build_Mon(boost.mon_sprite)
+	# if boost.mon_sprite:
+	# 	$MonSpirit.build_Mon(boost.mon_sprite)
 	var item_is = "to Weapon"
 	if !weapon:
 		item_is="to Suit"
@@ -17,16 +17,16 @@ func build(boost:Stat_Boost):
 func stat_shwocase(equipment:Stat_Boost):
 	var desc=""
 	if equipment:
-		if equipment.speed_boost!=0:
-			desc+="Speed " + ifplus(equipment.speed_boost) + "\n"
-		if equipment.defense_boost!=0:
-			desc+="Defense " + ifplus(equipment.defense_boost) + "\n"
-		if equipment.ammo_boost!=0:
-			desc+="Ammo " + ifplus(equipment.ammo_boost) + "\n"
+		if equipment.bullet_speed_boost!=0:
+			desc+="Bullet Speed " + ifplus(equipment.bullet_speed_boost) + ". " + "\n"
+		if equipment.stamina_boost!=0:
+			desc+="Stamina " + ifplus(equipment.stamina_boost) + ". " + "\n"
 		if equipment.bullet_power_boost!=0:
-			desc+="Bullet Power " + ifplus(equipment.bullet_power_boost) + "\n"
+			desc+="Buller Power " + ifplus(equipment.bullet_power_boost) + ". " + "\n"
 		if equipment.bullet_reach_boost!=0:
-			desc+="Bullet Reach " + ifplus(equipment.bullet_reach_boost) + "\n"
+			desc+="Bullet Reach " + ifplus(equipment.bullet_reach_boost) + ". " + "\n"
+		if equipment.stamina_recover_boost!=0:
+			desc+="Recover  " + ifplus(equipment.stamina_recover_boost) + ". " + "\n"
 		return desc
 
 func ifplus(value:int):
@@ -40,23 +40,21 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	var stat_boost=item
 	if body is Player_Unit and GLOBAL.weapon!=GLOBAL.base_weapon and GLOBAL.suit!=GLOBAL.base_suit:
 		if weapon:
-			boost_this=body.weapon
+			boost_this=body.weapon.stat_boost
 		else:
-			boost_this=body.suit
-		if stat_boost.speed_boost!=0:
-			boost_this.speed_boost+=stat_boost.speed_boost
-		if stat_boost.defense_boost!=0:
-			boost_this.defense_boost+=stat_boost.defense_boost
-		if stat_boost.ammo_boost!=0:
-			boost_this.ammo_boost+=stat_boost.ammo_boost
+			boost_this=body.suit.stat_boost
+		if stat_boost.bullet_speed_boost!=0:
+			boost_this.bullet_speed_boost+=stat_boost.bullet_speed_boost
+		if stat_boost.stamina_boost!=0:
+			boost_this.stamina_boost+=stat_boost.stamina_boost
 		if stat_boost.bullet_power_boost!=0:
 			boost_this.bullet_power_boost+=stat_boost.bullet_power_boost
 		if stat_boost.bullet_reach_boost!=0:
 			boost_this.bullet_reach_boost+=stat_boost.bullet_reach_boost
 		if weapon:
-			body.stats_setup(GLOBAL.suit,boost_this)
+			body.stats_setup(GLOBAL.suit,body.weapon)
 		else:
-			body.stats_setup(boost_this,GLOBAL.weapon)
+			body.stats_setup(body.suit,GLOBAL.weapon)
 		PLAYSFX.recover()
 		queue_free()
 		

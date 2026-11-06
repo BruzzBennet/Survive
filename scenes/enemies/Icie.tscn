@@ -8,11 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://bi85dc6igdck0" path="res://assets/audio/complaint.wav" id="4_fu0ok"]
 [ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="4_l6580"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="5_1awcq"]
-[ext_resource type="Script" uid="uid://c38u5aaaos1gy" path="res://scripts/Items/item.gd" id="7_vjgsm"]
-[ext_resource type="Resource" uid="uid://cqagoe3l62t02" path="res://resources/items/Suit_Icie.tres" id="8_450o4"]
-[ext_resource type="Resource" uid="uid://esu63s8l24lr" path="res://resources/items/Boot_Icie.tres" id="9_q7fmb"]
-[ext_resource type="Resource" uid="uid://bw4s680n2ywxu" path="res://resources/items/Blade_Icie.tres" id="10_aorp8"]
-[ext_resource type="Resource" uid="uid://df2nbd23piwyc" path="res://resources/items/healing_item.tres" id="11_f3q5m"]
+[ext_resource type="Resource" uid="uid://b5h1tt01frljp" path="res://resources/Mons/Icie.tres" id="7_1awcq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ydeur"]
 shader = ExtResource("2_1awcq")
@@ -703,7 +699,7 @@ debug_color = Color(1, 1, 0, 0.42000002)
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("3_fu0ok")]
 collision_layer = 2
 collision_mask = 8
-items_it_can_drop = Array[ExtResource("7_vjgsm")]([ExtResource("9_q7fmb"), ExtResource("8_450o4"), ExtResource("10_aorp8"), ExtResource("11_f3q5m")])
+drops = ExtResource("7_1awcq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=295741136]
 position = Vector2(0, 1)

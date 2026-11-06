@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://cwy0bt2iirh15" path="res://assets/audio/bomb_throw.wav" id="2_8f8ty"]
 [ext_resource type="Script" uid="uid://hig2h24o38p0" path="res://scripts/Components/Weapons/weapon.gd" id="3_76vav"]
 [ext_resource type="Texture2D" uid="uid://dvvd8dubjrsh7" path="res://assets/Weapons/Guns/Bomb_Gun.png" id="4_vr5oi"]
+[ext_resource type="Resource" uid="uid://dxl5488wkoglb" path="res://resources/stat_boosts/bombry.tres" id="5_8f8ty"]
 
 [resource]
 script = ExtResource("3_76vav")
@@ -14,5 +15,5 @@ weapon_type = 1
 bullet_scene = ExtResource("1_vr5oi")
 normal_attack_sfx = ExtResource("2_8f8ty")
 special_attack_sfx = ExtResource("2_8f8ty")
-ammo_boost = -1
+stat_boost = ExtResource("5_8f8ty")
 metadata/_custom_type_script = "uid://hig2h24o38p0"

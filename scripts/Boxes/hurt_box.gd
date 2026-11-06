@@ -9,7 +9,7 @@ var shared_material: ShaderMaterial
 @export var score_value: int = 50
 @export var receives_knockback: bool = false
 @export var gets_stunned: bool = false
-@export var items_it_can_drop : Array[Item]
+@export var drops: Equipment
 var defense:= 0.0
 var extra_heal=0.0
 var drops_items:bool
@@ -53,6 +53,7 @@ func _ready():
 			max_health=GLOBAL.base_health
 			drops_items=false
 			hpUI = get_tree().current_scene.get_node("HenshinMenu/UI")
+			defense=2.0
 	elif takes_damage_from == attack_source.player:
 			set_collision_layer_value(2, true)
 			set_collision_mask_value(4, true)
@@ -190,7 +191,9 @@ func knockback(attack: Variant):
 func damage(attack: Attack) -> void:
 	if !is_hurt and !is_invincible:
 		if takes_damage_from == attack.source:
-			var damage_done=attack.damage_done - defense
+			# var damage_done=attack.damage_done - defense
+			var base_value = max_health
+			var damage_done=base_value*(1/(1+defense))
 			
 			if gets_stunned:
 				hit_stun()	
@@ -268,39 +271,13 @@ func dead_enemy(increase_score=true):
 		
 
 func item_drop():
-	if !items_it_can_drop.is_empty():
-		var item_to_be_dropped=items_it_can_drop.pick_random()
-		match item_to_be_dropped.item_is:
-			item_to_be_dropped.item_type.weapon:
-				item_to_be_dropped.weapon = item_to_be_dropped.weapon.duplicate()
-			item_to_be_dropped.item_type.suit:
-				item_to_be_dropped.suit = item_to_be_dropped.suit.duplicate()
-		var item_dropped=item_to_be_dropped.duplicate()	
-		if item_dropped.item_is != item_dropped.item_type.normal_item:
-			var card=preload("res://scenes/items/Mon_card_item.tscn")
-			var this_item
-			match item_dropped.item_is:
-				item_dropped.item_type.weapon:
-					item_to_be_dropped.weapon = item_to_be_dropped.weapon.duplicate()
-					this_item=item_dropped
-				item_dropped.item_type.suit:
-					item_to_be_dropped.suit = item_to_be_dropped.suit.duplicate()
-					this_item=item_dropped
-				item_dropped.item_type.stat_boost:
-					card=preload("res://scenes/items/boost_item.tscn")
-					this_item = item_to_be_dropped.stat_boost.duplicate()
-			var card_drop = card.instantiate()
-			card_drop.global_position=global_position
-			card_drop.item=this_item
-			get_tree().current_scene.add_child(card_drop)
-			if item_dropped.item_is == item_dropped.item_type.stat_boost:
-				var will_be_suit_boost = randi_range(0,1)
-				if will_be_suit_boost==1:
-					card_drop.weapon=false
-			if card_drop.get_node_or_null("PanelContainer"):
-				card_drop.get_node("PanelContainer").visible=false
-		else:
-			spawn(item_dropped.item_scene)
+	if !drops==null:
+		var item_dropped=drops.duplicate()	
+		var card=preload("res://scenes/items/Mon_card_item.tscn")
+		var card_drop = card.instantiate()
+		card_drop.global_position=global_position
+		card_drop.item=item_dropped
+		get_tree().current_scene.add_child(card_drop)
 
 func find_item_to_drop(item_dropped:Item):
 	var drop
