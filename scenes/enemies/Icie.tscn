@@ -3,10 +3,10 @@
 [ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="2_1awcq"]
 [ext_resource type="PackedScene" uid="uid://ffrii0cvnsbc" path="res://scenes/enemies/enemy_movement.tscn" id="2_fu0ok"]
 [ext_resource type="Texture2D" uid="uid://beplf6glrkbnu" path="res://assets/Enemies/Icie.png" id="2_s1ktm"]
-[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="3_fu0ok"]
+[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/boxes/hurt_box.tscn" id="3_fu0ok"]
 [ext_resource type="PackedScene" uid="uid://bebyjivuy8kc1" path="res://scenes/boxes/followbox.tscn" id="3_s1ktm"]
 [ext_resource type="AudioStream" uid="uid://bi85dc6igdck0" path="res://assets/audio/complaint.wav" id="4_fu0ok"]
-[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="4_l6580"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/boxes/hitbox.tscn" id="4_l6580"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="5_1awcq"]
 [ext_resource type="Resource" uid="uid://b5h1tt01frljp" path="res://resources/Mons/Icie.tres" id="7_1awcq"]
 

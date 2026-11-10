@@ -10,8 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://b7qsue6uvesb7" path="res://assets/MR/BodyParts/MRWeaponlessBase.png" id="10_hthvt"]
 [ext_resource type="Script" uid="uid://bj0e5pun6w7gk" path="res://scripts/Player/shading.gd" id="11_du73w"]
 [ext_resource type="Resource" uid="uid://dv3yq4k8v8kyj" path="res://resources/characters/MR/palettes/green.tres" id="12_mk6f3"]
-[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="13_3ctro"]
-[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="14_44t4v"]
+[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/boxes/hurt_box.tscn" id="13_3ctro"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/boxes/hitbox.tscn" id="14_44t4v"]
 [ext_resource type="Resource" uid="uid://c52eksclkoven" path="res://resources/characters/MR/Attacks/2damage1knockback.tres" id="15_tejji"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xcnp1"]

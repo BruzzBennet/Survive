@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://c3lfs0fkyaxhm"]
 
 [ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="1_8wljp"]
-[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="2_8wljp"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/boxes/hitbox.tscn" id="2_8wljp"]
 [ext_resource type="Texture2D" uid="uid://dw85y3fj4kjyt" path="res://assets/Enemies/PlucklamSheet.png" id="2_g7ww7"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="3_hr2tv"]
-[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="4_6fhpp"]
+[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/boxes/hurt_box.tscn" id="4_6fhpp"]
 [ext_resource type="Resource" uid="uid://cxfqgcicsjycu" path="res://resources/Mons/Pucklam.tres" id="6_4qj83"]
 [ext_resource type="PackedScene" uid="uid://bodyf87taxuu6" path="res://scenes/enemies/bounce.tscn" id="6_g7ww7"]
 [ext_resource type="AudioStream" uid="uid://bemloeykhd5mm" path="res://assets/audio/GiantsStepWalk.wav" id="7_4qj83"]

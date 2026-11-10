@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b8ptv4rbu8ocx"]
 
 [ext_resource type="Script" uid="uid://cax0jfx0imua8" path="res://scripts/Player/player.gd" id="1_qll5q"]
-[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="1_wak01"]
-[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="2_jptdl"]
+[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/boxes/hurt_box.tscn" id="1_wak01"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/boxes/hitbox.tscn" id="2_jptdl"]
 [ext_resource type="Texture2D" uid="uid://lthgfou14u5y" path="res://assets/Weapons/Blade/Blade.png" id="3_oig8y"]
 [ext_resource type="Texture2D" uid="uid://dwwxljqniuq2q" path="res://assets/MR/BodyParts/Helmets/Helmet_MROG.png" id="4_qll5q"]
 [ext_resource type="Shader" uid="uid://bivbni0u3mi5d" path="res://shaders/palette_changer_and_hurt.gdshader" id="5_t48au"]

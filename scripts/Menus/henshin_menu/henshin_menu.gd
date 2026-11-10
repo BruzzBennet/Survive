@@ -2,8 +2,8 @@ extends Control
 
 var was_pressed := true
 var current_focused_button = null
-var base_weapon=preload("res://resources/characters/Weapons/weaponless.tres")
-var base_suit=preload("res://resources/characters/MR/Suits/Sergyo.tres")
+var base_weapon=GLOBAL.base_weapon
+var base_suit=GLOBAL.base_suit
 var ui
 var located_in
 
@@ -43,34 +43,36 @@ func tween_it(node:Node,dist:int):
 
 func _play_or_discard(button:Button):
 	if button.get_child(0).visible == true:	
+		var equipment =  button.get_child(0).item_summoned
 		if Input.is_action_just_pressed("ui_accept"):
-			equip_suit(button)
+			if GLOBAL.weapon == equipment:
+				equip_weapon(GLOBAL.suit)
+			equip_suit(equipment)
 			close_menu()
 		elif Input.is_action_just_pressed("shoot"):
-			equip_weapon(button)
+			if GLOBAL.suit == equipment:
+				equip_suit(GLOBAL.weapon)
+			equip_weapon(equipment)
 			close_menu()
+		if Input.is_action_just_pressed("drop"):
+			discard(button)
 
 func discard(button: Button):
 		var body = get_player()
 		var item =  button.get_child(0).item_summoned
-		match item.item_is:
-			item.item_type.weapon:
-				# ui.set_weapon(item)
-				if GLOBAL.weapon == item.weapon:
-					ui.set_weapon()
-					call_deferred("switch_weapon", base_weapon, body)
-			item.item_type.suit:
-				# ui.set_suit(item)
-				if GLOBAL.suit == item.suit:
-					ui.set_suit()
-					body.equip(base_suit,GLOBAL.weapon)
+		if GLOBAL.weapon == item:
+			ui.set_weapon()
+			unequip_weapon(body,GLOBAL.base_suit)
+		if GLOBAL.suit == item:
+			ui.set_suit()
+			body.equip(base_suit,GLOBAL.weapon)
 		drop_card(item)
 		GLOBAL.deck.erase(item)
 		PLAYSFX.unequip()
 		button.get_child(0).visible = false		
 
 
-func drop_card(item_dropped:Item):
+func drop_card(item_dropped:Equipment):
 	var card_item_drop=preload("res://scenes/items/Mon_card_item.tscn")
 	var card_drop = card_item_drop.instantiate()
 	card_drop.global_position=get_player().global_position
@@ -83,7 +85,6 @@ func drop_card(item_dropped:Item):
 	card_drop.global_position=new_position
 	get_tree().current_scene.add_child(card_drop)
 	tween_drop(card_drop,new_position)
-	card_drop.get_node("PanelContainer").visible=false	
 
 func tween_drop(node:Node,dist:Vector2):
 	var duration=0.25
@@ -128,21 +129,15 @@ func display_info(button: Button):
 
 func stat_info(item:Equipment):
 	description(item.mon_name,stat_shwocase(item.stat_boost)+item.equipment_description)
-		# match item.item_is:
-		# 	item.item_type.weapon:
-				# description(item.weapon.name,stat_shwocase(item.weapon)+item.weapon.description)
-			# item.item_type.suit:
-			# 	description(item.suit.name,stat_shwocase(item.suit)+item.suit.description)
 
 func stat_shwocase(equipment:Stat_Boost):
 		var desc=""
-	# if equipment is Suit or equipment is Weapon:
 		if equipment.bullet_speed_boost!=0:
 			desc+="Bullet Speed " + ifplus(equipment.bullet_speed_boost) + ". "
 		if equipment.stamina_boost!=0:
 			desc+="Stamina " + ifplus(equipment.stamina_boost) + ". "
 		if equipment.bullet_power_boost!=0:
-			desc+="Buller Power " + ifplus(equipment.bullet_power_boost) + ". "
+			desc+="Buller Pierce " + ifplus(equipment.bullet_power_boost) + ". "
 		if equipment.bullet_reach_boost!=0:
 			desc+="Bullet Reach " + ifplus(equipment.bullet_reach_boost) + ". "
 		if equipment.stamina_recover_boost!=0:
@@ -163,108 +158,68 @@ func description(item_name:String, desc:String):
 		$Screen/Label.text=""
 	else:
 		$Screen/Label.text=item_name + ":\n" + desc
-	
-func _on_any_button_pressed(button: Button) -> void:
-	if button.get_child(0).visible == true:
-		equip(button)
-
-func equip_switch(button):
-	var body = get_player()
-	var item =  button.get_child(0).item_summoned
-	var equipment
-	var past_suit=GLOBAL.suit_item
-	var past_weapon=GLOBAL.weapon_item
-	match item.item_is:
-		item.item_type.weapon:
-			ui.set_weapon(item)
-			equipment = item.weapon
-			henshin(body)
-			if GLOBAL.weapon.weapon_type != equipment.weapon_type:
-				call_deferred("switch_weapon", equipment, body)
-			else:
-				body.equip(GLOBAL.suit,equipment)
-		item.item_type.suit:
-			ui.set_suit(item)
-			henshin(body)
-			body.equip(item.suit,GLOBAL.weapon)
-	GLOBAL.deck.erase(item)
-	match item.item_is:
-		item.item_type.weapon:
-			GLOBAL.weapon_item=item
-			if past_weapon and past_weapon!=GLOBAL.base_weapon:
-				GLOBAL.add_card(past_weapon)
-		item.item_type.suit:
-			GLOBAL.suit_item=item
-			if past_suit and past_suit!=GLOBAL.base_suit:
-				GLOBAL.add_card(past_suit)
-	close_menu()
-
-func equip(button):
-		var body = get_player()
-		var item =  button.get_child(0).item_summoned
-		var equipment
-		match item.item_is:
-			item.item_type.weapon:
-				ui.set_weapon(item)
-				GLOBAL.weapon_item=item
-				if GLOBAL.weapon != item.weapon:
-					equipment = item.weapon
-					henshin(body)
-				else:
-					ui.set_weapon()
-					equipment=base_weapon
-					PLAYSFX.unequip()
-				if GLOBAL.weapon.weapon_type != equipment.weapon_type:
-					call_deferred("switch_weapon", equipment, body)
-				else:
-					body.equip(GLOBAL.suit,equipment)
-			item.item_type.suit:
-				ui.set_suit(item)
-				if GLOBAL.suit != item.suit:
-					equipment = item.suit
-					henshin(body)
-					ui.suit_ammo_setup(item.suit,false)
-				else:
-					ui.set_suit()
-					equipment = base_suit
-					PLAYSFX.unequip()
-					ui.suit_ammo_setup(GLOBAL.base_suit,false)
-				body.equip(equipment,GLOBAL.weapon)	
-		close_menu()
 
 func equip_suit(button):
 	var body = get_player()
-	var item =  button.get_child(0).item_summoned
+	var item =  button
 	var equipment
-	ui.set_suit(item)
 	if GLOBAL.suit != item:
 		equipment = item
 		henshin(body)
-		ui.suit_ammo_setup(item,false)
+		if item==GLOBAL.base_weapon:
+			ui.set_suit()
+		else:
+			ui.set_suit(equipment)
+		ui.suit_ammo_setup(equipment,false)
 	else:
 		ui.set_suit()
 		equipment = GLOBAL.base_suit
 		PLAYSFX.unequip()
 		ui.suit_ammo_setup(GLOBAL.base_suit,false)
 	body.equip(equipment,GLOBAL.weapon)	
+	
+
 
 func equip_weapon(button):
 	var body = get_player()
-	var item =  button.get_child(0).item_summoned
-	var equipment
-	ui.set_weapon(item)
-	GLOBAL.weapon_item=item
-	if GLOBAL.weapon != item.weapon:
-		equipment = item.weapon
-		henshin(body)
-	else:
-		ui.set_weapon()
-		equipment=base_weapon
-		PLAYSFX.unequip()
-		if GLOBAL.weapon.weapon_type != equipment.weapon_type:
-			call_deferred("switch_weapon", equipment, body)
-		else:
-			body.equip(GLOBAL.suit,equipment)
+	var equipment =  button
+	match GLOBAL.player_type:
+		GLOBAL.base_player_type:
+			if equipment==GLOBAL.base_suit:
+				ui.set_weapon()
+			else:
+				ui.set_weapon(equipment)
+			call_deferred("switch_weapon", equipment, body, GLOBAL.player_type2)
+			henshin(body)
+		GLOBAL.player_type2:
+			if GLOBAL.weapon == equipment:
+				unequip_weapon(body,GLOBAL.base_suit)
+			else:
+				if equipment==GLOBAL.base_suit:
+					unequip_weapon(body,GLOBAL.base_suit)
+				else:
+					# print(str(equipment))
+					ui.set_weapon(equipment)
+					body.equip(GLOBAL.suit,equipment)
+					henshin(body)
+
+func unequip_weapon(body,template_weapon):
+	ui.set_weapon()
+	call_deferred("switch_weapon", template_weapon, body, GLOBAL.base_player_type)
+	PLAYSFX.unequip()
+
+
+func switch_weapon(weapon,body,type):
+	var player_scene
+	player_scene=type
+	GLOBAL.player_type=player_scene
+	var this_player = player_scene.instantiate()
+	get_tree().current_scene.add_child(this_player)
+	this_player.position = body.global_position
+	body.queue_free()
+	this_player.equip(GLOBAL.suit,weapon)
+	GLOBAL.weapon=weapon
+		
 
 func henshin(body):
 	PLAYSFX.equip()
@@ -311,32 +266,8 @@ func close_menu():
 	PLAYSFX.MenuSelect()
 	$Screen.hide()
 
-var shootplayer: PackedScene = preload("res://scenes/PlayerTypes/Shooter.tscn")
-var dashplayer: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
-var slashplayer: PackedScene = preload("res://scenes/PlayerTypes/Slasher.tscn")
-var weaponless: PackedScene = preload("res://scenes/PlayerTypes/weaponless.tscn")
-
-func switch_weapon(weapon,body):
-	var player_scene
-	match weapon.weapon_type:
-		Weapon.type.boot:
-			player_scene=dashplayer
-		Weapon.type.gun:
-			player_scene=shootplayer
-		Weapon.type.blade:
-			player_scene=slashplayer
-		Weapon.type.none:
-			player_scene=weaponless
-	GLOBAL.player_type=player_scene
-	var this_player = player_scene.instantiate()
-	get_tree().current_scene.add_child(this_player)
-	this_player.position = body.global_position
-	body.queue_free()
-	this_player.equip(GLOBAL.suit,weapon)
-	GLOBAL.weapon=weapon
-
 func explode(here):
-	var consume: PackedScene = preload("res://scenes/DiedExplosion.tscn")
+	var consume: PackedScene = load("res://scenes/DiedExplosion.tscn")
 	var fx = consume.instantiate()
 	if here:
 		fx.global_position = here.global_position

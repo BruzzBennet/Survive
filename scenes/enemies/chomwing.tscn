@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bju1w73ni3m3"]
 
 [ext_resource type="Texture2D" uid="uid://bo2qs2vrhrv7x" path="res://assets/Enemies/Chomwing.png" id="1_hy1qq"]
-[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="2_88rwa"]
+[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/boxes/hurt_box.tscn" id="2_88rwa"]
 [ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="2_jsaom"]
 [ext_resource type="PackedScene" uid="uid://ffrii0cvnsbc" path="res://scenes/enemies/enemy_movement.tscn" id="3_6uv0u"]
-[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="3_jsaom"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/boxes/hitbox.tscn" id="3_jsaom"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="4_ec30e"]
 [ext_resource type="Resource" uid="uid://bqhr7dwmaef55" path="res://resources/Mons/chomwing.tres" id="5_1vr4p"]
 [ext_resource type="PackedScene" uid="uid://bebyjivuy8kc1" path="res://scenes/boxes/followbox.tscn" id="7_ec30e"]

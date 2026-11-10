@@ -19,7 +19,7 @@ func summon_pozzap():
 	spawner=spawner.get_child(1)
 	spawner=spawner.get_node_or_null("Spawner")
 	if spawner:
-		spawner.enemies.append(pozzap)
+		# spawner.enemies.append(pozzap)
 		pozzap.add_to_group("enemies")
 		var hitbox = pozzap.get_node("HurtBox")
 		hitbox.died.connect(spawner.enemy_died.bind(pozzap))

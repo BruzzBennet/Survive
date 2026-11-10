@@ -2,8 +2,8 @@ extends Control
 
 var was_pressed := true
 var current_focused_button = null
-var base_weapon=preload("res://resources/characters/Weapons/weaponless.tres")
-var base_suit=preload("res://resources/characters/MR/Suits/Sergyo.tres")
+var base_weapon=GLOBAL.base_weapon
+var base_suit=GLOBAL.base_suit
 var ui
 var located_in
 @onready var hp = $HP
@@ -255,11 +255,6 @@ func equip(button):
 		item.item_type.weapon:
 			equipment = item.weapon
 			if GLOBAL.weapon != item.weapon:
-			# 	equipment=base_weapon
-			# 	PLAYSFX.unequip()
-			# 	if GLOBAL.deck.size()<GLOBAL.deck_size:
-			# 		set_weapon()
-			# else:
 				set_weapon(item)				
 				henshin(body)
 				if GLOBAL.weapon.weapon_type != equipment.weapon_type:
@@ -269,11 +264,6 @@ func equip(button):
 		item.item_type.suit:
 			equipment = item.suit
 			if GLOBAL.suit != item.suit:
-			# 	equipment = base_suit
-			# 	PLAYSFX.unequip()
-			# 	if GLOBAL.deck.size()<GLOBAL.deck_size:
-			# 		set_suit()		
-			# else:
 				set_suit(item)
 				henshin(body)
 				body.equip(equipment,GLOBAL.weapon)	
@@ -356,22 +346,8 @@ func close_menu():
 	PLAYSFX.MenuSelect()
 	$Screen.hide()
 
-var shootplayer: PackedScene = preload("res://scenes/PlayerTypes/Shooter.tscn")
-var dashplayer: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
-var slashplayer: PackedScene = preload("res://scenes/PlayerTypes/Slasher.tscn")
-var weaponless: PackedScene = preload("res://scenes/PlayerTypes/weaponless.tscn")
-
-func switch_weapon(weapon,body):
-	var player_scene
-	match weapon.weapon_type:
-		Weapon.type.boot:
-			player_scene=dashplayer
-		Weapon.type.gun:
-			player_scene=shootplayer
-		Weapon.type.blade:
-			player_scene=slashplayer
-		Weapon.type.none:
-			player_scene=weaponless
+func switch_weapon(weapon,body,type):
+	var player_scene=type
 	GLOBAL.player_type=player_scene
 	var this_player = player_scene.instantiate()
 	get_tree().current_scene.add_child(this_player)

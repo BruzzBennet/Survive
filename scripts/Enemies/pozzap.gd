@@ -20,7 +20,7 @@ func choose(array):
 	return array.front()
 
 func blank():
-	$HurtBox.items_it_can_drop.clear()
+	$HurtBox.drops=null
 	$HurtBox.score_value=0
 	$FollowBox.set_process(false)
 	baby=true

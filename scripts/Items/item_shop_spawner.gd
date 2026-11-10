@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var weapon:=false
+# @export var weapon:=false
 
 func done(_body):
 	# if !weapon:

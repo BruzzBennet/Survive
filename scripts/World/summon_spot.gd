@@ -18,7 +18,7 @@ func switch() -> void:
 	var current_level = GLOBAL.current_level
 	var tree := get_tree()
 
-	GLOBAL.current_level += 1
+	# GLOBAL.current_level += 1
 
 	if tree.current_scene.scene_file_path != "res://scenes/worlds/rng_world.tscn":
 		BGM.playStageMusic()

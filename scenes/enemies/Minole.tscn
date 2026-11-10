@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bxq5krfknir3p" path="res://scripts/Enemies/bombry.gd" id="1_lbxlw"]
 [ext_resource type="PackedScene" uid="uid://ffrii0cvnsbc" path="res://scenes/enemies/enemy_movement.tscn" id="2_lbxlw"]
-[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="4_e41bs"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/boxes/hitbox.tscn" id="4_e41bs"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="5_0q6se"]
 [ext_resource type="Texture2D" uid="uid://bf66b31d1kv1x" path="res://assets/Enemies/Minole-Sheet.png" id="5_m5an7"]
 [ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="6_nyxej"]
 [ext_resource type="PackedScene" uid="uid://bebyjivuy8kc1" path="res://scenes/boxes/followbox.tscn" id="6_qo6uu"]
-[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="8_wlgnr"]
+[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/boxes/hurt_box.tscn" id="8_wlgnr"]
 [ext_resource type="Resource" uid="uid://cxr2a1jsq7hc5" path="res://resources/Mons/minole.tres" id="9_ev7nd"]
 
 [sub_resource type="Resource" id="Resource_ros7y"]
@@ -104,6 +104,7 @@ debug_color = Color(1, 1, 0, 0.42000002)
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("8_wlgnr")]
 collision_layer = 2
 collision_mask = 8
+defense = 0.0
 score_value = 100
 drops = ExtResource("9_ev7nd")
 

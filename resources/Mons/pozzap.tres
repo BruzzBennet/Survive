@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://qlpthir3ew8x"]
+
+[ext_resource type="Texture2D" uid="uid://ces2q4na51usd" path="res://assets/Weapons/Blade/Pozzap_Blade.png" id="1_s1g8w"]
+[ext_resource type="Resource" uid="uid://b5le0wblin430" path="res://resources/characters/MR/palettes/beige.tres" id="2_3duf5"]
+[ext_resource type="Texture2D" uid="uid://cve58dosfbjlj" path="res://assets/Weapons/Boots/Boot_Pozzap.png" id="3_173py"]
+[ext_resource type="PackedScene" uid="uid://c0u3a864ma6ks" path="res://scenes/bullets/pozzap_bullet.tscn" id="4_jgvaa"]
+[ext_resource type="Texture2D" uid="uid://bynukgkie1vkt" path="res://assets/Weapons/Guns/Pozzap_Gun.png" id="5_e51in"]
+[ext_resource type="Texture2D" uid="uid://cudv7ackguvfy" path="res://assets/MR/BodyParts/Helmets/Helmet_Pozzap.png" id="6_nthms"]
+[ext_resource type="Texture2D" uid="uid://c5l3s62fram2m" path="res://assets/cards/Mons/pozzap.png" id="7_lcwgj"]
+[ext_resource type="AudioStream" uid="uid://cf2juyju77jvv" path="res://assets/audio/ShotShort.wav" id="8_3k24k"]
+[ext_resource type="Script" uid="uid://d4dsworwk7sp" path="res://scripts/Components/Weapons/Equipment.gd" id="9_03wwm"]
+[ext_resource type="AudioStream" uid="uid://ty8f4esqts1g" path="res://assets/audio/ShotLong.wav" id="10_lgweq"]
+[ext_resource type="Resource" uid="uid://cf2bfbp6locps" path="res://resources/stat_boosts/pozzap.tres" id="11_ilmpv"]
+
+[resource]
+script = ExtResource("9_03wwm")
+mon_sprite = ExtResource("7_lcwgj")
+mon_name = "Pozzap"
+helmet = ExtResource("6_nthms")
+body_palette = ExtResource("2_3duf5")
+blade_sprite = ExtResource("1_s1g8w")
+gun_sprite = ExtResource("5_e51in")
+boot_sprite = ExtResource("3_173py")
+bullet_scene = ExtResource("4_jgvaa")
+normal_attack_sfx = ExtResource("8_3k24k")
+special_attack_sfx = ExtResource("10_lgweq")
+shot_type = 3
+stat_boost = ExtResource("11_ilmpv")
+metadata/_custom_type_script = "uid://d4dsworwk7sp"

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://6gqvqsp365lw"]
 
 [ext_resource type="Script" uid="uid://cr4iur2uuu4wx" path="res://scripts/Particles/died_explosion.gd" id="1_d6bb2"]
-[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="2_yqd0p"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/boxes/hitbox.tscn" id="2_yqd0p"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="3_3eccc"]
 
 [sub_resource type="Curve" id="Curve_h5l37"]

@@ -47,4 +47,3 @@ func _physics_process(delta):
 	or reach<=reach_check:
 		limit_reached.emit()
 		queue_free()
-

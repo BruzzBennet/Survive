@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://e7k5wcox11oq"]
 
 [ext_resource type="Texture2D" uid="uid://ch0vwennns6y3" path="res://assets/bullets/Clamik_Bullet.png" id="2_eeu7r"]
-[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="3_ayeaj"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/boxes/hitbox.tscn" id="3_ayeaj"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="4_t56jy"]
 
 [sub_resource type="GDScript" id="GDScript_ybeja"]

@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://bxq5krfknir3p" path="res://scripts/Enemies/bombry.gd" id="1_q7ugj"]
 [ext_resource type="PackedScene" uid="uid://ffrii0cvnsbc" path="res://scenes/enemies/enemy_movement.tscn" id="1_wkfc6"]
 [ext_resource type="PackedScene" uid="uid://bebyjivuy8kc1" path="res://scenes/boxes/followbox.tscn" id="2_3aiav"]
-[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="3_q7ugj"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/boxes/hitbox.tscn" id="3_q7ugj"]
 [ext_resource type="Texture2D" uid="uid://ckfyunyxos0bh" path="res://assets/Enemies/Bombry.png" id="4_0kfug"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="5_0kfug"]
-[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="5_ros7y"]
+[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/boxes/hurt_box.tscn" id="5_ros7y"]
 [ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="6_0kfug"]
 [ext_resource type="Resource" uid="uid://cgwhn5cya2tx8" path="res://resources/Mons/Bombry.tres" id="9_ros7y"]
 
@@ -165,6 +165,7 @@ libraries/ = SubResource("AnimationLibrary_pqtu3")
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("5_ros7y")]
 collision_layer = 2
 collision_mask = 8
+defense = 0.0
 score_value = 100
 drops = ExtResource("9_ros7y")
 

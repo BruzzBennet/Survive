@@ -8,11 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://cw6cd3flyltnt" path="res://scenes/boxes/damage_from_poision_tile.tscn" id="4_txggv"]
 [ext_resource type="Texture2D" uid="uid://de7uv4o2xx5dg" path="res://scenes/palette_red.png" id="5_33f0w"]
 [ext_resource type="Shader" uid="uid://bivbni0u3mi5d" path="res://shaders/palette_changer_and_hurt.gdshader" id="5_yjc1k"]
-[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="6_33f0w"]
+[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/boxes/hurt_box.tscn" id="6_33f0w"]
 [ext_resource type="Texture2D" uid="uid://dwwxljqniuq2q" path="res://assets/MR/BodyParts/Helmets/Helmet_MROG.png" id="6_yjc1k"]
 [ext_resource type="Texture2D" uid="uid://dxddbd3vkpdtx" path="res://assets/palettes/MonRanger/palette_yellow.png" id="7_lmgta"]
 [ext_resource type="Resource" uid="uid://dv3yq4k8v8kyj" path="res://resources/characters/MR/palettes/green.tres" id="9_u33sq"]
-[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="13_t2guo"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/boxes/hitbox.tscn" id="13_t2guo"]
 [ext_resource type="Resource" uid="uid://c52eksclkoven" path="res://resources/characters/MR/Attacks/2damage1knockback.tres" id="14_txggv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yjc1k"]
@@ -4947,7 +4947,6 @@ libraries/ = SubResource("AnimationLibrary_tjlm8")
 [node name="HurtBox" parent="." unique_id=850522042 instance=ExtResource("6_33f0w")]
 collision_layer = 0
 collision_mask = 3
-max_health = 7
 takes_damage_from = 1
 receives_knockback = true
 gets_stunned = true

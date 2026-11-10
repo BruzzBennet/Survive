@@ -18,6 +18,7 @@ func _on_body_entered(body) -> void:
 			sfx_player.bus="SFX"
 			sfx_player.stream = follow_sfx
 			if GLOBAL.sfx_on:
+				sfx_player.pitch_scale = randf_range(0.9, 1.25)
 				sfx_player.play()
 		last_direction = (body.global_position - this_enemy.global_position).normalized()
 		# if !stationary_enemy:

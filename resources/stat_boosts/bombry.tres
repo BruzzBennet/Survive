@@ -5,6 +5,5 @@
 [resource]
 script = ExtResource("1_61dbr")
 bullet_speed_boost = 1
-stamina_boost = -1
-bullet_reach_boost = 1
+stamina_boost = -2
 metadata/_custom_type_script = "uid://84qpp678qnu4"

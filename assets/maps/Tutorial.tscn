@@ -5,8 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://djyfobi8to0tr" path="res://assets/Tiles/TilesS.png" id="3_ogar2"]
 [ext_resource type="Script" uid="uid://c2arsgsl2lotg" path="res://scripts/World/spawner.gd" id="4_6vdjy"]
 [ext_resource type="PackedScene" uid="uid://cgrehgbf0gsnv" path="res://scenes/boxes/summon_spot.tscn" id="4_ulifj"]
-[ext_resource type="PackedScene" uid="uid://cigy3geh1va3x" path="res://scenes/items/card_item.tscn" id="6_kyti1"]
-[ext_resource type="Resource" uid="uid://bcelcn2nsi8lb" path="res://resources/items/Suit_MR.tres" id="7_ogar2"]
+[ext_resource type="PackedScene" uid="uid://bbn06r1cdptgw" path="res://assets/maps/choose_between_3.tscn" id="6_3jw5k"]
+[ext_resource type="PackedScene" uid="uid://d3ttm1t3l0su0" path="res://scenes/items/Mon_card_item.tscn" id="6_ogar2"]
+[ext_resource type="Resource" uid="uid://dv2kq8tvy21i8" path="res://resources/Mons/MR.tres" id="7_6vdjy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_17ebl"]
 texture = ExtResource("3_ogar2")
@@ -114,6 +115,9 @@ tile_set = SubResource("TileSet_ww3q3")
 [node name="SummonSpot" parent="." unique_id=1167084153 instance=ExtResource("4_ulifj")]
 position = Vector2(320, 144)
 
-[node name="Dropped_Card4" parent="." unique_id=1870751650 instance=ExtResource("6_kyti1")]
-position = Vector2(321, 230)
-item_summoned = ExtResource("7_ogar2")
+[node name="ChooseBetween3" parent="." unique_id=1277225118 instance=ExtResource("6_3jw5k")]
+
+[node name="Item" parent="ChooseBetween3" unique_id=1432517486 instance=ExtResource("6_ogar2")]
+position = Vector2(320, 242)
+item = ExtResource("7_6vdjy")
+duplicated = true

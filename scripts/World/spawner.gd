@@ -1,30 +1,23 @@
 extends Marker2D
 
-var lvl_1_enemies=[
-	preload("res://scenes/enemies/Icie.tscn")
-	]
-var lvl_2_enemies=[
-	preload("res://scenes/enemies/chomwing.tscn")
-	]
-var lvl_3_enemies=[
-	preload("res://scenes/enemies/Bombry.tscn")
-]
-var lvl_4_enemies=[
-	preload("res://scenes/enemies/pucklam.tscn"),
-	preload("res://scenes/enemies/clamik.tscn")
-	]
-var lvl_5_enemies=[
-	preload("res://scenes/pozzap.tscn")
-	]
-var lvl_6_enemies=[
-	preload("res://scenes/opozzap.tscn")
-	]
-
 
 var items=[
-	preload("res://scenes/items/coin.tscn"),
-	preload("res://scenes/items/recharge_item.tscn")
+	load("res://scenes/items/coin.tscn"),
+	load("res://scenes/items/recharge_item.tscn"),
+	load("res://scenes/enemies/icie.tscn"),
+	load("res://scenes/enemies/chomwing.tscn"),
+	load("res://scenes/enemies/Minole.tscn"),
+	load("res://scenes/enemies/pucklam.tscn"),
+	load("res://scenes/pozzap.tscn"),
+	load("res://scenes/enemies/Bombry.tscn"),
+	load("res://scenes/enemies/clamik.tscn"),
+	load("res://scenes/opozzap.tscn")
 	]
+
+var enemy_list=[
+	load("res://scenes/enemies/miminzombie.tscn"),
+	load("res://scenes/enemies/mimintank.tscn")
+]
 
 var spawn_this_player: PackedScene = GLOBAL.player_type
 
@@ -43,29 +36,32 @@ func get_enemies_by_level(lvl:int):
 	var enemy
 	match lvl:
 		1:
-			enemy=preload("res://scenes/enemies/icie.tscn")
+			enemy=load("res://scenes/enemies/miminzombie.tscn")
 		2:
-			enemy=preload("res://scenes/enemies/chomwing.tscn")
+			enemy=load("res://scenes/enemies/mimin.tscn")
 		3:
-			enemy=preload("res://scenes/enemies/Minole.tscn")
-		4:
-			enemy=preload("res://scenes/enemies/pucklam.tscn")
-		5:
-			enemy=preload("res://scenes/pozzap.tscn")
-		6:
-			enemy=preload("res://scenes/enemies/Bombry.tscn")
-		7:
-			enemy=preload("res://scenes/enemies/clamik.tscn")
-		8:
-			enemy=preload("res://scenes/opozzap.tscn")
+			enemy=load("res://scenes/enemies/mimintank.tscn")
+		# 4:
+		# 	enemy=preload("res://scenes/enemies/pucklam.tscn")
+		# 5:
+		# 	enemy=preload("res://scenes/pozzap.tscn")
+		# 6:
+		# 	enemy=preload("res://scenes/enemies/Bombry.tscn")
+		# 7:
+		# 	enemy=preload("res://scenes/enemies/clamik.tscn")
+		# 8:
+		# 	enemy=preload("res://scenes/opozzap.tscn")
 	return enemy
 
 func spawn_enemy(lvl:int) -> void:
 	# var enemy_list=get_enemies_by_level(lvl)
 	# var spawn_this_enemy=enemy_list[randi_range(0, enemy_list.size() - 1)]
-	# spawn_this_enemy=preload("res://scenes/opozzap.tscn")
+	# # spawn_this_enemy=preload("res://scenes/opozzap.tscn")
 	# var enemy=spawn_this_enemy.instantiate()
+
 	var enemy=get_enemies_by_level(lvl).instantiate()
+	
+	# var enemy=load("res://scenes/enemies/miminzombie.tscn").instantiate()
 	get_tree().current_scene.add_child(enemy)
 	enemy.global_position = global_position
 	enemies.append(enemy)
@@ -101,5 +97,5 @@ func spawn_player(_first_time=false):
 func spawn_item() -> void:
 	var spawn_this_enemy=items[randi_range(0, items.size() - 1)]
 	var item=spawn_this_enemy.instantiate()
-	add_child(item)
+	get_tree().current_scene.add_child(item)
 	item.global_position = global_position

@@ -4,6 +4,8 @@ extends Node2D
 @export var time_to_change_dir:=1.6
 @export var diagonal:=false
 @export var choppy:=false
+@export var stopped:=false
+var dumb:=false
 const margin = 12
 var screen_size: Vector2
 var last_direction
@@ -60,20 +62,21 @@ func _physics_process(_delta):
 			if choppy:
 				move()
 			idle_time = 0.0
-	if animated_sprite_2d:
+	if animated_sprite_2d and !stopped:
 		process_animation(last_direction)
 
 func move():
-	if chasing:
-		boost = 1.5
-	else:
-		boost = 1.0
-	if diagonal:
-		last_direction= last_direction.normalized()
-	this_enemy.velocity = last_direction * speed * boost
-	this_enemy.move_and_slide()
-	if this_enemy.get_slide_collision_count() > 0:
-		change_direction_after_wall()
+	if !stopped:		
+		if chasing:
+			boost = 1.5
+		else:
+			boost = 1.0
+		if diagonal:
+			last_direction= last_direction.normalized()
+		this_enemy.velocity = last_direction * speed * boost
+		this_enemy.move_and_slide()
+		if this_enemy.get_slide_collision_count() > 0 and !dumb:
+			change_direction_after_wall()
 	
 func check_margins():
 

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dyf6o2plwi4mj"]
+
+[ext_resource type="Script" uid="uid://bwtlbg2aa78s8" path="res://scripts/Boxes/attack_box.gd" id="1_e26u7"]
+
+[node name="AttackBox" type="Area2D" unique_id=324801478]
+script = ExtResource("1_e26u7")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1819482814]
+volume_db = -10.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://b8omkhbpr2qab" path="res://assets/Elecbullet.png" id="1_2e8nn"]
 [ext_resource type="Script" uid="uid://bkhns2leu0p5m" path="res://scripts/Enemies/Attacks/enemy_elec_shot.gd" id="1_4qdr7"]
-[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/hit_box.tscn" id="3_pf2g1"]
-[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/hurt_box.tscn" id="4_a5rix"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/boxes/hitbox.tscn" id="3_pf2g1"]
+[ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/boxes/hurt_box.tscn" id="4_a5rix"]
 [ext_resource type="Script" uid="uid://bip4nm76t78cb" path="res://scripts/Particles/parried_fx.gd" id="4_pf2g1"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="4_qcr21"]
 [ext_resource type="PackedScene" uid="uid://5bbrtc4cfkdv" path="res://scenes/hurtParticles.tscn" id="5_a5rix"]

@@ -1,13 +1,13 @@
 extends Node2D
 
 @export var item: Equipment
-@export var monCard:=false
 @export var duplicated:=false
 
 func _ready() -> void:
-		build_w_Mon(item)
-		if duplicated:
-			new_item(item)
+	if duplicated:
+		new_item(item)
+	build_w_Mon(item)
+		
 
 func build_w_Mon(this_one_item: Equipment):
 	if this_one_item.mon_sprite:
@@ -19,7 +19,7 @@ func description(item_name:String, desc:String):
 	$PanelContainer/Label.text=item_name + ":\n" + desc
 
 func new_item(this_one_item: Equipment):
-	this_one_item=this_one_item.duplicate()
+	item=this_one_item.duplicate()
 
 func item_icon_is(this_one_item: Item):
 	var item_type: String
@@ -41,28 +41,28 @@ func item_icon_is(this_one_item: Item):
 		item_type_icon = "res://assets/cards/icons/"+item_type+".png"
 		$CardNode/Type.texture=load(item_type_icon)
 
-var shootplayer: PackedScene = preload("res://scenes/PlayerTypes/Shooter.tscn")
-var dashplayer: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
-var slashplayer: PackedScene = preload("res://scenes/PlayerTypes/Slasher.tscn")
+# var shootplayer: PackedScene = preload("res://scenes/PlayerTypes/Shooter.tscn")
+# var dashplayer: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
+# var slashplayer: PackedScene = preload("res://scenes/PlayerTypes/Slasher.tscn")
 
-func switch_weapon(weapon,body):
-	weapon.current_ammo = weapon.max_ammo
-	var player_scene
-	match weapon.weapon_type:
-		Weapon.type.boot:
-			player_scene=dashplayer
-		Weapon.type.gun:
-			player_scene=shootplayer
-		Weapon.type.blade:
-			player_scene=slashplayer
-	GLOBAL.player_type=player_scene
-	var player = player_scene.instantiate()
-	get_tree().current_scene.add_child(player)
-	player.position = body.global_position
-	body.queue_free()
-	var new_weapon = weapon.duplicate()
-	player.equip(GLOBAL.suit,new_weapon)
-	GLOBAL.weapon=new_weapon
+# func switch_weapon(weapon,body):
+# 	weapon.current_ammo = weapon.max_ammo
+# 	var player_scene
+# 	match weapon.weapon_type:
+# 		Weapon.type.boot:
+# 			player_scene=dashplayer
+# 		Weapon.type.gun:
+# 			player_scene=shootplayer
+# 		Weapon.type.blade:
+# 			player_scene=slashplayer
+# 	GLOBAL.player_type=player_scene
+# 	var player = player_scene.instantiate()
+# 	get_tree().current_scene.add_child(player)
+# 	player.position = body.global_position
+# 	body.queue_free()
+# 	var new_weapon = weapon.duplicate()
+# 	player.equip(GLOBAL.suit,new_weapon)
+# 	GLOBAL.weapon=new_weapon
 
 func _on_area_2d_body_entered(body) -> void:
 	if body is Player_Unit:
@@ -71,7 +71,7 @@ func _on_area_2d_body_entered(body) -> void:
 func add_card():
 	if GLOBAL.deck.size() < GLOBAL.deck_size:
 			PLAYSFX.get_card()
-			GLOBAL.add_card(item.duplicate())						
+			GLOBAL.add_card(item)						
 			queue_free()
 
 func switch_weapon_to_item(body):

@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var max_lvl: int = 8
+@export var max_lvl: int = 3
 @export var max_lvl_n = [13,31,17,18]
 var map_grid=[Vector2(0,62), 
 			Vector2(0,190),
@@ -29,8 +29,12 @@ var first_player_starting_point
 var current_level
 var max_enemy_amount:= 24
 var portal_points = []
+var level_treshold = 3
 
 func _ready() -> void:
+	print(str(GLOBAL.current_level))
+	if GLOBAL.starting_enemy_amount<max_enemy_amount and several_enemies_level():
+			GLOBAL.starting_enemy_amount += 1
 	current_level=GLOBAL.current_level
 	map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
 	$Map.tile_set.get_source(4).texture = map_texture
@@ -48,8 +52,8 @@ func next_round():
 	if GLOBAL.starting_enemy_amount<max_enemy_amount:
 		# GLOBAL.increase_dificulty +=0.5
 		# if GLOBAL.increase_dificulty >= 1.5:
-		# if several_enemies_level():
-		GLOBAL.starting_enemy_amount += 1
+		if several_enemies_level():
+			GLOBAL.starting_enemy_amount += 1
 	# 		GLOBAL.increase_dificulty = 0.0
 	# if current_level % 3 == 0:
 	PLAYSFX.portal_opens()
@@ -89,7 +93,9 @@ func create_map():
 		spawn_points.append(instance)
 
 func several_enemies_level():
-	if current_level%3 == 0:
+	if GLOBAL.current_level%(level_treshold) == 0:
+		# print("several enemies level!")
+		# print("| current level: "+str(current_level))
 		return true
 	else:
 		return false
@@ -98,7 +104,7 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 	var times: = 0
 	var enemy_level=0
 	var max_level
-	var max_current_level=round(current_level/3)
+	var max_current_level=round(GLOBAL.current_level/level_treshold)
 	for instance in spawn_points:	
 		var spawner = instance.get_node_or_null("Spawner")
 		if spawner:
@@ -111,32 +117,37 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 			times +=1
 			var type = randi_range(0,2)		
 			if type == 0 && enemy_amount>0 && !spawned_already.has(spawner):
-				max_level=clamp(max_current_level,1,max_lvl)
-				enemy_level= randi_range(1, max_level)
+				if GLOBAL.current_level < (level_treshold*3):
+					enemy_level=1
+				else:
+					max_level=clamp(1+max_current_level,1,max_lvl)
+					enemy_level= randi_range(1, max_level)
+					if enemy_level > enemy_amount:
+						enemy_level=enemy_level-enemy_amount	
 				spawner.spawn_enemy(enemy_level)
-				enemy_amount -=1
+				enemy_amount -= enemy_level
 				spawned_already.append(spawner)
 		else:
 			print("Spawner not found")
 		var item = instance.get_node_or_null("Item")
 		if item:
-			var do_or_not= randi_range(0,3)
-			if GLOBAL.starting_enemy_amount>=max_enemy_amount and !spawned_already.has(item):
-				if do_or_not == 1:
-					max_level=clamp(max_current_level,1,max_lvl)
-					enemy_level= randi_range(1, max_level)
-					item.spawn_enemy(enemy_level)
-					spawned_already.append(spawner)
-				if do_or_not ==2:
-					item.spawn_minole()
-					spawned_already.append(spawner)			
-				elif do_or_not == 0 :
-					item.spawn_item()
-					spawned_already.append(item)
-			elif do_or_not == 3 && !spawned_already.has(item):
+			var do_or_not= randi_range(0,1)
+			# if GLOBAL.starting_enemy_amount>=max_enemy_amount and !spawned_already.has(item):
+			# 	if do_or_not == 1:
+			# 		max_level=clamp(max_current_level,1,max_lvl)
+			# 		enemy_level= randi_range(1, max_level)
+			# 		item.spawn_enemy(enemy_level)
+			# 		spawned_already.append(spawner)
+			# 	if do_or_not ==2:
+			# 		item.spawn_minole()
+			# 		spawned_already.append(spawner)			
+			# 	elif do_or_not == 0 :
+			# 		item.spawn_item()
+			# 		spawned_already.append(item)
+			if do_or_not == 0 && !spawned_already.has(item):
 				item.spawn_item()	
 				spawned_already.append(item)
-	if players > 0 and spawned_already.size()<9 or enemy_amount > 0 and spawned_already.size()<9:
+	if players > 0 or enemy_amount > 0:
 		spawn(players, enemy_amount, spawned_already)
 
 func remove_items():
@@ -156,8 +167,6 @@ func next_level():
 		return
 
 	switching = true
-	if GLOBAL.starting_enemy_amount<max_enemy_amount:
-		GLOBAL.starting_enemy_amount += 1
 	call_deferred("switch")
 
 
@@ -174,10 +183,10 @@ func switch() -> void:
 		tree.change_scene_to_file("res://scenes/worlds/rng_world.tscn")
 	else:
 		var change_scene_to
-		if GLOBAL.current_level % 4 == 0:
-			change_scene_to=randi_range(0,1)
+		if GLOBAL.current_level % (level_treshold) == 0:
+			change_scene_to=0
 		else:
-			change_scene_to=randi_range(0,5)
+			change_scene_to=1
 		
 		if change_scene_to == 0:
 			tree.change_scene_to_file("res://scenes/worlds/shop_world.tscn")

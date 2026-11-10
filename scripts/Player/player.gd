@@ -57,12 +57,12 @@ func equip(this_suit:Equipment,this_weapon:Equipment):
 func stats_setup(this_suit:Equipment,this_weapon:Equipment):
 	var suit_boost=this_suit.stat_boost
 	var weapon_boost=this_weapon.stat_boost
-	max_speed=GLOBAL.max_speed + ((GLOBAL.max_speed * 0.125) * (suit_boost.bullet_speed_boost+weapon_boost.bullet_speed_boost))
+	max_speed=GLOBAL.max_speed + ((GLOBAL.max_speed * 0.1) * (suit_boost.bullet_speed_boost+weapon_boost.bullet_speed_boost))
 	$HurtBox.defense = GLOBAL.defense + suit_boost.stamina_boost+weapon_boost.stamina_boost
 	var new_ammo = 1.0 - (0.25 * (suit_boost.stamina_boost+weapon_boost.stamina_boost))
 	ammo_reduce = max(new_ammo,0.05)
 	if weapon_is == type.boot:
-		max_speed+=(GLOBAL.max_speed * 0.125)
+		max_speed+=(GLOBAL.max_speed * 0.1)
 
 func equip_weapon(this_weapon:Equipment):
 	GLOBAL.weapon=this_weapon
@@ -119,7 +119,7 @@ func _physics_process(delta: float) -> void:
 		play_animation("Idle_", last_direction)
 
 func check_weapon_durability():
-	if atkUI.currentATK < atkUI.min_ammo and weapon.weapon_type != Weapon.type.none:
+	if atkUI.currentATK < atkUI.min_ammo and weapon != GLOBAL.base_weapon:
 		weapon_broken.emit()
 		broken = true
 		broken_weapon()
@@ -131,7 +131,7 @@ func check_suit_durability():
 		broken_suit()
 
 func broken_suit():
-	GLOBAL.deck.erase(GLOBAL.suit_item)
+	GLOBAL.deck.erase(GLOBAL.suit)
 	atkUI.set_suit()
 	explode_fx()
 	PLAYSFX.crunchyMash()
@@ -146,14 +146,14 @@ func explode_fx():
 	get_tree().current_scene.add_child(fx)
 
 func broken_weapon():
-	GLOBAL.deck.erase(GLOBAL.weapon_item)
+	GLOBAL.deck.erase(GLOBAL.weapon)
 	atkUI.set_weapon()
 	explode_fx()
 	PLAYSFX.crunchyMash()
 	PLAYSFX.unequip()
 	get_tree().current_scene.get_node("HenshinMenu").update_deck()
 	equip(GLOBAL.suit,GLOBAL.base_weapon)
-	GLOBAL.player_type=GLOBAL.weaponless
+	GLOBAL.player_type=GLOBAL.base_player_type
 	
 func remove_weapon():
 		var player= GLOBAL.player_type.instantiate()
@@ -267,7 +267,7 @@ func recovering(delta):
 		$HurtBox.cancel_flash()
 
 func reset_ammo(on_start=true):
-	GLOBAL.weapon.current_ammo+=GLOBAL.weapon.max_ammo/4
+	GLOBAL.weapon.current_ammo+=GLOBAL.weapon.max_ammo/2
 	GLOBAL.weapon.current_ammo=clamp(GLOBAL.weapon.current_ammo,0,GLOBAL.weapon.max_ammo)
 	atkUI.ammo_setup(GLOBAL.weapon)
 	if !on_start:

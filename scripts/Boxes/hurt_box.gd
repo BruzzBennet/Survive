@@ -4,13 +4,14 @@ class_name HurtBox_Component
 var died_fx: PackedScene = preload("res://scenes/DiedExplosion.tscn")
 var hurt_fx: PackedScene = preload("res://scenes/hurtParticles.tscn")
 var shared_material: ShaderMaterial
-@export var max_health: float = 0.5
+@export var defense: float = 1.0
 @export var takes_damage_from: attack_source
 @export var score_value: int = 50
 @export var receives_knockback: bool = false
 @export var gets_stunned: bool = false
 @export var drops: Equipment
-var defense:= 0.0
+@export var mimin:=false
+var max_health:= 100.0
 var extra_heal=0.0
 var drops_items:bool
 
@@ -53,18 +54,20 @@ func _ready():
 			max_health=GLOBAL.base_health
 			drops_items=false
 			hpUI = get_tree().current_scene.get_node("HenshinMenu/UI")
-			defense=2.0
+			defense=GLOBAL.defense
+			defense=max(defense,0)
 	elif takes_damage_from == attack_source.player:
 			set_collision_layer_value(2, true)
 			set_collision_mask_value(4, true)
 			set_collision_mask_value(5, true)
 			set_collision_mask_value(6, true)
+			
 			health = max_health
 			if GLOBAL.current_level>=50:
-				health+=1.0
+				defense+=1.0
 			drops_items=true
 
-	if takes_damage_from == attack_source.enemy:
+	if takes_damage_from == attack_source.enemy or mimin:
 		sprite = get_parent().get_node("Skeleton/Sprite")
 		for piece in get_parent().get_node("Skeleton").get_children():
 			if piece is Sprite2D and piece != sprite:
@@ -110,23 +113,12 @@ func cancel_flash():
 			if piece is Sprite2D:
 				piece.material.set_shader_parameter("flash_modifier", 0.0)
 
-func heals(amount=0.5):
+func heals(_amount=0.5):
 	cancel_flash()
 	play_flash(Color.GREEN)
-	var new_hp = health+amount+extra_heal
-	new_hp-=health
-	hpUI.set_hp(new_hp)
-	if new_hp<=max_health:
-		health+=new_hp
-	else:
-		health=max_health
-		SCORE.increaseBy(250)
-
-func normal_heal(amount=0.5):
-	cancel_flash()
-	play_flash(Color.GREEN)
-	var new_hp = health+amount
-	new_hp-=health
+	# var new_hp = health+amount+extra_heal
+	var new_hp=max_health*1/4
+	# new_hp-=health
 	hpUI.set_hp(new_hp)
 	if new_hp<=max_health:
 		health+=new_hp
@@ -138,22 +130,7 @@ func set_max_hp_UI(set_hp):
 	hpUI.edit_max_hp(set_hp)
 
 func set_hp_UI(set_hp):
-	# hp.set_value(set_hp)
 	GLOBAL.health=set_hp
-
-func extra_health(extra_hp:=1.0):
-	var new_max_hp=max_health+extra_hp
-	var new_hp=health+extra_hp
-	if new_hp > 0:
-		max_health=new_max_hp
-		hpUI.edit_max_hp(max_health)
-		normal_heal(extra_hp)
-	else:
-		max_health=GLOBAL.base_health
-		hpUI.edit_max_hp(max_health)
-		hpUI.set_hp(0.5)
-		GLOBAL.health=0.5
-		print(str(GLOBAL.health))
 
 func play_flash(color:Color):
 	sprite.material.set_shader_parameter("flash_color", color)
@@ -193,7 +170,7 @@ func damage(attack: Attack) -> void:
 		if takes_damage_from == attack.source:
 			# var damage_done=attack.damage_done - defense
 			var base_value = max_health
-			var damage_done=base_value*(1/(1+defense))
+			var damage_done=ceil(base_value*(1/(1+defense)))
 			
 			if gets_stunned:
 				hit_stun()	
@@ -203,12 +180,11 @@ func damage(attack: Attack) -> void:
 			match takes_damage_from:
 				attack_source.player:
 					hurt_enemy()
-					health -= damage_done
 				attack_source.enemy:
-					if GLOBAL.suit==GLOBAL.base_suit:
-						health -= damage_done
 					hurt_player(damage_done)
-					
+			
+			health -= damage_done
+
 			if dead:
 				return
 			if health <= 0:
@@ -222,10 +198,10 @@ func damage(attack: Attack) -> void:
 				get_parent().queue_free()
 
 func player_touched_poison():
-			health -= (1 - defense)
+			health -= max_health*(1/(1+defense))
 			if gets_stunned:
 				hit_stun()	
-			hurt_player(1 - defense)
+			hurt_player(max_health*(1/(1+defense)))
 			if dead:
 				return
 			if health <= 0:
@@ -265,34 +241,20 @@ func dead_enemy(increase_score=true):
 	if increase_score:
 		SCORE.increaseBy(score_value)
 	PLAYSFX.died()
-	var drop_item = randi_range(0,5)
-	if drop_item==1:
+	var drop_item = randi_range(0,3)
+	if drop_item==0:
 		call_deferred("item_drop")
 		
 
 func item_drop():
 	if !drops==null:
-		var item_dropped=drops.duplicate()	
+		var item_dropped=drops.duplicate()
+		item_dropped.stat_boost=item_dropped.stat_boost.duplicate()
 		var card=preload("res://scenes/items/Mon_card_item.tscn")
 		var card_drop = card.instantiate()
 		card_drop.global_position=global_position
-		card_drop.item=item_dropped
+		card_drop.item=item_dropped.duplicate()
 		get_tree().current_scene.add_child(card_drop)
-
-func find_item_to_drop(item_dropped:Item):
-	var drop
-	match item_dropped.item_is:
-				item_dropped.item_type.weapon:
-					match item_dropped.weapon.weapon_type:
-						Weapon.type.blade:
-							drop=preload("res://scenes/items/blade_item.tscn")
-						Weapon.type.boot:
-							drop=preload("res://scenes/items/boot_item.tscn")
-						Weapon.type.gun:
-							drop=preload("res://scenes/items/gun_item.tscn")
-				item_dropped.item_type.suit:
-					drop=preload("res://scenes/items/suit_item.tscn")
-	return drop
 		
 func spawn(this: Variant):
 	var spawn_this=this.instantiate()

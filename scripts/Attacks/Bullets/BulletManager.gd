@@ -41,6 +41,7 @@ func setup(bullet:Equipment, suit:Equipment,weapon_is:String):
 	bullet_scene = weapon.bullet_scene
 	weapon_effect=weapon.effect_added
 	suit_effect=suit.effect_added
+	shot_type=weapon.shot_type
 	
 	
 
@@ -75,43 +76,52 @@ func shoot(pos,dir,shot_pattern_is=null):
 			shot_is="continuous_shot_triple"
 		weapon.shot_pattern.triple_shot:
 			shot_is="triple_shot"
+	# print("SHOOT | shot_pattern: "+str(shot_pattern_is))
+	# # print("SHOOT | shot_type: "+str(shot_type))
+	# print("SHOOT | shot is: "+str(shot_is))
 	shot_pattern(pos,dir,shot_pattern_is,shot_is)
 
-func shot_pattern(pos,dir,shoot_pattern,shot_is):
+func shot_pattern(pos,dir,shoot_pattern,shot_is:String):
+	# print("SHOOT PATTERN | shot_pattern: "+str(shoot_pattern))
+	# print("SHOOT PATTERN | shot_is: "+str(shot_is))
 	match shoot_pattern:
 		"simple_shot":
-			simple_shot(pos,dir)
+			normal_shot(pos,dir,shot_is,1.0)
 		"circle_shot":
 			circle_shot(pos,dir,shot_is)
 		"four_way_shot":
 			four_way_shot(pos,dir,shot_is)
 		"triple_shot":
-			triple_shot(pos,dir)
+			tri_shot(pos,dir,shot_is,1.0)
 		"triple_shot_short":
-			triple_shot(pos,dir,0.35)
+			tri_shot(pos,dir,shot_is,0.5)
 		"triple_shot_medium":
-			triple_shot(pos,dir,0.65)
+			tri_shot(pos,dir,shot_is,0.75)
 		"c_shot_triple":
-			continuous_shot_triple(pos,dir)
+			c_shot_triple(pos,dir,shot_is,1.0)
 		"c_shot_double":
-			continuous_shot_double(pos,dir)
+			c_shot_double(pos,dir,shot_is,1.0)
 		"short_shot":
-			simple_shot(pos,dir,0.35)
+			normal_shot(pos,dir,shot_is,0.5)
 		"medium_shot":
-			simple_shot(pos,dir,0.65)
+			normal_shot(pos,dir,shot_is,0.75)
 		"double_shot":
-			double_shot(pos,dir)
+			dual_shot(pos,dir,shot_is,1.0)
 		"area_shot":
-			area_shot(pos,0.65)
+			area_shot(pos,shot_is,0.75)
 		"small_area_shot":
-			area_shot(pos,0.35)
+			area_shot(pos,shot_is,0.5)
 		null:
-			simple_shot(pos,dir)
+			normal_shot(pos,dir,shot_is,1.0)
 
 func no_shot():
 	pass
 
-func simple_shot(pos,dir,dur:=1.0):
+func normal_shot(pos,dir,func_to_use="simple_shot",dur:=1.0):
+	var my_func = Callable(self, func_to_use)
+	my_func.call(pos,dir,func_to_use,dur)
+
+func simple_shot(pos,dir,_func_to_use,dur:=1.0):
 	var anim_name
 	var bullet=bullet_scene.instantiate()
 	bullet.new_pierce(durability)
@@ -144,26 +154,45 @@ func simple_shot(pos,dir,dur:=1.0):
 		bullet.add_child(effect)
 		# effect.owner=bullet
 
-func continuous_shot_double(pos,dir):
-	simple_shot(pos,dir)
+func c_shot_double(pos,dir,func_to_use="simple_shot",dur:=1.0):
+	normal_shot(pos,dir,func_to_use,dur)
 	await get_tree().create_timer(timeout_value).timeout
-	simple_shot(pos,dir)
+	normal_shot(pos,dir,func_to_use,dur)
 
-func continuous_shot_triple(pos,dir):
-	await continuous_shot_double(pos,dir)
-	await get_tree().create_timer(timeout_value).timeout
-	simple_shot(pos,dir)
-
-func double_shot(pos,dir):
-	simple_shot(pos,dir.rotated(deg_to_rad(45)))
-	simple_shot(pos,dir.rotated(deg_to_rad(-45)))
-
-func triple_shot(pos,dir,dur:=1.0):
+func continuous_shot_double(pos,dir,dur:=1.0):
 	simple_shot(pos,dir,dur)
-	simple_shot(pos,dir.rotated(deg_to_rad(45)),dur)
-	simple_shot(pos,dir.rotated(deg_to_rad(-45)),dur)
+	await get_tree().create_timer(timeout_value).timeout
+	simple_shot(pos,dir,dur)
 
-func circle_shot(pos,dir,func_to_use):
+func c_shot_triple(pos,dir,func_to_use="simple_shot",dur:=1.0):
+	await continuous_shot_double(pos,dir,dur)
+	await get_tree().create_timer(timeout_value).timeout
+	normal_shot(func_to_use,pos,dir,dur)
+
+func continuous_shot_triple(pos,dir,dur:=1.0):
+	await continuous_shot_double(pos,dir,dur)
+	await get_tree().create_timer(timeout_value).timeout
+	simple_shot(pos,dir,dur)
+
+func dual_shot(pos,dir,func_to_use="simple_shot",dur:=1.0):
+	normal_shot(pos,dir.rotated(deg_to_rad(15)),func_to_use,dur)
+	normal_shot(pos,dir.rotated(deg_to_rad(-15)),func_to_use,dur)
+
+func double_shot(pos,dir,dur:=1.0):
+	simple_shot(pos,dir.rotated(deg_to_rad(15)),dur)
+	simple_shot(pos,dir.rotated(deg_to_rad(-15)),dur)
+
+func tri_shot(pos,dir,func_to_use="simple_shot",dur:=1.0):
+	normal_shot(pos,dir,func_to_use,dur)
+	normal_shot(pos,dir.rotated(deg_to_rad(15)),func_to_use,dur)
+	normal_shot(pos,dir.rotated(deg_to_rad(-15)),func_to_use,dur)
+
+func triple_shot(pos,dir,_func_to_use="simple_shot",dur:=1.0):
+	simple_shot(pos,dir,dur)
+	simple_shot(pos,dir.rotated(deg_to_rad(15)),dur)
+	simple_shot(pos,dir.rotated(deg_to_rad(-15)),dur)
+
+func circle_shot(pos,dir,func_to_use="simple_shot"):
 	var shot_directions
 	var start_by_right = [Vector2.RIGHT,Vector2.DOWN,Vector2.LEFT,Vector2.UP]
 	var start_by_up = [Vector2.UP,Vector2.RIGHT,Vector2.DOWN,Vector2.LEFT]
@@ -182,19 +211,19 @@ func circle_shot(pos,dir,func_to_use):
 		my_func.call(pos,i)
 		await get_tree().create_timer(timeout_value).timeout
 	
-func four_way_shot(pos,_dir,func_to_use):
+func four_way_shot(pos,_dir,func_to_use="simple_shot"):
 	var my_func = Callable(self, func_to_use)
 	my_func.call(pos,Vector2.UP)
 	my_func.call(pos,Vector2.RIGHT)
 	my_func.call(pos,Vector2.DOWN)
 	my_func.call(pos,Vector2.LEFT)
 
-func area_shot(pos,dur:=1.0):
-	simple_shot(pos, Vector2.UP,dur)
-	simple_shot(pos, Vector2.from_angle(deg_to_rad(45)),dur)
-	simple_shot(pos, Vector2.RIGHT,dur)
-	simple_shot(pos, Vector2.from_angle(deg_to_rad(135)),dur)
-	simple_shot(pos, Vector2.DOWN,dur)
-	simple_shot(pos, Vector2.from_angle(deg_to_rad(225)),dur)
-	simple_shot(pos, Vector2.LEFT,dur)
-	simple_shot(pos, Vector2.from_angle(deg_to_rad(315)),dur)
+func area_shot(pos,shot_is="simple_shot",dur:=1.0):
+	normal_shot(pos, Vector2.UP,shot_is,dur)
+	normal_shot(pos, Vector2.from_angle(deg_to_rad(45)),shot_is,dur)
+	normal_shot(pos, Vector2.RIGHT,shot_is,dur)
+	normal_shot(pos, Vector2.from_angle(deg_to_rad(135)),shot_is,dur)
+	normal_shot(pos, Vector2.DOWN,shot_is,dur)
+	normal_shot(pos, Vector2.from_angle(deg_to_rad(225)),shot_is,dur)
+	normal_shot(pos, Vector2.LEFT,shot_is,dur)
+	normal_shot(pos, Vector2.from_angle(deg_to_rad(315)),shot_is,dur)
