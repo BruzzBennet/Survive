@@ -16,14 +16,11 @@ func get_item():
 	return item_summoned
 
 func setup(item:Equipment):
-	# print("item setup!")
 	item_summoned=item
 	if get_node_or_null("Mon") and item.mon_sprite:
 		$Mon.texture=item.mon_sprite
 	item_name = item.mon_name
 	item_description = item.equipment_description
-	# item_icon_is(item)
-	# print("item set up is: "+ str(item))
 	if get_node_or_null("Ammo"):
 		setup_ammo(item)
 
@@ -36,25 +33,28 @@ func show_ammo():
 func setup_ammo(item:Equipment):
 	var max_ammo
 	var current_ammo
-	# match item.item_is: 
-	# 	item.item_type.weapon:
-	# 		max_ammo=item.weapon.max_ammo
-	# 		current_ammo=item.weapon.current_ammo
-	# 	item.item_type.suit:
-	# 		max_ammo=item.suit.max_ammo
-	# 		current_ammo=item.suit.current_ammo
 	max_ammo=item.max_ammo
 	current_ammo=item.current_ammo
 	$Ammo.max_value=max_ammo
 	$Ammo.value=current_ammo
-	if current_ammo >= (max_ammo*3/5):
+	if current_ammo >= (max_ammo*6/10):
 		set_color(Color(0.0,0.5,0.65,1.0))
-	elif current_ammo >= (max_ammo*1/4):
+	elif current_ammo >= (max_ammo*3/10):
 		set_color(Color.YELLOW)
 	else:
-		set_color(Color.RED)	
-	# else:
-	# 	$Ammo.visible=false
+		set_color(Color.RED)
+
+func update_ammo():
+	var current_ammo=item_summoned.current_ammo
+	var max_ammo=item_summoned.max_ammo
+	$Ammo.value=current_ammo
+	if current_ammo >= (max_ammo*6/10):
+		set_color(Color(0.0,0.5,0.65,1.0))
+	elif current_ammo >= (max_ammo*3/10):
+		set_color(Color.YELLOW)
+	else:
+		set_color(Color.RED)		
+
 
 func set_color(color):
 	var sb = $Ammo.get_theme_stylebox("fill") as StyleBoxFlat

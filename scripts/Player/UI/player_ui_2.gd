@@ -22,9 +22,6 @@ var original_color=Color(0.0,0.5,0.65,1.0)
 var ready_card
 
 func _ready() -> void:
-	# print("deck "+str(GLOBAL.deck))
-	# print("suit "+str(GLOBAL.suit))
-	# print("weapon "+str(GLOBAL.weapon))
 	hp.material.set_shader_parameter("flash_modifier", 0.0)
 	max_hp=GLOBAL.base_health
 	hp.max_value=max_hp
@@ -119,12 +116,14 @@ func ammo_setup(weapon: Equipment, flash_it=true):
 	$Ammo.max_value=maxATK
 	startingATK= weapon.current_ammo
 	currentATK= weapon.current_ammo
-	set_ammo(startingATK,flash_it)
+	set_ammo(startingATK)
+	bar_color(ammo,maxATK,currentATK,flash_it,original_color,false)
 
-func set_ammo(current_ammo,flash_it=true):
-	if flash_it:
-		flash(Color.GREEN,ammo)
+func set_ammo(current_ammo):
 	ammo.value=current_ammo
+	var weapon_card=get_node("Panel/Card2/CardBase2")
+	if weapon_card.item_summoned!=GLOBAL.base_weapon:
+		weapon_card.update_ammo()
 
 func display_info(button: Button):
 	if button.get_child(0).visible == true:
@@ -288,7 +287,6 @@ func equip_suit(button):
 			set_suit()
 		else:
 			set_suit(equipment)
-		# trade_cards(past_suit)
 		body.equip(equipment,GLOBAL.weapon)	
 		clear_item_from_deck(equipment,button)
 		if past_suit!=GLOBAL.base_suit and (past_suit!=past_weapon):
@@ -419,4 +417,5 @@ func reduce_ammo(times: float = 1):
 	var depletion: float = depletion_rate * times
 	currentATK = max(0, currentATK - depletion)
 	current_weapon.current_ammo = currentATK
-	set_ammo(currentATK,false)
+	set_ammo(currentATK)
+	bar_color(ammo,maxATK,currentATK,true,original_color,false)

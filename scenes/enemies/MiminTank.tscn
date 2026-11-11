@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dxddbd3vkpdtx" path="res://assets/palettes/MonRanger/palette_yellow.png" id="7_jx0ff"]
 [ext_resource type="Texture2D" uid="uid://b7qsue6uvesb7" path="res://assets/MR/BodyParts/MRWeaponlessBase.png" id="8_b22p5"]
 [ext_resource type="Script" uid="uid://bj0e5pun6w7gk" path="res://scripts/Player/shading.gd" id="9_oi7p5"]
-[ext_resource type="Resource" uid="uid://cdwri2egvh0mn" path="res://resources/characters/MR/palettes/grey.tres" id="10_x6rkc"]
+[ext_resource type="Resource" uid="uid://b5abk162wnhtu" path="res://resources/characters/MR/palettes/green_dark.tres" id="10_x6rkc"]
 [ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/boxes/hurt_box.tscn" id="11_4g3q3"]
 [ext_resource type="PackedScene" uid="uid://ffrii0cvnsbc" path="res://scenes/enemies/enemy_movement.tscn" id="12_qh1oo"]
 [ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/boxes/hitbox.tscn" id="13_2btmm"]

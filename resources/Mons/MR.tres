@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://ddps1u5bhw5fe" path="res://assets/Weapons/Boots/Boot_1.png" id="3_1kx06"]
 [ext_resource type="PackedScene" uid="uid://dcclv4wy77u2a" path="res://scenes/bullets/slash_bullet.tscn" id="4_mrloy"]
 [ext_resource type="Texture2D" uid="uid://3kybjfo0bofs" path="res://assets/Weapons/Guns/Lazer_Gun.png" id="5_21i2i"]
-[ext_resource type="Texture2D" uid="uid://dwwxljqniuq2q" path="res://assets/MR/BodyParts/Helmets/Helmet_MROG.png" id="6_e0ay4"]
 [ext_resource type="Texture2D" uid="uid://dqw0etqnmrkme" path="res://assets/cards/Mons/MR_Big_Helmet.png" id="7_lwsnq"]
+[ext_resource type="Texture2D" uid="uid://ct28kno0x52u1" path="res://assets/MR/BodyParts/Helmets/Helmet_MR1.png" id="7_u2ujn"]
 [ext_resource type="AudioStream" uid="uid://bs6u0275h8oso" path="res://assets/audio/slash.mp3" id="8_pyasq"]
 [ext_resource type="Script" uid="uid://d4dsworwk7sp" path="res://scripts/Components/Weapons/Equipment.gd" id="9_imocq"]
 [ext_resource type="AudioStream" uid="uid://b5vijeuq114j3" path="res://assets/audio/slashshot.mp3" id="10_y12nw"]
@@ -21,7 +21,7 @@ metadata/_custom_type_script = "uid://84qpp678qnu4"
 script = ExtResource("9_imocq")
 mon_sprite = ExtResource("7_lwsnq")
 mon_name = "MonRanger"
-helmet = ExtResource("6_e0ay4")
+helmet = ExtResource("7_u2ujn")
 body_palette = ExtResource("2_r70vj")
 blade_sprite = ExtResource("1_u2ujn")
 gun_sprite = ExtResource("5_21i2i")

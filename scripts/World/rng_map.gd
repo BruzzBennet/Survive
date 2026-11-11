@@ -117,7 +117,7 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 			times +=1
 			var type = randi_range(0,2)		
 			if type == 0 && enemy_amount>0 && !spawned_already.has(spawner):
-				if GLOBAL.current_level < (level_treshold*2):
+				if GLOBAL.current_level < (level_treshold*1.5):
 					enemy_level=1
 				else:
 					max_level=clamp(max_current_level,1,max_lvl)
@@ -125,7 +125,7 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 					if enemy_level > enemy_amount:
 						enemy_level=enemy_level-enemy_amount	
 				spawner.spawn_enemy(enemy_level)
-				enemy_amount -= enemy_level
+				enemy_amount -= min(enemy_level/1.5,1)
 				spawned_already.append(spawner)
 		else:
 			print("Spawner not found")
