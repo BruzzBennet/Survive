@@ -55,7 +55,7 @@ func mute_sfx():
 		GLOBAL.sfx_on=true
 
 var deck = []
-var deck_size:= 3
+var deck_size:= 1
 
 func add_card(card:Equipment):
 	if deck.size() < deck_size:
@@ -64,8 +64,8 @@ func add_card(card:Equipment):
 func restart():
 	SCORE.actual=0
 	player_type=base_player_type
-	weapon = base_weapon.duplicate()
-	suit= base_suit
+	weapon = base_weapon
+	suit= weapon
 	starting_enemy_amount= base_enemy_amount
 	increase_dificulty = 0.0
 	max_speed = 200
@@ -76,5 +76,3 @@ func restart():
 	current_level= 1
 	about_to_henshin=false
 	deck = []
-	weapon_item=null
-	suit_item=null

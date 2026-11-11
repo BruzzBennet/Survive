@@ -104,7 +104,7 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 	var times: = 0
 	var enemy_level=0
 	var max_level
-	var max_current_level=round(GLOBAL.current_level/level_treshold)
+	var max_current_level=round(GLOBAL.current_level/(level_treshold*1.5))
 	for instance in spawn_points:	
 		var spawner = instance.get_node_or_null("Spawner")
 		if spawner:
@@ -117,10 +117,10 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array):
 			times +=1
 			var type = randi_range(0,2)		
 			if type == 0 && enemy_amount>0 && !spawned_already.has(spawner):
-				if GLOBAL.current_level < (level_treshold*3):
+				if GLOBAL.current_level < (level_treshold*2):
 					enemy_level=1
 				else:
-					max_level=clamp(1+max_current_level,1,max_lvl)
+					max_level=clamp(max_current_level,1,max_lvl)
 					enemy_level= randi_range(1, max_level)
 					if enemy_level > enemy_amount:
 						enemy_level=enemy_level-enemy_amount	

@@ -93,8 +93,7 @@ func tween_drop(node:Node,dist:Vector2):
 	tween_movement.tween_property(sprite, "global_position", dist, duration)\
 		.set_trans(Tween.TRANS_QUAD)\
 		.set_ease(Tween.EASE_OUT)
-		
-	
+
 
 func plus_or_minus():
 	var dist = randi_range(0,1)
@@ -177,7 +176,6 @@ func equip_suit(button):
 		PLAYSFX.unequip()
 		ui.suit_ammo_setup(GLOBAL.base_suit,false)
 	body.equip(equipment,GLOBAL.weapon)	
-	
 
 
 func equip_weapon(button):

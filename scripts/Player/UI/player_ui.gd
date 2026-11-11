@@ -53,27 +53,17 @@ func set_weapon(item:Equipment=null):
 		GLOBAL.weapon_item=null
 
 func set_hp(new_hp: float, spawned=true):
-	# hp.value=GLOBAL.health  
-	# if GLOBAL.suit==GLOBAL.base_suit:
-		# print("set_hp "+str(spawned))
 	set_health(new_hp,spawned)
-	# else:
-	# 	set_ammo_suit(new_hp, spawned)
 
 func set_health(add: float,spawned=true):
 	var old_hp=GLOBAL.health
 	var new_hp
-	# if old_hp==max_hp:
-	# 	new_hp=old_hp
-	# else:
 	if spawned:
 		new_hp=old_hp+add
 	else:
 		new_hp=old_hp
 	GLOBAL.health=clamp(new_hp,0,max_hp)
 	hp.value=GLOBAL.health
-	# print("current health: "+str(GLOBAL.health))
-
 	bar_color(hp,old_hp,new_hp,spawned)
 
 func bar_color(bar,old_value:float,new_value:float,spawned=true,color:Color=Color.GREEN,damage=true):
@@ -102,7 +92,6 @@ func flash(color,bar,past_color=original_color):
 	if sb == null:
 		return
 
-	# Stop any previous flash
 	if flash_tween and flash_tween.is_running():
 		flash_tween.kill()
 

@@ -14,6 +14,7 @@
 
 [sub_resource type="Resource" id="Resource_n4vsj"]
 script = ExtResource("11_oavlu")
+stamina_boost = 1
 metadata/_custom_type_script = "uid://84qpp678qnu4"
 
 [resource]

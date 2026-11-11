@@ -25,7 +25,6 @@ equipment_description = "Bullets explode on touch"
 bullet_scene = ExtResource("4_b73a1")
 normal_attack_sfx = ExtResource("8_nop8l")
 special_attack_sfx = ExtResource("8_nop8l")
-shot_type = 3
 stat_boost = ExtResource("11_r612a")
 effect_added = ExtResource("5_dau66")
 metadata/_custom_type_script = "uid://d4dsworwk7sp"

@@ -107,7 +107,7 @@ func equip_suit(this_suit:Equipment):
 
 func _physics_process(delta: float) -> void:
 	check_weapon_durability()
-	check_suit_durability()
+	# check_suit_durability()
 	if GLOBAL.about_to_henshin==false:
 		walk_sfx()
 		player_movement(delta)
@@ -151,7 +151,7 @@ func broken_weapon():
 	explode_fx()
 	PLAYSFX.crunchyMash()
 	PLAYSFX.unequip()
-	get_tree().current_scene.get_node("HenshinMenu").update_deck()
+	get_tree().current_scene.get_node("HenshinMenu/UI").update_deck()
 	equip(GLOBAL.suit,GLOBAL.base_weapon)
 	GLOBAL.player_type=GLOBAL.base_player_type
 	

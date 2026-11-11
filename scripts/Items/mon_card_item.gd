@@ -12,11 +12,34 @@ func _ready() -> void:
 func build_w_Mon(this_one_item: Equipment):
 	if this_one_item.mon_sprite:
 			$MonSpirit.build_Mon(this_one_item.mon_sprite)
-	# description(this_one_item.mon_name,this_one_item.equipment_description)
+	description(this_one_item.mon_name,stat_shwocase(this_one_item.stat_boost)+this_one_item.equipment_description)
 	# item_icon_is(this_one_item)
 
 func description(item_name:String, desc:String):
 	$PanelContainer/Label.text=item_name + ":\n" + desc
+
+func stat_shwocase(equipment:Stat_Boost):
+		var desc=""
+		if equipment.bullet_speed_boost!=0:
+			desc+="Bullet Speed " + ifplus(equipment.bullet_speed_boost) + ". "
+		if equipment.stamina_boost!=0:
+			desc+="Stamina " + ifplus(equipment.stamina_boost) + ". "
+		if equipment.bullet_power_boost!=0:
+			desc+="Buller Pierce " + ifplus(equipment.bullet_power_boost) + ". "
+		if equipment.bullet_reach_boost!=0:
+			desc+="Bullet Reach " + ifplus(equipment.bullet_reach_boost) + ". "
+		if equipment.stamina_recover_boost!=0:
+			desc+="Recover  " + ifplus(equipment.stamina_recover_boost) + ". "
+		if desc == "":
+			return desc
+		else:
+			return desc + "\n"
+
+func ifplus(value:int):
+	if value>0:
+		return "+" + str(value)
+	else:
+		return str(value)
 
 func new_item(this_one_item: Equipment):
 	item=this_one_item.duplicate()
@@ -40,29 +63,6 @@ func item_icon_is(this_one_item: Item):
 	if item_type!="item":
 		item_type_icon = "res://assets/cards/icons/"+item_type+".png"
 		$CardNode/Type.texture=load(item_type_icon)
-
-# var shootplayer: PackedScene = preload("res://scenes/PlayerTypes/Shooter.tscn")
-# var dashplayer: PackedScene = preload("res://scenes/PlayerTypes/Dasher.tscn")
-# var slashplayer: PackedScene = preload("res://scenes/PlayerTypes/Slasher.tscn")
-
-# func switch_weapon(weapon,body):
-# 	weapon.current_ammo = weapon.max_ammo
-# 	var player_scene
-# 	match weapon.weapon_type:
-# 		Weapon.type.boot:
-# 			player_scene=dashplayer
-# 		Weapon.type.gun:
-# 			player_scene=shootplayer
-# 		Weapon.type.blade:
-# 			player_scene=slashplayer
-# 	GLOBAL.player_type=player_scene
-# 	var player = player_scene.instantiate()
-# 	get_tree().current_scene.add_child(player)
-# 	player.position = body.global_position
-# 	body.queue_free()
-# 	var new_weapon = weapon.duplicate()
-# 	player.equip(GLOBAL.suit,new_weapon)
-# 	GLOBAL.weapon=new_weapon
 
 func _on_area_2d_body_entered(body) -> void:
 	if body is Player_Unit:

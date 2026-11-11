@@ -102,7 +102,6 @@ texture = ExtResource("5_biqaa")
 [node name="ItemUpDown2" parent="CardNode" unique_id=299360922 instance=ExtResource("5_m6sjq")]
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1104734786]
-visible = false
 offset_left = -45.0
 offset_top = 8.0
 offset_right = 45.0

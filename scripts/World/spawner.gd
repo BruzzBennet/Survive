@@ -84,7 +84,7 @@ func enemy_died(enemy):
 		rng_map.call_deferred("next_level")
 
 func spawn_player(_first_time=false):
-	var player_ui = preload("res://scenes/henshin_menu/henshin_menu.tscn").instantiate()
+	var player_ui = preload("res://scenes/UI/PlayerUI_2.tscn").instantiate()
 	get_tree().current_scene.add_child(player_ui)
 	player_ui.position=Vector2(0,0)
 
