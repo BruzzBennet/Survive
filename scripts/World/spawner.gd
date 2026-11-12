@@ -30,27 +30,20 @@ func _ready():
 	if get_tree().current_scene.get_node_or_null("RNG_Map"):
 		rng_map=get_tree().current_scene.get_node("RNG_Map")
 		enemies = rng_map.enemies
-	
 
 func get_enemies_by_level(lvl:int):
 	var enemy
 	match lvl:
 		1:
-			enemy=load("res://scenes/enemies/miminzombie.tscn")
+			enemy=load("res://scenes/enemies/miminrage.tscn")
 		2:
-			enemy=load("res://scenes/enemies/mimin.tscn")
+			enemy=load("res://scenes/enemies/miminfast.tscn")
 		3:
+			enemy=load("res://scenes/enemies/miminzombie.tscn")
+		4:
+			enemy=load("res://scenes/enemies/miminflyer.tscn")
+		5:
 			enemy=load("res://scenes/enemies/mimintank.tscn")
-		# 4:
-		# 	enemy=preload("res://scenes/enemies/pucklam.tscn")
-		# 5:
-		# 	enemy=preload("res://scenes/pozzap.tscn")
-		# 6:
-		# 	enemy=preload("res://scenes/enemies/Bombry.tscn")
-		# 7:
-		# 	enemy=preload("res://scenes/enemies/clamik.tscn")
-		# 8:
-		# 	enemy=preload("res://scenes/opozzap.tscn")
 	return enemy
 
 func spawn_enemy(lvl:int) -> void:
@@ -66,6 +59,7 @@ func spawn_enemy(lvl:int) -> void:
 	enemy.global_position = global_position
 	enemies.append(enemy)
 	enemy.add_to_group("enemies")
+	GLOBAL.mimin+=1
 	var hitbox = enemy.get_node("HurtBox")
 	hitbox.died.connect(enemy_died.bind(enemy))
 
@@ -80,6 +74,8 @@ func spawn_minole():
 
 func enemy_died(enemy):
 	enemies.erase(enemy)
+	if GLOBAL.mimin>0:
+		GLOBAL.mimin-=1
 	if enemies.is_empty():
 		rng_map.call_deferred("next_level")
 

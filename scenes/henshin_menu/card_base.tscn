@@ -5,10 +5,14 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdjtb"]
 bg_color = Color(0, 0, 0, 1)
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcgng"]
 resource_local_to_scene = true
 bg_color = Color(0, 0.72156864, 0.8235294, 1)
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [node name="CardBase" type="Node2D" unique_id=706061897]
 script = ExtResource("1_cj6du")
@@ -25,10 +29,10 @@ position = Vector2(0, 13)
 
 [node name="Ammo" type="ProgressBar" parent="." unique_id=2121918318]
 visible = false
-offset_left = -13.0
-offset_top = 14.0
-offset_right = 13.0
-offset_bottom = 22.0
+offset_left = -14.0
+offset_top = 15.0
+offset_right = 14.0
+offset_bottom = 23.0
 theme_override_styles/background = SubResource("StyleBoxFlat_kdjtb")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tcgng")
 show_percentage = false

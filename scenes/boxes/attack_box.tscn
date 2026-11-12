@@ -6,6 +6,6 @@
 script = ExtResource("1_e26u7")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1819482814]
-volume_db = -10.0
+volume_db = -7.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -76,14 +76,9 @@ func shoot(pos,dir,shot_pattern_is=null):
 			shot_is="continuous_shot_triple"
 		weapon.shot_pattern.triple_shot:
 			shot_is="triple_shot"
-	# print("SHOOT | shot_pattern: "+str(shot_pattern_is))
-	# # print("SHOOT | shot_type: "+str(shot_type))
-	# print("SHOOT | shot is: "+str(shot_is))
 	shot_pattern(pos,dir,shot_pattern_is,shot_is)
 
 func shot_pattern(pos,dir,shoot_pattern,shot_is:String):
-	# print("SHOOT PATTERN | shot_pattern: "+str(shoot_pattern))
-	# print("SHOOT PATTERN | shot_is: "+str(shot_is))
 	match shoot_pattern:
 		"simple_shot":
 			normal_shot(pos,dir,shot_is,1.0)

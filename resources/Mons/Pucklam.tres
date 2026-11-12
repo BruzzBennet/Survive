@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://d3fr727htt61s" path="res://assets/Weapons/Blade/Pucklam_Blade.png" id="1_d2jq3"]
 [ext_resource type="Resource" uid="uid://c5plftuvha1cv" path="res://resources/characters/palettes/MR.tres" id="2_ci7f2"]
 [ext_resource type="PackedScene" uid="uid://e7k5wcox11oq" path="res://scenes/bullets/clamik_bullet.tscn" id="3_dm0rm"]
+[ext_resource type="PackedScene" uid="uid://bodyf87taxuu6" path="res://scenes/enemies/bounce.tscn" id="4_ci7f2"]
 [ext_resource type="Texture2D" uid="uid://bu0tsdj37eks2" path="res://assets/Weapons/Guns/Pucklam_Gun.png" id="4_rxst6"]
 [ext_resource type="Texture2D" uid="uid://bvh3jmse02gcb" path="res://assets/MR/BodyParts/Helmets/Helmet_Pucklam.png" id="5_03oso"]
 [ext_resource type="Texture2D" uid="uid://35py80wnqaso" path="res://assets/Enemies/Plucklam.png" id="6_64dtm"]
@@ -18,9 +19,10 @@ helmet = ExtResource("5_03oso")
 body_palette = ExtResource("2_ci7f2")
 blade_sprite = ExtResource("1_d2jq3")
 gun_sprite = ExtResource("4_rxst6")
-equipment_description = "Bullets have a bigger area"
+equipment_description = "Bullets bounce."
 bullet_scene = ExtResource("3_dm0rm")
 normal_attack_sfx = ExtResource("7_vjo46")
 special_attack_sfx = ExtResource("7_vjo46")
 stat_boost = ExtResource("9_dan8i")
+effect_added = ExtResource("4_ci7f2")
 metadata/_custom_type_script = "uid://d4dsworwk7sp"

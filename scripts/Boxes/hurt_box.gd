@@ -6,13 +6,13 @@ var hurt_fx: PackedScene = preload("res://scenes/hurtParticles.tscn")
 var shared_material: ShaderMaterial
 @export var defense: float = 1.0
 @export var takes_damage_from: attack_source
-@export var score_value: int = 50
 @export var receives_knockback: bool = false
 @export var gets_stunned: bool = false
 @export var drops: Equipment
 @export var mimin:=false
+var score_value: = 100
 var max_health:= 100.0
-var extra_heal=0.0
+var extra_heal:=0.0
 var drops_items:bool
 
 enum attack_source {

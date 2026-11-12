@@ -11,7 +11,12 @@ var damage_done:= 1.0
 var reach
 var reach_check
 var player
+var bounce:=false
+var bounced:=false
 signal limit_reached
+
+func bounces():
+	bounce=true
 
 func new_pierce(amount:int):
 	max_enemies_pierced=amount
@@ -34,16 +39,29 @@ func _ready():
 func _on_area_entered(body):
 	if body is HurtBox_Component and body.get_parent().is_in_group("enemies"):
 		enemies_pierced+=1
+		if bounce:
+			var enemy = body.get_parent()
+			direction = (global_position - enemy.global_position).normalized()
+			bounced = true
 	
 func _physics_process(delta):
 	time_on_field += delta
-	velocity = direction * speed
+	if bounce:
+		var collision = move_and_collide(direction * speed * delta)
+
+		if collision:
+			direction = direction.bounce(collision.get_normal()).normalized()
+
+		if bounced:
+			bounced = false
+
+		velocity = direction * speed
+	else:
+		velocity = direction * speed
+		move_and_slide()
 	reach_check=speed*time_on_field
-	# print(str(reach_check))
-	move_and_slide()
-	if get_slide_collision_count() > 0 \
+	if get_slide_collision_count()>0 and !bounce \
 	or enemies_pierced>=max_enemies_pierced \
-	# or time_on_field>=max_time_on_field\
 	or reach<=reach_check:
 		limit_reached.emit()
 		queue_free()

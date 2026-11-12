@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://dbrb3hg728t00"]
+
+[ext_resource type="Script" uid="uid://cgl72hkgnqoa8" path="res://scripts/Menus/mimin_tracker.gd" id="1_fggw7"]
+[ext_resource type="Texture2D" uid="uid://brb4vqqr6ym28" path="res://assets/Enemies/Mimin_Big_Helmet.png" id="1_spwgy"]
+[ext_resource type="FontFile" uid="uid://bcw8ds3wtqx7e" path="res://assets/fonts/hero-italic.ttf" id="2_fggw7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0yf3"]
+bg_color = Color(0, 0, 0, 1)
+skew = Vector2(0.15, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dv1x1"]
+font = ExtResource("2_fggw7")
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_6ldna"]
+line_spacing = -3.0
+font = ExtResource("2_fggw7")
+font_size = 13
+
+[node name="MiminTracker" type="Node2D" unique_id=1216740893]
+script = ExtResource("1_fggw7")
+
+[node name="Panel" type="Panel" parent="." unique_id=1857598773]
+offset_left = 5.0
+offset_top = -16.0
+offset_right = 45.0
+offset_bottom = 14.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b0yf3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=246566862]
+scale = Vector2(2, 2)
+texture = ExtResource("1_spwgy")
+
+[node name="Amount" type="Label" parent="." unique_id=1053725078]
+offset_left = 3.0
+offset_top = -15.0
+offset_right = 43.0
+offset_bottom = 21.0
+text = "09"
+label_settings = SubResource("LabelSettings_dv1x1")
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="." unique_id=816343661]
+visible = false
+offset_left = 45.0
+offset_top = -14.0
+offset_right = 117.0
+offset_bottom = 19.0
+text = "Mimin"
+label_settings = SubResource("LabelSettings_6ldna")
+
+[node name="Label3" type="Label" parent="." unique_id=1561190056]
+visible = false
+offset_left = 43.0
+offset_top = -1.0
+offset_right = 115.0
+offset_bottom = 32.0
+text = "Left"
+label_settings = SubResource("LabelSettings_6ldna")

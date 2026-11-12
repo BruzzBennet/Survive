@@ -6,17 +6,21 @@ extends Node2D
 var play_sfx:=0
 
 func _ready():
-	if body is CharacterBody2D:
+	if body.is_in_group("bullet"):
+		body.bounces()
+	elif body is CharacterBody2D:
 		body.velocity=Vector2(-200,-200).normalized() * speed
+	
 
 func _physics_process(delta):
-	var collision = body.move_and_collide(body.velocity * delta)
-	if collision:
-		play_sfx+=1
-		if play_sfx==3 and bounce_sfx:
-			playsfx()
-			play_sfx=0
-		body.velocity = body.velocity.bounce(collision.get_normal())
+	if !body.is_in_group("bullet"):
+		var collision = body.move_and_collide(body.velocity * delta)
+		if collision:
+			play_sfx+=1
+			if play_sfx==3 and bounce_sfx:
+				playsfx()
+				play_sfx=0
+			body.velocity = body.velocity.bounce(collision.get_normal())
 
 
 func playsfx():

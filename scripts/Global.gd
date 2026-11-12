@@ -8,7 +8,7 @@ var base_Mon1=load("res://resources/Mons/minole.tres")
 var base_weapon=load("res://resources/Mons/sergyo.tres")
 var base_suit=base_weapon
 var base_health=100
-var base_enemy_amount: = 2
+var base_enemy_amount: = 3
 var base_ammo = 0.65
 
 var weaponless = "res://scenes/PlayerTypes/weaponless.tscn"
@@ -34,7 +34,7 @@ var weapon_item
 var suit_item
 var music_on:=true
 var sfx_on:=true
-
+var mimin:=0
 
 func mute_music():
 	var bus_index = AudioServer.get_bus_index("Music")
@@ -76,3 +76,4 @@ func restart():
 	current_level= 1
 	about_to_henshin=false
 	deck = []
+	mimin=0

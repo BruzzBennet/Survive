@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/boxes/hitbox.tscn" id="13_2btmm"]
 [ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="14_ejtbh"]
 [ext_resource type="PackedScene" uid="uid://dyf6o2plwi4mj" path="res://scenes/boxes/attack_box.tscn" id="15_bi3fo"]
-[ext_resource type="AudioStream" uid="uid://c8auegmv7t80r" path="res://assets/audio/nullpunch.wav" id="16_x6rkc"]
+[ext_resource type="AudioStream" uid="uid://dyp5myumj03y1" path="res://assets/audio/lan.wav" id="16_x6rkc"]
 [ext_resource type="Script" uid="uid://cphbcc37lky8e" path="res://scripts/Enemies/chase.gd" id="17_0ul4o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xcnp1"]
