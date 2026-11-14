@@ -38,16 +38,17 @@ func ifplus(value:int):
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var boost_this
+	var equipment
 	var stat_boost=item
 	if body is Player_Unit:
 		if weapon:
 			if GLOBAL.weapon==GLOBAL.base_weapon:
 				return
-			boost_this=body.weapon.stat_boost
+			boost_this=body.weapon.stat_boost.duplicate()
 		else:
 			if GLOBAL.suit==GLOBAL.base_suit:
 				return
-			boost_this=body.suit.stat_boost
+			boost_this=body.suit.stat_boost.duplicate()
 		if stat_boost.bullet_speed_boost!=0:
 			boost_this.bullet_speed_boost+=stat_boost.bullet_speed_boost
 		if stat_boost.stamina_boost!=0:
@@ -57,9 +58,13 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if stat_boost.bullet_reach_boost!=0:
 			boost_this.bullet_reach_boost+=stat_boost.bullet_reach_boost
 		if weapon:
-			body.stats_setup(GLOBAL.suit,body.weapon)
+			equipment=body.weapon
+			equipment.stat_boost=boost_this
+			body.stats_setup(GLOBAL.suit,equipment)
 		else:
-			body.stats_setup(body.suit,GLOBAL.weapon)
+			equipment=body.suit
+			equipment.stat_boost=boost_this
+			body.stats_setup(equipment,GLOBAL.weapon)
 		PLAYSFX.recover()
 		queue_free()
 		

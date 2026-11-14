@@ -2743,7 +2743,6 @@ shape = SubResource("RectangleShape2D_00sev")
 debug_color = Color(0, 0.60038817, 0, 0.42000002)
 
 [node name="EnemyMovement" parent="." unique_id=1062153470 instance=ExtResource("12_6eufd")]
-speed = 80.0
 time_to_change_dir = 1.0
 
 [node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("12_pstt6")]
@@ -2761,7 +2760,6 @@ debug_color = Color(1, 0, 0, 0.42000002)
 libraries/ = SubResource("AnimationLibrary_b7s4r")
 
 [node name="FollowBox" parent="." unique_id=665233923 instance=ExtResource("15_6eufd")]
-process_mode = 4
 follow_sfx = ExtResource("16_k8uqi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FollowBox" unique_id=128998696]
@@ -2779,5 +2777,4 @@ attack_sfx = ExtResource("16_k8uqi")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox" unique_id=1090590937]
 position = Vector2(16, 7)
 shape = SubResource("RectangleShape2D_k8uqi")
-disabled = true
 debug_color = Color(1, 0.28627452, 0, 0.41960785)

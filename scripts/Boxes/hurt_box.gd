@@ -255,7 +255,7 @@ func item_drop():
 		var card_drop = card.instantiate()
 		card_drop.global_position=global_position
 		card_drop.item=item_dropped
-		card_drop.item.stat_boost.duplicate()
+		card_drop.item.stat_boost=drops.stat_boost.duplicate()
 		get_tree().current_scene.add_child(card_drop)
 		
 func spawn(this: Variant):

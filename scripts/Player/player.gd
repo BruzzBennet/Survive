@@ -254,11 +254,12 @@ func dodge(value:float):
 	var stamina=atkUI.ammo
 	if stamina.value>stamina.max_value*3/5:
 		able_to_dodge=true
+	if Input.is_action_just_pressed("dash") and stamina.value>0 and able_to_dodge:
+		dash_fx(rotation, global_position, last_direction)
 	if Input.is_action_pressed("dash"):
 		if stamina.value > 0 and able_to_dodge:
 			is_dodging = true
 			able_to_dodge = false
-			dash_fx(rotation, global_position, last_direction)
 	else:
 		is_dodging=false
 
