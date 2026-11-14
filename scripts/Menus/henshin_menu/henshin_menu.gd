@@ -248,7 +248,7 @@ func screen():
 func open_menu():
 	# update_deck()
 	BGM.standBy()
-	show_ammo()
+	# show_ammo()
 	%Panel/Card1.grab_focus()
 	GLOBAL.about_to_henshin=true
 	was_pressed=false
@@ -256,7 +256,7 @@ func open_menu():
 
 func close_menu():
 	BGM.stop_standBy()
-	show_ammo(false)
+	# show_ammo(false)
 	for i in %Panel.get_children():
 		i.release_focus()
 	GLOBAL.about_to_henshin=false

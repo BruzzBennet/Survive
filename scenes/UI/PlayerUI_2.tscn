@@ -216,6 +216,8 @@ offset_bottom = 61.0
 rotation = -1.5707964
 theme_override_styles/background = SubResource("StyleBoxFlat_jt14p")
 theme_override_styles/fill = SubResource("StyleBoxFlat_cviaw")
+max_value = 1.0
+value = 1.0
 show_percentage = false
 
 [node name="Node2D" type="Node2D" parent="UI" unique_id=1622889538]

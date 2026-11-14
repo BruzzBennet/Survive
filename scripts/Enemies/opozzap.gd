@@ -15,10 +15,10 @@ func summon_pozzap():
 	get_tree().current_scene.add_child(pozzap)
 	pozzap.global_position = global_position +  Vector2.RIGHT * 25
 	pozzap.blank()
-	var spawner = get_tree().current_scene.get_node_or_null("RNG_Map")
-	spawner=spawner.get_child(1)
-	spawner=spawner.get_node_or_null("Spawner")
+	var spawner = get_tree().current_scene.get_node_or_null("RNG_Map")	
 	if spawner:
+		spawner=spawner.get_child(1)
+		spawner=spawner.get_node_or_null("Spawner")
 		# spawner.enemies.append(pozzap)
 		pozzap.add_to_group("enemies")
 		var hitbox = pozzap.get_node("HurtBox")
@@ -31,6 +31,7 @@ func summon_pozzap():
 func _on_sprite_frame_changed() -> void:
 	if animated_sprite_2d.frame in summon_frames:
 		idle+=1
-		if idle>=2:
+		var spawner = get_tree().current_scene.get_node_or_null("RNG_Map")	
+		if idle>=2 and spawner:
 			summon_pozzap()
 			idle=0

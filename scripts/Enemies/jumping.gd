@@ -29,16 +29,16 @@ func _physics_process(_delta):
 	if !chasing:
 		idle_time += _delta
 		if idle_time >= time_to_change_dir:
-			var new_position=get_new_position()
+			var new_position=get_new_position(-6)
 			if !can_jump_to(new_position):	
 				new_position=this_enemy.position
 			jump(new_position)
 			idle_time = 0.0				
 			
 
-func get_new_position():
+func get_new_position(dist:=0):
 	last_direction = choose([Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN])
-	var new_position = this_enemy.position + last_direction * jump_distance
+	var new_position = this_enemy.position + last_direction * (jump_distance+dist)
 	new_position = new_position.clamp(
 		Vector2(margin, 40),
 		Vector2(screen_size.x - margin, screen_size.y - margin)

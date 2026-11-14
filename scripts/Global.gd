@@ -7,9 +7,10 @@ var base_Mon1=load("res://resources/Mons/minole.tres")
 
 var base_weapon=load("res://resources/Mons/sergyo.tres")
 var base_suit=base_weapon
-var base_health=100
+var base_health:=100
 var base_enemy_amount: = 3
-var base_ammo = 0.65
+var base_ammo: = 0.65
+var base_defense:=11.0
 
 var weaponless = "res://scenes/PlayerTypes/weaponless.tscn"
 var shooter= "res://scenes/PlayerTypes/Shooter.tscn"
@@ -27,7 +28,7 @@ var increase_dificulty: float = 0.0
 var max_speed: float = 200
 var health=base_health
 var melee_damage = 2.0
-var defense = 9.0
+var defense = base_defense
 var ammo = base_ammo
 var about_to_henshin:=false
 var weapon_item
@@ -71,7 +72,7 @@ func restart():
 	max_speed = 200
 	health=base_health
 	melee_damage = 2.0
-	defense = 9.0
+	defense = base_defense
 	ammo = base_ammo
 	current_level= 1
 	about_to_henshin=false

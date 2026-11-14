@@ -24,6 +24,6 @@ boot_sprite = ExtResource("3_173py")
 bullet_scene = ExtResource("4_jgvaa")
 normal_attack_sfx = ExtResource("8_3k24k")
 special_attack_sfx = ExtResource("10_lgweq")
-shot_type = 3
+shot_type = 4
 stat_boost = ExtResource("11_ilmpv")
 metadata/_custom_type_script = "uid://d4dsworwk7sp"

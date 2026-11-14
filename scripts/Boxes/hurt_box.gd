@@ -53,6 +53,8 @@ func _ready():
 			health=GLOBAL.health
 			max_health=GLOBAL.base_health
 			drops_items=false
+			if drops:
+				drops.duplicate()
 			hpUI = get_tree().current_scene.get_node("HenshinMenu/UI")
 			defense=GLOBAL.defense
 			defense=max(defense,0)
@@ -248,12 +250,12 @@ func dead_enemy(increase_score=true):
 
 func item_drop():
 	if !drops==null:
-		var item_dropped=drops.duplicate()
-		item_dropped.stat_boost=item_dropped.stat_boost.duplicate()
+		var item_dropped=drops
 		var card=preload("res://scenes/items/Mon_card_item.tscn")
 		var card_drop = card.instantiate()
 		card_drop.global_position=global_position
-		card_drop.item=item_dropped.duplicate()
+		card_drop.item=item_dropped
+		card_drop.item.stat_boost.duplicate()
 		get_tree().current_scene.add_child(card_drop)
 		
 func spawn(this: Variant):

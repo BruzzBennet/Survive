@@ -14,6 +14,17 @@ var items=[
 	load("res://scenes/opozzap.tscn")
 	]
 
+var zoo=[
+	load("res://scenes/enemies/icie.tscn"),
+	# load("res://scenes/enemies/chomwing.tscn"),
+	load("res://scenes/enemies/Minole.tscn"),
+	load("res://scenes/enemies/pucklam.tscn"),
+	load("res://scenes/pozzap.tscn"),
+	load("res://scenes/enemies/Bombry.tscn"),
+	load("res://scenes/enemies/clamik.tscn"),
+	load("res://scenes/opozzap.tscn")
+]
+
 var enemy_list=[
 	load("res://scenes/enemies/miminzombie.tscn"),
 	load("res://scenes/enemies/mimintank.tscn")
@@ -92,6 +103,12 @@ func spawn_player(_first_time=false):
 
 func spawn_item() -> void:
 	var spawn_this_enemy=items[randi_range(0, items.size() - 1)]
+	var item=spawn_this_enemy.instantiate()
+	get_tree().current_scene.add_child(item)
+	item.global_position = global_position
+
+func spawn_zoo() -> void:
+	var spawn_this_enemy=zoo[randi_range(0, zoo.size() - 1)]
 	var item=spawn_this_enemy.instantiate()
 	get_tree().current_scene.add_child(item)
 	item.global_position = global_position

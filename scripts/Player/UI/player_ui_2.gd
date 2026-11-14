@@ -28,6 +28,7 @@ func _ready() -> void:
 	set_hp(GLOBAL.health,false)
 	set_equipment(GLOBAL.suit,GLOBAL.weapon)
 	ammo_setup(GLOBAL.weapon,false)
+	bar_color(ammo,ammo.max_value,ammo.max_value,true,original_color)
 	$Screen.hide()
 	for child in %Panel.get_children():
 		if child is Button:
@@ -110,17 +111,17 @@ func set_weapon(item:Equipment=null):
 		$Panel/Card2/CardBase2.visible=false
 		GLOBAL.weapon=base_weapon
 
-func ammo_setup(weapon: Equipment, flash_it=true):
+func ammo_setup(weapon: Equipment, _flash_it=true):
 	current_weapon = weapon
 	maxATK = weapon.max_ammo
-	$Ammo.max_value=maxATK
+	# $Ammo.max_value=maxATK
 	startingATK= weapon.current_ammo
 	currentATK= weapon.current_ammo
 	set_ammo(startingATK)
-	bar_color(ammo,maxATK,currentATK,flash_it,original_color,false)
+	# bar_color(ammo,maxATK,currentATK,flash_it,original_color,false)
 
-func set_ammo(current_ammo):
-	ammo.value=current_ammo
+func set_ammo(_current_ammo):
+	# ammo.value=current_ammo
 	var weapon_card=get_node("Panel/Card2/CardBase2")
 	if weapon_card.item_summoned!=GLOBAL.base_weapon:
 		weapon_card.update_ammo()
@@ -225,7 +226,7 @@ func update_deck(extra_deck:=true):
 func open_menu():
 	# update_deck()
 	BGM.standBy()
-	show_ammo()
+	# show_ammo()
 	var check:=0
 	for child in $Panel.get_children():
 		if child is Button: 
@@ -251,7 +252,7 @@ func show_ammo(show_it=true):
 
 func close_menu():
 	BGM.stop_standBy()
-	show_ammo(false)
+	# show_ammo(false)
 	for i in %Panel.get_children():
 		i.release_focus()
 	GLOBAL.about_to_henshin=false
@@ -271,7 +272,7 @@ func _play_or_discard(button:Button):
 			if GLOBAL.suit == equipment:
 				equip_suit(GLOBAL.weapon)
 			equip_weapon(equipment)
-		if Input.is_action_just_pressed("drop"):
+		if Input.is_action_just_pressed("dash"):
 			discard(button)
 		
 func equip_suit(button):
@@ -418,4 +419,14 @@ func reduce_ammo(times: float = 1):
 	currentATK = max(0, currentATK - depletion)
 	current_weapon.current_ammo = currentATK
 	set_ammo(currentATK)
-	bar_color(ammo,maxATK,currentATK,true,original_color,false)
+	# bar_color(ammo,maxATK,currentATK,true,original_color,false)
+
+func reduce_stamina(value:float):
+	if ammo.value >= 0:
+		ammo.value-=value
+		bar_color(ammo,ammo.max_value,ammo.value,true,original_color,false)
+
+func increase_stamina(value:float):
+	if ammo.value < ammo.max_value:
+		ammo.value+=value
+		bar_color(ammo,ammo.value,ammo.max_value,false,original_color)

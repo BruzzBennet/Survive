@@ -4,8 +4,8 @@ class_name Player_Unit
 var max_speed
 var accel: float = 50
 var friction: float = 0.25
-# var dodge_speed: = 1.0
-# var dodge_min: float = 5.0
+var dodge_speed: = 1.0
+var able_to_dodge:=true
 @export var weapon_is: type
 
 enum type {
@@ -38,12 +38,14 @@ var ammo_reduce:=1.0
 var broken:=false
 var melee_shot_pattern
 var shot_pattern
+var starting_invincibility=true
 signal weapon_broken
 
 func _ready():
 	broken=false
-	$HurtBox.invincible(1.0,false)
 	screen_size = get_viewport_rect().size
+	await $HurtBox.invincible(1.0,false)
+	starting_invincibility=false
 
 
 func equip(this_suit:Equipment,this_weapon:Equipment):
@@ -89,7 +91,7 @@ func weapon_setup(this_weapon:Equipment):
 			weapon_sprite=this_weapon.blade_sprite
 			weapon_type="blade"
 		type.none:
-			melee_shot_pattern = "short_shot"
+			melee_shot_pattern = "very_short_shot"
 			shot_pattern = "medium_shot"
 			weapon_type="none"
 	$Skeleton/Weapon_Back.texture = weapon_sprite
@@ -111,15 +113,17 @@ func _physics_process(delta: float) -> void:
 	if GLOBAL.about_to_henshin==false:
 		walk_sfx()
 		player_movement(delta)
-		if Input.is_action_pressed("attack"):
-			attack()
-		if Input.is_action_pressed("shoot"):
-			shoot()
+		if !is_dodging:
+			if Input.is_action_pressed("attack"):
+				attack()
+			if Input.is_action_pressed("shoot"):
+				shoot()
 	else:
 		play_animation("Idle_", last_direction)
 
 func check_weapon_durability():
-	if atkUI.currentATK < atkUI.min_ammo and weapon != GLOBAL.base_weapon:
+	if GLOBAL.weapon.current_ammo <= 0 \
+	and GLOBAL.weapon != GLOBAL.base_weapon:
 		weapon_broken.emit()
 		broken = true
 		broken_weapon()
@@ -177,7 +181,8 @@ func attack():
 		type.blade:
 			atkUI.reduce_ammo(ammo_reduce*0.35)
 		type.none:
-			atkUI.reduce_ammo(ammo_reduce*0.35)
+			atkUI.reduce_stamina(ammo_reduce*0.1)
+			# atkUI.reduce_ammo(ammo_reduce*0.35)
 	$HurtBox.cancel_flash()
 	Short_Range_Attack()
 	$AttackAnimationTimer.start()
@@ -187,34 +192,30 @@ func attack():
 
 func Short_Range_Attack():
 	is_attacking = true
+	if GLOBAL.weapon==GLOBAL.base_weapon and atkUI.ammo.value<atkUI.ammo.max_value*2/5:
+		can_hit=false
 	if can_hit:
-		if atkUI.currentATK >= atkUI.min_ammo:
+		if GLOBAL.weapon.current_ammo >= 0:
 			$BulletManager.shoot(position, last_direction, melee_shot_pattern)
-		# elif weapon.weapon_type == Weapon.type.gun:
-		# 	PLAYSFX.out_of_ammo()
 		else:
 			PLAYSFX.slash()			
 		can_hit = false
 
 func shoot():
-	# if weapon.weapon_type == Weapon.type.boot:
-	# 		atkUI.reduce(ammo_reduce*3)
 	if weapon_is == type.gun:
 			atkUI.reduce_ammo(ammo_reduce*2)
 	elif weapon_is in [type.none]:
-			atkUI.reduce_ammo(ammo_reduce*0.65)
+		atkUI.reduce_stamina(ammo_reduce*0.15)
 	else:
 		atkUI.reduce_ammo(ammo_reduce)
 
-	if atkUI.currentATK >= atkUI.min_ammo:
+	if GLOBAL.weapon.current_ammo >= 0:
 		$HurtBox.cancel_flash()
 		Long_Range_Attack()
 		$AttackAnimationTimer.start()
 		await $AttackAnimationTimer.timeout
 		can_shoot = true
 		is_shooting = false
-	# elif weapon.weapon_type != Weapon.type.none:
-	# 	broken_weapon()
 	else:
 		attack()
 		can_shoot = false
@@ -222,40 +223,75 @@ func shoot():
 
 func Long_Range_Attack():
 	is_shooting = true
+	if GLOBAL.weapon==GLOBAL.base_weapon and atkUI.ammo.value<atkUI.ammo.max_value*3/5:
+		can_shoot=false
 	if can_shoot:
 		$BulletManager.shoot(position, last_direction, shot_pattern)
 		can_shoot = false
 
+func player_movement(delta):
+	position = position.clamp(Vector2(margin, 40), Vector2(screen_size.x - margin, screen_size.y - margin))
+	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	dodge(delta)
+	if is_dodging:
+		dodge_speed = 2
+	else:
+		dodge_speed = 1
+	if direction != Vector2.ZERO:
+		last_direction = direction
+		
+	if direction != Vector2.ZERO:
+		velocity = velocity.lerp(direction * max_speed * dodge_speed, accel * delta)
+	else:
+		if !is_dodging:
+			atkUI.increase_stamina(delta)
+		velocity = velocity.lerp(Vector2.ZERO, friction)
+		
+	process_animation(direction)
+	move_and_slide()
+
+func dodge(value:float):
+	var stamina=atkUI.ammo
+	if stamina.value>stamina.max_value*3/5:
+		able_to_dodge=true
+	if Input.is_action_pressed("dash"):
+		if stamina.value > 0 and able_to_dodge:
+			is_dodging = true
+			able_to_dodge = false
+			dash_fx(rotation, global_position, last_direction)
+	else:
+		is_dodging=false
+
+	if is_dodging:
+		if stamina.value > 0:
+			atkUI.reduce_stamina(value)
+			$HurtBox.becomes_invincible()
+		else:
+			is_dodging = false
+			if !starting_invincibility:
+				$HurtBox.no_longer_invincible()
+	else:
+		is_dodging = false
+		if !starting_invincibility:
+			$HurtBox.no_longer_invincible()
+
 func dash_fx(angle, pos, dir):
+	PLAYSFX.dash()
 	var dash_scene = preload("res://scenes/dashparticles.tscn")
 	var dash = dash_scene.instantiate()
-	add_child(dash)
+	get_tree().current_scene.add_child(dash)
 	dash.rotation = angle + deg_to_rad(-90)
 	if dir == Vector2.UP:
 		dash.global_position = pos - dir * 10
 	else:
 		dash.global_position = pos + Vector2(0, 16) - dir * 10
 	dash.direction = dir.normalized()
-	dash.z_index = -1
+	# dash.z_index = -1
 
-func player_movement(delta):
-	position = position.clamp(Vector2(margin, 40), Vector2(screen_size.x - margin, screen_size.y - margin))
-	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	# if is_dodging:
-	# 		dodge_speed = 2
-	# else:
-	# 		dodge_speed = 1.35
-	if direction != Vector2.ZERO:
-		last_direction = direction
-		
-	if direction != Vector2.ZERO:
-			velocity = velocity.lerp(direction * max_speed, accel * delta)
-			# print("speed: "+str(direction * max_speed * dodge_speed))
-			# print("weight: "+ str(accel * delta))
-	else:
-		velocity = velocity.lerp(Vector2.ZERO, friction)
-	process_animation(direction)
-	move_and_slide()
+# func tired():
+# 	$HurtBox.no_longer_invincible()
+# 	is_dodging=false
+# 	return false
 
 func recovering(delta):
 	idle_time += delta
@@ -271,13 +307,11 @@ func reset_ammo(on_start=true):
 	GLOBAL.weapon.current_ammo=clamp(GLOBAL.weapon.current_ammo,0,GLOBAL.weapon.max_ammo)
 	atkUI.ammo_setup(GLOBAL.weapon)
 	if !on_start:
-		# atkUI.flash(Color.GREEN)
 		PLAYSFX.recover()
 		$HurtBox.play_flash(Color.GREEN)
 
 func process_animation(direction) -> void:
 	if direction != Vector2.ZERO:
-		# PLAYSFX.recover_stop()
 		if is_attacking or is_shooting:
 			play_animation("Walk_Attack_", direction)
 		else:

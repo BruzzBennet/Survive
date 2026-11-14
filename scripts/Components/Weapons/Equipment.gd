@@ -24,7 +24,8 @@ enum shot_pattern{
 	simple_shot,
 	continuous_shot_double,
 	continuous_shot_triple,
-	triple_shot
+	triple_shot,
+	double_shot
 }
 
 @export var stat_boost: Stat_Boost

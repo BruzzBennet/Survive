@@ -76,6 +76,8 @@ func shoot(pos,dir,shot_pattern_is=null):
 			shot_is="continuous_shot_triple"
 		weapon.shot_pattern.triple_shot:
 			shot_is="triple_shot"
+		weapon.shot_pattern.double_shot:
+			shot_is="double_shot"
 	shot_pattern(pos,dir,shot_pattern_is,shot_is)
 
 func shot_pattern(pos,dir,shoot_pattern,shot_is:String):
@@ -96,6 +98,8 @@ func shot_pattern(pos,dir,shoot_pattern,shot_is:String):
 			c_shot_triple(pos,dir,shot_is,1.0)
 		"c_shot_double":
 			c_shot_double(pos,dir,shot_is,1.0)
+		"very_short_shot":
+			normal_shot(pos,dir,shot_is,0.35)
 		"short_shot":
 			normal_shot(pos,dir,shot_is,0.5)
 		"medium_shot":
@@ -173,9 +177,9 @@ func dual_shot(pos,dir,func_to_use="simple_shot",dur:=1.0):
 	normal_shot(pos,dir.rotated(deg_to_rad(15)),func_to_use,dur)
 	normal_shot(pos,dir.rotated(deg_to_rad(-15)),func_to_use,dur)
 
-func double_shot(pos,dir,dur:=1.0):
-	simple_shot(pos,dir.rotated(deg_to_rad(15)),dur)
-	simple_shot(pos,dir.rotated(deg_to_rad(-15)),dur)
+func double_shot(pos,dir,_func_to_use="simple_shot",dur:=1.0):
+	simple_shot(pos,dir.rotated(deg_to_rad(6)),dur)
+	simple_shot(pos,dir.rotated(deg_to_rad(-6)),dur)
 
 func tri_shot(pos,dir,func_to_use="simple_shot",dur:=1.0):
 	normal_shot(pos,dir,func_to_use,dur)
@@ -184,8 +188,8 @@ func tri_shot(pos,dir,func_to_use="simple_shot",dur:=1.0):
 
 func triple_shot(pos,dir,_func_to_use="simple_shot",dur:=1.0):
 	simple_shot(pos,dir,dur)
-	simple_shot(pos,dir.rotated(deg_to_rad(15)),dur)
-	simple_shot(pos,dir.rotated(deg_to_rad(-15)),dur)
+	simple_shot(pos,dir.rotated(deg_to_rad(10)),dur)
+	simple_shot(pos,dir.rotated(deg_to_rad(-10)),dur)
 
 func circle_shot(pos,dir,func_to_use="simple_shot"):
 	var shot_directions

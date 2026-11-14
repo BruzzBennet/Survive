@@ -28,7 +28,6 @@ visible = false
 position = Vector2(0, 13)
 
 [node name="Ammo" type="ProgressBar" parent="." unique_id=2121918318]
-visible = false
 offset_left = -14.0
 offset_top = 15.0
 offset_right = 14.0

@@ -2529,7 +2529,7 @@ size = Vector2(32, 25)
 
 [node name="Player" type="CharacterBody2D" unique_id=2100245136]
 collision_layer = 2
-collision_mask = 9
+collision_mask = 11
 script = ExtResource("1_rb5j1")
 
 [node name="BulletManager" parent="." unique_id=1570605682 instance=ExtResource("2_6w255")]
@@ -2595,7 +2595,7 @@ shape = SubResource("RectangleShape2D_00sev")
 debug_color = Color(0, 0.60038817, 0, 0.42000002)
 
 [node name="EnemyMovement" parent="." unique_id=1062153470 instance=ExtResource("12_77gsv")]
-speed = 150.0
+speed = 135.0
 time_to_change_dir = 1.0
 
 [node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("13_6wut2")]
