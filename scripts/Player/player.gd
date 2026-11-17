@@ -109,14 +109,14 @@ func equip_suit(this_suit:Equipment):
 
 func _physics_process(delta: float) -> void:
 	check_weapon_durability()
-	# check_suit_durability()
+	check_suit_durability()
 	if GLOBAL.about_to_henshin==false:
 		walk_sfx()
 		player_movement(delta)
 		if !is_dodging:
-			if Input.is_action_pressed("attack"):
+			if Input.is_action_just_pressed("attack"):
 				attack()
-			if Input.is_action_pressed("shoot"):
+			if Input.is_action_just_pressed("shoot"):
 				shoot()
 	else:
 		play_animation("Idle_", last_direction)
@@ -131,7 +131,8 @@ func check_weapon_durability():
 		remove_weapon()
 
 func check_suit_durability():
-	if atkUI.currentSuitHP < atkUI.min_suit_hp and suit != GLOBAL.base_suit:
+	if GLOBAL.suit.current_ammo <= 0 \
+	and GLOBAL.suit != GLOBAL.base_suit:
 		broken_suit()
 
 func broken_suit():
@@ -140,7 +141,9 @@ func broken_suit():
 	explode_fx()
 	PLAYSFX.crunchyMash()
 	PLAYSFX.unequip()
-	get_tree().current_scene.get_node("HenshinMenu").update_deck()
+	var henshin_menu=get_tree().current_scene.get_node("HenshinMenu")
+	henshin_menu.update_deck()
+	henshin_menu.refresh_icons()
 	equip(GLOBAL.base_suit,GLOBAL.weapon)
 	
 
@@ -155,7 +158,9 @@ func broken_weapon():
 	explode_fx()
 	PLAYSFX.crunchyMash()
 	PLAYSFX.unequip()
-	get_tree().current_scene.get_node("HenshinMenu/UI").update_deck()
+	var henshin_menu=get_tree().current_scene.get_node("HenshinMenu")
+	henshin_menu.update_deck()
+	henshin_menu.refresh_icons()
 	equip(GLOBAL.suit,GLOBAL.base_weapon)
 	GLOBAL.player_type=GLOBAL.base_player_type
 	
@@ -181,7 +186,7 @@ func attack():
 		type.blade:
 			atkUI.reduce_ammo(ammo_reduce*0.35)
 		type.none:
-			atkUI.reduce_stamina(ammo_reduce*0.1)
+			atkUI.reduce_stamina(ammo_reduce*0.35)
 			# atkUI.reduce_ammo(ammo_reduce*0.35)
 	$HurtBox.cancel_flash()
 	Short_Range_Attack()
@@ -192,7 +197,7 @@ func attack():
 
 func Short_Range_Attack():
 	is_attacking = true
-	if GLOBAL.weapon==GLOBAL.base_weapon and atkUI.ammo.value<atkUI.ammo.max_value*2/5:
+	if GLOBAL.weapon==GLOBAL.base_weapon and atkUI.ammo.value<atkUI.ammo.max_value*1/5:
 		can_hit=false
 	if can_hit:
 		if GLOBAL.weapon.current_ammo >= 0:
@@ -205,25 +210,26 @@ func shoot():
 	if weapon_is == type.gun:
 			atkUI.reduce_ammo(ammo_reduce*2)
 	elif weapon_is in [type.none]:
-		atkUI.reduce_stamina(ammo_reduce*0.15)
+		atkUI.reduce_stamina(ammo_reduce*0.65)
 	else:
 		atkUI.reduce_ammo(ammo_reduce)
 
-	if GLOBAL.weapon.current_ammo >= 0:
-		$HurtBox.cancel_flash()
-		Long_Range_Attack()
-		$AttackAnimationTimer.start()
-		await $AttackAnimationTimer.timeout
-		can_shoot = true
-		is_shooting = false
-	else:
-		attack()
-		can_shoot = false
-		is_shooting = false
+	# if GLOBAL.weapon.current_ammo >= 0:
+	$HurtBox.cancel_flash()
+	Long_Range_Attack()
+	$AttackAnimationTimer.start()
+	await $AttackAnimationTimer.timeout
+	can_shoot = true
+	is_shooting = false
+	# else:
+	# 	attack()
+	# 	can_shoot = false
+	# 	is_shooting = false
 
 func Long_Range_Attack():
 	is_shooting = true
-	if GLOBAL.weapon==GLOBAL.base_weapon and atkUI.ammo.value<atkUI.ammo.max_value*3/5:
+	if GLOBAL.weapon==GLOBAL.base_weapon and atkUI.ammo.value<atkUI.ammo.max_value*1/5:
+		# print(str(atkUI.ammo.value))
 		can_shoot=false
 	if can_shoot:
 		$BulletManager.shoot(position, last_direction, shot_pattern)
@@ -232,7 +238,7 @@ func Long_Range_Attack():
 func player_movement(delta):
 	position = position.clamp(Vector2(margin, 40), Vector2(screen_size.x - margin, screen_size.y - margin))
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	dodge(delta)
+	dodge(delta*5)
 	if is_dodging:
 		dodge_speed = 2
 	else:
@@ -242,9 +248,10 @@ func player_movement(delta):
 		
 	if direction != Vector2.ZERO:
 		velocity = velocity.lerp(direction * max_speed * dodge_speed, accel * delta)
+		atkUI.increase_stamina(delta/3)
 	else:
 		if !is_dodging:
-			atkUI.increase_stamina(delta)
+			atkUI.increase_stamina(delta/2)
 		velocity = velocity.lerp(Vector2.ZERO, friction)
 		
 	process_animation(direction)
@@ -304,12 +311,17 @@ func recovering(delta):
 		$HurtBox.cancel_flash()
 
 func reset_ammo(on_start=true):
-	GLOBAL.weapon.current_ammo+=GLOBAL.weapon.max_ammo/2
-	GLOBAL.weapon.current_ammo=clamp(GLOBAL.weapon.current_ammo,0,GLOBAL.weapon.max_ammo)
+	recharge_ammo(GLOBAL.weapon)
+	recharge_ammo(GLOBAL.suit)
 	atkUI.ammo_setup(GLOBAL.weapon)
+	atkUI.suit_ammo_setup(GLOBAL.suit)
 	if !on_start:
 		PLAYSFX.recover()
 		$HurtBox.play_flash(Color.GREEN)
+
+func recharge_ammo(equipment):
+	equipment.current_ammo+=equipment.max_ammo/4
+	equipment.current_ammo=clamp(equipment.current_ammo,0,equipment.max_ammo)
 
 func process_animation(direction) -> void:
 	if direction != Vector2.ZERO:

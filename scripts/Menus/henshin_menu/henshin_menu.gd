@@ -2,14 +2,17 @@ extends Control
 
 var was_pressed := true
 var current_focused_button = null
-var base_weapon=GLOBAL.base_weapon
-var base_suit=GLOBAL.base_suit
+var current_weapon
+var current_suit
 var ui
 var located_in
+var deck_size
 
 func _ready() -> void:
+	deck_size=GLOBAL.deck.size()
 	ui=get_tree().current_scene.get_node("HenshinMenu/UI")
 	update_deck()
+	refresh_icons()	
 	$Screen.hide()
 	for child in %Panel.get_children():
 		if child is Button:
@@ -18,12 +21,32 @@ func _ready() -> void:
 			child.focus_entered.connect(take_card.bind(child))
 			child.focus_exited.connect(take_card.bind(child,false))
 
+func refresh_icons():
+	for child in %Panel.get_children():
+		if child is Button:
+			var card = child.get_child(0)
+			if card.item_summoned == GLOBAL.weapon:
+				current_weapon=card
+				show_icon(card,"tool")
+			elif card.item_summoned == GLOBAL.suit:
+				current_suit=card
+				show_icon(card,"suit")
+			else:
+				card.show_ammo()
+
+func check_for_update():
+	if GLOBAL.deck.size()!=deck_size:
+		update_deck()
+		refresh_icons()	
+		deck_size=GLOBAL.deck.size()
+
 func _physics_process(_delta: float):
 	if !get_tree().paused:
 		screen()
 		for child in %Panel.get_children():
 			if child is Button and child.has_focus():
 				_play_or_discard(child)
+		check_for_update()
 	
 func take_card(button:Button,up=true):
 	var card =  button.get_child(0)
@@ -44,18 +67,54 @@ func tween_it(node:Node,dist:int):
 func _play_or_discard(button:Button):
 	if button.get_child(0).visible == true:	
 		var equipment =  button.get_child(0).item_summoned
-		if Input.is_action_just_pressed("ui_accept"):
+		if Input.is_action_just_pressed("attack"):
 			if GLOBAL.weapon == equipment:
-				equip_weapon(GLOBAL.suit)
-			equip_suit(equipment)
-			close_menu()
+				equip_weapon(button,false)
+			if GLOBAL.suit != equipment:
+				equip_suit(button)
+				close_menu()
 		elif Input.is_action_just_pressed("shoot"):
 			if GLOBAL.suit == equipment:
-				equip_suit(GLOBAL.weapon)
-			equip_weapon(equipment)
-			close_menu()
-		if Input.is_action_just_pressed("drop"):
-			discard(button)
+				equip_suit(button,false)
+			if GLOBAL.weapon != equipment:
+				equip_weapon(button)
+				close_menu()
+		if Input.is_action_just_pressed("dash"):
+			if GLOBAL.weapon == equipment:
+				equip_weapon(button,false,false)
+			elif GLOBAL.suit == equipment:
+				equip_suit(button,false,false)
+			else:
+				discard(button)
+				
+
+func refresh_ammo_show(button,icon:String):
+	button.show_ammo()
+	var check
+	match icon:
+		"suit":
+			check=GLOBAL.suit
+		"tool":
+			check=GLOBAL.weapon
+		_:
+			return
+	if button.item_summoned == check:
+		show_icon(button,icon)
+
+func show_icon(button,icon:String):
+	var equipment =  button.item_summoned
+	var equipment_check
+	match icon:
+		"suit":
+			equipment_check=GLOBAL.base_suit
+		"tool":
+			equipment_check=GLOBAL.base_weapon
+		_:
+			return
+	if equipment==equipment_check:
+		button.show_ammo()
+	else:
+		button.show_icon(icon)
 
 func discard(button: Button):
 		var body = get_player()
@@ -65,11 +124,11 @@ func discard(button: Button):
 			unequip_weapon(body,GLOBAL.base_suit)
 		if GLOBAL.suit == item:
 			ui.set_suit()
-			body.equip(base_suit,GLOBAL.weapon)
+			body.equip(GLOBAL.base_suit,GLOBAL.weapon)
 		drop_card(item)
 		GLOBAL.deck.erase(item)
 		PLAYSFX.unequip()
-		button.get_child(0).visible = false		
+		button.get_child(0).visible = false	
 
 
 func drop_card(item_dropped:Equipment):
@@ -100,18 +159,6 @@ func plus_or_minus():
 	if dist==0:
 		dist=-1
 	return dist
-
-func show_ammo(show_it=true):
-	for child in %Panel.get_children():
-		if child is Button:
-			var card = child.get_child(0)
-			if !show_it:
-				card.hide_ammo()
-			else:
-				# var item =  card.item_summoned
-				# if item and	item.item_is == item.item_type.weapon:
-					# print(str(item))
-					card.show_ammo()
 				
 
 func get_player():
@@ -136,7 +183,7 @@ func stat_shwocase(equipment:Stat_Boost):
 		if equipment.stamina_boost!=0:
 			desc+="Stamina " + ifplus(equipment.stamina_boost) + ". "
 		if equipment.bullet_power_boost!=0:
-			desc+="Buller Pierce " + ifplus(equipment.bullet_power_boost) + ". "
+			desc+="Bullet Pierce " + ifplus(equipment.bullet_power_boost) + ". "
 		if equipment.bullet_reach_boost!=0:
 			desc+="Bullet Reach " + ifplus(equipment.bullet_reach_boost) + ". "
 		if equipment.stamina_recover_boost!=0:
@@ -158,32 +205,53 @@ func description(item_name:String, desc:String):
 	else:
 		$Screen/Label.text=item_name + ":\n" + desc
 
-func equip_suit(button):
+func equip_suit(button,non_global:=true,redo:=true):
+	if current_suit:
+		refresh_ammo_show(current_suit,"tool")
 	var body = get_player()
-	var item =  button
-	var equipment
-	if GLOBAL.suit != item:
-		equipment = item
+	show_icon(button.get_child(0),"suit")
+	var equipment =  button.get_child(0).item_summoned
+	current_suit=button.get_child(0)
+	if !non_global:
+		button.get_child(0).show_ammo()
+		equipment=GLOBAL.base_weapon
+		if redo:
+			equipment=GLOBAL.weapon
+			current_suit=current_weapon
+	if GLOBAL.suit != equipment:
 		henshin(body)
-		if item==GLOBAL.base_weapon:
+		if equipment==GLOBAL.base_weapon:
 			ui.set_suit()
 		else:
 			ui.set_suit(equipment)
-		ui.suit_ammo_setup(equipment,false)
+		ui.suit_ammo_setup(equipment)
 	else:
 		ui.set_suit()
 		equipment = GLOBAL.base_suit
 		PLAYSFX.unequip()
-		ui.suit_ammo_setup(GLOBAL.base_suit,false)
+		ui.suit_ammo_setup(GLOBAL.base_suit)
+		current_suit=null
 	body.equip(equipment,GLOBAL.weapon)	
 
 
-func equip_weapon(button):
+func equip_weapon(button,non_global:=true,redo:=true):
+	if current_weapon:
+		refresh_ammo_show(current_weapon,"suit")
 	var body = get_player()
-	var equipment =  button
+	var reset_weapon=false
+	show_icon(button.get_child(0),"tool")
+	var equipment =  button.get_child(0).item_summoned
+	current_weapon=button.get_child(0)
+	if !non_global:
+		button.get_child(0).show_ammo()
+		equipment=GLOBAL.base_suit
+		if redo:
+			equipment=GLOBAL.suit
+			current_weapon=current_suit
 	match GLOBAL.player_type:
 		GLOBAL.base_player_type:
 			if equipment==GLOBAL.base_suit:
+				reset_weapon=true
 				ui.set_weapon()
 			else:
 				ui.set_weapon(equipment)
@@ -191,15 +259,19 @@ func equip_weapon(button):
 			henshin(body)
 		GLOBAL.player_type2:
 			if GLOBAL.weapon == equipment:
+				# reset_weapon=true
 				unequip_weapon(body,GLOBAL.base_suit)
 			else:
 				if equipment==GLOBAL.base_suit:
+					reset_weapon=true
 					unequip_weapon(body,GLOBAL.base_suit)
 				else:
-					# print(str(equipment))
 					ui.set_weapon(equipment)
 					body.equip(GLOBAL.suit,equipment)
 					henshin(body)
+	if reset_weapon:
+		current_weapon=null
+		
 
 func unequip_weapon(body,template_weapon):
 	ui.set_weapon()
@@ -229,7 +301,7 @@ func update_deck():
 	for child in panel.get_children():
 		if child is Button:
 			child.get_child(0).visible = false
-
+	
 	if GLOBAL.deck.size() > 0:
 		for i in GLOBAL.deck:
 			index_num+=1
@@ -238,7 +310,7 @@ func update_deck():
 			card.setup(GLOBAL.deck[index_num-1])
 
 func screen():
-	update_deck()
+	# update_deck()
 	if Input.is_action_just_pressed("henshin_menu"):
 		if was_pressed:
 			open_menu()

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dap4owc1csu1r" path="res://scripts/Menus/henshin_menu/card.gd" id="1_cj6du"]
 [ext_resource type="Texture2D" uid="uid://lqntlnhad3wa" path="res://assets/cards/Card.png" id="4_deeji"]
+[ext_resource type="Texture2D" uid="uid://dcjuy08jl0hma" path="res://assets/cards/icons/suit.png" id="4_ys6w7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kdjtb"]
 bg_color = Color(0, 0, 0, 1)
@@ -21,11 +22,12 @@ script = ExtResource("1_cj6du")
 texture = ExtResource("4_deeji")
 
 [node name="Mon" type="Sprite2D" parent="." unique_id=1831833925]
-position = Vector2(0, -1)
+position = Vector2(0, -3)
 
 [node name="Type" type="Sprite2D" parent="." unique_id=1602442849]
 visible = false
-position = Vector2(0, 13)
+position = Vector2(0, 17)
+texture = ExtResource("4_ys6w7")
 
 [node name="Ammo" type="ProgressBar" parent="." unique_id=2121918318]
 offset_left = -14.0

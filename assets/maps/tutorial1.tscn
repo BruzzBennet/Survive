@@ -128,7 +128,7 @@ position = Vector2(205, 84)
 
 [node name="ChooseBetween3" parent="." unique_id=1277225118 instance=ExtResource("7_hj517")]
 
-[node name="Item" parent="ChooseBetween3" unique_id=1644609114 instance=ExtResource("8_qc8te")]
+[node name="Item" parent="ChooseBetween3" unique_id=1700615167 instance=ExtResource("8_qc8te")]
 position = Vector2(320, 242)
 item = ExtResource("9_hu8wq")
 duplicated = true

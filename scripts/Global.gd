@@ -8,9 +8,9 @@ var base_Mon1=load("res://resources/Mons/minole.tres")
 var base_weapon=load("res://resources/Mons/sergyo.tres")
 var base_suit=base_weapon
 var base_health:=100
-var base_enemy_amount: = 3
+var base_enemy_amount: = 1
 var base_ammo: = 0.65
-var base_defense:=11.0
+var base_defense:=14.0
 
 var weaponless = "res://scenes/PlayerTypes/weaponless.tscn"
 var shooter= "res://scenes/PlayerTypes/Shooter.tscn"
@@ -56,7 +56,7 @@ func mute_sfx():
 		GLOBAL.sfx_on=true
 
 var deck = []
-var deck_size:= 1
+var deck_size:= 3
 
 func add_card(card:Equipment):
 	if deck.size() < deck_size:
@@ -76,5 +76,5 @@ func restart():
 	ammo = base_ammo
 	current_level= 1
 	about_to_henshin=false
-	deck = []
+	# deck = []
 	mimin=0

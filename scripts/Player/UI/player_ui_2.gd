@@ -123,7 +123,7 @@ func ammo_setup(weapon: Equipment, _flash_it=true):
 func set_ammo(_current_ammo):
 	# ammo.value=current_ammo
 	var weapon_card=get_node("Panel/Card2/CardBase2")
-	if weapon_card.item_summoned!=GLOBAL.base_weapon:
+	if weapon_card.item_summoned in GLOBAL.base_weapon:
 		weapon_card.update_ammo()
 
 func display_info(button: Button):

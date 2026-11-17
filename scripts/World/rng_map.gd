@@ -63,7 +63,7 @@ func transition():
 
 func create_map():
 	for grid_section in map_grid:
-		var difficulty = randi_range(0,(10 + GLOBAL.current_level/6))
+		var difficulty = randi_range(0,(10 + GLOBAL.current_level/10))
 		var lvl
 		if difficulty < 8:
 			lvl = 0
@@ -87,7 +87,7 @@ func create_map():
 		spawn_points.append(instance)
 
 func several_enemies_level():
-	if (GLOBAL.current_level+level_treshold)%(level_treshold*2) == 0:
+	if (GLOBAL.current_level+level_treshold)%(level_treshold) == 0:
 		return true
 	else:
 		return false
@@ -96,7 +96,7 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array, items_spawne
 	var times: = 0
 	var enemy_level=0
 	var max_level
-	var max_current_level=round(GLOBAL.current_level/(level_treshold*1.5))
+	var max_current_level=round(GLOBAL.current_level/(level_treshold*2))
 	for instance in spawn_points:	
 		var spawner = instance.get_node_or_null("Spawner")
 		if spawner:
@@ -109,7 +109,7 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array, items_spawne
 			times +=1
 			var type = randi_range(0,2)		
 			if type == 0 && enemy_amount>0 && !spawned_already.has(spawner) and spawned_already.size()<10:
-				if GLOBAL.current_level < (level_treshold*1.5):
+				if GLOBAL.current_level < (level_treshold*3):
 					enemy_level=1
 				else:
 					max_level=clamp(max_current_level,1,max_lvl)
@@ -117,6 +117,7 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array, items_spawne
 					if enemy_level > enemy_amount:
 						enemy_level=enemy_level-enemy_amount	
 				spawner.spawn_enemy(enemy_level)
+				# enemy_amount-=enemy_level
 				enemy_amount -= min(enemy_level/1.5,1)
 				spawned_already.append(spawner)
 		else:
@@ -124,7 +125,7 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array, items_spawne
 		var item = instance.get_node_or_null("Item")
 		if item:
 			var do_or_not= randi_range(0,1)
-			if do_or_not == 0 && !items_spawned.has(item):
+			if do_or_not == 0 && !items_spawned.has(item) &&items_spawned.size()<3:
 				item.spawn_item()	
 				items_spawned.append(item)
 	if players > 0 or enemy_amount > 0:

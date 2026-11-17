@@ -118,9 +118,7 @@ func cancel_flash():
 func heals(_amount=0.5):
 	cancel_flash()
 	play_flash(Color.GREEN)
-	# var new_hp = health+amount+extra_heal
 	var new_hp=max_health*1/4
-	# new_hp-=health
 	hpUI.set_hp(new_hp)
 	if new_hp<=max_health:
 		health+=new_hp
@@ -152,7 +150,6 @@ func becomes_invincible(flash=true):
 	is_invincible=true
 
 func no_longer_invincible():
-	# cancel_flash()
 	is_invincible=false
 
 func invincible(time=0.65,flash=true):
@@ -170,7 +167,6 @@ func knockback(attack: Variant):
 func damage(attack: Attack) -> void:
 	if !is_hurt and !is_invincible:
 		if takes_damage_from == attack.source:
-			# var damage_done=attack.damage_done - defense
 			var base_value = max_health
 			var damage_done=ceil(base_value*(1/(1+defense)))
 			
@@ -220,6 +216,7 @@ func add_death_explosion():
 func hurt_player(damage_taken:float):
 	cancel_flash()
 	play_flash(Color.RED)
+	hpUI.reduce_ammo_suit(damage_taken)
 	hpUI.set_hp(damage_taken*-1)
 	var fx = hurt_fx.instantiate()
 	fx.global_position = global_position

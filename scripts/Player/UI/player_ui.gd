@@ -7,50 +7,47 @@ var flash_tween: Tween
 var current_weapon: Equipment
 var current_suit: Equipment
 var min_ammo:=1.0
-var depletion_rate:=0.65
+var depletion_rate:=10.0
 var max_hp
 var maxSuitHP
+var startingSuitHP
+var currentSuitHP
 var maxATK 
 var startingATK
 var currentATK
-var startingSuitHP
-var currentSuitHP:=0.2
 var min_suit_hp:=0.1
-# var weapon_type
 var original_color=Color(0.0,0.5,0.65,1.0)
 
 func _ready() -> void:
 	max_hp=GLOBAL.base_health
 	hp.max_value=max_hp
 	set_hp(GLOBAL.health,false)
-	set_equipment(GLOBAL.suit_item,GLOBAL.weapon_item)
-	# set_icon(GLOBAL.suit)
+	set_equipment(GLOBAL.suit,GLOBAL.weapon)
+	bar_color(ammo,ammo.max_value,ammo.max_value,true,original_color)
 	ammo_setup(GLOBAL.weapon)
-	suit_ammo=get_node_or_null("Suit_Ammo")
-	if suit_ammo:
-		suit_ammo_setup(GLOBAL.suit,false)
+	suit_ammo_setup(GLOBAL.suit)
 
 func set_equipment(suit:Equipment,weapon:Equipment):
 	set_suit(suit)
 	set_weapon(weapon)
 
 func set_suit(item:Equipment=null):
-	if item:
+	if item and item != GLOBAL.base_suit:
 		$CardBase.visible=true
-		GLOBAL.suit_item=item
-		$CardBase.setup(GLOBAL.suit_item)
+		GLOBAL.suit=item
+		$CardBase.setup(GLOBAL.suit)
 	else:
 		$CardBase.visible=false
-		GLOBAL.suit_item=null
+		GLOBAL.suit=GLOBAL.base_suit
 	
 func set_weapon(item:Equipment=null):
-	if item:
+	if item and item != GLOBAL.base_weapon:
 		$CardBase2.visible=true
-		GLOBAL.weapon_item=item
-		$CardBase2.setup(GLOBAL.weapon_item)
+		GLOBAL.weapon=item
+		$CardBase2.setup(GLOBAL.weapon)
 	else:
 		$CardBase2.visible=false
-		GLOBAL.weapon_item=null
+		GLOBAL.weapon=GLOBAL.base_weapon
 
 func set_hp(new_hp: float, spawned=true):
 	set_health(new_hp,spawned)
@@ -109,44 +106,45 @@ func flash(color,bar,past_color=original_color):
 func set_icon(suit:Suit):
 	$PlayerIcon.texture=suit.helmet
 
-func ammo_setup(weapon: Equipment,spawned=true):
+func ammo_setup(weapon: Equipment,_spawned=true):
 	current_weapon = weapon
-	# weapon_type = weapon.weapon_type
-	maxATK = weapon.max_ammo
-	ammo.max_value=maxATK
 	startingATK= weapon.current_ammo
 	currentATK= weapon.current_ammo
 	set_ammo(startingATK)
-	bar_color(ammo,maxATK,currentATK,spawned,original_color,false)
 
 func reduce_ammo(times: float = 1):
 	var depletion: float = depletion_rate * times
 	currentATK = max(0, currentATK - depletion)
 	current_weapon.current_ammo = currentATK
 	set_ammo(currentATK)
-	bar_color(ammo,maxATK,currentATK,true,original_color,false)
 
-func set_ammo(current_ammo):
-	ammo.value=current_ammo
+func set_ammo(_current_ammo):
+	var weapon_card=get_node("CardBase2")
+	if not weapon_card.item_summoned in [GLOBAL.base_weapon,null]:
+		weapon_card.update_ammo()
+	
+func suit_ammo_setup(weapon: Equipment):
+	current_suit = weapon
+	currentSuitHP= weapon.current_ammo
+	set_ammo_suit()
+	
+func set_ammo_suit():
+	var weapon_card=get_node("CardBase")
+	if not weapon_card.item_summoned in [GLOBAL.base_weapon,null]:
+		weapon_card.update_ammo()
 
-func suit_ammo_setup(weapon: Equipment, flash_it=true):
-	suit_ammo=get_node_or_null("Suit_Ammo")
-	if suit_ammo:
-		current_suit = weapon
-		if current_suit!=GLOBAL.base_suit:
-			maxSuitHP=weapon.max_ammo
-			suit_ammo.max_value=maxSuitHP
-			currentSuitHP=weapon.current_ammo
-			set_ammo_suit(currentSuitHP,flash_it)
-		else:
-			suit_ammo.value=0
+func reduce_ammo_suit(times: float = 1):
+	var depletion: float = times*1.5
+	currentSuitHP = max(0, currentSuitHP - depletion)
+	current_suit.current_ammo = currentSuitHP
+	set_ammo_suit()
 
-func set_ammo_suit(current_ammo,flash_it=true):
-	if suit_ammo:
-		var past_hp=currentSuitHP
-		if flash_it:
-			currentSuitHP+=current_ammo
-			currentSuitHP=clamp(currentSuitHP,0,current_suit.max_ammo)
-		suit_ammo.value=currentSuitHP
-		current_suit.current_ammo=currentSuitHP
-		bar_color(suit_ammo,past_hp,currentSuitHP,flash_it,original_color,flash_it)
+func reduce_stamina(value:float):
+	if ammo.value >= 0:
+		ammo.value-=value
+		bar_color(ammo,ammo.max_value,ammo.value,true,original_color,false)
+
+func increase_stamina(value:float):
+	if ammo.value < ammo.max_value:
+		ammo.value+=value
+		bar_color(ammo,ammo.value,ammo.max_value,false,original_color)

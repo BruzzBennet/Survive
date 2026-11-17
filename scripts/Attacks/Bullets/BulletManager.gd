@@ -178,8 +178,8 @@ func dual_shot(pos,dir,func_to_use="simple_shot",dur:=1.0):
 	normal_shot(pos,dir.rotated(deg_to_rad(-15)),func_to_use,dur)
 
 func double_shot(pos,dir,_func_to_use="simple_shot",dur:=1.0):
-	simple_shot(pos,dir.rotated(deg_to_rad(6)),dur)
-	simple_shot(pos,dir.rotated(deg_to_rad(-6)),dur)
+	simple_shot(pos,dir.rotated(deg_to_rad(5)),dur)
+	simple_shot(pos,dir.rotated(deg_to_rad(-5)),dur)
 
 func tri_shot(pos,dir,func_to_use="simple_shot",dur:=1.0):
 	normal_shot(pos,dir,func_to_use,dur)
@@ -188,8 +188,8 @@ func tri_shot(pos,dir,func_to_use="simple_shot",dur:=1.0):
 
 func triple_shot(pos,dir,_func_to_use="simple_shot",dur:=1.0):
 	simple_shot(pos,dir,dur)
-	simple_shot(pos,dir.rotated(deg_to_rad(10)),dur)
-	simple_shot(pos,dir.rotated(deg_to_rad(-10)),dur)
+	simple_shot(pos,dir.rotated(deg_to_rad(6)),dur)
+	simple_shot(pos,dir.rotated(deg_to_rad(-6)),dur)
 
 func circle_shot(pos,dir,func_to_use="simple_shot"):
 	var shot_directions
