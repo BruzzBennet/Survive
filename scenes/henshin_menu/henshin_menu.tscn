@@ -41,6 +41,7 @@ font = ExtResource("6_vrd3v")
 font_size = 11
 
 [sub_resource type="LabelSettings" id="LabelSettings_y7d4b"]
+line_spacing = 0.0
 font = ExtResource("4_y7d4b")
 font_size = 11
 

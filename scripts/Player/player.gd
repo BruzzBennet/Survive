@@ -315,6 +315,8 @@ func reset_ammo(on_start=true):
 	recharge_ammo(GLOBAL.suit)
 	atkUI.ammo_setup(GLOBAL.weapon)
 	atkUI.suit_ammo_setup(GLOBAL.suit)
+	var henshin_menu=get_tree().current_scene.get_node("HenshinMenu")
+	henshin_menu.update_deck()
 	if !on_start:
 		PLAYSFX.recover()
 		$HurtBox.play_flash(Color.GREEN)
