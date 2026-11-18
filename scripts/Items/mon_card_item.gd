@@ -25,7 +25,7 @@ func stat_shwocase(equipment:Stat_Boost):
 		if equipment.stamina_boost!=0:
 			desc+="Stamina " + ifplus(equipment.stamina_boost) + ". "
 		if equipment.bullet_power_boost!=0:
-			desc+="Buller Pierce " + ifplus(equipment.bullet_power_boost) + ". "
+			desc+="Bullet Pierce " + ifplus(equipment.bullet_power_boost) + ". "
 		if equipment.bullet_reach_boost!=0:
 			desc+="Bullet Reach " + ifplus(equipment.bullet_reach_boost) + ". "
 		if equipment.stamina_recover_boost!=0:
