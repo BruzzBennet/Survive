@@ -32,7 +32,7 @@ var portal_points = []
 var level_treshold = 3
 
 func _ready() -> void:
-	print(str(GLOBAL.current_level))
+	# print(str(GLOBAL.current_level))
 	if GLOBAL.starting_enemy_amount<max_enemy_amount and several_enemies_level():
 			GLOBAL.starting_enemy_amount += 1
 	current_level=GLOBAL.current_level
@@ -87,7 +87,7 @@ func create_map():
 		spawn_points.append(instance)
 
 func several_enemies_level():
-	if (GLOBAL.current_level+level_treshold)%(level_treshold) == 0:
+	if (GLOBAL.current_level)%(level_treshold) == 0:
 		return true
 	else:
 		return false
@@ -96,7 +96,7 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array, items_spawne
 	var times: = 0
 	var enemy_level=0
 	var max_level
-	var max_current_level=round(GLOBAL.current_level/(level_treshold*2))
+	var max_current_level=round((GLOBAL.current_level+level_treshold)/(level_treshold*2))
 	for instance in spawn_points:	
 		var spawner = instance.get_node_or_null("Spawner")
 		if spawner:
@@ -109,7 +109,7 @@ func spawn(players: int, enemy_amount: int, spawned_already: Array, items_spawne
 			times +=1
 			var type = randi_range(0,2)		
 			if type == 0 && enemy_amount>0 && !spawned_already.has(spawner) and spawned_already.size()<10:
-				if GLOBAL.current_level < (level_treshold*3):
+				if GLOBAL.current_level < (level_treshold*2):
 					enemy_level=1
 				else:
 					max_level=clamp(max_current_level,1,max_lvl)

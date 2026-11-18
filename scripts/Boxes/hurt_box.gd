@@ -251,7 +251,7 @@ func item_drop():
 		var card=preload("res://scenes/items/Mon_card_item.tscn")
 		var card_drop = card.instantiate()
 		card_drop.global_position=global_position
-		card_drop.item=item_dropped
+		card_drop.item=item_dropped.duplicate()
 		card_drop.item.stat_boost=drops.stat_boost.duplicate()
 		get_tree().current_scene.add_child(card_drop)
 		

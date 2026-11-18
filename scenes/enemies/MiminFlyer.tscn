@@ -2606,7 +2606,6 @@ shape = SubResource("RectangleShape2D_00sev")
 debug_color = Color(0, 0.60038817, 0, 0.42000002)
 
 [node name="EnemyMovement" parent="." unique_id=1062153470 instance=ExtResource("12_4uxhy")]
-speed = 65.0
 time_to_change_dir = 1.0
 
 [node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("13_n5vxq")]

@@ -202,8 +202,10 @@ func ifplus(value:int):
 func description(item_name:String, desc:String):
 	if item_name=="" && desc=="":
 		$Screen/Label.text=""
+		$Screen/Label2.text=""
 	else:
-		$Screen/Label.text=item_name + ":\n" + desc
+		$Screen/Label.text=item_name + ":"
+		$Screen/Label2.text=desc
 
 func equip_suit(button,non_global:=true,redo:=true):
 	if current_suit:

@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://b2518i8rrlh3u" path="res://scripts/Items/shop_item.gd" id="1_kmeu6"]
 [ext_resource type="Resource" uid="uid://df2nbd23piwyc" path="res://resources/items/healing_item.tres" id="2_kmeu6"]
+[ext_resource type="FontFile" uid="uid://bcw8ds3wtqx7e" path="res://assets/fonts/hero-italic.ttf" id="3_kmeu6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajq8o"]
-bg_color = Color(0, 0, 0, 0.75000006)
+bg_color = Color(0, 0, 0, 0)
 expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
@@ -12,7 +13,10 @@ expand_margin_bottom = 2.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_pffs2"]
 line_spacing = 0.0
+font = ExtResource("3_kmeu6")
 font_size = 9
+outline_size = 5
+outline_color = Color(0.14509805, 0.14509805, 0.14509805, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_esxyk"]
 size = Vector2(16, 16)

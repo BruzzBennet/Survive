@@ -5,9 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://dvxsn55ra6y28" path="res://assets/cards/dropped_card.png" id="4_b7hu1"]
 [ext_resource type="Texture2D" uid="uid://npfvmcmbc37y" path="res://assets/cards/icons/MonJoy.png" id="5_biqaa"]
 [ext_resource type="PackedScene" uid="uid://3lwoa7tsv1fj" path="res://scenes/items/itemUpDown.tscn" id="5_m6sjq"]
+[ext_resource type="FontFile" uid="uid://bcw8ds3wtqx7e" path="res://assets/fonts/hero-italic.ttf" id="6_biqaa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajq8o"]
-bg_color = Color(0, 0, 0, 0.75000006)
+bg_color = Color(0, 0, 0, 0)
 expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
@@ -15,7 +16,10 @@ expand_margin_bottom = 2.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_pffs2"]
 line_spacing = 0.0
+font = ExtResource("6_biqaa")
 font_size = 9
+outline_size = 5
+outline_color = Color(0.14509805, 0.14509805, 0.14509805, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_esxyk"]
 size = Vector2(35, 35)

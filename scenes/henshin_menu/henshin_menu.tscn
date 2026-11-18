@@ -5,6 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://dstfd2nwh8man" path="res://scenes/menus/button_move.tscn" id="3_7dkp0"]
 [ext_resource type="StyleBox" uid="uid://b4s4g0bbtyh4h" path="res://card_blank.tres" id="3_jkji6"]
 [ext_resource type="PackedScene" uid="uid://cpp72lf4ylqo4" path="res://scenes/UI/PlayerUI.tscn" id="3_ribii"]
+[ext_resource type="FontFile" uid="uid://hcb06j5s83g" path="res://assets/fonts/hero_4.ttf" id="4_y7d4b"]
+[ext_resource type="FontFile" uid="uid://bcw8ds3wtqx7e" path="res://assets/fonts/hero-italic.ttf" id="6_vrd3v"]
+[ext_resource type="PackedScene" uid="uid://3lwoa7tsv1fj" path="res://scenes/items/itemUpDown.tscn" id="7_y7d4b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dkp0"]
 bg_color = Color(0.972549, 0.972549, 0.972549, 1)
@@ -25,6 +28,8 @@ border_width_bottom = 1
 border_color = Color(0.735357, 0.735357, 0.735357, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 expand_margin_left = 2.0
 expand_margin_top = 2.0
 expand_margin_right = 2.0
@@ -32,19 +37,16 @@ expand_margin_bottom = 2.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_1iwen"]
 line_spacing = 0.0
+font = ExtResource("6_vrd3v")
 font_size = 11
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1iwen"]
-bg_color = Color(0, 0, 0, 0.85)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.735357, 0.735357, 0.735357, 1)
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-expand_margin_left = 5.0
-expand_margin_right = 5.0
+[sub_resource type="LabelSettings" id="LabelSettings_y7d4b"]
+font = ExtResource("4_y7d4b")
+font_size = 11
+
+[sub_resource type="LabelSettings" id="LabelSettings_5jcjx"]
+font = ExtResource("6_vrd3v")
+font_size = 14
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkji6"]
 bg_color = Color(0.24313726, 0.20784314, 0.27450982, 1)
@@ -91,33 +93,55 @@ offset_bottom = 320.0
 layout_mode = 0
 offset_left = 247.0
 offset_top = 6.0
-offset_right = 498.0
-offset_bottom = 71.0
+offset_right = 497.0
+offset_bottom = 62.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_f1lyw")
 
 [node name="Label" type="Label" parent="Screen" unique_id=1016155828]
 layout_mode = 0
 offset_left = 248.0
-offset_top = 7.0
+offset_top = 9.0
 offset_right = 497.0
-offset_bottom = 23.0
+offset_bottom = 25.0
 label_settings = SubResource("LabelSettings_1iwen")
 autowrap_mode = 3
 
-[node name="PanelContainer2" type="PanelContainer" parent="Screen" unique_id=1068005920]
+[node name="Label2" type="Label" parent="Screen" unique_id=279855390]
 layout_mode = 0
-offset_left = 250.0
-offset_top = 73.0
-offset_right = 495.0
-offset_bottom = 91.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_1iwen")
-
-[node name="Label2" type="Label" parent="Screen/PanelContainer2" unique_id=1351068270]
-layout_mode = 2
-text = "Equip / Unequip: Z / J / Enter   -   Drop: X / K"
-label_settings = SubResource("LabelSettings_1iwen")
-horizontal_alignment = 1
+offset_left = 248.0
+offset_top = 18.0
+offset_right = 497.0
+offset_bottom = 34.0
+label_settings = SubResource("LabelSettings_y7d4b")
 autowrap_mode = 3
+
+[node name="Instructions" type="Node2D" parent="Screen" unique_id=252577925]
+
+[node name="Label2" type="Label" parent="Screen/Instructions" unique_id=1647645517]
+offset_left = 51.0
+offset_top = 65.0
+offset_right = 91.0
+offset_bottom = 88.0
+text = "K/X"
+label_settings = SubResource("LabelSettings_5jcjx")
+
+[node name="Label" type="Label" parent="Screen/Instructions" unique_id=2051838034]
+offset_left = 18.0
+offset_top = 65.0
+offset_right = 58.0
+offset_bottom = 88.0
+text = "Z/J"
+label_settings = SubResource("LabelSettings_5jcjx")
+
+[node name="Label3" type="Label" parent="Screen/Instructions" unique_id=1237798668]
+offset_left = 113.0
+offset_top = 65.0
+offset_right = 230.0
+offset_bottom = 88.0
+text = "C/L - UNEQUIP/DROP"
+label_settings = SubResource("LabelSettings_5jcjx")
+
+[node name="ItemUpDown" parent="Screen/Instructions" unique_id=329888079 instance=ExtResource("7_y7d4b")]
 
 [node name="Panel" type="Node2D" parent="." unique_id=373129143]
 unique_name_in_owner = true

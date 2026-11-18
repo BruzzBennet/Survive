@@ -7,7 +7,7 @@ var flash_tween: Tween
 var current_weapon: Equipment
 var current_suit: Equipment
 var min_ammo:=1.0
-var depletion_rate:=10.0
+var depletion_rate:=7.0
 var max_hp
 var maxSuitHP
 var startingSuitHP
@@ -134,7 +134,7 @@ func set_ammo_suit():
 		weapon_card.update_ammo()
 
 func reduce_ammo_suit(times: float = 1):
-	var depletion: float = times*1.5
+	var depletion: float = times
 	currentSuitHP = max(0, currentSuitHP - depletion)
 	current_suit.current_ammo = currentSuitHP
 	set_ammo_suit()
