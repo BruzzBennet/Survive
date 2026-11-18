@@ -10,12 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://d3ttm1t3l0su0" path="res://scenes/items/Mon_card_item.tscn" id="8_qc8te"]
 [ext_resource type="Resource" uid="uid://dv2kq8tvy21i8" path="res://resources/Mons/MR.tres" id="9_hu8wq"]
 [ext_resource type="PackedScene" uid="uid://bxays1qgt17kk" path="res://scenes/Characters/spawner.tscn" id="10_qc8te"]
-[ext_resource type="PackedScene" uid="uid://b6whdqri3ld1c" path="res://scenes/items/recharge_item.tscn" id="10_s0br0"]
 [ext_resource type="Texture2D" uid="uid://caluf25nbkver" path="res://assets/MRRunRight.png" id="11_ipuf0"]
-[ext_resource type="Resource" uid="uid://qlpthir3ew8x" path="res://resources/Mons/pozzap.tres" id="12_b4dqo"]
 [ext_resource type="FontFile" uid="uid://bcw8ds3wtqx7e" path="res://assets/fonts/hero-italic.ttf" id="12_n3ruv"]
 [ext_resource type="Texture2D" uid="uid://d20p2eh5sadla" path="res://assets/MR/BodyParts/MRWeaponless.png" id="13_cqkck"]
-[ext_resource type="Resource" uid="uid://b5h1tt01frljp" path="res://resources/Mons/Icie.tres" id="13_j157i"]
 [ext_resource type="Texture2D" uid="uid://kwla42renok5" path="res://assets/Slash.png" id="14_s0br0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_17ebl"]
@@ -294,19 +291,6 @@ text = "L/C - DODGE
 I/V - TRANSFORM!
 Q/P - Pause"
 label_settings = SubResource("LabelSettings_b4dqo")
-
-[node name="RechargeItem" parent="." unique_id=909775596 instance=ExtResource("10_s0br0")]
-position = Vector2(142, 233)
-
-[node name="Item2" parent="." unique_id=1644609114 instance=ExtResource("8_qc8te")]
-position = Vector2(251, 242)
-item = ExtResource("12_b4dqo")
-duplicated = true
-
-[node name="Item3" parent="." unique_id=1797163164 instance=ExtResource("8_qc8te")]
-position = Vector2(409, 240)
-item = ExtResource("13_j157i")
-duplicated = true
 
 [node name="ChooseBetween3" parent="." unique_id=1277225118 instance=ExtResource("7_hj517")]
 
