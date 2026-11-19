@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Stat_Boost" format=3 uid="uid://bnmupev2dx2lq"]
+
+[ext_resource type="Script" uid="uid://84qpp678qnu4" path="res://scripts/Components/stat_boost.gd" id="1_u1yli"]
+
+[resource]
+script = ExtResource("1_u1yli")
+stamina_boost = -1
+defense_boost = -1
+metadata/_custom_type_script = "uid://84qpp678qnu4"

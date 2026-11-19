@@ -10,6 +10,7 @@ var shared_material: ShaderMaterial
 @export var gets_stunned: bool = false
 @export var drops: Equipment
 @export var mimin:=false
+@export var no_points:=false
 var score_value: = 100
 var max_health:= 100.0
 var extra_heal:=0.0
@@ -45,6 +46,8 @@ var damage_tile_location=[
 var idle=0.0
 
 func _ready():
+	if no_points:
+		score_value=0
 	if takes_damage_from == attack_source.enemy:
 			set_collision_layer_value(4, true)
 			set_collision_mask_value(2, true)
@@ -216,6 +219,7 @@ func add_death_explosion():
 func hurt_player(damage_taken:float):
 	cancel_flash()
 	play_flash(Color.RED)
+	hpUI.get_parent().close_menu()
 	hpUI.reduce_ammo_suit(damage_taken)
 	hpUI.set_hp(damage_taken*-1)
 	var fx = hurt_fx.instantiate()

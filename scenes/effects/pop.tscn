@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cbvu11wc43e1f"]
+
+[ext_resource type="Script" uid="uid://dbqea4u0h4ygf" path="res://scripts/Components/effects/multiply_on_pop.gd" id="1_6owxh"]
+
+[node name="Pop" type="Node2D" unique_id=1890864039]
+script = ExtResource("1_6owxh")

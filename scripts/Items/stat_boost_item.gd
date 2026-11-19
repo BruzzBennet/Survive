@@ -21,13 +21,13 @@ func stat_shwocase(equipment:Stat_Boost):
 		if equipment.bullet_speed_boost!=0:
 			desc+="Bullet Speed " + ifplus(equipment.bullet_speed_boost) + ". " + "\n"
 		if equipment.stamina_boost!=0:
-			desc+="Stamina " + ifplus(equipment.stamina_boost) + ". " + "\n"
+			desc+="Ammo " + ifplus(equipment.stamina_boost) + ". " + "\n"
 		if equipment.bullet_power_boost!=0:
 			desc+="Bullet Pierce " + ifplus(equipment.bullet_power_boost) + ". " + "\n"
 		if equipment.bullet_reach_boost!=0:
 			desc+="Bullet Reach " + ifplus(equipment.bullet_reach_boost) + ". " + "\n"
-		if equipment.stamina_recover_boost!=0:
-			desc+="Recover  " + ifplus(equipment.stamina_recover_boost) + ". " + "\n"
+		if equipment.defense_boost!=0:
+			desc+="Defense " + ifplus(equipment.defense_boost) + ". " + "\n"
 		return desc
 
 func ifplus(value:int):
@@ -57,6 +57,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			boost_this.bullet_power_boost+=stat_boost.bullet_power_boost
 		if stat_boost.bullet_reach_boost!=0:
 			boost_this.bullet_reach_boost+=stat_boost.bullet_reach_boost
+		if stat_boost.defense_boost!=0:
+			boost_this.defense_boost+=stat_boost.defense_boost
 		if weapon:
 			equipment=body.weapon
 			equipment.stat_boost=boost_this

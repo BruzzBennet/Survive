@@ -60,7 +60,7 @@ func stats_setup(this_suit:Equipment,this_weapon:Equipment):
 	var suit_boost=this_suit.stat_boost
 	var weapon_boost=this_weapon.stat_boost
 	max_speed=GLOBAL.max_speed + ((GLOBAL.max_speed * 0.1) * (suit_boost.bullet_speed_boost+weapon_boost.bullet_speed_boost))
-	$HurtBox.defense = GLOBAL.defense + suit_boost.stamina_boost+weapon_boost.stamina_boost
+	$HurtBox.defense = GLOBAL.defense + suit_boost.defense_boost+weapon_boost.defense_boost
 	var new_ammo = 1.0 - (0.25 * (suit_boost.stamina_boost+weapon_boost.stamina_boost))
 	ammo_reduce = max(new_ammo,0.05)
 	if weapon_is == type.boot:
@@ -186,7 +186,7 @@ func attack():
 		type.blade:
 			atkUI.reduce_ammo(ammo_reduce*0.35)
 		type.none:
-			atkUI.reduce_stamina(ammo_reduce*0.35)
+			atkUI.reduce_stamina(ammo_reduce*0.2)
 			# atkUI.reduce_ammo(ammo_reduce*0.35)
 	$HurtBox.cancel_flash()
 	Short_Range_Attack()
@@ -198,6 +198,7 @@ func attack():
 func Short_Range_Attack():
 	is_attacking = true
 	if GLOBAL.weapon==GLOBAL.base_weapon and atkUI.ammo.value<atkUI.ammo.max_value*1/5:
+		PLAYSFX.slash()
 		can_hit=false
 	if can_hit:
 		if GLOBAL.weapon.current_ammo >= 0:
@@ -210,7 +211,7 @@ func shoot():
 	if weapon_is == type.gun:
 			atkUI.reduce_ammo(ammo_reduce*2)
 	elif weapon_is in [type.none]:
-		atkUI.reduce_stamina(ammo_reduce*0.65)
+		atkUI.reduce_stamina(ammo_reduce*0.35)
 	else:
 		atkUI.reduce_ammo(ammo_reduce)
 
@@ -230,6 +231,7 @@ func Long_Range_Attack():
 	is_shooting = true
 	if GLOBAL.weapon==GLOBAL.base_weapon and atkUI.ammo.value<atkUI.ammo.max_value*1/5:
 		# print(str(atkUI.ammo.value))
+		PLAYSFX.slash()
 		can_shoot=false
 	if can_shoot:
 		$BulletManager.shoot(position, last_direction, shot_pattern)
@@ -237,35 +239,45 @@ func Long_Range_Attack():
 
 func player_movement(delta):
 	position = position.clamp(Vector2(margin, 40), Vector2(screen_size.x - margin, screen_size.y - margin))
-	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	dodge(delta*5)
+	var direction
+	var val
+	if GLOBAL.weapon==GLOBAL.base_weapon:
+		val= 3
+	else:
+		val = 5
+	dodge(delta*val)
 	if is_dodging:
 		dodge_speed = 2
+		direction=last_direction
+		velocity = direction * max_speed * dodge_speed
 	else:
-		dodge_speed = 1
-	if direction != Vector2.ZERO:
-		last_direction = direction
-		
-	if direction != Vector2.ZERO:
-		velocity = velocity.lerp(direction * max_speed * dodge_speed, accel * delta)
-		atkUI.increase_stamina(delta/3)
-	else:
-		if !is_dodging:
-			atkUI.increase_stamina(delta/2)
-		velocity = velocity.lerp(Vector2.ZERO, friction)
+		direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		if direction != Vector2.ZERO:
+			dodge_speed = 1
+			last_direction = direction
+			velocity = velocity.lerp(direction * max_speed * dodge_speed, accel * delta)
+			if !Input.is_action_pressed("dash"):	
+				atkUI.increase_stamina(delta/3)	
+		else:
+			velocity = velocity.lerp(Vector2.ZERO, friction)
+			if !Input.is_action_pressed("dash"):
+				atkUI.increase_stamina(delta/2)	
 		
 	process_animation(direction)
 	move_and_slide()
 
 func dodge(value:float):
 	var stamina=atkUI.ammo
-	if stamina.value>stamina.max_value*3/5:
+	if stamina.value>stamina.max_value*3/5 or (weapon_is==type.none and stamina.value>stamina.max_value*3/10):
 		able_to_dodge=true
 	if Input.is_action_just_pressed("dash") and stamina.value>0 and able_to_dodge:
 		dash_fx(rotation, global_position, last_direction)
 	if Input.is_action_pressed("dash"):
 		if stamina.value > 0 and able_to_dodge:
 			is_dodging = true
+			able_to_dodge = false
+		elif stamina.value <=stamina.max_value*1/10:
+			is_dodging = false
 			able_to_dodge = false
 	else:
 		is_dodging=false
@@ -294,12 +306,6 @@ func dash_fx(angle, pos, dir):
 	else:
 		dash.global_position = pos + Vector2(0, 16) - dir * 10
 	dash.direction = dir.normalized()
-	# dash.z_index = -1
-
-# func tired():
-# 	$HurtBox.no_longer_invincible()
-# 	is_dodging=false
-# 	return false
 
 func recovering(delta):
 	idle_time += delta

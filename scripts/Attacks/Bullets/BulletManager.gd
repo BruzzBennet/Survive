@@ -129,29 +129,29 @@ func simple_shot(pos,dir,_func_to_use,dur:=1.0):
 	bullet.set_player(get_player())
 	bullet.damage_done=bullet_damage
 	add_child(bullet)
+	bullet.direction = dir.normalized()
 	bullet.global_position = pos + dir * 10
 	if dir.x > 0:
 		anim_name = "0"
-	elif dir.x < 0 and dir.y > 0:
-		anim_name = "2"
+		bullet.rotation = bullet.direction.angle()
 	elif dir.y > 0:
 		anim_name = "1"
+		bullet.rotation = bullet.direction.angle() + deg_to_rad(-90)
 	elif dir.x < 0:
 		anim_name = "2"
+		bullet.rotation = bullet.direction.angle() + deg_to_rad(180)
 	elif dir.y < 0:
 		anim_name = "3"
+		bullet.rotation = bullet.direction.angle() + deg_to_rad(90)
 	if bullet.get_node_or_null("AnimationPlayer"):
 		bullet.get_node("AnimationPlayer").play(anim_name)
-	bullet.direction = dir.normalized()
 	bullet.add_to_group("bullets")
 	if weapon_effect:
 		var effect=weapon_effect.instantiate()
 		bullet.add_child(effect)
-		# effect.owner=bullet
 	if suit_effect:
 		var effect=suit_effect.instantiate()
 		bullet.add_child(effect)
-		# effect.owner=bullet
 
 func c_shot_double(pos,dir,func_to_use="simple_shot",dur:=1.0):
 	normal_shot(pos,dir,func_to_use,dur)

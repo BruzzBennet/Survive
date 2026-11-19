@@ -303,10 +303,10 @@ duplicated = true
 position = Vector2(320, 96)
 
 [node name="Player" parent="." unique_id=2100245136 instance=ExtResource("6_2ut4g")]
-position = Vector2(144, 84)
+position = Vector2(64, 84)
 
 [node name="Player2" parent="." unique_id=2015003901 instance=ExtResource("6_2ut4g")]
-position = Vector2(174, 84)
+position = Vector2(143, 84)
 
 [node name="Player3" parent="." unique_id=798213609 instance=ExtResource("6_2ut4g")]
 position = Vector2(205, 84)

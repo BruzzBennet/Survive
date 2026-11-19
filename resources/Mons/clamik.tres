@@ -18,7 +18,6 @@ helmet = ExtResource("5_vfmci")
 body_palette = ExtResource("2_ludv3")
 blade_sprite = ExtResource("1_7u7v1")
 gun_sprite = ExtResource("4_ykp8k")
-equipment_description = "Bullets have a bigger area"
 bullet_scene = ExtResource("3_cbbpt")
 normal_attack_sfx = ExtResource("7_r47qc")
 special_attack_sfx = ExtResource("7_r47qc")

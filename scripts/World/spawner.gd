@@ -11,6 +11,7 @@ var items=[
 	load("res://scenes/pozzap.tscn"),
 	load("res://scenes/enemies/Bombry.tscn"),
 	load("res://scenes/enemies/clamik.tscn"),
+	load("res://scenes/enemies/bubbler.tscn"),
 	load("res://scenes/opozzap.tscn")
 	]
 
@@ -22,6 +23,7 @@ var zoo=[
 	load("res://scenes/pozzap.tscn"),
 	load("res://scenes/enemies/Bombry.tscn"),
 	load("res://scenes/enemies/clamik.tscn"),
+	load("res://scenes/enemies/bubbler.tscn"),
 	load("res://scenes/opozzap.tscn")
 ]
 

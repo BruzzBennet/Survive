@@ -14,6 +14,8 @@ var player
 var bounce:=false
 var bounced:=false
 signal limit_reached
+signal hit_enemy
+signal shot
 
 func bounces():
 	bounce=true
@@ -39,12 +41,15 @@ func _ready():
 func _on_area_entered(body):
 	if body is HurtBox_Component and body.get_parent().is_in_group("enemies"):
 		enemies_pierced+=1
+		if enemies_pierced < max_enemies_pierced:
+			hit_enemy.emit()
 		if bounce:
 			var enemy = body.get_parent()
 			direction = (global_position - enemy.global_position).normalized()
 			bounced = true
 	
 func _physics_process(delta):
+	shot.emit()
 	time_on_field += delta
 	if bounce:
 		var collision = move_and_collide(direction * speed * delta)

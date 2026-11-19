@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://bc01k6piuljr6"]
+
+[ext_resource type="Script" uid="uid://bdx0cpvtgtkt0" path="res://scripts/Attacks/Bullets/bullet.gd" id="1_y17wt"]
+[ext_resource type="Texture2D" uid="uid://bg5ygoyd0dwxf" path="res://assets/bullets/Bubble_bullet1.png" id="2_y17wt"]
+[ext_resource type="PackedScene" uid="uid://cglw5ss388y7r" path="res://scenes/boxes/hitbox.tscn" id="3_nikoj"]
+[ext_resource type="Script" uid="uid://doj80p0chh8d7" path="res://scripts/Attacks/Attack.gd" id="4_wdopn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ffnc2"]
+radius = 5.0
+
+[sub_resource type="Resource" id="Resource_ffnc2"]
+script = ExtResource("4_wdopn")
+metadata/_custom_type_script = "uid://doj80p0chh8d7"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lpuq3"]
+radius = 6.0
+
+[node name="bullet" type="CharacterBody2D" unique_id=272047002]
+collision_layer = 32
+script = ExtResource("1_y17wt")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1876856369]
+texture = ExtResource("2_y17wt")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=1523381360]
+position = Vector2(0, 6)
+shape = SubResource("CircleShape2D_ffnc2")
+
+[node name="HitBox" parent="." unique_id=80339694 instance=ExtResource("3_nikoj")]
+attack = SubResource("Resource_ffnc2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=624829467]
+shape = SubResource("CircleShape2D_lpuq3")
+debug_color = Color(1, 0, 0, 0.41960785)

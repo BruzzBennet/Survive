@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Equipment" format=3 uid="uid://646vqqagaqrj"]
+
+[ext_resource type="Texture2D" uid="uid://cwo7su6mgo207" path="res://assets/Weapons/Blade/Bubbler_Blade.png" id="1_v8c1m"]
+[ext_resource type="Resource" uid="uid://x3it1ssnlafn" path="res://resources/characters/MR/palettes/pink.tres" id="2_jom1u"]
+[ext_resource type="PackedScene" uid="uid://bc01k6piuljr6" path="res://scenes/bullets/bubble.tscn" id="3_jom1u"]
+[ext_resource type="Texture2D" uid="uid://d255k3oaj3mav" path="res://assets/MR/BodyParts/Helmets/Helmet_Bubbler.png" id="3_x6kth"]
+[ext_resource type="PackedScene" uid="uid://cbvu11wc43e1f" path="res://scenes/effects/pop.tscn" id="4_jom1u"]
+[ext_resource type="Texture2D" uid="uid://ddxhs7pf0u4i6" path="res://assets/Enemies/Bubbler.png" id="4_jyrlx"]
+[ext_resource type="Script" uid="uid://d4dsworwk7sp" path="res://scripts/Components/Weapons/Equipment.gd" id="6_6w6ky"]
+[ext_resource type="AudioStream" uid="uid://1xmcsy3c73pr" path="res://assets/audio/bwop.wav" id="7_x6kth"]
+[ext_resource type="Resource" uid="uid://bnmupev2dx2lq" path="res://resources/stat_boosts/bubbler.tres" id="8_bhcpr"]
+
+[resource]
+script = ExtResource("6_6w6ky")
+mon_sprite = ExtResource("4_jyrlx")
+mon_name = "Bubbler"
+helmet = ExtResource("3_x6kth")
+body_palette = ExtResource("2_jom1u")
+blade_sprite = ExtResource("1_v8c1m")
+equipment_description = "Shoot double bullets"
+bullet_scene = ExtResource("3_jom1u")
+normal_attack_sfx = ExtResource("7_x6kth")
+special_attack_sfx = ExtResource("7_x6kth")
+shot_type = 4
+stat_boost = ExtResource("8_bhcpr")
+effect_added = ExtResource("4_jom1u")
+metadata/_custom_type_script = "uid://d4dsworwk7sp"
