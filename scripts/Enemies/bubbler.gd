@@ -6,7 +6,7 @@ var idle:=0.0
 func _process(delta:float) -> void:
 	if in_battlefield:
 		idle+=delta
-		if idle >= 2:
+		if idle >= 2.5:
 			summon_bubbly()
 			idle=0
 

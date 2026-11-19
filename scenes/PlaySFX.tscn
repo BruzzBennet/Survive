@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://ct61tixhl2jy3" path="res://assets/audio/CrunchyMash.wav" id="23_ngslh"]
 [ext_resource type="AudioStream" uid="uid://ciermrkha08fk" path="res://assets/audio/MagicalSurge.mp3" id="24_b6f54"]
 [ext_resource type="AudioStream" uid="uid://coktqgq5iifsk" path="res://assets/audio/HenshinShortN.mp3" id="24_obbcd"]
+[ext_resource type="AudioStream" uid="uid://1xmcsy3c73pr" path="res://assets/audio/bwop.wav" id="25_mte22"]
 [ext_resource type="AudioStream" uid="uid://g2flnmnf067q" path="res://assets/audio/Pick Coin.wav" id="25_obbcd"]
 [ext_resource type="AudioStream" uid="uid://dj6u5v35s5yux" path="res://assets/audio/deactivate.mp3" id="26_mte22"]
 [ext_resource type="AudioStream" uid="uid://ba2082skeyjtd" path="res://assets/audio/InsertCard.mp3" id="27_dgm6k"]
@@ -144,3 +145,7 @@ bus = &"SFX"
 
 [node name="Upgrade" type="AudioStreamPlayer2D" parent="." unique_id=1953012211]
 stream = ExtResource("24_obbcd")
+
+[node name="Bubbly" type="AudioStreamPlayer2D" parent="." unique_id=304006484]
+stream = ExtResource("25_mte22")
+bus = &"SFX"

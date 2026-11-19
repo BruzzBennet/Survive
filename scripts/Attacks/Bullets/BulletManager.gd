@@ -109,7 +109,7 @@ func shot_pattern(pos,dir,shoot_pattern,shot_is:String):
 		"area_shot":
 			area_shot(pos,shot_is,0.75)
 		"small_area_shot":
-			area_shot(pos,shot_is,0.5)
+			area_shot(pos,shot_is,0.35)
 		null:
 			normal_shot(pos,dir,shot_is,1.0)
 

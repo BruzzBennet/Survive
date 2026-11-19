@@ -2,17 +2,19 @@ extends Node2D
 
 var parent
 
+
 func _ready() -> void:
 	setup()
 
 func setup():
 	parent = get_parent()
 	add_to_group("pops")
-	if parent.has_signal("shot"):
-		if not parent.shot.is_connected(on_popped):
-			parent.shot.connect(on_popped)
+	if parent.has_signal("hit_enemy"):
+		if not parent.hit_enemy.is_connected(on_popped):
+			parent.hit_enemy.connect(on_popped)
 
 func on_popped():
+	PLAYSFX.pop()
 	call_deferred("double_shot",parent.global_position,parent.direction)
 	parent.queue_free()
 

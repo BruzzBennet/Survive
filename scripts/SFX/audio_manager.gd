@@ -15,6 +15,9 @@ func unequip():
 func shot():
 	play_varied_sfx("ShotSFX",0.5,1.5)
 
+func pop():
+	play_varied_sfx("Bubbly",0.5,1.5)
+
 func play_this_sfx(node:String):
 	var this_node = get_node(node)
 	if not this_node.is_playing() and GLOBAL.sfx_on:

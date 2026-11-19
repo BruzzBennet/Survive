@@ -39,14 +39,14 @@ func _ready():
 	$HitBox.attack.damage_done=damage_done
 
 func _on_area_entered(body):
-	if body is HurtBox_Component and body.get_parent().is_in_group("enemies"):
-		enemies_pierced+=1
-		if enemies_pierced < max_enemies_pierced:
-			hit_enemy.emit()
-		if bounce:
-			var enemy = body.get_parent()
-			direction = (global_position - enemy.global_position).normalized()
-			bounced = true
+	if body is HurtBox_Component and body.get_parent() is not Player_Unit:
+		hit_enemy.emit()
+		if body.get_parent().is_in_group("enemies"):
+			enemies_pierced+=1
+			if bounce:
+				var enemy = body.get_parent()
+				direction = (global_position - enemy.global_position).normalized()
+				bounced = true
 	
 func _physics_process(delta):
 	shot.emit()
