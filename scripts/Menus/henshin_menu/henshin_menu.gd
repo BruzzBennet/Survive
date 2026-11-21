@@ -7,6 +7,8 @@ var current_suit
 var ui
 var located_in
 var deck_size
+var card_item_drop=preload("res://scenes/items/Mon_card_item.tscn")
+var consume: PackedScene = preload("res://scenes/DiedExplosion.tscn")
 
 func _ready() -> void:
 	deck_size=GLOBAL.deck.size()
@@ -82,8 +84,10 @@ func _play_or_discard(button:Button):
 		if Input.is_action_just_pressed("dash"):
 			if GLOBAL.weapon == equipment:
 				equip_weapon(button,false,false)
+				update_deck()
 			elif GLOBAL.suit == equipment:
 				equip_suit(button,false,false)
+				update_deck()
 			else:
 				discard(button)
 				
@@ -132,7 +136,6 @@ func discard(button: Button):
 
 
 func drop_card(item_dropped:Equipment):
-	var card_item_drop=preload("res://scenes/items/Mon_card_item.tscn")
 	var card_drop = card_item_drop.instantiate()
 	card_drop.global_position=get_player().global_position
 	var dist_1 = randi_range(1,30)
@@ -174,7 +177,8 @@ func display_info(button: Button):
 		description("","")
 
 func stat_info(item:Equipment):
-	description(item.mon_name,stat_shwocase(item.stat_boost)+item.equipment_description)
+	var desc = stat_shwocase(item.stat_boost)+item.equipment_description
+	description(item.mon_name,desc,item.mon_level)
 
 func stat_shwocase(equipment:Stat_Boost):
 		var desc=""
@@ -199,12 +203,16 @@ func ifplus(value:int):
 	else:
 		return str(value)
 
-func description(item_name:String, desc:String):
+func description(item_name:String, desc:String,mon_level:int=1):
+	var max_level=GLOBAL.mon_max_level
 	if item_name=="" && desc=="":
 		$Screen/Label.text=""
 		$Screen/Label2.text=""
 	else:
-		$Screen/Label.text=item_name + ":"
+		var level_text=" - Level " + str(mon_level) + "/" + str(max_level)
+		if mon_level>=max_level:
+			level_text= " MAX LEVEL"
+		$Screen/Label.text=item_name + level_text
 		$Screen/Label2.text=desc
 
 func equip_suit(button,non_global:=true,redo:=true):
@@ -340,7 +348,6 @@ func close_menu():
 	$Screen.hide()
 
 func explode(here):
-	var consume: PackedScene = load("res://scenes/DiedExplosion.tscn")
 	var fx = consume.instantiate()
 	if here:
 		fx.global_position = here.global_position

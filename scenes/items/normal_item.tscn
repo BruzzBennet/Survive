@@ -19,7 +19,7 @@ outline_size = 5
 outline_color = Color(0.14509805, 0.14509805, 0.14509805, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_esxyk"]
-size = Vector2(16, 16)
+size = Vector2(12, 12)
 
 [node name="Item" type="Node2D" unique_id=1644609114]
 script = ExtResource("1_kmeu6")

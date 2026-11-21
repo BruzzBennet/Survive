@@ -16,6 +16,8 @@ var bounced:=false
 signal limit_reached
 signal hit_enemy
 signal shot
+var shot_check:=0
+var active := true
 
 func bounces():
 	bounce=true
@@ -49,7 +51,11 @@ func _on_area_entered(body):
 				bounced = true
 	
 func _physics_process(delta):
-	shot.emit()
+	if shot_check==0:
+		shot.emit()
+		shot_check+=1
+	if not active:
+		return
 	time_on_field += delta
 	if bounce:
 		var collision = move_and_collide(direction * speed * delta)
@@ -70,3 +76,21 @@ func _physics_process(delta):
 	or reach<=reach_check:
 		limit_reached.emit()
 		queue_free()
+
+func deactivate():
+	active = false
+
+	visible = false
+	set_physics_process(false)
+	set_process(false)
+
+	$HitBox.set_deferred("monitoring", false)
+
+func activate():
+	active = true
+
+	visible = true
+	set_physics_process(true)
+	set_process(true)
+
+	$HitBox.set_deferred("monitoring", true)

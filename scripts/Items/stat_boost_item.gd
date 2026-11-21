@@ -43,30 +43,43 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player_Unit:
 		if weapon:
 			if GLOBAL.weapon==GLOBAL.base_weapon:
+				extra_points()
 				return
-			boost_this=body.weapon.stat_boost.duplicate()
+			equipment=body.weapon
 		else:
 			if GLOBAL.suit==GLOBAL.base_suit:
+				extra_points()
 				return
-			boost_this=body.suit.stat_boost.duplicate()
-		if stat_boost.bullet_speed_boost!=0:
-			boost_this.bullet_speed_boost+=stat_boost.bullet_speed_boost
-		if stat_boost.stamina_boost!=0:
-			boost_this.stamina_boost+=stat_boost.stamina_boost
-		if stat_boost.bullet_power_boost!=0:
-			boost_this.bullet_power_boost+=stat_boost.bullet_power_boost
-		if stat_boost.bullet_reach_boost!=0:
-			boost_this.bullet_reach_boost+=stat_boost.bullet_reach_boost
-		if stat_boost.defense_boost!=0:
-			boost_this.defense_boost+=stat_boost.defense_boost
-		if weapon:
-			equipment=body.weapon
-			equipment.stat_boost=boost_this
-			body.stats_setup(GLOBAL.suit,equipment)
-		else:
 			equipment=body.suit
+
+		if equipment.mon_level<GLOBAL.mon_max_level:	
+
+			boost_this=equipment.stat_boost.duplicate()
+
+			if stat_boost.bullet_speed_boost!=0:
+				boost_this.bullet_speed_boost+=stat_boost.bullet_speed_boost
+			if stat_boost.stamina_boost!=0:
+				boost_this.stamina_boost+=stat_boost.stamina_boost
+			if stat_boost.bullet_power_boost!=0:
+				boost_this.bullet_power_boost+=stat_boost.bullet_power_boost
+			if stat_boost.bullet_reach_boost!=0:
+				boost_this.bullet_reach_boost+=stat_boost.bullet_reach_boost
+			if stat_boost.defense_boost!=0:
+				boost_this.defense_boost+=stat_boost.defense_boost
+			
 			equipment.stat_boost=boost_this
-			body.stats_setup(equipment,GLOBAL.weapon)
-		PLAYSFX.recover()
-		queue_free()
+			equipment.mon_level+=1
+			
+			if weapon:
+				body.stats_setup(GLOBAL.suit,equipment)
+			else:
+				body.stats_setup(equipment,GLOBAL.weapon)
+
+			PLAYSFX.recover()
+		else:
+			extra_points()
+	queue_free()
 		
+func extra_points():
+	PLAYSFX.pick_coin()
+	SCORE.actual+=250

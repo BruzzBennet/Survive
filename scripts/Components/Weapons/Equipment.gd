@@ -34,3 +34,4 @@ enum shot_pattern{
 var max_ammo: float = 100.0
 var current_ammo: float = 100.0
 var broken:=false
+var mon_level:=1

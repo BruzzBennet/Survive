@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bju1w73ni3m3"]
 
+[ext_resource type="Script" uid="uid://d18vpi4f2tboy" path="res://scripts/Enemies/chomwing.gd" id="1_5njql"]
 [ext_resource type="Texture2D" uid="uid://bo2qs2vrhrv7x" path="res://assets/Enemies/Chomwing.png" id="1_hy1qq"]
 [ext_resource type="PackedScene" uid="uid://bstabgb4bl3q6" path="res://scenes/boxes/hurt_box.tscn" id="2_88rwa"]
 [ext_resource type="Shader" uid="uid://dy4kyjr3v8a8q" path="res://scenes/hurt_shader.gdshader" id="2_jsaom"]
@@ -781,6 +782,7 @@ radius = 64.0
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1839844215]
 collision_layer = 2
 collision_mask = 10
+script = ExtResource("1_5njql")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=1435101142]
 material = SubResource("ShaderMaterial_ec30e")

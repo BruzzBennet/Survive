@@ -20,6 +20,8 @@ var weapon_type
 var deck
 var original_color=Color(0.0,0.5,0.65,1.0)
 var ready_card
+var consume: PackedScene = preload("res://scenes/DiedExplosion.tscn")
+var card_item_drop=preload("res://scenes/items/Mon_card_item.tscn")
 
 func _ready() -> void:
 	hp.material.set_shader_parameter("flash_modifier", 0.0)
@@ -365,7 +367,6 @@ func henshin(body):
 	explode(body)
 
 func explode(here):
-	var consume: PackedScene = preload("res://scenes/DiedExplosion.tscn")
 	var fx = consume.instantiate()
 	if here:
 		fx.global_position = here.global_position
@@ -386,7 +387,6 @@ func discard(button: Button):
 		button.get_child(0).visible = false	
 
 func drop_card(item_dropped:Equipment):
-	var card_item_drop=preload("res://scenes/items/Mon_card_item.tscn")
 	var card_drop = card_item_drop.instantiate()
 	card_drop.global_position=get_player().global_position
 	var dist_1 = randi_range(1,30)

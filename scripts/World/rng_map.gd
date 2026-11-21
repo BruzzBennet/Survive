@@ -17,13 +17,15 @@ var enemies = []
 var starting_player_amount: int = 1
 var map_texture
 var tile_maps =[
-			preload("res://assets/Tiles/Tiles.png"),
-			preload("res://assets/Tiles/Tiles1.png"),
-			preload("res://assets/Tiles/Tiles2.png"),
-			preload("res://assets/Tiles/Tiles3.png"),
-			preload("res://assets/Tiles/Tiles4.png"),
-			preload("res://assets/Tiles/Tiles5.png")
+			"res://assets/Tiles/Tiles.png",
+			"res://assets/Tiles/Tiles1.png",
+			"res://assets/Tiles/Tiles2.png",
+			"res://assets/Tiles/Tiles3.png",
+			"res://assets/Tiles/Tiles4.png",
+			"res://assets/Tiles/Tiles5.png"
 		]
+var portal = preload("res://scenes/boxes/summon_spot.tscn").instantiate()
+var base_section=preload("res://assets/maps/Sections/Level0_0.tscn")
 var enemy_difficulty:= 1
 var first_player_starting_point
 var current_level
@@ -36,13 +38,13 @@ func _ready() -> void:
 	if GLOBAL.starting_enemy_amount<max_enemy_amount and several_enemies_level():
 			GLOBAL.starting_enemy_amount += 1
 	current_level=GLOBAL.current_level
-	map_texture=tile_maps[randi_range(0, tile_maps.size() - 1)]
+	map_texture=load(tile_maps[randi_range(0, tile_maps.size() - 1)])
 	$Map.tile_set.get_source(4).texture = map_texture
 	create_map()
 	spawn(1,GLOBAL.starting_enemy_amount,[],[])
 
 func portal_opens(spawner_point):
-	var portal = preload("res://scenes/boxes/summon_spot.tscn").instantiate()
+	portal.instantiate()
 	add_child(portal)
 	portal.global_position = spawner_point
 
@@ -78,7 +80,7 @@ func create_map():
 		var section_path="res://assets/maps/Sections/Level" + str(lvl) + "_" + str(n) + ".tscn"
 		var section=load(section_path)
 		if !section:
-			section=load("res://assets/maps/Sections/Level0_0.tscn")
+			section=base_section
 	
 		var instance = section.instantiate()
 		instance.position = grid_section

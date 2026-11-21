@@ -1,19 +1,23 @@
 extends CharacterBody2D
 
 var idle:=0.0
+var max_babies:=5
+var babies:=0
 @onready var in_battlefield = get_tree().current_scene.get_node_or_null("RNG_Map")	
+var baby=preload("res://scenes/enemies/bubbly.tscn")
 
 func _process(delta:float) -> void:
 	if in_battlefield:
 		idle+=delta
-		if idle >= 3.5:
+		if idle >= 3.5 and babies<=max_babies:
 			summon_bubbly()
+			babies+=1
 			idle=0
 
 func summon_bubbly():
 	if GLOBAL.sfx_on:
 		$sfx.play()
-	var bubbly=load("res://scenes/enemies/bubbly.tscn").instantiate()
+	var bubbly=baby.instantiate()
 	get_tree().current_scene.add_child(bubbly)
 	bubbly.global_position = global_position +  Vector2.RIGHT * 32
 	var spawner = get_tree().current_scene.get_node_or_null("RNG_Map")	

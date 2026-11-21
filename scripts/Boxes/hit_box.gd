@@ -2,6 +2,7 @@ extends Area2D
 class_name HitBox_Component
 
 @export var attack: Attack
+var fx = preload("res://scenes/hurtParticles.tscn").instantiate()
 
 func _on_area_entered(body):
 	if body is HurtBox_Component: 
@@ -14,7 +15,6 @@ func _on_area_entered(body):
 		parried()
 
 func parried():
-	var fx = preload("res://scenes/hurtParticles.tscn").instantiate()
 	fx.global_position = global_position
 	get_tree().current_scene.add_child(fx)
 

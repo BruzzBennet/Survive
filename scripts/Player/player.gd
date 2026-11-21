@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Player_Unit
 
+var explosion_fx = preload("res://scenes/hurtParticles.tscn")
+var dash_scene = preload("res://scenes/dashparticles.tscn")
 var max_speed
 var accel: float = 50
 var friction: float = 0.25
@@ -36,8 +38,8 @@ var invincible_time:=0.0
 var start_end: = false
 var ammo_reduce:=1.0
 var broken:=false
-var melee_shot_pattern
-var shot_pattern
+var melee_shot_pattern = "short_shot"
+var shot_pattern = "short_shot"
 var starting_invincibility=true
 signal weapon_broken
 
@@ -53,7 +55,7 @@ func equip(this_suit:Equipment,this_weapon:Equipment):
 	weapon=this_weapon
 	equip_suit(this_suit)
 	equip_weapon(this_weapon)
-	$BulletManager.setup(this_weapon,this_suit,weapon_type)
+	$BulletManager.setup(this_weapon,this_suit,weapon_type,melee_shot_pattern,shot_pattern)
 	stats_setup(this_suit,this_weapon)
 
 func stats_setup(this_suit:Equipment,this_weapon:Equipment):
@@ -101,7 +103,6 @@ func equip_suit(this_suit:Equipment):
 	if this_suit:
 		$Skeleton/Head_Back.texture = this_suit.helmet
 		$Skeleton/Head_Front.texture = this_suit.helmet
-		# GLOBAL.player_palette=this_suit.body_palette
 		GLOBAL.suit=this_suit
 		$Skeleton/Sprite.set_palette(this_suit.body_palette)
 	else:
@@ -148,7 +149,7 @@ func broken_suit():
 	
 
 func explode_fx():
-	var fx = preload("res://scenes/hurtParticles.tscn").instantiate()
+	var fx = explosion_fx.instantiate()
 	fx.global_position = global_position
 	get_tree().current_scene.add_child(fx)
 
@@ -202,7 +203,7 @@ func Short_Range_Attack():
 		can_hit=false
 	if can_hit:
 		if GLOBAL.weapon.current_ammo >= 0:
-			$BulletManager.shoot(position, last_direction, melee_shot_pattern)
+			$BulletManager.shoot(position, last_direction, true)
 		else:
 			PLAYSFX.slash()			
 		can_hit = false
@@ -234,7 +235,7 @@ func Long_Range_Attack():
 		PLAYSFX.slash()
 		can_shoot=false
 	if can_shoot:
-		$BulletManager.shoot(position, last_direction, shot_pattern)
+		$BulletManager.shoot(position, last_direction)
 		can_shoot = false
 
 func player_movement(delta):
@@ -297,7 +298,6 @@ func dodge(value:float):
 
 func dash_fx(angle, pos, dir):
 	PLAYSFX.dash()
-	var dash_scene = preload("res://scenes/dashparticles.tscn")
 	var dash = dash_scene.instantiate()
 	get_tree().current_scene.add_child(dash)
 	dash.rotation = angle + deg_to_rad(-90)

@@ -3,6 +3,7 @@ class_name HurtBox_Component
 
 var died_fx: PackedScene = preload("res://scenes/DiedExplosion.tscn")
 var hurt_fx: PackedScene = preload("res://scenes/hurtParticles.tscn")
+var card=preload("res://scenes/items/Mon_card_item.tscn")
 var shared_material: ShaderMaterial
 @export var defense: float = 1.0
 @export var takes_damage_from: attack_source
@@ -48,6 +49,13 @@ var idle=0.0
 func _ready():
 	if no_points:
 		score_value=0
+	if takes_damage_from == attack_source.enemy or mimin:
+		sprite = get_parent().get_node("Skeleton/Sprite")
+		for piece in get_parent().get_node("Skeleton").get_children():
+			if piece is Sprite2D and piece != sprite:
+					shared_material = ShaderMaterial.new()
+					shared_material.shader = preload("res://scenes/hurt_shader.gdshader")
+					piece.material = shared_material
 	if takes_damage_from == attack_source.enemy:
 			set_collision_layer_value(4, true)
 			set_collision_mask_value(2, true)
@@ -71,20 +79,11 @@ func _ready():
 			if GLOBAL.current_level>=50:
 				defense+=1.0
 			drops_items=true
-
-	if takes_damage_from == attack_source.enemy or mimin:
-		sprite = get_parent().get_node("Skeleton/Sprite")
-		for piece in get_parent().get_node("Skeleton").get_children():
-			if piece is Sprite2D and piece != sprite:
-					shared_material = ShaderMaterial.new()
-					shared_material.shader = preload("res://scenes/hurt_shader.gdshader")
-					piece.material = shared_material
-	else:
-		sprite = get_parent().get_node("Sprite")
+			if not mimin:
+				sprite = get_parent().get_node("Sprite")
 	if sprite.material:
 		sprite.material = sprite.material.duplicate()
 		sprite.material.set_shader_parameter("flash_modifier", 0)
-
 
 func flash_action(sprite_to_flash):
 	sprite_to_flash.material.set_shader_parameter("flash_modifier", 1.0)
@@ -181,22 +180,22 @@ func damage(attack: Attack) -> void:
 			match takes_damage_from:
 				attack_source.player:
 					hurt_enemy()
+					see_if_dead(damage_done,"dead_enemy")
 				attack_source.enemy:
 					hurt_player(damage_done)
-			
-			health -= damage_done
+					see_if_dead(damage_done,"gameover")
 
-			if dead:
-				return
-			if health <= 0:
-				dead = true
-				add_death_explosion()
+func see_if_dead(damage_done:float,function:String):
+	health -= damage_done
+	if dead:
+		return
+	if health <= 0:
+		dead = true
+		add_death_explosion()
+		var my_func = Callable(self, function)
+		my_func.call()
+		get_parent().queue_free()
 
-				if takes_damage_from == attack_source.player:
-					dead_enemy()
-				elif takes_damage_from == attack_source.enemy:
-					gameover()
-				get_parent().queue_free()
 
 func player_touched_poison():
 			health -= max_health*(1/(1+defense))
@@ -252,7 +251,6 @@ func dead_enemy(increase_score=true):
 func item_drop():
 	if !drops==null:
 		var item_dropped=drops
-		var card=preload("res://scenes/items/Mon_card_item.tscn")
 		var card_drop = card.instantiate()
 		card_drop.global_position=global_position
 		card_drop.item=item_dropped.duplicate()

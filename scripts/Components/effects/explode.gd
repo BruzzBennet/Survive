@@ -1,6 +1,7 @@
 extends Node2D
 
 var hurt_box
+var exploded = preload("res://scenes/effects/explosion.tscn")
 
 func _ready():
 	setup()
@@ -16,7 +17,6 @@ func setup():
 			get_parent().limit_reached.connect(explosion)
 
 func explosion():
-	var exploded = load("res://scenes/effects/explosion.tscn")
 	var explosion_fx=exploded.instantiate()
 	explosion_fx.global_position = global_position
 	get_tree().current_scene.call_deferred("add_child", explosion_fx)

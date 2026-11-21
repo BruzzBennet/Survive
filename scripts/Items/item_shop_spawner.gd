@@ -1,6 +1,6 @@
 extends Node2D
 
-# @export var weapon:=false
+var consume: PackedScene = preload("res://scenes/DiedExplosion.tscn")
 
 func done(_body):
 	# if !weapon:
@@ -17,7 +17,6 @@ func do_it():
 	queue_free()
 
 func explode(here):
-	var consume: PackedScene = preload("res://scenes/DiedExplosion.tscn")
 	var fx = consume.instantiate()
 	PLAYSFX.crunchyMash()
 	fx.global_position = here.global_position

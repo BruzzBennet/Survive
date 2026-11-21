@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cwi7ljetr5qn2"]
+
+[ext_resource type="Script" uid="uid://mbgcn16lhcxd" path="res://scripts/World/to_level.gd" id="1_ewq5o"]
+
+[node name="ToLevel" type="Area2D" unique_id=1689079412]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_ewq5o")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

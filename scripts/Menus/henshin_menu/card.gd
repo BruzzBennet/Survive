@@ -64,20 +64,6 @@ func set_color(color):
 	sb.bg_color=color
 
 func item_icon_is(item: String):
-	# match item.item_is:
-	# 	item.item_type.normal_item:
-	# 		item_type="item"
-	# 	item.item_type.weapon:
-	# 		match item.weapon.weapon_type:
-	# 			Weapon.type.boot:
-	# 				item_type="boot"
-	# 			Weapon.type.gun:
-	# 				item_type="gun"
-	# 			Weapon.type.blade:
-	# 				item_type="blade"
-	# 	item.item_type.suit:
-	# 		item_type="suit"
-	# if item_type!="item":
 		item_type_icon = "res://assets/cards/icons/"+item+".png"
 		if item_type_icon:
 			$Type.texture=load(item_type_icon)

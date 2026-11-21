@@ -2,15 +2,13 @@ extends Node
 
 var starting_level="res://scenes/worlds/start_world.tscn"
 
-var base_Mon=load("res://resources/Mons/clamik.tres")
-var base_Mon1=load("res://resources/Mons/minole.tres")
-
-var base_weapon=load("res://resources/Mons/sergyo.tres")
+var base_weapon=preload("res://resources/Mons/sergyo.tres")
 var base_suit=base_weapon
 var base_health:=100
 var base_enemy_amount: = 1
 var base_ammo: = 0.65
 var base_defense:=14.0
+var mon_max_level:=7
 
 var weaponless = "res://scenes/PlayerTypes/weaponless.tscn"
 var shooter= "res://scenes/PlayerTypes/Shooter.tscn"
@@ -35,7 +33,7 @@ var weapon_item
 var suit_item
 var music_on:=true
 var sfx_on:=true
-var mimin:=0
+var last_scene=null
 
 func mute_music():
 	var bus_index = AudioServer.get_bus_index("Music")
@@ -76,5 +74,31 @@ func restart():
 	ammo = base_ammo
 	current_level= 1
 	about_to_henshin=false
+	last_scene=null
 	# deck = []
-	mimin=0
+
+
+var items=[
+	preload("res://scenes/items/coin.tscn"),
+	preload("res://scenes/items/recharge_item.tscn")
+	]
+
+var zoo=[
+	preload("res://scenes/enemies/icie.tscn"),
+	preload("res://scenes/enemies/chomwing.tscn"),
+	preload("res://scenes/enemies/Minole.tscn"),
+	preload("res://scenes/enemies/pucklam.tscn"),
+	preload("res://scenes/pozzap.tscn"),
+	preload("res://scenes/enemies/Bombry.tscn"),
+	preload("res://scenes/enemies/clamik.tscn"),
+	preload("res://scenes/enemies/bubbler.tscn"),
+	preload("res://scenes/opozzap.tscn")
+]
+
+var mimin=[
+	preload("res://scenes/enemies/miminrage.tscn"),
+	preload("res://scenes/enemies/miminfast.tscn"),
+	preload("res://scenes/enemies/miminzombie.tscn"),
+	preload("res://scenes/enemies/miminflyer.tscn"),
+	preload("res://scenes/enemies/mimintank.tscn")
+]

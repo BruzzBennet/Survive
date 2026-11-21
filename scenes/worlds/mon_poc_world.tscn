@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://be51faolne4p8"]
+
+[ext_resource type="Script" uid="uid://dan8rxx63nj3x" path="res://scripts/World/world.gd" id="1_ruxuf"]
+[ext_resource type="PackedScene" uid="uid://vaja3lj2244l" path="res://assets/maps/MonPoc.tscn" id="2_ahva6"]
+[ext_resource type="Script" uid="uid://pks0tfm1bus5" path="res://scripts/World/Resources/world_resource.gd" id="3_aluvq"]
+[ext_resource type="PackedScene" uid="uid://c8slwdh6xqobl" path="res://scenes/pause_menu.tscn" id="3_np3jh"]
+[ext_resource type="PackedScene" uid="uid://co62ljw3i7u4j" path="res://scenes/TransitionAnimation.tscn" id="4_aluvq"]
+[ext_resource type="PackedScene" uid="uid://c6i85j2k3ovco" path="res://scenes/worlds/ScoreUI.tscn" id="5_0cfkm"]
+[ext_resource type="PackedScene" uid="uid://d4fsptvwptuf4" path="res://scenes/ctr_shader.tscn" id="6_sf1e1"]
+
+[sub_resource type="Resource" id="Resource_0cfkm"]
+script = ExtResource("3_aluvq")
+map_layout = ExtResource("2_ahva6")
+metadata/_custom_type_script = "uid://pks0tfm1bus5"
+
+[sub_resource type="Environment" id="Environment_4mrxx"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 0.35
+
+[node name="World" type="Node2D" unique_id=1779477526]
+script = ExtResource("1_ruxuf")
+this_level = SubResource("Resource_0cfkm")
+
+[node name="DeathTimer" type="Timer" parent="." unique_id=1937362618]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=63205776]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=48230163 instance=ExtResource("3_np3jh")]
+
+[node name="Transition" parent="." unique_id=2142637533 instance=ExtResource("4_aluvq")]
+light_mask = 524288
+visibility_layer = 524288
+z_index = 100
+offset_left = -10.0
+offset_top = -23.0
+offset_right = 652.0
+offset_bottom = 330.0
+
+[node name="PanelContainer" parent="." unique_id=1312277092 instance=ExtResource("5_0cfkm")]
+
+[node name="CTRShader" parent="." unique_id=1374949823 instance=ExtResource("6_sf1e1")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1012215030]
+environment = SubResource("Environment_4mrxx")
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
